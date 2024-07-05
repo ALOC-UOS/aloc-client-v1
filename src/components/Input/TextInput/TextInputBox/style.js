@@ -12,20 +12,20 @@ const InputBox = styled.input`
   width: 100%;
   height: 40px;
 
-  border: ${(props) => props.theme.mode === 'light' ? '1px solid #f0f1f5' : '1px solid #2c3038'};
+  border: ${props => (props.theme.mode === 'light' ? '1px solid #f0f1f5' : '1px solid #2c3038')};
   outline: none;
-  color: ${(props) => props.theme.contentText};
+  color: ${props => props.theme.contentText};
   font-size: 14px;
   letter-spacing: -1px;
 
-  background-color: ${(props) => props.theme.foreground};
+  background-color: ${props => props.theme.foreground};
   padding: 4px 4px 4px 8px;
   border-radius: 8px;
-  
-  opacity: ${(props) => props.disabled ? '0.5' : '1'};
+
+  opacity: ${props => (props.disabled ? '0.5' : '1')};
   &::placeholder {
     opacity: 0.5;
   }
-`
+`;
 
 export { InputBox };

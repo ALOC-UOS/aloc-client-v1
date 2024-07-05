@@ -16,22 +16,21 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
       JSONData[item.id] = inputTextArray[index];
     });
 
-    axios.post(url, JSONData)
-      .catch((error) => {
-        console.log(error);
-      })
+    axios.post(url, JSONData).catch(error => {
+      console.log(error);
+    });
     setIsDisabled(true);
-  }
+  };
 
   const checkAllInput = () => {
-    for(let i = 0; i < inputTextArray.length; i++) {
-      if(inputTextArray[i] === '') {
+    for (let i = 0; i < inputTextArray.length; i++) {
+      if (inputTextArray[i] === '') {
         setIsDisabled(true);
         return;
       }
     }
     setIsDisabled(false);
-  }
+  };
 
   return (
     <InputContainer>
@@ -41,7 +40,7 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
           <TextInputBox
             key={index}
             placeholder={item.placeholder}
-            onChange={(e) => {
+            onChange={e => {
               inputTextArray[index] = e.target.value;
               setInputTextArray(inputTextArray);
               checkAllInput();
@@ -50,15 +49,15 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
         ))}
       </TextInputBoxWrap>
       <Button
-        color={"blue"}
-        type={isDisabled ? "disabled" : "active"}
-        size={"small"}
+        color={'blue'}
+        type={isDisabled ? 'disabled' : 'active'}
+        size={'small'}
         onClick={clickSaveButton}
       >
         저장
       </Button>
     </InputContainer>
-  )
-}
+  );
+};
 
 export default TextInputWrap;

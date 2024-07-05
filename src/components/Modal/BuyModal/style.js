@@ -17,20 +17,22 @@ const ModalContainer = styled.div`
   filter: blur(12px);
   pointer-events: none;
 
-  ${(props) => props.isOpen && css`
-    min-width: 320px;
-    opacity: 1;
-    filter: blur(0px);
-    pointer-events: auto;
-  `}
-`
+  ${props =>
+    props.isOpen &&
+    css`
+      min-width: 320px;
+      opacity: 1;
+      filter: blur(0px);
+      pointer-events: auto;
+    `}
+`;
 
 const Description = styled.div`
-  color: ${(props) => props.theme.titleText};
+  color: ${props => props.theme.titleText};
   font-size: 16px;
   letter-spacing: -2px;
   user-select: none;
   padding-bottom: 16px;
-`
+`;
 
 export { ModalContainer, Description };

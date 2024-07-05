@@ -9,19 +9,19 @@ const InputContainer = styled.div`
   padding: 12px;
   background-color: #ffffff;
   border-radius: 8px;
-`
+`;
 
 const InputLabel = styled.div`
-  color: ${(props) => props.theme.subText};
+  color: ${props => props.theme.subText};
   font-size: 12px;
   letter-spacing: -1px;
   user-select: none;
-`
+`;
 
 const TextInputBoxWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-`
+`;
 
 export { InputContainer, InputLabel, TextInputBoxWrap };

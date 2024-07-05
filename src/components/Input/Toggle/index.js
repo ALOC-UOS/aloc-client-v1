@@ -3,7 +3,7 @@ import { ToggleSwitch, ToggleSwtichButton } from './style';
 
 const Toggle = ({ active, handleClick }) => {
   return (
-    <ToggleSwitch active={active} onClick={handleClick} >
+    <ToggleSwitch active={active} onClick={handleClick}>
       <ToggleSwtichButton active={active} />
     </ToggleSwitch>
   );
