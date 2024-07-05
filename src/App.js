@@ -1,17 +1,14 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import {ThemeProvider} from 'styled-components';
 import './App.css';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route
-} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './views/Home';
 import Problem from './views/Problem';
 import Member from './views/Member';
 import Shop from './views/Shop';
 import Battle from './views/Battle';
 import Setting from './views/Setting';
+import Login from './views/Login';
 
 function App() {
   const theme = 'light';
@@ -37,12 +34,13 @@ function App() {
       primary: '#408cff',
       secondary: '#98bffa',
       boxShadow: '0 4px 24px 0 #3c414c',
-    }
+    },
   };
   return (
     <ThemeProvider theme={themeObject[theme]}>
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
+          <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/problem" element={<Problem />} />
           <Route path="/member" element={<Member />} />
