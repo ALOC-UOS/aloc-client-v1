@@ -20,7 +20,7 @@ const Problem = () => {
     loadAlgorithmList();
   }, []);
 
-  function moveProblemPage(number) {
+  function moveToBaekjoonSite(number) {
     window.open("https://www.acmicpc.net/problem/" + number, "_blank");
   };
 
@@ -49,7 +49,6 @@ const Problem = () => {
       });
   };
       
-
   function openSolvedUserList(id) {
     setIsOpenedModal(true);
     let url = 'https://www.iflab.run/api/show/problem/solved-user/' + id;
@@ -121,7 +120,7 @@ const Problem = () => {
                   맞힌 사람
                   <ProblemCorrectNum> {problem.solved}명</ProblemCorrectNum>
                 </ProblemCorrect>
-                <ProblemButton onClick={() => moveProblemPage(problem.id)}>
+                <ProblemButton onClick={() => moveToBaekjoonSite(problem.id)}>
                   문제 확인하기
                 </ProblemButton>
               </ProblemRightWrap>

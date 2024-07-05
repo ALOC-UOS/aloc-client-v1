@@ -58,10 +58,6 @@ const Shop = () => {
     setIsOpenedBuyModal(false);
   }
 
-  function acceptModal() {
-    setIsOpenedBuyModal(false);
-  }
-
   return (
     <ShopContainer>
       <TopBar />
