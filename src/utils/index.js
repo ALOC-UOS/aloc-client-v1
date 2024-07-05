@@ -18,15 +18,8 @@ export const getDifficultyIcon = difficulty => {
 
 export const formatSolveTime = solvedAt => {
   const now = dayjs();
-  const solved = dayjs(solvedAt, 'HH:mm:ss');
-
-  // 날짜가 바뀌었는지 확인
-  if (now.date() !== solved.date()) {
-    solved.year(now.year()).month(now.month()).date(now.date());
-    if (solved.isAfter(now)) {
-      solved.subtract(1, 'day');
-    }
-  }
+  const currentDate = now.format('YYYY-MM-DD');
+  const solved = dayjs(`${currentDate} ${solvedAt}`, 'YYYY-MM-DD HH:mm:ss');
 
   const diffMinutes = now.diff(solved, 'minute');
   const diffSeconds = now.diff(solved, 'second');

@@ -64,7 +64,7 @@ const ProblemContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 640px;
+  height: 800px;
   overflow: hidden;
   background-color: #121314;
   cursor: pointer;

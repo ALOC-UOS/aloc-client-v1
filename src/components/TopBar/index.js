@@ -58,6 +58,7 @@ const TopBar = ({ active }) => {
   const navigate = useNavigate();
   function goRoute(route) {
     if (route === selectedItem) return;
+    window.scrollTo(0, 0);
     navigate(route);
   }
 

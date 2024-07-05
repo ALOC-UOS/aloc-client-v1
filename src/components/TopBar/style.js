@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const TopBarContainer = styled('div')`
   z-index: 100;
   position: fixed;
-  top: 16px;
+  top: 0px;
   left: 0;
   right: 0;
   display: flex;
@@ -11,10 +11,7 @@ const TopBarContainer = styled('div')`
   align-items: center;
   justify-content: space-between;
 
-  padding: 16px 24px;
-  margin: 0 40px;
-  border-radius: 16px;
-  background-color: ${props => props.theme.foreground}d0;
+  padding: 8px 40px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
@@ -22,10 +19,7 @@ const TopBarContainer = styled('div')`
   ${props =>
     props.isScroll &&
     css`
-      top: 0;
-      margin: 0;
-      padding: 16px 64px;
-      border-radius: 0px;
+      background-color: ${props => props.theme.foreground}18;
     `}
   @media (max-width: 480px) {
     top: 0;
