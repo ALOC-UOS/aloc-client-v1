@@ -1,21 +1,8 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
-  },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 12,
-    sourceType: 'module',
-  },
-  plugins: ['react', 'prettier'],
+  extends: ['react-app', 'react-app/jest', 'plugin:prettier/recommended'],
   rules: {
     'prettier/prettier': 'error',
-    'react/react-in-jsx-scope': 'off', // React 17 이상을 사용하는 경우
+    // 필요한 경우 여기에 추가 규칙을 작성하세요
   },
   settings: {
     react: {
