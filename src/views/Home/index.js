@@ -1,21 +1,33 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { HomeContainer, ContentContainer, ProblemContainer, ProblemWrapper, ProblemTitleWrapper, ProblemTitle, ProblemDifficulty, ProblemName, ProblemButton, BackgroundImage, ProblemTags, ProblemTag, ProblemTagText, SolveMemberContainer, MemberWrapper, ProfileImage, Description, MemberName, SolveTime } from './style';
+import {
+  HomeContainer,
+  ContentContainer,
+  ProblemContainer,
+  ProblemWrapper,
+  ProblemTitleWrapper,
+  ProblemTitle,
+  ProblemDifficulty,
+  ProblemName,
+  BackgroundImage,
+  MemberWrapper,
+  ProfileImage,
+  Description,
+  MemberName,
+  SolveTime,
+} from './style';
 import TopBar from '../../components/TopBar';
-import ProblemBackgroundImage from '../../assets/background1.png';
-import RightArrowIcon from '../../assets/right-arrow-icon.svg';
-import Bronze from '../../assets/bronze-small.png';
-import Silver from '../../assets/silver-small.png';
-import Gold from '../../assets/gold-small.png';
-import Platinum from '../../assets/platinum-small.png';
-import Card from '../../components/Card';
+import ProblemBackgroundImage from '../../assets/background2.png';
+import { getDifficultyIcon, formatSolveTime } from '../../utils';
+import BottomInfo from '../../components/Card';
+
+const API_BASE_URL = 'https://www.iflab.run/api';
 
 const Home = () => {
-  const [ProblemData, setProblemData] = useState({});
-  const [ProblemTagData, setProblemTagData] = useState([]);
+  const [problemData, setProblemData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [SolvedMemberList, setSolvedMemberList] = useState([]);
-  const [isShowMemberNumber, setIsShowMemberNumber] = useState(0);
+  const [solvedMemberList, setSolvedMemberList] = useState([]);
+  const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
   const [isShowMember, setIsShowMember] = useState(false);
 
   useEffect(() => {
@@ -23,134 +35,90 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (ProblemData.id) {
-      setTimeout(() => {
-        loadSolveMember();
-
-        setIsShowMember(false);
-        setTimeout(() => {
-          setIsShowMember(true);
-        }, 4000);
-      }, 1000);
+    if (problemData.id) {
+      loadSolveMember();
     }
-  }, [ProblemData]);
+  }, [problemData]);
 
   useEffect(() => {
+    const showMemberInterval = 5000;
+    const hideMemberDelay = 4000;
+
     const timer = setInterval(() => {
-      if (isShowMemberNumber + 1 === SolvedMemberList.length) {
-        setIsShowMemberNumber(0);
-      } else {
-        setIsShowMemberNumber(isShowMemberNumber + 1);
-      }
-
+      setCurrentMemberIndex(prevIndex => (prevIndex + 1) % solvedMemberList.length);
       setIsShowMember(false);
-      setTimeout(() => {
-        setIsShowMember(true);
-      }, 4000);
-    }, 5000);
+      setTimeout(() => setIsShowMember(true), hideMemberDelay);
+    }, showMemberInterval);
 
-    return () => {
-      clearInterval(timer);
+    return () => clearInterval(timer);
+  }, [solvedMemberList]);
+
+  const loadProblem = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/show/problem/today`);
+      setProblemData(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error loading problem:', error);
     }
-  }, [isShowMemberNumber, SolvedMemberList]);
-  
-  function moveProblemPage(number) {
-    window.open("https://www.acmicpc.net/problem/" + number, "_blank");
   };
 
-  function loadProblem() {
-    let url = 'https://www.iflab.run/api/show/problem/today';
-    axios.get(url)
-      .then(response => {
-        setProblemData(response.data);
-        setIsLoading(false);
-        setProblemTagData(JSON.parse(response.data.tags));
-      })
-      .catch(error => {
-        console.error('API 요청 중 오류 발생:');
-      });
-  }
-
-  function loadSolveMember() {
-    let url = 'https://www.iflab.run/api/show/problem/solved-user/' + ProblemData.id;
-
-    axios.get(url)
-      .then(response => {
-        setSolvedMemberList(response.data);
-      })
-      .catch(error => {
-        console.error('API 요청 중 오류 발생:');
-      });
+  const loadSolveMember = async () => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/show/problem/solved-user/${problemData.id}`
+      );
+      setSolvedMemberList(response.data);
+    } catch (error) {
+      console.error('Error loading solved members:', error);
+    }
   };
 
-  function solvedAtAgo(solvedAt) {
-    const now = new Date();
-    const nowHour = now.getHours();
-    const nowMinute = now.getMinutes();
-    const nowSecond = now.getSeconds();
+  const handleProblemClick = () => {
+    window.open(`https://www.acmicpc.net/problem/${problemData.id}`, '_blank');
+  };
 
-    const solvedAtHour = Number(solvedAt[0]) * 10 + Number(solvedAt[1]);
-    const solvedAtMinute = Number(solvedAt[3]) * 10 + Number(solvedAt[4]);
-    const solvedAtSecond = Number(solvedAt[6]) * 10 + Number(solvedAt[7]);
+  const renderProblemContent = () => (
+    <ProblemContainer onClick={handleProblemClick}>
+      <BackgroundImage src={ProblemBackgroundImage} />
+      <ProblemWrapper>
+        <ProblemTitleWrapper>
+          <ProblemTitle>오늘의 문제</ProblemTitle>
+          <ProblemDifficulty src={getDifficultyIcon(problemData.difficulty)} />
+        </ProblemTitleWrapper>
+        <ProblemName>
+          {problemData.id}. {problemData.title}
+        </ProblemName>
+        {renderMemberInfo()}
+      </ProblemWrapper>
+    </ProblemContainer>
+  );
 
-    if (nowHour * 60 + nowMinute - solvedAtHour * 60 - solvedAtMinute > 60) {
-      return nowHour - solvedAtHour + "시간 전";
-    } else if (nowHour * 60 + nowMinute - solvedAtHour * 60 - solvedAtMinute > 0) {
-      return nowHour * 60 + nowMinute - solvedAtHour * 60 - solvedAtMinute + "분 전";
-    } else if (nowSecond - solvedAtSecond > 0) {
-      return nowSecond - solvedAtSecond + "초 전";
-    } else {
-      return "방금 전";
-    }
-  }
+  const renderMemberInfo = () => {
+    if (solvedMemberList.length === 0) return <div style={{ height: '48px' }} />;
+
+    const currentMember = solvedMemberList[currentMemberIndex];
+    return (
+      <MemberWrapper isShow={isShowMember}>
+        <ProfileImage
+          src={`https://avatars.githubusercontent.com/u/${currentMember.profileNumber}`}
+        />
+        <Description>
+          <MemberName>{currentMember.username}</MemberName>
+          님이 문제를 풀었어요.
+        </Description>
+        <SolveTime>{formatSolveTime(currentMember.solvedAt)}</SolveTime>
+      </MemberWrapper>
+    );
+  };
 
   return (
     <HomeContainer>
       <TopBar />
-      { isLoading ? (
-        <ContentContainer>
-          <ProblemContainer>
-          </ProblemContainer>
-        </ContentContainer>
-      ) : (
-        <ContentContainer>
-          <ProblemContainer>
-            <ProblemWrapper>
-              <ProblemTitleWrapper>
-                <ProblemTitle>오늘의 문제</ProblemTitle>
-                <ProblemDifficulty src={ProblemData.difficulty < 6 ? Bronze : ProblemData.difficulty < 11 ? Silver : ProblemData.difficulty < 16 ? Gold : Platinum} />
-              </ProblemTitleWrapper>
-              <ProblemName>{ProblemData.id}. {ProblemData.title}</ProblemName>
-              <ProblemTags>
-                {ProblemTagData.map((tag, index) => (
-                  <ProblemTag key={index}>
-                    <ProblemTagText># {tag.korean}</ProblemTagText>
-                    <ProblemTagText>{tag.english}</ProblemTagText>
-                  </ProblemTag>
-                ))}
-              </ProblemTags>
-              <ProblemButton onClick={moveProblemPage.bind(this, ProblemData.id)}>
-                문제 확인하기
-                <img src={RightArrowIcon} alt="right-arrow-icon" />
-              </ProblemButton>
-            </ProblemWrapper>
-            <BackgroundImage src={ProblemBackgroundImage} />
-            { SolvedMemberList.length > 0 && (
-              <SolveMemberContainer>
-                <MemberWrapper isShow={isShowMember}>
-                  <ProfileImage src={`https://avatars.githubusercontent.com/u/${SolvedMemberList[isShowMemberNumber].profileNumber}`} />
-                  <Description>
-                    <MemberName> {SolvedMemberList[isShowMemberNumber].username} </MemberName>
-                    님이 문제를 풀었어요.
-                  </Description>
-                  <SolveTime> {solvedAtAgo(SolvedMemberList[isShowMemberNumber].solvedAt)} </SolveTime>
-                </MemberWrapper>
-              </SolveMemberContainer>
-            )}
-          </ProblemContainer>
-          <Card />
-        </ContentContainer>
-      )}
+      <ContentContainer>
+        {isLoading ? <ProblemContainer /> : renderProblemContent()}
+        <BottomInfo />
+      </ContentContainer>
     </HomeContainer>
   );
 };

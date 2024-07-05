@@ -9,17 +9,14 @@ const ListInputBox = ({
   selectedItemId,
   selectedItemName,
   openList,
-  selectItem
+  selectItem,
 }) => {
   return (
     <InputBox onClick={() => openList(listName)}>
       <SelectedText>{selectedItemName}</SelectedText>
       <ArrowIcon src={InputArrowIcon} selected={isOpenList === listName} />
-      <InputList
-        isOpen={isOpenList === listName}
-        ItemNumber={listData.length}
-      >
-        {listData.map((ListItem) => (
+      <InputList isOpen={isOpenList === listName} ItemNumber={listData.length}>
+        {listData.map(ListItem => (
           <InputItem
             key={ListItem.list_id}
             onClick={() => selectItem(ListItem.name)}
@@ -31,6 +28,6 @@ const ListInputBox = ({
       </InputList>
     </InputBox>
   );
-}
+};
 
 export default ListInputBox;

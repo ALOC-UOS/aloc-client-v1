@@ -11,26 +11,28 @@ const ModalContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.foreground};
+  background-color: ${props => props.theme.foreground};
   padding: 16px;
   border-radius: 16px;
   filter: blur(12px);
   pointer-events: none;
 
-  ${(props) => props.isOpen && css`
-    min-width: 320px;
-    opacity: 1;
-    filter: blur(0px);
-    pointer-events: auto;
-  `}
-`
+  ${props =>
+    props.isOpen &&
+    css`
+      min-width: 320px;
+      opacity: 1;
+      filter: blur(0px);
+      pointer-events: auto;
+    `}
+`;
 
 const Description = styled.div`
-  color: ${(props) => props.theme.titleText};
+  color: ${props => props.theme.titleText};
   font-size: 16px;
   letter-spacing: -2px;
   user-select: none;
   padding-bottom: 24px;
-`
+`;
 
 export { ModalContainer, Description };

@@ -1,21 +1,11 @@
-import {
-  ToastContainer,
-  ToastIcon,
-  ToastText,
-  ToastWrapper,
-  Progress,
-} from "./style.js";
+import { ToastContainer, ToastIcon, ToastText, ToastWrapper, Progress } from './style.js';
 
 const Toast = ({ toastState, text, icon, copyClick }) => {
   return (
-    <ToastContainer
-      $toastState={toastState}
-    >
+    <ToastContainer $toastState={toastState}>
       <ToastWrapper>
         <ToastIcon src={icon} />
-        <ToastText>
-          {text}
-        </ToastText>
+        <ToastText>{text}</ToastText>
       </ToastWrapper>
       <Progress key={copyClick} $runAnimation={toastState} />
     </ToastContainer>

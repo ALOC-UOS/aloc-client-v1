@@ -12,40 +12,40 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
 
   useEffect(() => {
     const url = 'https://www.iflab.run/api/' + apiURL;
-    axios.get(url)
-      .then((response) => {
-        setSelectedItemName(listData.find((item) => item.id === response.data).name);
+    axios
+      .get(url)
+      .then(response => {
+        setSelectedItemName(listData.find(item => item.id === response.data).name);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
-      }
-    );
+      });
   }, [apiURL, listData]);
 
-  const openList = (id) => {
-    if(id === isOpenList) {
+  const openList = id => {
+    if (id === isOpenList) {
       setOpenList('');
       return;
     }
     setOpenList(id);
-  }
+  };
 
-  const selectItem = (selectedItem) => {
-    setSelectedItemId(listData.find((item) => item.name === selectedItem).id);
+  const selectItem = selectedItem => {
+    setSelectedItemId(listData.find(item => item.name === selectedItem).id);
     setSelectedItemName(selectedItem);
     setOpenList('');
     setIsDisabled(false);
-  }
+  };
 
   const clickSaveButton = () => {
     const url = 'https://www.iflab.run/api/' + apiURL;
     axios.post(url, {
       id: selectedItemId,
-      name: selectedItemName
-    })
+      name: selectedItemName,
+    });
     setIsDisabled(true);
     setSelectedItemId('');
-  }
+  };
 
   return (
     <InputContainer>
@@ -60,15 +60,15 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
         selectItem={selectItem}
       />
       <Button
-        color={"blue"}
-        type={isDisabled ? "disabled" : "active"}
-        size={"small"}
+        color={'blue'}
+        type={isDisabled ? 'disabled' : 'active'}
+        size={'small'}
         onClick={clickSaveButton}
       >
         저장
       </Button>
     </InputContainer>
-  )
-}
+  );
+};
 
 export default ListInput;

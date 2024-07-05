@@ -1,6 +1,30 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { MemberContainer, ContentContainer, ProfileWrapper, ProfileBackgroundImage, ProfileLink, ProfileImage, ProfileBlurImage, ProfileRankWrap, ProfileRank, ProfileNumber, MemberWrapper, MemberName, MemberUserInfoWrapper, MemberUserInfoText, MemberUserInfoBar, MemberUserInfoCoin, MemberBar, MemberInfoWrapper, MemberInfoRow, MemberInfoItem, SolvedAnimation, IconWrapper, Icon } from './style';
+import {
+  MemberContainer,
+  ContentContainer,
+  ProfileWrapper,
+  ProfileBackgroundImage,
+  ProfileLink,
+  ProfileImage,
+  ProfileBlurImage,
+  ProfileRankWrap,
+  ProfileRank,
+  ProfileNumber,
+  MemberWrapper,
+  MemberName,
+  MemberUserInfoWrapper,
+  MemberUserInfoText,
+  MemberUserInfoBar,
+  MemberUserInfoCoin,
+  MemberBar,
+  MemberInfoWrapper,
+  MemberInfoRow,
+  MemberInfoItem,
+  SolvedAnimation,
+  IconWrapper,
+  Icon,
+} from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import BlackScreen from '../../components/BlackScreen';
@@ -18,7 +42,6 @@ import CoinIcon from '../../assets/coin-icon.svg';
 import LoadingIcon from '../../assets/loading-icon.svg';
 import CheckIcon from '../../assets/check-icon.svg';
 
-
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoading, setIsShowLoading] = useState(false);
@@ -35,7 +58,8 @@ const Member = () => {
 
   function loadMemberData() {
     let url = 'https://www.iflab.run/api/show/user';
-    axios.get(url)
+    axios
+      .get(url)
       .then(response => {
         setMemberData(response.data);
       })
@@ -54,7 +78,8 @@ const Member = () => {
       url = `https://www.iflab.run/api/show/user/unsolved-problem/${githubId}`;
       setModalTitle('해결하지 못한 문제 목록');
     }
-    axios.get(url)
+    axios
+      .get(url)
       .then(response => {
         setProblemListData(response.data);
         setIsOpenedModal(true);
@@ -77,7 +102,8 @@ const Member = () => {
     setIsShowLoading(true);
     let url = `https://www.iflab.run/api/check/problem/${SelectedGithubId}`;
 
-    axios.get(url)
+    axios
+      .get(url)
       .then(response => {
         loadMemberData();
         openProblemListModal(SelectedType, SelectedGithubId);
@@ -87,7 +113,6 @@ const Member = () => {
         setTimeout(() => {
           setIsLoading(false);
         }, 1500);
-
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
@@ -116,18 +141,55 @@ const Member = () => {
               <img src={CoinIcon} />
               {member.coin}
             </MemberUserInfoCoin>
-            <ProfileBackgroundImage solved={member.todaySolved} category={member.colorCategory} color1={member.color1} color2={member.color2} color3={member.color3} color4={member.color4} color5={member.color5} degree={member.degree}>
+            <ProfileBackgroundImage
+              solved={member.todaySolved}
+              category={member.colorCategory}
+              color1={member.color1}
+              color2={member.color2}
+              color3={member.color3}
+              color4={member.color4}
+              color5={member.color5}
+              degree={member.degree}
+            >
               {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
               <SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
-              {!member.todaySolved && <ProfileBlurImage src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`} />}
+              {!member.todaySolved && (
+                <ProfileBlurImage
+                  src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`}
+                />
+              )}
               <ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
-                <ProfileImage src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`} />
+                <ProfileImage
+                  src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`}
+                />
               </ProfileLink>
             </ProfileBackgroundImage>
             <MemberWrapper>
               <ProfileRankWrap href={`https://solved.ac/${member.baekjoonId}`} target="_blank">
-                <ProfileRank src={parseInt(member.rank / 10) === 1 ? Bronze : parseInt(member.rank / 10) === 2 ? Silver : parseInt(member.rank / 10) === 3 ? Gold : Platinum} />
-                <ProfileNumber src={member.rank % 10 === 1 ? Number1 : member.rank % 10 === 2 ? Number2 : member.rank % 10 === 3 ? Number3 : member.rank % 10 === 4 ? Number4 : Number5} />
+                <ProfileRank
+                  src={
+                    parseInt(member.rank / 10) === 1
+                      ? Bronze
+                      : parseInt(member.rank / 10) === 2
+                        ? Silver
+                        : parseInt(member.rank / 10) === 3
+                          ? Gold
+                          : Platinum
+                  }
+                />
+                <ProfileNumber
+                  src={
+                    member.rank % 10 === 1
+                      ? Number1
+                      : member.rank % 10 === 2
+                        ? Number2
+                        : member.rank % 10 === 3
+                          ? Number3
+                          : member.rank % 10 === 4
+                            ? Number4
+                            : Number5
+                  }
+                />
               </ProfileRankWrap>
               <MemberName>{member.username}</MemberName>
               <MemberUserInfoWrapper>
@@ -139,17 +201,22 @@ const Member = () => {
               <MemberInfoWrapper>
                 <MemberInfoRow>
                   <MemberInfoItem>해결한 문제 수</MemberInfoItem>
-                  <MemberInfoItem blue={true} onClick={() => openProblemListModal('solved', member.githubId)}>
+                  <MemberInfoItem
+                    blue={true}
+                    onClick={() => openProblemListModal('solved', member.githubId)}
+                  >
                     {member.solved}개
                   </MemberInfoItem>
                 </MemberInfoRow>
                 <MemberInfoRow>
                   <MemberInfoItem>해결하지 못한 문제 수</MemberInfoItem>
-                  <MemberInfoItem blue={true} onClick={() => openProblemListModal('unsolved', member.githubId)}>
-                    {member.thisWeekUnsolved === 0 ?
-                        `${member.unsolved}개` :
-                        `${member.thisWeekUnsolved}개 / ${member.unsolved}개`
-                    }
+                  <MemberInfoItem
+                    blue={true}
+                    onClick={() => openProblemListModal('unsolved', member.githubId)}
+                  >
+                    {member.thisWeekUnsolved === 0
+                      ? `${member.unsolved}개`
+                      : `${member.thisWeekUnsolved}개 / ${member.unsolved}개`}
                   </MemberInfoItem>
                 </MemberInfoRow>
               </MemberInfoWrapper>

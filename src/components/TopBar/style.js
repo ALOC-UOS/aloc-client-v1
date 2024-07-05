@@ -14,23 +14,24 @@ const TopBarContainer = styled('div')`
   padding: 16px 24px;
   margin: 0 40px;
   border-radius: 16px;
-  background-color: ${(props) => props.theme.foreground}d0;
+  background-color: ${props => props.theme.foreground}d0;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
 
-  ${(props) => props.isScroll && css`
-    top: 0;
-    margin: 0;
-    padding: 16px 64px;
-    border-radius: 0px;
-  `}
+  ${props =>
+    props.isScroll &&
+    css`
+      top: 0;
+      margin: 0;
+      padding: 16px 64px;
+      border-radius: 0px;
+    `}
   @media (max-width: 480px) {
     top: 0;
     margin: 0;
     padding: 8px 16px;
     border-radius: 0px;
-    
   }
 `;
 
@@ -38,7 +39,7 @@ const TopBarLeft = styled.div`
   display: flex;
   flex-direction: row;
   gap: 40px;
-`
+`;
 
 const TopBarItem = styled.div`
   font-size: 16px;
@@ -49,18 +50,20 @@ const TopBarItem = styled.div`
   &:hover {
     color: ${props => props.theme.titleText};
   }
-  ${(props) => props.selected && css`
-    color: ${props => props.theme.primary};
-    &:hover {
+  ${props =>
+    props.selected &&
+    css`
       color: ${props => props.theme.primary};
-    }
-  `}
-`
+      &:hover {
+        color: ${props => props.theme.primary};
+      }
+    `}
+`;
 
 const TopBarButton = styled.div`
   padding: 12px;
   border-radius: 12px;
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${props => props.theme.primary};
 
   color: #ffffff;
   font-size: 12px;
@@ -78,11 +81,13 @@ const TopBarButton = styled.div`
     filter: brightness(0.8);
     transform: scale(0.95);
   }
-  
-  ${(props) => props.active && css`
-    opacity: 1;
-    pointer-events: auto;
-  `}
-` 
+
+  ${props =>
+    props.active &&
+    css`
+      opacity: 1;
+      pointer-events: auto;
+    `}
+`;
 
 export { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton };
