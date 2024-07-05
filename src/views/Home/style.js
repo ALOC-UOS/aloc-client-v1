@@ -66,7 +66,7 @@ const ProblemContainer = styled.div`
   width: 100%;
   height: 800px;
   overflow: hidden;
-  background-color: #121314;
+  background-color: #000000;
   cursor: pointer;
   @media (max-width: 480px) {
     width: calc(100% - 32px);
