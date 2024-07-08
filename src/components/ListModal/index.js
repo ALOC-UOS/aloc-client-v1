@@ -1,5 +1,25 @@
 import React from 'react';
-import { ListModalContainer, ListModalTopBar, ModalTitle, Wrapper, IconWrapper, Icon, CloseButton, Divider, MemberList, MemberItem, ProfileImage, MemberWrapper, MemberName, MemberBaekjoonId, ProblemList, ProblemItem, ProblemDifficulty, ProblemName, Reloader } from './style';
+import {
+  ListModalContainer,
+  ListModalTopBar,
+  ModalTitle,
+  Wrapper,
+  IconWrapper,
+  Icon,
+  CloseButton,
+  Divider,
+  MemberList,
+  MemberItem,
+  ProfileImage,
+  MemberWrapper,
+  MemberName,
+  MemberBaekjoonId,
+  ProblemList,
+  ProblemItem,
+  ProblemDifficulty,
+  ProblemName,
+  Reloader,
+} from './style';
 import memberIcon from '../../assets/member-icon.svg';
 import problemIcon from '../../assets/problem-icon.svg';
 import closeButton from '../../assets/close-button.svg';
@@ -8,8 +28,14 @@ import Silver from '../../assets/silver-small.png';
 import Gold from '../../assets/gold-small.png';
 import Platinum from '../../assets/platinum-small.png';
 
-const ListModal = ({ isOpen, modalTitle, memberListData, problemListData, closeModal, checkSolvedProblem }) => {
-
+const ListModal = ({
+  isOpen,
+  modalTitle,
+  memberListData,
+  problemListData,
+  closeModal,
+  checkSolvedProblem,
+}) => {
   const renderMember = () => (
     <>
       <ListModalTopBar>
@@ -23,9 +49,11 @@ const ListModal = ({ isOpen, modalTitle, memberListData, problemListData, closeM
       </ListModalTopBar>
       <Divider />
       <MemberList>
-        {memberListData.map((member) => (
+        {memberListData.map(member => (
           <MemberItem>
-            <ProfileImage src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`} />
+            <ProfileImage
+              src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`}
+            />
             <MemberWrapper>
               <MemberName>{member.username}</MemberName>
               <MemberBaekjoonId>{member.baekjoonId}</MemberBaekjoonId>
@@ -49,10 +77,22 @@ const ListModal = ({ isOpen, modalTitle, memberListData, problemListData, closeM
       </ListModalTopBar>
       <Divider />
       <ProblemList>
-        {problemListData.map((problem) => (
+        {problemListData.map(problem => (
           <ProblemItem href={`https://www.acmicpc.net/problem/${problem.id}`} target="_blank">
-            <ProblemDifficulty src={problem.difficulty < 6 ? Bronze : problem.difficulty < 11 ? Silver : problem.difficulty < 16 ? Gold : Platinum} />
-            <ProblemName>{problem.id}. {problem.title}</ProblemName>
+            <ProblemDifficulty
+              src={
+                problem.difficulty < 6
+                  ? Bronze
+                  : problem.difficulty < 11
+                    ? Silver
+                    : problem.difficulty < 16
+                      ? Gold
+                      : Platinum
+              }
+            />
+            <ProblemName>
+              {problem.id}. {problem.title}
+            </ProblemName>
           </ProblemItem>
         ))}
       </ProblemList>
@@ -65,7 +105,7 @@ const ListModal = ({ isOpen, modalTitle, memberListData, problemListData, closeM
       {memberListData ? renderMember() : null}
       {problemListData ? renderProblem() : null}
     </ListModalContainer>
-  )
-}
+  );
+};
 
-export default ListModal
+export default ListModal;

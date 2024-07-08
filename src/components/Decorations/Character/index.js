@@ -36,7 +36,7 @@ const DecorationItems = [
     top: 66,
     left: 0,
     delay: 300,
-  }
+  },
 ];
 
 const Character = ({ type, size }) => {
@@ -54,7 +54,7 @@ const Character = ({ type, size }) => {
   }
 
   function FindDecorationItem(type) {
-    return DecorationItems.find((item) => item.id === type);
+    return DecorationItems.find(item => item.id === type);
   }
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const Character = ({ type, size }) => {
 
     return () => {
       clearInterval(timer);
-    }
+    };
   }, [selectedDecorationItemIndex]);
 
   return (
@@ -92,7 +92,6 @@ const Character = ({ type, size }) => {
       )}
     </>
   );
-
 };
 
 export default Character;

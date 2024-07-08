@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
-import {InputBox} from '../../Input/TextInput/TextInputBox/style';
+import { InputBox } from '../../Input/TextInput/TextInputBox/style';
 import Button from '../../Buttons';
-const SignUp = ({setFormType}) => {
+const SignUp = ({ setFormType }) => {
   return (
     <SigninBox>
       <ImageWrapper>
@@ -24,7 +24,8 @@ const SignUp = ({setFormType}) => {
       <UnderlinedText
         onClick={() => {
           setFormType('SIGNIN');
-        }}>
+        }}
+      >
         로그인하기
       </UnderlinedText>
     </SigninBox>

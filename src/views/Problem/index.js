@@ -1,6 +1,25 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { ProblemContainer, ContentContainer, ProblemList, ProblemItem, ProblemInfoWrap, ProblemName, ProblemDifficulty, ProblemTags, ProblemTag, ProblemTagText, ProblemCorrect, ProblemCorrectNum, ProblemRightWrap, ProblemButton, WeekList, WeekItem, WeekTitle, AlgorithmName } from './style';
+import {
+  ProblemContainer,
+  ContentContainer,
+  ProblemList,
+  ProblemItem,
+  ProblemInfoWrap,
+  ProblemName,
+  ProblemDifficulty,
+  ProblemTags,
+  ProblemTag,
+  ProblemTagText,
+  ProblemCorrect,
+  ProblemCorrectNum,
+  ProblemRightWrap,
+  ProblemButton,
+  WeekList,
+  WeekItem,
+  WeekTitle,
+  AlgorithmName,
+} from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import BlackScreen from '../../components/BlackScreen';
@@ -21,23 +40,25 @@ const Problem = () => {
   }, []);
 
   function moveProblemPage(number) {
-    window.open("https://www.acmicpc.net/problem/" + number, "_blank");
-  };
+    window.open('https://www.acmicpc.net/problem/' + number, '_blank');
+  }
 
   function loadProblemData(algorithmId) {
     let url = 'https://www.iflab.run/api/show/problem/' + algorithmId;
-    axios.get(url)
+    axios
+      .get(url)
       .then(response => {
         setProblemData(response.data);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
       });
-  };
+  }
 
   function loadAlgorithmList() {
     let url = 'https://www.iflab.run/api/show/algorithm';
-    axios.get(url)
+    axios
+      .get(url)
       .then(response => {
         setAlgorithmList(response.data);
         const algorithmId = response.data[0].algorithmId;
@@ -47,24 +68,24 @@ const Problem = () => {
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
       });
-  };
-      
+  }
 
   function openSolvedUserList(id) {
     setIsOpenedModal(true);
     let url = 'https://www.iflab.run/api/show/problem/solved-user/' + id;
-    axios.get(url)
+    axios
+      .get(url)
       .then(response => {
         setSolvedMemberList(response.data);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
       });
-  };
+  }
 
   function selectWeek(week) {
     setSelectedWeek(week);
-    const algorithmId = AlgorithmList.find((algorithm) => algorithm.id === week).algorithmId;
+    const algorithmId = AlgorithmList.find(algorithm => algorithm.id === week).algorithmId;
     loadProblemData(algorithmId);
   }
 
@@ -84,18 +105,14 @@ const Problem = () => {
       <BlackScreen isOpen={isOpenedModal} />
       <ContentContainer>
         <WeekList>
-          { AlgorithmList.map((week, index) => (
+          {AlgorithmList.map((week, index) => (
             <WeekItem
               key={index}
               isActive={selectedWeek === week.id}
               onClick={() => selectWeek(week.id)}
             >
-              <WeekTitle isActive={selectedWeek === week.id}>
-                {week.id}주차
-              </WeekTitle>
-              <AlgorithmName isActive={selectedWeek === week.id}>
-                {week.name}
-              </AlgorithmName>
+              <WeekTitle isActive={selectedWeek === week.id}>{week.id}주차</WeekTitle>
+              <AlgorithmName isActive={selectedWeek === week.id}>{week.name}</AlgorithmName>
             </WeekItem>
           ))}
         </WeekList>
@@ -104,7 +121,17 @@ const Problem = () => {
             <ProblemItem key={index}>
               <ProblemInfoWrap>
                 <ProblemName>
-                  <ProblemDifficulty src={problem.difficulty < 6 ? Bronze : problem.difficulty < 11 ? Silver : problem.difficulty < 16 ? Gold : Platinum} />
+                  <ProblemDifficulty
+                    src={
+                      problem.difficulty < 6
+                        ? Bronze
+                        : problem.difficulty < 11
+                          ? Silver
+                          : problem.difficulty < 16
+                            ? Gold
+                            : Platinum
+                    }
+                  />
                   {problem.id}. {problem.title}
                 </ProblemName>
                 <ProblemTags>

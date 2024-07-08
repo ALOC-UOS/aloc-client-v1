@@ -1,7 +1,7 @@
 import React from 'react';
-import {ThemeProvider} from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Problem from './views/Problem';
 import Member from './views/Member';

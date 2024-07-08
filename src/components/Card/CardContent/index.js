@@ -2,12 +2,9 @@ import React from 'react';
 import { CardContentWrapper, CardSubscription, CardContent, Icon, Text } from './style';
 
 const CardContentContainer = ({ subscription, contents }) => {
-
   return (
     <CardContentWrapper>
-      <CardSubscription>
-        {subscription}
-      </CardSubscription>
+      <CardSubscription>{subscription}</CardSubscription>
       {contents.map((content, index) => {
         return (
           <CardContent key={index}>
@@ -20,6 +17,6 @@ const CardContentContainer = ({ subscription, contents }) => {
       })}
     </CardContentWrapper>
   );
-}
+};
 
 export default CardContentContainer;

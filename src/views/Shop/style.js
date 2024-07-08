@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 
 const AppearCard = keyframes`
   0% {
@@ -9,15 +9,15 @@ const AppearCard = keyframes`
     transform: translateY(0px);
     opacity: 1;
   }
-`
+`;
 
 const ShopContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${props => props.theme.background};
   min-height: 100vh;
   padding-bottom: 48px;
-`
+`;
 
 const ContentContainer = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ const ContentContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 const ItemContainer = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const ItemContainer = styled.div`
   align-items: flex-start;
   gap: 24px;
   margin-top: 24px;
-`
+`;
 
 const ItemCard = styled.div`
   animation: ${AppearCard} 1s ease forwards;
@@ -53,7 +53,7 @@ const ItemCard = styled.div`
   border-radius: 16px;
   overflow: hidden;
   background-color: #ffffff;
-`
+`;
 
 const ItemImgWrapper = styled.div`
   position: relative;
@@ -64,11 +64,10 @@ const ItemImgWrapper = styled.div`
   min-width: 240px;
   min-height: 176px;
   padding: 24px;
-  background-color: ${(props) => props.theme.foreground};
-`
+  background-color: ${props => props.theme.foreground};
+`;
 
-const ItemImg = styled.img`
-`
+const ItemImg = styled.img``;
 
 const ItemInfo = styled.div`
   display: flex;
@@ -76,22 +75,22 @@ const ItemInfo = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 8px 12px 12px;
-`
+`;
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const ItemName = styled.div`
-  color: ${(props) => props.theme.titleText};
+  color: ${props => props.theme.titleText};
   font-size: 16px;
   font-weight: 500;
-`
+`;
 
 const InfoDescription = styled.div`
-  color: ${(props) => props.theme.subText};
+  color: ${props => props.theme.subText};
   font-size: 12px;
-`
+`;
 
 const ItemPrice = styled.div`
   display: flex;
@@ -115,10 +114,10 @@ const ItemPrice = styled.div`
       transform: rotateY(180deg);
     }
   }
-`
+`;
 
 const Button = styled.div`
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${props => props.theme.primary};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,6 +138,19 @@ const Button = styled.div`
     filter: brightness(0.8);
     transform: scale(0.95);
   }
-`
+`;
 
-export { ShopContainer, ContentContainer, ItemContainer, ItemCard, ItemImgWrapper, ItemImg, ItemInfo, InfoWrapper, ItemName, InfoDescription, ItemPrice, Button };
+export {
+  ShopContainer,
+  ContentContainer,
+  ItemContainer,
+  ItemCard,
+  ItemImgWrapper,
+  ItemImg,
+  ItemInfo,
+  InfoWrapper,
+  ItemName,
+  InfoDescription,
+  ItemPrice,
+  Button,
+};

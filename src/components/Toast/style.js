@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components';
 const ToastContainer = styled.div`
   z-index: 9999;
   position: fixed;
@@ -6,21 +6,21 @@ const ToastContainer = styled.div`
   left: 50%;
 
   opacity: 0;
-  box-shadow: ${(props) => props.theme.boxShadow};
+  box-shadow: ${props => props.theme.boxShadow};
   display: flex;
   flex-direction: column;
   min-width: 320px;
   border-radius: 8px;
-  background-color: #FF5A5A;
+  background-color: #ff5a5a;
   justify-content: center;
   overflow: hidden;
-    transform: translate(-50%, 0%);
-  ${(props) =>
+  transform: translate(-50%, 0%);
+  ${props =>
     props.$toastState &&
     css`
       opacity: 1;
       transform: translate(-50%, -50%);
-  `}
+    `}
 `;
 const ToastIcon = styled.img`
   width: 24px;
@@ -55,19 +55,12 @@ const Progress = styled.div`
   height: 4px;
   position: absolute;
   bottom: 0;
-  animation: ${(props) =>
+  animation: ${props =>
     props.$runAnimation
       ? css`
           ${progressbar} 1.8s linear forwards
         `
-      : "none"};
+      : 'none'};
 `;
 
-export {
-  ToastContainer,
-  ToastIcon,
-  ToastText,
-  ToastWrapper,
-  progressbar,
-  Progress,
-};
+export { ToastContainer, ToastIcon, ToastText, ToastWrapper, progressbar, Progress };

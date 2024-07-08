@@ -7,10 +7,11 @@ const HistoryListContainer = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
   // scroll 가리기
-  &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb {
     display: none;
   }
-`
+`;
 
 const CardWrapper = styled.div`
   display: flex;
@@ -20,13 +21,13 @@ const CardWrapper = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
-`
+`;
 
 const CardSubscription = styled.div`
-  color: ${(props) => props.theme.subText};
+  color: ${props => props.theme.subText};
   font-size: 12px;
   font-weight: 500;
-`
+`;
 
 const CardContent = styled.div`
   display: flex;
@@ -34,31 +35,39 @@ const CardContent = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 4px;
-`
+`;
 
 const Icon = styled.img`
   width: 24px;
   height: 24px;
-`
+`;
 
 const Text = styled.div`
   display: flex;
   flex-direction: row;
-  color: ${(props) => props.theme.contentText};
+  color: ${props => props.theme.contentText};
   font-size: 16px;
   font-weight: 500;
 
-  ${(props) => props.textColor === 'blue' && css`
-    color: ${props.theme.primary};
-  `}
-  ${(props) => props.textColor === 'gold' && css`
-    color: #FFB800;
-  `}
-  ${(props) => props.textColor === 'silver' && css`
-    color: #BCBFC7;
-  `}
-  ${(props) => props.textColor === 'bronze' && css`
-    color: #B97C63;
-  `}
-`
-export { HistoryListContainer, CardWrapper,  CardSubscription, CardContent, Icon, Text };
+  ${props =>
+    props.textColor === 'blue' &&
+    css`
+      color: ${props.theme.primary};
+    `}
+  ${props =>
+    props.textColor === 'gold' &&
+    css`
+      color: #ffb800;
+    `}
+  ${props =>
+    props.textColor === 'silver' &&
+    css`
+      color: #bcbfc7;
+    `}
+  ${props =>
+    props.textColor === 'bronze' &&
+    css`
+      color: #b97c63;
+    `}
+`;
+export { HistoryListContainer, CardWrapper, CardSubscription, CardContent, Icon, Text };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SignIn from '../../components/SignForm/SignIn';
 import SignUp from '../../components/SignForm/SignUp';
-import {useState} from 'react';
+import { useState } from 'react';
 const Login = () => {
   const [formType, setFormType] = useState('LOGIN');
   return (

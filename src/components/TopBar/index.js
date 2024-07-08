@@ -28,7 +28,7 @@ const TopBar = ({ active }) => {
 
   useEffect(() => {
     const path = window.location.pathname;
-    if( path === '/') {
+    if (path === '/') {
       setSelectedItem('/');
     } else if (path === '/problem/' || path === '/problem') {
       setSelectedItem('/problem');
@@ -51,15 +51,16 @@ const TopBar = ({ active }) => {
 
   const checkTodaySolvedProblem = () => {
     let url = 'https://www.iflab.run/api/check/problem/today';
-    axios.get(url)
+    axios.get(url);
     window.location.reload();
-  }
+  };
 
   const navigate = useNavigate();
   function goRoute(route) {
     if (route === selectedItem) return;
+    window.scrollTo(0, 0);
     navigate(route);
-  };
+  }
 
   return (
     <TopBarContainer isScroll={isScroll}>
@@ -74,14 +75,11 @@ const TopBar = ({ active }) => {
           </TopBarItem>
         ))}
       </TopBarLeft>
-      <TopBarButton
-        active={active}
-        onClick={() => checkTodaySolvedProblem()}
-      >
+      <TopBarButton active={active} onClick={() => checkTodaySolvedProblem()}>
         문제 풀었어요!
       </TopBarButton>
     </TopBarContainer>
   );
-}
+};
 
 export default TopBar;

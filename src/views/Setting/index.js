@@ -102,65 +102,64 @@ const problemTierList = [
   {
     tier_id: 4,
     tier_name: '플래티넘',
-  }
+  },
 ];
 
 const memberAddList = [
   {
     id: 'name',
-    placeholder: 'Name'
+    placeholder: 'Name',
   },
   {
     id: 'studentId',
-    placeholder: 'Student ID'
+    placeholder: 'Student ID',
   },
   {
     id: 'githubId',
-    placeholder: 'Github ID'
+    placeholder: 'Github ID',
   },
   {
-    id: 'baekjoonId',  
-    placeholder: 'Baekjoon ID'
-  }
-]
+    id: 'baekjoonId',
+    placeholder: 'Baekjoon ID',
+  },
+];
 
 const colorAddList = [
   {
     id: 'id',
-    placeholder: 'Name'
+    placeholder: 'Name',
   },
   {
     id: 'color1',
-    placeholder: 'Color1'
+    placeholder: 'Color1',
   },
   {
     id: 'color2',
-    placeholder: 'Color2'
+    placeholder: 'Color2',
   },
   {
     id: 'color3',
-    placeholder: 'Color3'
+    placeholder: 'Color3',
   },
   {
     id: 'color4',
-    placeholder: 'Color4'
+    placeholder: 'Color4',
   },
   {
     id: 'color5',
-    placeholder: 'Color5'
+    placeholder: 'Color5',
   },
   {
     id: 'degree',
-    placeholder: 'Degree'
+    placeholder: 'Degree',
   },
   {
     id: 'category',
-    placeholder: 'Category'
-  }
-]
+    placeholder: 'Category',
+  },
+];
 
 const Setting = () => {
-
   return (
     <SettingContainer>
       <ListInputWrap
@@ -169,16 +168,8 @@ const Setting = () => {
         listName={'algorithm'}
         listData={algorithmList}
       />
-      <TextInputWrap
-        label={'멤버 추가하기'}
-        apiURL={'add/user'}
-        inputList={memberAddList}
-      />
-      <TextInputWrap
-        label={'색상 추가하기'}
-        apiURL={'add/color'}
-        inputList={colorAddList}
-      />
+      <TextInputWrap label={'멤버 추가하기'} apiURL={'add/user'} inputList={memberAddList} />
+      <TextInputWrap label={'색상 추가하기'} apiURL={'add/color'} inputList={colorAddList} />
     </SettingContainer>
   );
 };

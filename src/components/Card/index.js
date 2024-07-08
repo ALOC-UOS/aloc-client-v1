@@ -12,13 +12,13 @@ const Card = () => {
       contents: [
         {
           Icon: CalendarIcon,
-          Text: '5월 6일 화요일, 오후 7시'
+          Text: '5월 6일 화요일, 오후 7시',
         },
         {
           Icon: LocationIcon,
-          Text: '정보기술관 106호 / 107호'
-        }
-      ]
+          Text: '정보기술관 106호 / 107호',
+        },
+      ],
     },
   ];
 
@@ -27,40 +27,30 @@ const Card = () => {
       <CardWrapper>
         <CardTop>
           <CardLabel> 우리의 흔적 </CardLabel>
-          <CardTitle>
-            히스토리
-          </CardTitle>
+          <CardTitle>히스토리</CardTitle>
         </CardTop>
         <HistoryList />
       </CardWrapper>
       <CardWrapper>
         <CardTop>
           <CardLabel> 예정된 일정 </CardLabel>
-          <CardTitle>
-            정기 세미나 - 9회차
-          </CardTitle>
+          <CardTitle>정기 세미나 - 9회차</CardTitle>
         </CardTop>
         {SeminarData.map((data, index) => {
           return (
-            <CardContent
-              key={index}
-              subscription={data.subscription}
-              contents={data.contents}
-            />
+            <CardContent key={index} subscription={data.subscription} contents={data.contents} />
           );
         })}
       </CardWrapper>
       <CardWrapper>
         <CardTop>
           <CardLabel> 지나간 문제</CardLabel>
-          <CardTitle>
-            문제 목록
-          </CardTitle>
+          <CardTitle>문제 목록</CardTitle>
         </CardTop>
         <ProblemList />
       </CardWrapper>
     </CardContainer>
   );
-}
+};
 
 export default Card;
