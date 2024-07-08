@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const InputBox = styled.div`
+const InputBox = styled.input`
   position: relative;
   display: flex;
   flex-direction: row;

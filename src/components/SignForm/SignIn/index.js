@@ -2,7 +2,32 @@ import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
 import { InputBox } from '../../Input/TextInput/TextInputBox/style';
 import Button from '../../Buttons';
+import { useState } from 'react';
+import { useRef } from 'react';
+
 const SignIn = ({ setFormType }) => {
+  const [githubId, setGithubId] = useState('');
+  const [password, setPassword] = useState('');
+  const [githubIdFocus, setGithubIdFocus] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
+  const githubIdRef = useRef();
+  const passwordRef = useRef();
+  const checkForm = () => {
+    let checkBool = true;
+    if (githubId.length <= 1) {
+      githubIdRef.current.placeholder = '닉네임은 2글자 이상이어야 합니다';
+      setGithubId('');
+      setGithubIdFocus(true);
+      checkBool = false;
+    }
+    if (password.length <= 3) {
+      passwordRef.current.placeholder = '비밀번호는 4글자 이상이어야 합니다';
+      setPassword('');
+      setPasswordFocus(true);
+      checkBool = false;
+    }
+    return checkBool;
+  };
   return (
     <SigninBox>
       <ImageWrapper>
@@ -12,16 +37,54 @@ const SignIn = ({ setFormType }) => {
         <Phrase>오늘도 알록하세요</Phrase>
       </PhraseWrapper>
       <BreakLine />
-      <InputBox placeholder={'깃허브 닉네임'}></InputBox>
-      <InputBox placeholder={'비밀번호'}></InputBox>
-      <Button color={'blue'} type={'active'} size={'small'} onClick={() => {}}>
+      <StyledInputBox
+        ref={githubIdRef}
+        placeholder={'깃허브 닉네임'}
+        value={githubId}
+        isFocused={githubIdFocus}
+        onChange={e => setGithubId(e.target.value)}
+      ></StyledInputBox>
+      <StyledInputBox
+        ref={passwordRef}
+        type="password"
+        placeholder={'비밀번호'}
+        value={password}
+        isFocused={passwordFocus}
+        onChange={e => setPassword(e.target.value)}
+      ></StyledInputBox>
+
+      <Button
+        color={'blue'}
+        type={'active'}
+        size={'medium'}
+        style={{
+          height: 40,
+          textAlign: 'start',
+          padding: '4px 8px',
+          fontSize: 14,
+          borderRadius: 8,
+        }}
+        onClick={() => {
+          console.log(checkForm());
+        }}
+      >
         로그인
       </Button>
-      <UnderlinedText onClick={() => setFormType('SIGNUP')}>알록 회원이 아니신가요?</UnderlinedText>
+      <UnderlinedText
+        onClick={() => {
+          setFormType('SIGNUP');
+        }}
+      >
+        알록 회원이 아니신가요?
+      </UnderlinedText>
     </SigninBox>
   );
 };
 export default SignIn;
+
+const StyledInputBox = styled(InputBox)`
+  border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
+`;
 
 const SigninBox = styled.div`
   display: flex;
