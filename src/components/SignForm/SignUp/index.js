@@ -50,14 +50,24 @@ const SignUp = ({ setFormType }) => {
     discordId,
     notionEmail,
   } = inputs;
-  const githubIdRef = useRef();
-  const passwordRef = useRef();
-  const checkedPasswordRef = useRef();
-  const nameRef = useRef();
-  const studentIdRef = useRef();
-  const baekjoonIdRef = useRef();
-  const discordIdRef = useRef();
-  const notionEmailRef = useRef();
+  // const githubIdRef = useRef();
+  // const passwordRef = useRef();
+  // const checkedPasswordRef = useRef();
+  // const nameRef = useRef();
+  // const studentIdRef = useRef();
+  // const baekjoonIdRef = useRef();
+  // const discordIdRef = useRef();
+  // const notionEmailRef = useRef();
+  const {
+    githubIdRef,
+    passwordRef,
+    checkedPasswordRef,
+    nameRef,
+    studentIdRef,
+    baekjoonIdRef,
+    discordIdRef,
+    notionEmailRef,
+  } = useRef();
   useEffect(() => {
     if (githubIdRef.current) {
       githubIdRef.current.placeholder = '깃허브 닉네임';
