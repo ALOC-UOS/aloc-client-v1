@@ -3,42 +3,64 @@ import logo from '../../../assets/logo.png';
 import { InputBox } from '../../Input/TextInput/TextInputBox/style';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
+import BlackScreen from '../../BlackScreen';
+import AlertModal from '../../Modal/AlertModal';
 
 const SignUp = ({ setFormType }) => {
+  const [isOpenedModal, setIsOpenedModal] = useState(false);
+  const [modalText, setModalText] = useState('');
   const [inputs, setInputs] = useState({
-    nickname: '',
+    githubId: '',
     password: '',
     checkedPassword: '',
     name: '',
     studentId: '',
     baekjoonId: '',
+    discordId: '',
+    notionEmail: '',
   });
   const [focus, setFocus] = useState({
-    nicknameFocus: false,
+    githubIdFocus: false,
     passwordFocus: false,
     checkedPasswordFocus: false,
     nameFocus: false,
     studentIdFocus: false,
     beakjoonIdFocus: false,
+    discordIdFocus: false,
+    notionEmailFocus: false,
   });
   const {
-    nicknameFocus,
+    githubIdFocus,
     passwordFocus,
     checkedPasswordFocus,
     nameFocus,
     studentIdFocus,
     baekjoonIdFocus,
+    discordIdFocus,
+    notionEmailFocus,
   } = focus;
-  const { nickname, password, checkedPassword, name, studentId, baekjoonId } = inputs;
-  const nicknameRef = useRef();
+  const {
+    githubId,
+    password,
+    checkedPassword,
+    name,
+    studentId,
+    baekjoonId,
+    discordId,
+    notionEmail,
+  } = inputs;
+  const githubIdRef = useRef();
   const passwordRef = useRef();
   const checkedPasswordRef = useRef();
   const nameRef = useRef();
   const studentIdRef = useRef();
   const baekjoonIdRef = useRef();
+  const discordIdRef = useRef();
+  const notionEmailRef = useRef();
   useEffect(() => {
-    if (nicknameRef.current) {
-      nicknameRef.current.placeholder = '깃허브 닉네임';
+    if (githubIdRef.current) {
+      githubIdRef.current.placeholder = '깃허브 닉네임';
     }
     if (passwordRef.current) {
       passwordRef.current.placeholder = '비밀번호';
@@ -55,7 +77,22 @@ const SignUp = ({ setFormType }) => {
     if (baekjoonIdRef.current) {
       baekjoonIdRef.current.placeholder = '백준 닉네임';
     }
-  }, [nicknameRef, passwordRef, checkedPasswordRef, nameRef, studentIdRef, baekjoonIdRef]);
+    if (discordIdRef.current) {
+      discordIdRef.current.placeholder = '디스코드 아이디';
+    }
+    if (notionEmailRef.current) {
+      notionEmailRef.current.placeholder = '노션 이메일';
+    }
+  }, [
+    githubIdRef,
+    passwordRef,
+    checkedPasswordRef,
+    nameRef,
+    studentIdRef,
+    baekjoonIdRef,
+    discordIdRef,
+    notionEmailRef,
+  ]);
 
   const reset = type => {
     setInputs(prev => {
@@ -84,11 +121,38 @@ const SignUp = ({ setFormType }) => {
     return password === checkedPassword;
   };
 
+  const onSubmit = async () => {
+    if (checkForm()) {
+      await axios
+        .post('https://www.iflab.run//api2/sign-up', {
+          username: name,
+          password: password,
+          githubId: githubId,
+          baekjoonId: baekjoonId,
+          studentId: studentId,
+          discordId: discordId,
+          notionEmail: notionEmail,
+        })
+        .then(response => {
+          console.log(response);
+          setFormType('SIGNIN');
+        })
+        .catch(error => {
+          if (error.response.data.code === 'COMMON400') {
+            setModalText('이미 가입된 유저입니다.');
+            setIsOpenedModal(true);
+          }
+          console.log('뭔가 안됨');
+        });
+    }
+    return;
+  };
+
   const checkForm = () => {
     let checkBool = true;
-    if (nickname.length <= 1) {
-      nicknameRef.current.placeholder = '닉네임은 2글자 이상이어야 합니다';
-      reset('nickname');
+    if (githubId.length <= 1) {
+      githubIdRef.current.placeholder = '닉네임은 2글자 이상이어야 합니다';
+      reset('githubId');
       checkBool = false;
     }
     if (password.length <= 3) {
@@ -120,6 +184,15 @@ const SignUp = ({ setFormType }) => {
   };
   return (
     <SigninBox>
+      <BlackScreen isOpen={isOpenedModal} />
+      <AlertModal
+        isOpen={isOpenedModal}
+        description={modalText}
+        closeModal={() => {
+          setIsOpenedModal(false);
+          setFormType('SIGNIN');
+        }}
+      />
       <ImageWrapper>
         <LogoImage src={logo} />
       </ImageWrapper>
@@ -128,15 +201,15 @@ const SignUp = ({ setFormType }) => {
       </PhraseWrapper>
       <BreakLine />
       <StyledInputBox
-        ref={nicknameRef}
-        isFocused={nicknameFocus}
-        name="nickname"
-        value={nickname}
+        ref={githubIdRef}
+        $isFocused={githubIdFocus}
+        name="githubId"
+        value={githubId}
         onChange={onChange}
       />
       <StyledInputBox
         ref={passwordRef}
-        isFocused={passwordFocus}
+        $isFocused={passwordFocus}
         name="password"
         value={password}
         type="password"
@@ -144,7 +217,7 @@ const SignUp = ({ setFormType }) => {
       />
       <StyledInputBox
         ref={checkedPasswordRef}
-        isFocused={checkedPasswordFocus}
+        $isFocused={checkedPasswordFocus}
         name="checkedPassword"
         value={checkedPassword}
         type="password"
@@ -152,23 +225,37 @@ const SignUp = ({ setFormType }) => {
       />
       <StyledInputBox
         ref={nameRef}
-        isFocused={nameFocus}
+        $isFocused={nameFocus}
         name="name"
         value={name}
         onChange={onChange}
       />
       <StyledInputBox
         ref={studentIdRef}
-        isFocused={studentIdFocus}
+        $isFocused={studentIdFocus}
         name="studentId"
         value={studentId}
         onChange={onChange}
       />
       <StyledInputBox
         ref={baekjoonIdRef}
-        isFocused={baekjoonIdFocus}
+        $isFocused={baekjoonIdFocus}
         name="baekjoonId"
         value={baekjoonId}
+        onChange={onChange}
+      />
+      <StyledInputBox
+        ref={discordIdRef}
+        $isFocused={discordIdFocus}
+        name="discordId"
+        value={discordId}
+        onChange={onChange}
+      />
+      <StyledInputBox
+        ref={notionEmailRef}
+        $isFocused={notionEmailFocus}
+        name="notionEmail"
+        value={notionEmail}
         onChange={onChange}
       />
       <Button
@@ -182,10 +269,7 @@ const SignUp = ({ setFormType }) => {
           fontSize: 14,
           borderRadius: 8,
         }}
-        onClick={() => {
-          console.log(checkForm());
-          // setFormType('SIGNIN');
-        }}
+        onClick={onSubmit}
       >
         회원가입
       </Button>
@@ -202,7 +286,7 @@ const SignUp = ({ setFormType }) => {
 export default SignUp;
 
 const StyledInputBox = styled(InputBox)`
-  border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
+  border-color: ${props => (props.$isFocused && props.value.length === 0 ? 'red' : '')};
 `;
 
 const SigninBox = styled.div`
