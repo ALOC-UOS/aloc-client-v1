@@ -4,14 +4,32 @@ import { InputBox } from '../../Input/TextInput/TextInputBox/style';
 import Button from '../../Buttons';
 import { useState } from 'react';
 import { useRef } from 'react';
+import BlackScreen from '../../BlackScreen';
+import AlertModal from '../../Modal/AlertModal';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const SignIn = ({ setFormType }) => {
+  const [isOpenedModal, setIsOpenedModal] = useState(false);
+  const [modalText, setModalText] = useState('');
   const [githubId, setGithubId] = useState('');
   const [password, setPassword] = useState('');
   const [githubIdFocus, setGithubIdFocus] = useState(false);
   const [passwordFocus, setPasswordFocus] = useState(false);
   const githubIdRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (githubIdRef.current) {
+      githubIdRef.current.placeholder = '깃허브 닉네임';
+    }
+    if (passwordRef.current) {
+      passwordRef.current.placeholder = '비밀번호';
+    }
+  }, [githubIdRef, passwordRef]);
+
   const checkForm = () => {
     let checkBool = true;
     if (githubId.length <= 1) {
@@ -28,8 +46,41 @@ const SignIn = ({ setFormType }) => {
     }
     return checkBool;
   };
+
+  const onSubmit = async event => {
+    event.preventDefault();
+    if (checkForm()) {
+      await axios
+        .post('https://www.iflab.run/api2/login', {
+          password: password,
+          githubId: githubId,
+        })
+        .then(response => {
+          console.log('hello');
+          navigate('/');
+        })
+        .catch(error => {
+          console.log(error);
+          // if (error.response.data.code === 'COMMON400') {
+          //   setModalText('로그인 형식 이상');
+          //   setIsOpenedModal(true);
+          // }
+          console.log('뭔가 안됨');
+        });
+    }
+    return;
+  };
+
   return (
-    <SigninBox>
+    <SigninBox onSubmit={onSubmit}>
+      <BlackScreen isOpen={isOpenedModal} />
+      <AlertModal
+        isOpen={isOpenedModal}
+        description={modalText}
+        closeModal={() => {
+          setIsOpenedModal(false);
+        }}
+      />
       <ImageWrapper>
         <LogoImage src={logo} />
       </ImageWrapper>
@@ -52,10 +103,9 @@ const SignIn = ({ setFormType }) => {
         isFocused={passwordFocus}
         onChange={e => setPassword(e.target.value)}
       ></StyledInputBox>
-
       <Button
         color={'blue'}
-        type={'active'}
+        type={'submit'}
         size={'medium'}
         style={{
           height: 40,
@@ -64,9 +114,7 @@ const SignIn = ({ setFormType }) => {
           fontSize: 14,
           borderRadius: 8,
         }}
-        onClick={() => {
-          console.log(checkForm());
-        }}
+        // onClick={onSubmit}
       >
         로그인
       </Button>
@@ -86,7 +134,7 @@ const StyledInputBox = styled(InputBox)`
   border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
 `;
 
-const SigninBox = styled.div`
+const SigninBox = styled.form`
   display: flex;
   width: 350px;
   border-radius: 16px;

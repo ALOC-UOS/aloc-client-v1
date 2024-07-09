@@ -3,7 +3,7 @@ import SignIn from '../../components/SignForm/SignIn';
 import SignUp from '../../components/SignForm/SignUp';
 import { useState } from 'react';
 const Login = () => {
-  const [formType, setFormType] = useState('LOGIN');
+  const [formType, setFormType] = useState('SIGNIN');
   return (
     <div>
       <SigninContainer>

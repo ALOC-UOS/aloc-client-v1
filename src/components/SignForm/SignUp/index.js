@@ -50,24 +50,16 @@ const SignUp = ({ setFormType }) => {
     discordId,
     notionEmail,
   } = inputs;
-  // const githubIdRef = useRef();
-  // const passwordRef = useRef();
-  // const checkedPasswordRef = useRef();
-  // const nameRef = useRef();
-  // const studentIdRef = useRef();
-  // const baekjoonIdRef = useRef();
-  // const discordIdRef = useRef();
-  // const notionEmailRef = useRef();
-  const {
-    githubIdRef,
-    passwordRef,
-    checkedPasswordRef,
-    nameRef,
-    studentIdRef,
-    baekjoonIdRef,
-    discordIdRef,
-    notionEmailRef,
-  } = useRef();
+
+  const githubIdRef = useRef();
+  const passwordRef = useRef();
+  const checkedPasswordRef = useRef();
+  const nameRef = useRef();
+  const studentIdRef = useRef();
+  const baekjoonIdRef = useRef();
+  const discordIdRef = useRef();
+  const notionEmailRef = useRef();
+
   useEffect(() => {
     if (githubIdRef.current) {
       githubIdRef.current.placeholder = '깃허브 닉네임';
@@ -131,10 +123,15 @@ const SignUp = ({ setFormType }) => {
     return password === checkedPassword;
   };
 
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   const onSubmit = async () => {
     if (checkForm()) {
       await axios
-        .post('https://www.iflab.run//api2/sign-up', {
+        .post('https://www.iflab.run/api2/sign-up', {
           username: name,
           password: password,
           githubId: githubId,
@@ -188,6 +185,16 @@ const SignUp = ({ setFormType }) => {
     if (baekjoonId.length <= 1) {
       baekjoonIdRef.current.placeholder = '백준 닉네임은 2글자 이상이어야 합니다';
       reset('baekjoonId');
+      checkBool = false;
+    }
+    if (discordId.length <= 1) {
+      discordIdRef.current.placeholder = '디스코드 아이디는 2글자 이상이어야 합니다';
+      reset('discordId');
+      checkBool = false;
+    }
+    if (!isValidEmail(notionEmail)) {
+      notionEmailRef.current.placeholder = '이메일 형식이 잘못됐습니다';
+      reset('notionEmail');
       checkBool = false;
     }
     return checkBool;
