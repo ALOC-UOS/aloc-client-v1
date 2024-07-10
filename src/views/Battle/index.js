@@ -20,11 +20,11 @@ const Battle = () => {
   }, []);
 
   function loadMemberData() {
-    let url = 'https://www.iflab.run/api/show/user';
+    let url = 'https://www.iflab.run/api2/users';
     axios
       .get(url)
       .then(response => {
-        setMemberData(response.data);
+        setMemberData(response.data.result);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');

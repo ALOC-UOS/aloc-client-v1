@@ -44,11 +44,17 @@ const Problem = () => {
   }
 
   function loadProblemData(algorithmId) {
-    let url = 'https://www.iflab.run/api/show/problem/' + algorithmId;
+    let season = 2;
+    let url =
+      'https://www.iflab.run/api2/problem/season/' +
+      season +
+      '/algorithmId/' +
+      algorithmId +
+      '/FULL';
     axios
       .get(url)
       .then(response => {
-        setProblemData(response.data);
+        setProblemData(response.data.result);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
@@ -56,27 +62,28 @@ const Problem = () => {
   }
 
   function loadAlgorithmList() {
-    let url = 'https://www.iflab.run/api/show/algorithm';
+    let url = 'https://www.iflab.run/api2/algorithm/2';
     axios
       .get(url)
       .then(response => {
-        setAlgorithmList(response.data);
-        const algorithmId = response.data[0].algorithmId;
-        setSelectedWeek(response.data[0].id);
+        setAlgorithmList(response.data.result.algorithms);
+        const algorithmId = response.data.result.algorithms[0].algorithmId;
+        setSelectedWeek(response.data.result.algorithms[0].week);
         loadProblemData(algorithmId);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
+        console.error(error);
       });
   }
 
   function openSolvedUserList(id) {
     setIsOpenedModal(true);
-    let url = 'https://www.iflab.run/api/show/problem/solved-user/' + id;
+    let url = 'https://www.iflab.run/api2/problem/solved-user/' + id;
     axios
       .get(url)
       .then(response => {
-        setSolvedMemberList(response.data);
+        setSolvedMemberList(response.data.result);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
@@ -85,7 +92,7 @@ const Problem = () => {
 
   function selectWeek(week) {
     setSelectedWeek(week);
-    const algorithmId = AlgorithmList.find(algorithm => algorithm.id === week).algorithmId;
+    const algorithmId = AlgorithmList.find(algorithm => algorithm.week === week).algorithmId;
     loadProblemData(algorithmId);
   }
 
@@ -105,14 +112,16 @@ const Problem = () => {
       <BlackScreen isOpen={isOpenedModal} />
       <ContentContainer>
         <WeekList>
-          {AlgorithmList.map((week, index) => (
+          {AlgorithmList.map(algorithm => (
             <WeekItem
-              key={index}
-              isActive={selectedWeek === week.id}
-              onClick={() => selectWeek(week.id)}
+              key={algorithm.week}
+              isActive={selectedWeek === algorithm.week}
+              onClick={() => selectWeek(algorithm.week)}
             >
-              <WeekTitle isActive={selectedWeek === week.id}>{week.id}주차</WeekTitle>
-              <AlgorithmName isActive={selectedWeek === week.id}>{week.name}</AlgorithmName>
+              <WeekTitle isActive={selectedWeek === algorithm.week}>{algorithm.week}주차</WeekTitle>
+              <AlgorithmName isActive={selectedWeek === algorithm.week}>
+                {algorithm.name}
+              </AlgorithmName>
             </WeekItem>
           ))}
         </WeekList>
@@ -135,10 +144,10 @@ const Problem = () => {
                   {problem.id}. {problem.title}
                 </ProblemName>
                 <ProblemTags>
-                  {JSON.parse(problem.tags).map((tag, index) => (
-                    <ProblemTag key={index}>
-                      <ProblemTagText># {tag.korean}</ProblemTagText>
-                      <ProblemTagText>{tag.english}</ProblemTagText>
+                  {problem.tags.map((tag, index) => (
+                    <ProblemTag key={tag.id}>
+                      <ProblemTagText># {tag.koreanName}</ProblemTagText>
+                      <ProblemTagText>{tag.englishName}</ProblemTagText>
                     </ProblemTag>
                   ))}
                 </ProblemTags>
@@ -146,7 +155,7 @@ const Problem = () => {
               <ProblemRightWrap>
                 <ProblemCorrect onClick={() => openSolvedUserList(problem.id)}>
                   맞힌 사람
-                  <ProblemCorrectNum> {problem.solved}명</ProblemCorrectNum>
+                  <ProblemCorrectNum> {problem.solvingCount}명</ProblemCorrectNum>
                 </ProblemCorrect>
                 <ProblemButton onClick={() => moveProblemPage(problem.id)}>
                   문제 확인하기

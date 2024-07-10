@@ -20,11 +20,11 @@ const HistoryList = () => {
   }, []);
 
   const loadHistoryData = () => {
-    let url = 'https://www.iflab.run/api/show/histories';
+    let url = 'https://www.iflab.run/api2/history';
     axios
       .get(url)
       .then(response => {
-        setHistoryData(response.data);
+        setHistoryData(response.data.result);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
