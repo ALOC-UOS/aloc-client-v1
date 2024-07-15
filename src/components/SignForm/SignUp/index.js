@@ -1,11 +1,19 @@
-import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
-import { InputBox } from '../../Input/TextInput/TextInputBox/style';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import BlackScreen from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
+import {
+  SignBox,
+  ImageWrapper,
+  LogoImage,
+  PhraseWrapper,
+  Phrase,
+  UnderlinedText,
+  BreakLine,
+  StyledInputBox,
+} from '../style';
 
 const SignUp = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -200,7 +208,7 @@ const SignUp = ({ setFormType }) => {
     return checkBool;
   };
   return (
-    <SigninBox>
+    <SignBox>
       <BlackScreen isOpen={isOpenedModal} />
       <AlertModal
         isOpen={isOpenedModal}
@@ -297,61 +305,7 @@ const SignUp = ({ setFormType }) => {
       >
         로그인하기
       </UnderlinedText>
-    </SigninBox>
+    </SignBox>
   );
 };
 export default SignUp;
-
-const StyledInputBox = styled(InputBox)`
-  border-color: ${props => (props.$isFocused && props.value.length === 0 ? 'red' : '')};
-`;
-
-const SigninBox = styled.div`
-  display: flex;
-  width: 350px;
-  border-radius: 16px;
-  background: white;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 12px;
-  gap: 8px;
-  box-shadow: 0px 8px 24px 0px rgba(64, 140, 255, 0.25);
-`;
-
-const PhraseWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-`;
-const Phrase = styled.div`
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: -2.56px;
-  color: ${props => props.theme.contentText};
-`;
-const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const LogoImage = styled.img`
-  width: 64px;
-  height: 64px;
-  margin: 24px;
-`;
-const BreakLine = styled.div`
-  width: 320px;
-  height: 2px;
-  flex-shrink: 0;
-  background: rgba(0, 0, 0, 0.1);
-  margin: 12px 0px;
-`;
-const UnderlinedText = styled.div`
-  cursor: pointer;
-  font-size: 12px;
-  color: #a9adb9;
-  text-decoration-line: underline;
-`;
