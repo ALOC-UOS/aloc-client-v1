@@ -1,9 +1,10 @@
 import logo from '../../../assets/logo.png';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
 import BlackScreen from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
+import LoginAPI from '../../../api/login/loginAPI';
+
 import {
   SignBox,
   ImageWrapper,
@@ -136,18 +137,18 @@ const SignUp = ({ setFormType }) => {
     return emailRegex.test(email);
   }
 
-  const onSubmit = async () => {
+  const onSubmit = async event => {
+    event.preventDefault();
     if (checkForm()) {
-      await axios
-        .post('https://www.iflab.run/api2/sign-up', {
-          username: name,
-          password: password,
-          githubId: githubId,
-          baekjoonId: baekjoonId,
-          studentId: studentId,
-          discordId: discordId,
-          notionEmail: notionEmail,
-        })
+      await LoginAPI.handleOnsubmitSignupForm(
+        name,
+        password,
+        githubId,
+        baekjoonId,
+        studentId,
+        discordId,
+        notionEmail
+      )
         .then(response => {
           console.log(response);
           setFormType('SIGNIN');
@@ -208,7 +209,7 @@ const SignUp = ({ setFormType }) => {
     return checkBool;
   };
   return (
-    <SignBox>
+    <SignBox onSubmit={onSubmit}>
       <BlackScreen isOpen={isOpenedModal} />
       <AlertModal
         isOpen={isOpenedModal}
@@ -227,14 +228,14 @@ const SignUp = ({ setFormType }) => {
       <BreakLine />
       <StyledInputBox
         ref={githubIdRef}
-        $isFocused={githubIdFocus}
+        isFocused={githubIdFocus}
         name="githubId"
         value={githubId}
         onChange={onChange}
       />
       <StyledInputBox
         ref={passwordRef}
-        $isFocused={passwordFocus}
+        isFocused={passwordFocus}
         name="password"
         value={password}
         type="password"
@@ -242,7 +243,7 @@ const SignUp = ({ setFormType }) => {
       />
       <StyledInputBox
         ref={checkedPasswordRef}
-        $isFocused={checkedPasswordFocus}
+        isFocused={checkedPasswordFocus}
         name="checkedPassword"
         value={checkedPassword}
         type="password"
@@ -250,35 +251,35 @@ const SignUp = ({ setFormType }) => {
       />
       <StyledInputBox
         ref={nameRef}
-        $isFocused={nameFocus}
+        isFocused={nameFocus}
         name="name"
         value={name}
         onChange={onChange}
       />
       <StyledInputBox
         ref={studentIdRef}
-        $isFocused={studentIdFocus}
+        isFocused={studentIdFocus}
         name="studentId"
         value={studentId}
         onChange={onChange}
       />
       <StyledInputBox
         ref={baekjoonIdRef}
-        $isFocused={baekjoonIdFocus}
+        isFocused={baekjoonIdFocus}
         name="baekjoonId"
         value={baekjoonId}
         onChange={onChange}
       />
       <StyledInputBox
         ref={discordIdRef}
-        $isFocused={discordIdFocus}
+        isFocused={discordIdFocus}
         name="discordId"
         value={discordId}
         onChange={onChange}
       />
       <StyledInputBox
         ref={notionEmailRef}
-        $isFocused={notionEmailFocus}
+        isFocused={notionEmailFocus}
         name="notionEmail"
         value={notionEmail}
         onChange={onChange}
@@ -294,7 +295,6 @@ const SignUp = ({ setFormType }) => {
           fontSize: 14,
           borderRadius: 8,
         }}
-        onClick={onSubmit}
       >
         회원가입
       </Button>

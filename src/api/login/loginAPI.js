@@ -7,6 +7,25 @@ const LoginAPI = {
       password: password,
     });
   },
+  handleOnsubmitSignupForm: (
+    name,
+    password,
+    githubId,
+    baekjoonId,
+    studentId,
+    discordId,
+    notionEmail
+  ) => {
+    return axios.post('https://www.iflab.run/api2/sign-up', {
+      username: name,
+      password: password,
+      githubId: githubId,
+      baekjoonId: baekjoonId,
+      studentId: studentId,
+      discordId: discordId,
+      notionEmail: notionEmail,
+    });
+  },
 };
 
 export default LoginAPI;

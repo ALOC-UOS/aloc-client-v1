@@ -64,7 +64,9 @@ const SignIn = ({ setFormType }) => {
         })
         .catch(error => {
           console.log(error);
-          console.log('뭔가 안됨');
+          passwordRef.current.placeholder = '비밀번호가 일치하지 않거나 없는 회원입니다.';
+          setPassword('');
+          setPasswordFocus(true);
         });
     }
     return;
@@ -113,7 +115,6 @@ const SignIn = ({ setFormType }) => {
           fontSize: 14,
           borderRadius: 8,
         }}
-        // onClick={onSubmit}
       >
         로그인
       </Button>
