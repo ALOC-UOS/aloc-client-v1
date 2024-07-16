@@ -79,6 +79,7 @@ const SignIn = ({ setFormType }) => {
           console.log(res.data);
           // storeToken();
           setIsLoggedIn(true);
+          localStorage.setItem('isLoggedIn', true);
           navigate('/');
         })
         .catch(error => {
