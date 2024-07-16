@@ -8,8 +8,12 @@ import Member from './views/Member';
 import Shop from './views/Shop';
 import Battle from './views/Battle';
 import Setting from './views/Setting';
+import Login from './views/Login';
+import { useAtom } from 'jotai';
+import loginStatusAtom from './store/login/loginStatus';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useAtom(loginStatusAtom);
   const theme = 'light';
   const themeObject = {
     light: {
@@ -39,6 +43,7 @@ function App() {
     <ThemeProvider theme={themeObject[theme]}>
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
+          <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/problem" element={<Problem />} />
           <Route path="/member" element={<Member />} />

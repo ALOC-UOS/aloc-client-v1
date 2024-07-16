@@ -77,11 +77,14 @@ const TopBarButton = styled.div`
   }
 
   ${props =>
-    props.active &&
-    css`
-      opacity: 1;
-      pointer-events: auto;
-    `}
+    props.active
+      ? css`
+          opacity: 1;
+          pointer-events: auto;
+        `
+      : css`
+          display: none;
+        `}
 `;
 
 export { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton };

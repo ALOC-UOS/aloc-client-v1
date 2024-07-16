@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton } from './style';
+import loginStatusAtom from '../../store/login/loginStatus';
+import { useAtomValue } from 'jotai';
 
 const TopBarItems = [
   {
@@ -25,7 +27,7 @@ const TopBarItems = [
 const TopBar = ({ active }) => {
   const [selectedItem, setSelectedItem] = useState(window.location.pathname);
   const [isScroll, setIsScroll] = useState(false);
-
+  const isLoggedIn = useAtomValue(loginStatusAtom);
   useEffect(() => {
     const path = window.location.pathname;
     if (path === '/') {
@@ -75,8 +77,13 @@ const TopBar = ({ active }) => {
           </TopBarItem>
         ))}
       </TopBarLeft>
-      <TopBarButton active={active} onClick={() => checkTodaySolvedProblem()}>
+
+      <TopBarButton active={isLoggedIn && active} onClick={() => checkTodaySolvedProblem()}>
         문제 풀었어요!
+      </TopBarButton>
+
+      <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
+        로그인
       </TopBarButton>
     </TopBarContainer>
   );
