@@ -7,6 +7,7 @@ import AlertModal from '../../Modal/AlertModal';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import LoginAPI from '../../../api/login/loginAPI';
+
 import {
   SignBox,
   ImageWrapper,
@@ -55,19 +56,30 @@ const SignIn = ({ setFormType }) => {
     return checkBool;
   };
 
+  const setTokens = (accessToken, refreshToken) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+  };
+
+  const clearTokens = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  };
+
   const onSubmit = async event => {
     event.preventDefault();
     if (checkForm()) {
-      await LoginAPI.handleOnSubmitLoginForm(githubId, password)
-        .then(() => {
-          navigate('/');
-        })
-        .catch(error => {
-          console.log(error);
-          passwordRef.current.placeholder = '비밀번호가 일치하지 않거나 없는 회원입니다.';
-          setPassword('');
-          setPasswordFocus(true);
-        });
+      try {
+        const response = await LoginAPI.handleOnSubmitLoginForm(githubId, password);
+        setTokens(response.data.accessToken, response.data.refreshToken);
+        navigate('/');
+      } catch (error) {
+        console.log(error);
+        passwordRef.current.placeholder = '비밀번호가 일치하지 않거나 없는 회원입니다.';
+        setPassword('');
+        setPasswordFocus(true);
+        clearTokens();
+      }
     }
     return;
   };
