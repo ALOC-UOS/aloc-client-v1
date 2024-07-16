@@ -17,6 +17,9 @@ import {
   BreakLine,
   StyledInputBox,
 } from '../style';
+import loginStatusAtom from '../../../store/login/loginStatus';
+import { useSetAtom } from 'jotai';
+import storeToken from '../../../utils/auth/storeToken';
 
 const SignIn = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -28,6 +31,7 @@ const SignIn = ({ setFormType }) => {
   const githubIdRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const setIsLoggedIn = useSetAtom(loginStatusAtom);
 
   useEffect(() => {
     if (githubIdRef.current) {
@@ -59,7 +63,11 @@ const SignIn = ({ setFormType }) => {
     event.preventDefault();
     if (checkForm()) {
       await LoginAPI.handleOnSubmitLoginForm(githubId, password)
-        .then(() => {
+        .then(res => {
+          const { accessToken, refreshToken } = res.data;
+          console.log(res.data);
+          // storeToken();
+          setIsLoggedIn(true);
           navigate('/');
         })
         .catch(error => {
