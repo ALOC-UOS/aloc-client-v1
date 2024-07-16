@@ -7,6 +7,7 @@ import AlertModal from '../../Modal/AlertModal';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import LoginAPI from '../../../api/login/loginAPI';
+
 import {
   SignBox,
   ImageWrapper,
@@ -57,6 +58,16 @@ const SignIn = ({ setFormType }) => {
       checkBool = false;
     }
     return checkBool;
+  };
+
+  const setTokens = (accessToken, refreshToken) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+  };
+
+  const clearTokens = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   };
 
   const onSubmit = async event => {
