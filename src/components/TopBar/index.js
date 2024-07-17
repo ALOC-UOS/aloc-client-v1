@@ -52,8 +52,8 @@ const TopBar = ({ active }) => {
   }, []);
 
   const checkTodaySolvedProblem = () => {
-    let url = 'https://www.iflab.run/api/check/problem/today';
-    axios.get(url);
+    let url = 'https://www.iflab.run/api2/problem/solved';
+    axios.put(url);
     window.location.reload();
   };
 

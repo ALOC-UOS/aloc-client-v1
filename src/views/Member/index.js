@@ -57,11 +57,11 @@ const Member = () => {
   }, []);
 
   function loadMemberData() {
-    let url = 'https://www.iflab.run/api/show/user';
+    let url = 'https://www.iflab.run/api2/users';
     axios
       .get(url)
       .then(response => {
-        setMemberData(response.data);
+        setMemberData(response.data.result);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
@@ -72,16 +72,17 @@ const Member = () => {
     let url = '';
 
     if (type === 'solved') {
-      url = `https://www.iflab.run/api/show/user/solved-problem/${githubId}`;
+      url = `https://www.iflab.run/api2/problem/solved/user/${githubId}`;
       setModalTitle('해결한 문제 목록');
     } else {
-      url = `https://www.iflab.run/api/show/user/unsolved-problem/${githubId}`;
+      url = `https://www.iflab.run/api2/problem/unsolved/user/${githubId}`;
       setModalTitle('해결하지 못한 문제 목록');
     }
     axios
       .get(url)
       .then(response => {
-        setProblemListData(response.data);
+        setProblemListData(response.data.result);
+        console.log(response.data.result);
         setIsOpenedModal(true);
         setSelectedGithubId(githubId);
         setSelectedType(type);
@@ -100,10 +101,11 @@ const Member = () => {
   function checkSolvedProblem() {
     setIsLoading(true);
     setIsShowLoading(true);
-    let url = `https://www.iflab.run/api/check/problem/${SelectedGithubId}`;
+    let url = `https://www.iflab.run/api2/problem/solved`;
 
+    // 로그인 및 토큰 추가
     axios
-      .get(url)
+      .put(url)
       .then(response => {
         loadMemberData();
         openProblemListModal(SelectedType, SelectedGithubId);

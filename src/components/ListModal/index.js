@@ -81,17 +81,17 @@ const ListModal = ({
           <ProblemItem href={`https://www.acmicpc.net/problem/${problem.id}`} target="_blank">
             <ProblemDifficulty
               src={
-                problem.difficulty < 6
+                problem.problemDifficulty < 6
                   ? Bronze
-                  : problem.difficulty < 11
+                  : problem.problemDifficulty < 11
                     ? Silver
-                    : problem.difficulty < 16
+                    : problem.problemDifficulty < 16
                       ? Gold
                       : Platinum
               }
             />
             <ProblemName>
-              {problem.id}. {problem.title}
+              {problem.problemId}. {problem.problemTitle}
             </ProblemName>
           </ProblemItem>
         ))}

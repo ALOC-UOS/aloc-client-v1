@@ -24,11 +24,11 @@ const ProblemList = () => {
   }
 
   function loadProblemData() {
-    let url = 'https://www.iflab.run/api/show/problem';
+    let url = 'https://www.iflab.run/api2/problem';
     axios
       .get(url)
       .then(response => {
-        setProblemData(response.data);
+        setProblemData(response.data.result);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');

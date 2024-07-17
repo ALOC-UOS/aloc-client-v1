@@ -21,7 +21,7 @@ import ProblemBackgroundImage from '../../assets/background2.png';
 import { getDifficultyIcon, formatSolveTime } from '../../utils';
 import BottomInfo from '../../components/Card';
 
-const API_BASE_URL = 'https://www.iflab.run/api';
+const API_BASE_URL = 'https://www.iflab.run/api2';
 
 const Home = () => {
   const [problemData, setProblemData] = useState({});
@@ -55,8 +55,8 @@ const Home = () => {
 
   const loadProblem = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/show/problem/today`);
-      setProblemData(response.data);
+      const response = await axios.get(`${API_BASE_URL}/problem/today/FULL`);
+      setProblemData(response.data.result);
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading problem:', error);
@@ -65,10 +65,8 @@ const Home = () => {
 
   const loadSolveMember = async () => {
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/show/problem/solved-user/${problemData.id}`
-      );
-      setSolvedMemberList(response.data);
+      const response = await axios.get(`${API_BASE_URL}/problem/solved-user/${problemData.id}`);
+      setSolvedMemberList(response.data.result);
     } catch (error) {
       console.error('Error loading solved members:', error);
     }
