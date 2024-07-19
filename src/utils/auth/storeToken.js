@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie';
 const storeToken = ({ accessToken, refreshToken }) => {
-  if (refreshToken) Cookies.set('refreshToken', refreshToken);
-  if (accessToken) Cookies.set('accessToken', refreshToken);
+  console.log(accessToken);
+  console.log(refreshToken);
+  if (refreshToken) Cookies.set('refreshToken', refreshToken, { secure: true });
+  if (accessToken) Cookies.set('accessToken', accessToken);
 };
 export default storeToken;

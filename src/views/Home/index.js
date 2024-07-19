@@ -22,7 +22,7 @@ import { getDifficultyIcon, formatSolveTime } from '../../utils';
 import BottomInfo from '../../components/Card';
 import MarathonProblemList from '../../components/MarathonProblemList';
 
-const API_BASE_URL = 'https://www.iflab.run/api2';
+export const API_BASE_URL = 'https://www.iflab.run/api2';
 
 const Home = () => {
   const [problemData, setProblemData] = useState({});
