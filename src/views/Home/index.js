@@ -21,7 +21,7 @@ import ProblemBackgroundImage from '../../assets/background2.png';
 import { getDifficultyIcon, formatSolveTime } from '../../utils';
 import BottomInfo from '../../components/Card';
 
-const API_BASE_URL = 'https://www.iflab.run/api2';
+export const API_BASE_URL = 'https://www.iflab.run/api2';
 
 const Home = () => {
   const [problemData, setProblemData] = useState({});

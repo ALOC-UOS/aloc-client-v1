@@ -1,4 +1,4 @@
-import logo from '../../../assets/logo.png';
+import logo from '../../../assets/logo.svg';
 import Button from '../../Buttons';
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -60,30 +60,18 @@ const SignIn = ({ setFormType }) => {
     return checkBool;
   };
 
-  const setTokens = (accessToken, refreshToken) => {
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-  };
-
-  const clearTokens = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-  };
-
   const onSubmit = async event => {
     event.preventDefault();
     if (checkForm()) {
       await LoginAPI.handleOnSubmitLoginForm(githubId, password)
         .then(res => {
           const { accessToken, refreshToken } = res.data;
-          console.log(res.data);
-          // storeToken();
+          storeToken({ accessToken, refreshToken });
           setIsLoggedIn(true);
           localStorage.setItem('isLoggedIn', true);
           navigate('/');
         })
         .catch(error => {
-          console.log(error);
           passwordRef.current.placeholder = '비밀번호가 일치하지 않거나 없는 회원입니다.';
           setPassword('');
           setPasswordFocus(true);

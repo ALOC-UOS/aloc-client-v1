@@ -1,4 +1,4 @@
-import logo from '../../../assets/logo.png';
+import logo from '../../../assets/logo.svg';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
 import BlackScreen from '../../BlackScreen';
@@ -140,7 +140,7 @@ const SignUp = ({ setFormType }) => {
   const onSubmit = async event => {
     event.preventDefault();
     if (checkForm()) {
-      await LoginAPI.handleOnsubmitSignupForm(
+      await LoginAPI.handleOnSubmitSignupForm(
         name,
         password,
         githubId,
@@ -150,7 +150,6 @@ const SignUp = ({ setFormType }) => {
         notionEmail
       )
         .then(response => {
-          console.log(response);
           setFormType('SIGNIN');
         })
         .catch(error => {
@@ -158,7 +157,7 @@ const SignUp = ({ setFormType }) => {
             setModalText('이미 가입된 유저입니다.');
             setIsOpenedModal(true);
           }
-          console.log('뭔가 안됨');
+          return;
         });
     }
     return;
