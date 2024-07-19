@@ -60,7 +60,7 @@ export const checkForm = (inputObject, dispatchText, dispatchFocus) => {
   let checkBool = true;
   Object.entries(inputObject).map(([key, value]) => {
     if (value.check()) {
-      value.ref.current.placeholder = value.error;
+      value.ref.current.placeholder = value.ERROR_PLACEHOLDER;
       resetInput(key, dispatchText, dispatchFocus);
       checkBool = false;
     }
