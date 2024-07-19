@@ -1,13 +1,13 @@
 import axios from 'axios';
-
+import { API_BASE_URL } from '../../views/Home';
 const LoginAPI = {
   handleOnSubmitLoginForm: (githubId, password) => {
-    return axios.post('https://www.iflab.run/api2/login', {
+    return axios.post(`${API_BASE_URL}/login`, {
       githubId: githubId,
       password: password,
     });
   },
-  handleOnsubmitSignupForm: (
+  handleOnSubmitSignupForm: (
     name,
     password,
     githubId,
@@ -16,7 +16,7 @@ const LoginAPI = {
     discordId,
     notionEmail
   ) => {
-    return axios.post('https://www.iflab.run/api2/sign-up', {
+    return axios.post(`${API_BASE_URL}/sign-up`, {
       username: name,
       password: password,
       githubId: githubId,

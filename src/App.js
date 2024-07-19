@@ -14,7 +14,10 @@ import loginStatusAtom from './store/login/loginStatus';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStatusAtom);
-  const theme = 'light';
+
+  const LIGHT_MODE = 'light';
+  const theme = LIGHT_MODE;
+
   const themeObject = {
     light: {
       mode: 'light',
