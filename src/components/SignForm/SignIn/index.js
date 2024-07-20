@@ -20,7 +20,7 @@ import {
 } from '../style';
 import loginStatusAtom from '../../../store/login/loginStatus';
 import { useSetAtom } from 'jotai';
-import storeToken from '../../../utils/auth/storeToken';
+import storeToken from '../../../auth/storeToken';
 
 const SignIn = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -43,7 +43,7 @@ const SignIn = ({ setFormType }) => {
     }
   }, [githubIdRef, passwordRef]);
 
-  const checkForm = () => {
+  const checkFormValidity = () => {
     let checkBool = true;
     if (githubId.length <= 1) {
       githubIdRef.current.placeholder = '닉네임은 2글자 이상이어야 합니다';
@@ -62,7 +62,7 @@ const SignIn = ({ setFormType }) => {
 
   const onSubmit = async event => {
     event.preventDefault();
-    if (checkForm()) {
+    if (checkFormValidity()) {
       await LoginAPI.handleOnSubmitLoginForm(githubId, password)
         .then(res => {
           const { accessToken, refreshToken } = res.data;

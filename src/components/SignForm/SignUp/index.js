@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import BlackScreen from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
 import LoginAPI from '../../../api/login/loginAPI';
-
+import { textReducer, focusReducer, isValidEmail, checkFormValidity } from '../../../utils/SignUp';
+import { SIGNUP_PLACEHOLDER } from '../../../constants/SignUp';
 import {
   SignBox,
   ImageWrapper,
@@ -15,11 +16,10 @@ import {
   BreakLine,
   StyledInputBox,
 } from '../style';
+import { useReducer } from 'react';
 
 const SignUp = ({ setFormType }) => {
-  const [isOpenedModal, setIsOpenedModal] = useState(false);
-  const [modalText, setModalText] = useState('');
-  const [inputs, setInputs] = useState({
+  const [inputState, dispatchText] = useReducer(textReducer, {
     githubId: '',
     password: '',
     checkedPassword: '',
@@ -29,7 +29,7 @@ const SignUp = ({ setFormType }) => {
     discordId: '',
     notionEmail: '',
   });
-  const [focus, setFocus] = useState({
+  const [focusState, dispatchFocus] = useReducer(focusReducer, {
     githubIdFocus: false,
     passwordFocus: false,
     checkedPasswordFocus: false,
@@ -39,26 +39,8 @@ const SignUp = ({ setFormType }) => {
     discordIdFocus: false,
     notionEmailFocus: false,
   });
-  const {
-    githubIdFocus,
-    passwordFocus,
-    checkedPasswordFocus,
-    nameFocus,
-    studentIdFocus,
-    baekjoonIdFocus,
-    discordIdFocus,
-    notionEmailFocus,
-  } = focus;
-  const {
-    githubId,
-    password,
-    checkedPassword,
-    name,
-    studentId,
-    baekjoonId,
-    discordId,
-    notionEmail,
-  } = inputs;
+  const [isOpenedModal, setIsOpenedModal] = useState(false);
+  const [modalText, setModalText] = useState('');
 
   const githubIdRef = useRef();
   const passwordRef = useRef();
@@ -69,86 +51,76 @@ const SignUp = ({ setFormType }) => {
   const discordIdRef = useRef();
   const notionEmailRef = useRef();
 
-  useEffect(() => {
-    if (githubIdRef.current) {
-      githubIdRef.current.placeholder = '깃허브 닉네임';
-    }
-    if (passwordRef.current) {
-      passwordRef.current.placeholder = '비밀번호';
-    }
-    if (checkedPasswordRef.current) {
-      checkedPasswordRef.current.placeholder = '비밀번호 확인';
-    }
-    if (nameRef.current) {
-      nameRef.current.placeholder = '이름';
-    }
-    if (studentIdRef.current) {
-      studentIdRef.current.placeholder = '학번';
-    }
-    if (baekjoonIdRef.current) {
-      baekjoonIdRef.current.placeholder = '백준 닉네임';
-    }
-    if (discordIdRef.current) {
-      discordIdRef.current.placeholder = '디스코드 아이디';
-    }
-    if (notionEmailRef.current) {
-      notionEmailRef.current.placeholder = '노션 이메일';
-    }
-  }, [
-    githubIdRef,
-    passwordRef,
-    checkedPasswordRef,
-    nameRef,
-    studentIdRef,
-    baekjoonIdRef,
-    discordIdRef,
-    notionEmailRef,
-  ]);
-
-  const reset = type => {
-    setInputs(prev => {
-      return {
-        ...prev,
-        [type]: '',
-      };
-    });
-    setFocus(prev => {
-      return {
-        ...prev,
-        [type + 'Focus']: true,
-      };
-    });
+  const inputObject = {
+    GITHUB_ID: {
+      inputState: inputState.githubId,
+      focusState: focusState.githubIdFocus,
+      ref: githubIdRef,
+      check: () => inputState.githubId.length <= 1,
+    },
+    PASSWORD: {
+      type: 'password',
+      inputState: inputState.password,
+      focusState: focusState.passwordFocus,
+      ref: passwordRef,
+      check: () => inputState.password.length <= 3,
+    },
+    CHECKED_PASSWORD: {
+      type: 'password',
+      inputState: inputState.checkedPassword,
+      focusState: focusState.checkedPasswordFocus,
+      ref: checkedPasswordRef,
+      check: () => !(inputState.password === inputState.checkedPassword),
+    },
+    NAME: {
+      inputState: inputState.name,
+      focusState: focusState.nameFocus,
+      ref: nameRef,
+      check: () => inputState.name.length <= 1,
+    },
+    STUDENT_ID: {
+      inputState: inputState.studentId,
+      focusState: focusState.studentIdFocus,
+      ref: studentIdRef,
+      check: () => inputState.studentId.length !== 10,
+    },
+    BAEKJOON_ID: {
+      inputState: inputState.baekjoonId,
+      focusState: focusState.baekjoonIdFocus,
+      ref: baekjoonIdRef,
+      check: () => inputState.baekjoonId.length <= 1,
+    },
+    DISCORD_ID: {
+      inputState: inputState.discordId,
+      focusState: focusState.discordIdFocus,
+      ref: discordIdRef,
+      check: () => inputState.discordId.length <= 1,
+    },
+    NOTION_EMAIL: {
+      inputState: inputState.notionEmail,
+      focusState: focusState.notionEmailFocus,
+      ref: notionEmailRef,
+      check: () => !isValidEmail(inputState.notionEmail),
+    },
   };
+
+  useEffect(() => {
+    Object.entries(inputObject).map(([key, value]) => {
+      if (value.ref) {
+        value.ref.current.placeholder = SIGNUP_PLACEHOLDER[key].DEFAULT_PLACEHOLDER;
+      }
+    });
+  }, []);
 
   const onChange = e => {
     const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+    dispatchText({ type: name, text: value });
   };
-
-  const checkPassword = () => {
-    return password === checkedPassword;
-  };
-
-  function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
 
   const onSubmit = async event => {
     event.preventDefault();
-    if (checkForm()) {
-      await LoginAPI.handleOnSubmitSignupForm(
-        name,
-        password,
-        githubId,
-        baekjoonId,
-        studentId,
-        discordId,
-        notionEmail
-      )
+    if (checkFormValidity(inputObject, dispatchText, dispatchFocus)) {
+      await LoginAPI.handleOnSubmitSignUpForm(inputState)
         .then(response => {
           setFormType('SIGNIN');
         })
@@ -163,50 +135,6 @@ const SignUp = ({ setFormType }) => {
     return;
   };
 
-  const checkForm = () => {
-    let checkBool = true;
-    if (githubId.length <= 1) {
-      githubIdRef.current.placeholder = '닉네임은 2글자 이상이어야 합니다';
-      reset('githubId');
-      checkBool = false;
-    }
-    if (password.length <= 3) {
-      passwordRef.current.placeholder = '비밀번호는 4글자 이상이어야 합니다';
-      reset('password');
-      checkBool = false;
-    }
-    if (!checkPassword()) {
-      checkedPasswordRef.current.placeholder = '비밀번호와 일치하지 않습니다.';
-      reset('checkedPassword');
-      checkBool = false;
-    }
-    if (name.length <= 1) {
-      nameRef.current.placeholder = '이름은 2글자 이상이어야 합니다';
-      reset('name');
-      checkBool = false;
-    }
-    if (studentId.length !== 10) {
-      studentIdRef.current.placeholder = '10자리의 학번 형식이어야 합니다.';
-      reset('studentId');
-      checkBool = false;
-    }
-    if (baekjoonId.length <= 1) {
-      baekjoonIdRef.current.placeholder = '백준 닉네임은 2글자 이상이어야 합니다';
-      reset('baekjoonId');
-      checkBool = false;
-    }
-    if (discordId.length <= 1) {
-      discordIdRef.current.placeholder = '디스코드 아이디는 2글자 이상이어야 합니다';
-      reset('discordId');
-      checkBool = false;
-    }
-    if (!isValidEmail(notionEmail)) {
-      notionEmailRef.current.placeholder = '이메일 형식이 잘못됐습니다';
-      reset('notionEmail');
-      checkBool = false;
-    }
-    return checkBool;
-  };
   return (
     <SignBox onSubmit={onSubmit}>
       <BlackScreen isOpen={isOpenedModal} />
@@ -225,64 +153,19 @@ const SignUp = ({ setFormType }) => {
         <Phrase>알록 멤버가 되신 것을 환영해요!</Phrase>
       </PhraseWrapper>
       <BreakLine />
-      <StyledInputBox
-        ref={githubIdRef}
-        isFocused={githubIdFocus}
-        name="githubId"
-        value={githubId}
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={passwordRef}
-        isFocused={passwordFocus}
-        name="password"
-        value={password}
-        type="password"
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={checkedPasswordRef}
-        isFocused={checkedPasswordFocus}
-        name="checkedPassword"
-        value={checkedPassword}
-        type="password"
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={nameRef}
-        isFocused={nameFocus}
-        name="name"
-        value={name}
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={studentIdRef}
-        isFocused={studentIdFocus}
-        name="studentId"
-        value={studentId}
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={baekjoonIdRef}
-        isFocused={baekjoonIdFocus}
-        name="baekjoonId"
-        value={baekjoonId}
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={discordIdRef}
-        isFocused={discordIdFocus}
-        name="discordId"
-        value={discordId}
-        onChange={onChange}
-      />
-      <StyledInputBox
-        ref={notionEmailRef}
-        isFocused={notionEmailFocus}
-        name="notionEmail"
-        value={notionEmail}
-        onChange={onChange}
-      />
+      {Object.entries(inputObject).map(([key, value]) => {
+        return (
+          <StyledInputBox
+            name={key}
+            ref={value.ref}
+            isFocused={value.focusState}
+            value={value.inputState}
+            onChange={onChange}
+            type={value.type === 'password' && 'password'}
+          />
+        );
+      })}
+
       <Button
         color={'blue'}
         type={'active'}

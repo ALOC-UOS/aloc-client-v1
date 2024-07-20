@@ -7,15 +7,15 @@ const LoginAPI = {
       password: password,
     });
   },
-  handleOnSubmitSignupForm: (
+  handleOnSubmitSignUpForm: ({
     name,
     password,
     githubId,
     baekjoonId,
     studentId,
     discordId,
-    notionEmail
-  ) => {
+    notionEmail,
+  }) => {
     return axios.post(`${API_BASE_URL}/sign-up`, {
       username: name,
       password: password,
