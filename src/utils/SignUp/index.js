@@ -57,7 +57,7 @@ export function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-export const checkForm = (inputObject, dispatchText, dispatchFocus) => {
+export const checkFormValidity = (inputObject, dispatchText, dispatchFocus) => {
   let checkBool = true;
   Object.entries(inputObject).map(([key, value]) => {
     if (value.check()) {

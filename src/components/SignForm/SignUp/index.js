@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import BlackScreen from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
 import LoginAPI from '../../../api/login/loginAPI';
-import { textReducer, focusReducer, isValidEmail, checkForm } from '../../../utils/SignUp';
+import { textReducer, focusReducer, isValidEmail, checkFormValidity } from '../../../utils/SignUp';
 import { SIGNUP_PLACEHOLDER } from '../../../constants/SignUp';
 import {
   SignBox,
@@ -119,8 +119,8 @@ const SignUp = ({ setFormType }) => {
 
   const onSubmit = async event => {
     event.preventDefault();
-    if (checkForm(inputObject, dispatchText, dispatchFocus)) {
-      await LoginAPI.handleOnSubmitSignupForm(inputState)
+    if (checkFormValidity(inputObject, dispatchText, dispatchFocus)) {
+      await LoginAPI.handleOnSubmitSignUpForm(inputState)
         .then(response => {
           setFormType('SIGNIN');
         })

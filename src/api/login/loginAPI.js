@@ -7,7 +7,7 @@ const LoginAPI = {
       password: password,
     });
   },
-  handleOnSubmitSignupForm: ({
+  handleOnSubmitSignUpForm: ({
     name,
     password,
     githubId,
