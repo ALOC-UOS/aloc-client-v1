@@ -1,3 +1,4 @@
+import { SIGNUP_PLACEHOLDER } from '../../constants/SignUp';
 export const textReducer = (state, action) => {
   switch (action.type) {
     //set text state
@@ -60,7 +61,7 @@ export const checkForm = (inputObject, dispatchText, dispatchFocus) => {
   let checkBool = true;
   Object.entries(inputObject).map(([key, value]) => {
     if (value.check()) {
-      value.ref.current.placeholder = value.ERROR_PLACEHOLDER;
+      value.ref.current.placeholder = SIGNUP_PLACEHOLDER[key].ERROR_PLACEHOLDER;
       resetInput(key, dispatchText, dispatchFocus);
       checkBool = false;
     }

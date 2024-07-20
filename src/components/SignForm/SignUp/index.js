@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import BlackScreen from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
 import LoginAPI from '../../../api/login/loginAPI';
-import { textReducer, focusReducer, isValidEmail, checkForm } from './utils';
+import { textReducer, focusReducer, isValidEmail, checkForm } from '../../../utils/SignUp';
+import { SIGNUP_PLACEHOLDER } from '../../../constants/SignUp';
 import {
   SignBox,
   ImageWrapper,
@@ -55,66 +56,50 @@ const SignUp = ({ setFormType }) => {
       inputState: inputState.githubId,
       focusState: focusState.githubIdFocus,
       ref: githubIdRef,
-      DEFAULT_PLACEHOLDE: '깃허브 닉네임',
-      ERROR_PLACEHOLDER: '닉네임은 2글자 이상이어야 합니다',
       check: () => inputState.githubId.length <= 1,
     },
     PASSWORD: {
+      type: 'password',
       inputState: inputState.password,
       focusState: focusState.passwordFocus,
       ref: passwordRef,
-      DEFAULT_PLACEHOLDE: '비밀번호',
-      ERROR_PLACEHOLDER: '비밀번호는 4글자 이상이어야 합니다',
       check: () => inputState.password.length <= 3,
-      type: 'password',
     },
     CHECKED_PASSWORD: {
+      type: 'password',
       inputState: inputState.checkedPassword,
       focusState: focusState.checkedPasswordFocus,
       ref: checkedPasswordRef,
-      DEFAULT_PLACEHOLDE: '비밀번호 확인',
-      ERROR_PLACEHOLDER: '비밀번호와 일치하지 않습니다.',
       check: () => !(inputState.password === inputState.checkedPassword),
-      type: 'password',
     },
     NAME: {
       inputState: inputState.name,
       focusState: focusState.nameFocus,
       ref: nameRef,
-      DEFAULT_PLACEHOLDE: '이름',
-      ERROR_PLACEHOLDER: '이름은 2글자 이상이어야 합니다',
       check: () => inputState.name.length <= 1,
     },
     STUDENT_ID: {
       inputState: inputState.studentId,
       focusState: focusState.studentIdFocus,
       ref: studentIdRef,
-      DEFAULT_PLACEHOLDE: '학번',
-      ERROR_PLACEHOLDER: '10자리의 학번 형식이어야 합니다.',
       check: () => inputState.studentId.length !== 10,
     },
     BAEKJOON_ID: {
       inputState: inputState.baekjoonId,
       focusState: focusState.baekjoonIdFocus,
       ref: baekjoonIdRef,
-      DEFAULT_PLACEHOLDE: '백준 닉네임',
-      ERROR_PLACEHOLDER: '백준 닉네임은 2글자 이상이어야 합니다',
       check: () => inputState.baekjoonId.length <= 1,
     },
     DISCORD_ID: {
       inputState: inputState.discordId,
       focusState: focusState.discordIdFocus,
       ref: discordIdRef,
-      DEFAULT_PLACEHOLDE: '디스코드 아이디',
-      ERROR_PLACEHOLDER: '디스코드 아이디는 2글자 이상이어야 합니다',
       check: () => inputState.discordId.length <= 1,
     },
     NOTION_EMAIL: {
       inputState: inputState.notionEmail,
       focusState: focusState.notionEmailFocus,
       ref: notionEmailRef,
-      DEFAULT_PLACEHOLDE: '노션 이메일',
-      ERROR_PLACEHOLDER: '이메일 형식이 잘못됐습니다',
       check: () => !isValidEmail(inputState.notionEmail),
     },
   };
@@ -122,7 +107,7 @@ const SignUp = ({ setFormType }) => {
   useEffect(() => {
     Object.entries(inputObject).map(([key, value]) => {
       if (value.ref) {
-        value.ref.current.placeholder = inputObject[key].DEFAULT_PLACEHOLDE;
+        value.ref.current.placeholder = SIGNUP_PLACEHOLDER[key].DEFAULT_PLACEHOLDER;
       }
     });
   }, []);

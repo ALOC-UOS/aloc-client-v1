@@ -20,7 +20,7 @@ import {
 } from '../style';
 import loginStatusAtom from '../../../store/login/loginStatus';
 import { useSetAtom } from 'jotai';
-import storeToken from '../../../utils/auth/storeToken';
+import storeToken from '../../../auth/storeToken';
 
 const SignIn = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
