@@ -53,8 +53,22 @@ const TopBar = ({ active }) => {
 
   const checkTodaySolvedProblem = () => {
     let url = 'https://www.iflab.run/api2/problem/solved';
-    axios.put(url);
-    window.location.reload();
+    // localStorage에서 accessToken 가져오기
+    const accessToken = localStorage.getItem('accessToken');
+    // 로그인 및 토큰 추가
+    axios
+      .put(url, null, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error('API 요청 중 오류 발생:');
+      });
+    // window.location.reload();
   };
 
   const navigate = useNavigate();

@@ -68,7 +68,6 @@ const SignIn = ({ setFormType }) => {
           const { accessToken, refreshToken } = res.data;
           storeToken({ accessToken, refreshToken });
           setIsLoggedIn(true);
-          localStorage.setItem('isLoggedIn', true);
           navigate('/');
         })
         .catch(error => {
