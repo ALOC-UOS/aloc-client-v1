@@ -72,10 +72,10 @@ const Member = () => {
     let url = '';
 
     if (type === 'solved') {
-      url = `https://www.iflab.run/api2/problem/solved/user/${githubId}`;
+      url = `https://www.iflab.run/api2/problem/solved/user/${githubId}/routine/DAILY?season=2`;
       setModalTitle('해결한 문제 목록');
     } else {
-      url = `https://www.iflab.run/api2/problem/unsolved/user/${githubId}`;
+      url = `https://www.iflab.run/api2/problem/unsolved/user/${githubId}/routine/DAILY?season=2`;
       setModalTitle('해결하지 못한 문제 목록');
     }
     axios
@@ -103,12 +103,20 @@ const Member = () => {
     setIsShowLoading(true);
     let url = `https://www.iflab.run/api2/problem/solved`;
 
+    // localStorage에서 accessToken 가져오기
+    const accessToken = localStorage.getItem('accessToken');
+
     // 로그인 및 토큰 추가
     axios
-      .put(url)
+      .put(url, null, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then(response => {
         loadMemberData();
         openProblemListModal(SelectedType, SelectedGithubId);
+        console.log(response);
         setTimeout(() => {
           setIsShowLoading(false);
         }, 500);
@@ -207,7 +215,7 @@ const Member = () => {
                     blue={true}
                     onClick={() => openProblemListModal('solved', member.githubId)}
                   >
-                    {member.solved}개
+                    {member.solvedCount}개
                   </MemberInfoItem>
                 </MemberInfoRow>
                 <MemberInfoRow>
@@ -216,9 +224,9 @@ const Member = () => {
                     blue={true}
                     onClick={() => openProblemListModal('unsolved', member.githubId)}
                   >
-                    {member.thisWeekUnsolved === 0
-                      ? `${member.unsolved}개`
-                      : `${member.thisWeekUnsolved}개 / ${member.unsolved}개`}
+                    {member.thisWeekUnsolvedCount === 0
+                      ? `${member.unsolvedCount}개`
+                      : `${member.thisWeekUnsolvedCount}개 / ${member.unsolvedCount}개`}
                   </MemberInfoItem>
                 </MemberInfoRow>
               </MemberInfoWrapper>

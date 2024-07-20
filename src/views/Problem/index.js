@@ -50,6 +50,7 @@ const Problem = () => {
       season +
       '/algorithmId/' +
       algorithmId +
+      '/course' +
       '/FULL';
     axios
       .get(url)
