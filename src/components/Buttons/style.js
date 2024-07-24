@@ -15,15 +15,25 @@ const Button = styled.button`
   outline: none;
 
   cursor: pointer;
-
-  &:hover {
+  ${props =>
+    props.hover !== 'none' &&
+    `&:hover {
     filter: brightness(0.9);
-  }
-  &:active {
+  }`}
+
+  ${props =>
+    props.active !== 'none' &&
+    `&:active {
     transition: all 0.05s;
     filter: brightness(0.8);
-  }
+  }`}
 
+ ${props =>
+    props.color === 'white' &&
+    css`
+      border: 1px #a9adb9 solid;
+      background-color: #fff;
+    `}
   ${props =>
     props.color === 'blue' &&
     css`
