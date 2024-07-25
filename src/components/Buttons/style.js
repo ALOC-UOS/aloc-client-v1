@@ -48,7 +48,7 @@ const Button = styled.button`
       background-color: #ff5a5f;
     `}
   ${props =>
-    props.type === 'disabled' &&
+    props.buttonType === 'disabled' &&
     css`
       opacity: 0.5;
       user-select: none;

@@ -61,7 +61,7 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
       />
       <Button
         color={'blue'}
-        type={isDisabled ? 'disabled' : 'active'}
+        buttonType={isDisabled ? 'disabled' : 'active'}
         size={'small'}
         onClick={clickSaveButton}
       >
