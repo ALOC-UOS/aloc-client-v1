@@ -1,20 +1,21 @@
 import { useState } from 'react';
-import Modal from '../components/Modal/Modal';
+import ModalWrapper from '../components/Modal/Modal';
+import BlackScreen from '../components/BlackScreen';
 
-export const useModal = () => {
+const useModal = ({
+  children,
+  title,
+  description,
+  cancelText,
+  okText = '확인',
+  onOk,
+  closable,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
   const [isPending, setIsPending] = useState(false);
-  const render = ({
-    children,
-    title,
-    description,
-    cancelText,
-    okText = '확인',
-    onOk,
-    closable,
-  }) => {
+  const render = () => {
     const handleOkButtonClick = () => {
       if (cancelText === '' || isPending) {
         return;
@@ -24,19 +25,25 @@ export const useModal = () => {
     };
     if (!isOpen) return null;
     return (
-      <Modal
-        title={title}
-        description={description}
-        cancelText={cancelText}
-        okText={okText}
-        handleOkButtonClick={handleOkButtonClick}
-        closable={closable}
-        hide={hide}
-      >
-        {children}
-      </Modal>
+      <>
+        <BlackScreen isOpen={isOpen} onClick={hide} />
+        <ModalWrapper
+          isOpen={isOpen}
+          title={title}
+          description={description}
+          cancelText={cancelText}
+          okText={okText}
+          handleOkButtonClick={handleOkButtonClick}
+          closable={closable}
+          hide={hide}
+        >
+          {children}
+        </ModalWrapper>
+      </>
     );
   };
 
-  return { isOpen, show, hide, render, setIsPending };
+  return { Modal: render, show, hide, setIsPending };
 };
+
+export default useModal;

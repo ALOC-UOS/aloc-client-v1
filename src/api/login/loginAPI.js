@@ -15,6 +15,7 @@ const LoginAPI = {
     studentId,
     discordId,
     notionEmail,
+    course,
   }) => {
     return axios.post(`${API_BASE_URL}/sign-up`, {
       username: name,
@@ -24,6 +25,7 @@ const LoginAPI = {
       studentId: studentId,
       discordId: discordId,
       notionEmail: notionEmail,
+      course: course,
     });
   },
 };

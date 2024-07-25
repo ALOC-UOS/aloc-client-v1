@@ -11,7 +11,6 @@ const ModalWrapper = ({
   okText,
   handleOkButtonClick,
 }) => {
-  console.log(children);
   return (
     <ModalContainer isOpen={isOpen}>
       {title && <Description>{title}</Description>}
@@ -21,9 +20,11 @@ const ModalWrapper = ({
         <Button color={'blue'} buttonType={'active'} size={'medium'} onClick={handleOkButtonClick}>
           확인
         </Button>
-        <Button buttonType={'active'} size={'medium'} onClick={hide}>
-          취소
-        </Button>
+        {closable && (
+          <Button buttonType={'active'} size={'medium'} onClick={hide}>
+            취소
+          </Button>
+        )}
       </ButtonWrap>
     </ModalContainer>
   );

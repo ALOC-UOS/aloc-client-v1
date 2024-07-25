@@ -62,9 +62,39 @@ export const checkFormValidity = (inputObject, dispatchText, dispatchFocus) => {
   Object.entries(inputObject).map(([key, value]) => {
     if (value.check()) {
       value.ref.current.placeholder = SIGNUP_PLACEHOLDER[key].ERROR_PLACEHOLDER;
-      resetInput(key, dispatchText, dispatchFocus);
+      !value.focusState && resetInput(key, dispatchText, dispatchFocus);
       checkBool = false;
     }
   });
   return checkBool;
+};
+
+export const setInputState = inputState => {
+  localStorage.setItem('githubId', inputState.githubId);
+  localStorage.setItem('password', inputState.password);
+  localStorage.setItem('name', inputState.name);
+  localStorage.setItem('studentId', inputState.studentId);
+  localStorage.setItem('baekjoonId', inputState.baekjoonId);
+  localStorage.setItem('discordId', inputState.discordId);
+  localStorage.setItem('notionEmail', inputState.notionEmail);
+};
+
+export const getInputState = () => {
+  const githubId = localStorage.getItem('githubId');
+  const password = localStorage.getItem('password');
+  const name = localStorage.getItem('name');
+  const studentId = localStorage.getItem('studentId');
+  const baekjoonId = localStorage.getItem('baekjoonId');
+  const discordId = localStorage.getItem('discordId');
+  const notionEmail = localStorage.getItem('notionEmail');
+
+  return {
+    githubId: githubId,
+    password: password,
+    name: name,
+    studentId: studentId,
+    baekjoonId: baekjoonId,
+    discordId: discordId,
+    notionEmail: notionEmail,
+  };
 };
