@@ -33,6 +33,7 @@ const Button = styled.button`
     css`
       border: 1px #a9adb9 solid;
       background-color: #fff;
+      transition: none;
     `}
   ${props =>
     props.color === 'blue' &&
