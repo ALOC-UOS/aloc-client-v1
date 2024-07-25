@@ -6,7 +6,7 @@ const AlertModal = ({ isOpen, description, closeModal }) => {
   return (
     <ModalContainer isOpen={isOpen}>
       <Description>{description}</Description>
-      <Button color={'blue'} type={'active'} size={'medium'} onClick={closeModal}>
+      <Button color={'blue'} buttonType={'active'} size={'medium'} onClick={closeModal}>
         확인
       </Button>
     </ModalContainer>

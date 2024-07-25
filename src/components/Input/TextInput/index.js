@@ -50,7 +50,7 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
       </TextInputBoxWrap>
       <Button
         color={'blue'}
-        type={isDisabled ? 'disabled' : 'active'}
+        buttonType={isDisabled ? 'disabled' : 'active'}
         size={'small'}
         onClick={clickSaveButton}
       >

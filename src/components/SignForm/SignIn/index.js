@@ -113,7 +113,7 @@ const SignIn = ({ setFormType }) => {
       ></StyledInputBox>
       <Button
         color={'blue'}
-        type={'submit'}
+        type="submit"
         size={'medium'}
         style={{
           height: 40,

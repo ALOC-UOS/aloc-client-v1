@@ -84,13 +84,13 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
         <ButtonWrap>
           <Button
             color={'blue'}
-            type={isDisabled ? 'disabled' : 'active'}
+            buttonType={isDisabled ? 'disabled' : 'active'}
             size={'medium'}
             onClick={accpetModal}
           >
             확인
           </Button>
-          <Button type={'active'} size={'medium'} onClick={closeModal}>
+          <Button buttonType={'active'} size={'medium'} onClick={closeModal}>
             취소
           </Button>
         </ButtonWrap>

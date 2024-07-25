@@ -1,8 +1,8 @@
 import React from 'react';
 import { BlackScreenContainer } from './style';
 
-const BlackScreen = ({ isOpen }) => {
-  return <BlackScreenContainer isOpen={isOpen} />;
+const BlackScreen = ({ isOpen, onClick }) => {
+  return <BlackScreenContainer isOpen={isOpen} onClick={onClick} />;
 };
 
 export default BlackScreen;
