@@ -53,7 +53,7 @@ const TopBar = ({ active }) => {
 
   const checkTodaySolvedProblem = () => {
     serverAPI
-      .put('/problem/solved')
+      .post('/problem/solved')
       .then(response => {
         console.log(response);
       })
