@@ -9,12 +9,8 @@ import Shop from './views/Shop';
 import Battle from './views/Battle';
 import Setting from './views/Setting';
 import Login from './views/Login';
-import { useAtom } from 'jotai';
-import loginStatusAtom from './store/login/loginStatus';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useAtom(loginStatusAtom);
-
   const LIGHT_MODE = 'light';
   const theme = LIGHT_MODE;
 

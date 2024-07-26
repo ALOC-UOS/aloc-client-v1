@@ -7,7 +7,6 @@ import AlertModal from '../../Modal/AlertModal';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import LoginAPI from '../../../api/login/loginAPI';
-
 import {
   SignBox,
   ImageWrapper,
@@ -18,9 +17,7 @@ import {
   BreakLine,
   StyledInputBox,
 } from '../style';
-import loginStatusAtom from '../../../store/login/loginStatus';
-import { useSetAtom } from 'jotai';
-import storeToken from '../../../auth/storeToken';
+import useLoginState from '../../../hooks/useLoginState';
 
 const SignIn = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -32,7 +29,7 @@ const SignIn = ({ setFormType }) => {
   const githubIdRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const setIsLoggedIn = useSetAtom(loginStatusAtom);
+  const { setLoginStatus, initLoginStatus } = useLoginState();
 
   useEffect(() => {
     if (githubIdRef.current) {
@@ -66,8 +63,7 @@ const SignIn = ({ setFormType }) => {
       await LoginAPI.handleOnSubmitLoginForm(githubId, password)
         .then(res => {
           const { accessToken, refreshToken } = res.data;
-          storeToken({ accessToken, refreshToken });
-          setIsLoggedIn(true);
+          setLoginStatus({ accessToken, refreshToken });
           navigate('/');
         })
         .catch(error => {

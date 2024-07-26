@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton } from './style';
-import loginStatusAtom from '../../store/login/loginStatus';
+import useLoginState from '../../hooks/useLoginState';
+
 import { useAtomValue } from 'jotai';
 
 const TopBarItems = [
@@ -27,7 +28,7 @@ const TopBarItems = [
 const TopBar = ({ active }) => {
   const [selectedItem, setSelectedItem] = useState(window.location.pathname);
   const [isScroll, setIsScroll] = useState(false);
-  const isLoggedIn = useAtomValue(loginStatusAtom);
+  const { isLoggedIn } = useLoginState();
   useEffect(() => {
     const path = window.location.pathname;
     if (path === '/') {
