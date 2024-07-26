@@ -27,3 +27,18 @@ jobs:
           git config --global user.email 'action@github.com'
           git remote add target_repo $TARGET_REPO
           git push target_repo deploy:main --force
+      - name: Send deployment status to Discord
+        if: success()
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: |
+            [aloc-client] 배포가 성공적으로 완료되었어요 🚀
+
+      - name: Send deployment failure to Discord
+        if: failure()
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: |
+            [aloc-client] 배포 중 문제가 발생했어요 ❌
