@@ -32,6 +32,8 @@ function App() {
       subText: '#a9adb9',
       primary: '#408cff',
       secondary: '#98bffa',
+      white: '#ffffff',
+      black: '#000000',
       boxShadow: '0 4px 24px 0 #cecece',
     },
     dark: {
@@ -43,6 +45,8 @@ function App() {
       subText: '#5d616f',
       primary: '#408cff',
       secondary: '#98bffa',
+      white: '#ffffff',
+      black: '#000000',
       boxShadow: '0 4px 24px 0 #3c414c',
     },
   };
