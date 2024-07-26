@@ -20,6 +20,7 @@ import TopBar from '../../components/TopBar';
 import ProblemBackgroundImage from '../../assets/background2.png';
 import { getDifficultyIcon, formatSolveTime } from '../../utils';
 import BottomInfo from '../../components/Card';
+import MarathonProblemList from '../../components/MarathonProblemList';
 
 export const API_BASE_URL = 'https://www.iflab.run/api2';
 
@@ -88,6 +89,7 @@ const Home = () => {
           {problemData.id}. {problemData.title}
         </ProblemName>
         {renderMemberInfo()}
+        <MarathonProblemList />
       </ProblemWrapper>
     </ProblemContainer>
   );
