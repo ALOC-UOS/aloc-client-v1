@@ -53,7 +53,7 @@ const TopBar = ({ active }) => {
 
   const checkTodaySolvedProblem = () => {
     serverAPI
-      .post('/problem/solved')
+      .post('/problem/today/solved', {}, { timeout: 300000 })
       .then(response => {
         console.log(response);
       })
