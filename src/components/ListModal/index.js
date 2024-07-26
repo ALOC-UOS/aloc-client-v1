@@ -78,7 +78,10 @@ const ListModal = ({
       <Divider />
       <ProblemList>
         {problemListData.map(problem => (
-          <ProblemItem href={`https://www.acmicpc.net/problem/${problem.id}`} target="_blank">
+          <ProblemItem
+            href={`https://www.acmicpc.net/problem/${problem.problemId}`}
+            target="_blank"
+          >
             <ProblemDifficulty
               src={
                 problem.problemDifficulty < 6

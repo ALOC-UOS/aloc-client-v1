@@ -82,7 +82,6 @@ const Member = () => {
       .get(url)
       .then(response => {
         setProblemListData(response.data.result);
-        console.log(response.data.result);
         setIsOpenedModal(true);
         setSelectedGithubId(githubId);
         setSelectedType(type);
@@ -116,7 +115,6 @@ const Member = () => {
       .then(response => {
         loadMemberData();
         openProblemListModal(SelectedType, SelectedGithubId);
-        console.log(response);
         setTimeout(() => {
           setIsShowLoading(false);
         }, 500);
