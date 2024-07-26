@@ -41,6 +41,7 @@ import Number1 from '../../assets/number-1.svg';
 import CoinIcon from '../../assets/coin-icon.svg';
 import LoadingIcon from '../../assets/loading-icon.svg';
 import CheckIcon from '../../assets/check-icon.svg';
+import { serverAPI } from '../../api/axios';
 
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -100,18 +101,8 @@ const Member = () => {
   function checkSolvedProblem() {
     setIsLoading(true);
     setIsShowLoading(true);
-    let url = `https://www.iflab.run/api2/problem/solved`;
-
-    // localStorage에서 accessToken 가져오기
-    const accessToken = localStorage.getItem('accessToken');
-
-    // 로그인 및 토큰 추가
-    axios
-      .put(url, null, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+    serverAPI
+      .put('/problem/solved')
       .then(response => {
         loadMemberData();
         openProblemListModal(SelectedType, SelectedGithubId);
