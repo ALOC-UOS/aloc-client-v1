@@ -9,12 +9,14 @@ const selectedCourseAtom = atom('FULL');
 const algorithmListAtom = atom([]);
 const selectedAlgorithmAtom = atom(null);
 const problemListAtom = atom([]);
+const solvedUserListAtom = atom([]);
 
 export const useProblem = () => {
   const [selectedCourse, setSelectedCourse] = useAtom(selectedCourseAtom);
   const [algorithmList, setAlgorithmList] = useAtom(algorithmListAtom);
   const [selectedAlgorithm, setSelectedAlgorithm] = useAtom(selectedAlgorithmAtom);
   const [problemList, setProblemList] = useAtom(problemListAtom);
+  const [solvedUserList, setSolvedUserList] = useAtom(solvedUserListAtom);
 
   useEffect(() => {
     fetchAlgorithmList(CURRENT_SEASON);
@@ -53,16 +55,25 @@ export const useProblem = () => {
     }
   };
 
-  const handleCourseButtonClick = course => {
-    setSelectedCourse(course);
+  const fetchSolvedUserList = async problemId => {
+    try {
+      const url = `${API_URL_PREFIX}problem/solved-user/${problemId}`;
+      const response = await axios.get(url);
+      setSolvedUserList(response.data.result);
+    } catch (error) {
+      console.error('해결한 사용자 목록을 가져오는 중 오류 발생:', error);
+      return [];
+    }
   };
 
   return {
     selectedCourse,
-    handleCourseButtonClick,
+    setSelectedCourse,
     selectedAlgorithm,
     algorithmList,
     problemList,
     setSelectedAlgorithm,
+    solvedUserList,
+    fetchSolvedUserList,
   };
 };

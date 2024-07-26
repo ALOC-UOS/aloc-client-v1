@@ -22,6 +22,7 @@ const Wrapping = styled.div`
 
 const Button = styled.div`
   width: 100%;
+  height: fit-content;
   color: ${props => props.theme.titleText};
   font-size: 16px;
   text-align: center;

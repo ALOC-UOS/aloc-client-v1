@@ -10,7 +10,7 @@ export const AlgorithmListComponent = () => {
   };
 
   return (
-    <VStack style={{ gap: '12px' }}>
+    <VStack style={{ height: 'fit-content', gap: '12px' }}>
       {algorithmList.map(algorithm => (
         <S.AlgorithmItem
           key={algorithm.algorithmId}
