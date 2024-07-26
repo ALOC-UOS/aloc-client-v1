@@ -5,5 +5,10 @@ export const storeToken = ({ accessToken, refreshToken }) => {
 
 export const deleteToken = () => {
   localStorage.removeItem('refreshToken');
-  localStorage.setItem('accessToken');
+  localStorage.removeItem('accessToken');
+};
+
+export const changeAccessToken = newAccessToken => {
+  localStorage.removeItem('accessToken');
+  localStorage.setItem('accessToken', newAccessToken);
 };

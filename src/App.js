@@ -9,8 +9,16 @@ import Shop from './views/Shop';
 import Battle from './views/Battle';
 import Setting from './views/Setting';
 import Login from './views/Login';
+import { setupInterceptors } from './api/axios';
+import useLoginState from './hooks/useLoginState';
+import { useEffect } from 'react';
 
 function App() {
+  const { initLoginStatus } = useLoginState();
+  useEffect(() => {
+    setupInterceptors(initLoginStatus);
+  }, [initLoginStatus]);
+
   const LIGHT_MODE = 'light';
   const theme = LIGHT_MODE;
 

@@ -1,8 +1,9 @@
 import { atom, useAtom } from 'jotai';
 import { storeToken, deleteToken } from '../auth/token';
 
+export const loginStatusAtom = atom(localStorage.getItem('isLoggedIn'));
+
 const useLoginState = () => {
-  const loginStatusAtom = atom(localStorage.getItem('isLoggedIn'));
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStatusAtom);
 
   const setLoginStatus = ({ accessToken, refreshToken }) => {

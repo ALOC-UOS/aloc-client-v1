@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton } from './style';
 import useLoginState from '../../hooks/useLoginState';
-
-import { useAtomValue } from 'jotai';
+import { serverAPI } from '../../api/axios';
 
 const TopBarItems = [
   {
@@ -53,16 +52,8 @@ const TopBar = ({ active }) => {
   }, []);
 
   const checkTodaySolvedProblem = () => {
-    let url = 'https://www.iflab.run/api2/problem/solved';
-    // localStorage에서 accessToken 가져오기
-    const accessToken = localStorage.getItem('accessToken');
-    // 로그인 및 토큰 추가
-    axios
-      .put(url, null, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+    serverAPI
+      .put('/problem/solved')
       .then(response => {
         console.log(response);
       })
