@@ -15,10 +15,10 @@ const getAccessByRefresh = async (config, refreshToken, initLoginStatus) => {
     })
     //refresh로 access 재발급
     .then(response => {
-      const new_accessToken = response.data.accessToken;
-      console.log('재발급받았어요', new_accessToken);
-      config.headers.Authorization = `Bearer ${new_accessToken}`;
-      changeAccessToken(new_accessToken);
+      const newAccessToken = response.data.accessToken;
+      console.log('재발급받았어요', newAccessToken);
+      config.headers.Authorization = `Bearer ${newAccessToken}`;
+      changeAccessToken(newAccessToken);
       return config;
     })
     .catch(() => {
