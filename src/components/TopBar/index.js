@@ -1,9 +1,20 @@
-import axios from 'axios';
+import logo from '../../assets/logo.svg';
+import typo from '../../assets/typo.svg';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton } from './style';
+import {
+  TopBarContainer,
+  TopBarLeft,
+  TopBarRight,
+  TopBarItem,
+  TopBarButton,
+  ImageWrapper,
+  LogoImage,
+  TypoImage,
+  UserImage,
+  UserImageWrapper,
+} from './style';
 import useLoginState from '../../hooks/useLoginState';
-import { serverAPI } from '../../api/axios';
 
 const TopBarItems = [
   {
@@ -51,18 +62,6 @@ const TopBar = ({ active }) => {
     });
   }, []);
 
-  const checkTodaySolvedProblem = () => {
-    serverAPI
-      .post('/problem/today/solved', {}, { timeout: 300000 })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error('API 요청 중 오류 발생:');
-      });
-    // window.location.reload();
-  };
-
   const navigate = useNavigate();
   function goRoute(route) {
     if (route === selectedItem) return;
@@ -72,7 +71,15 @@ const TopBar = ({ active }) => {
 
   return (
     <TopBarContainer isScroll={isScroll}>
-      <TopBarLeft>
+      <TopBarLeft onClick={() => navigate('/')}>
+        <ImageWrapper>
+          <LogoImage src={logo} />
+        </ImageWrapper>
+        <ImageWrapper>
+          <TypoImage src={typo} />
+        </ImageWrapper>
+      </TopBarLeft>
+      <TopBarRight>
         {TopBarItems.map((item, index) => (
           <TopBarItem
             key={index}
@@ -82,15 +89,16 @@ const TopBar = ({ active }) => {
             {item.name}
           </TopBarItem>
         ))}
-      </TopBarLeft>
-
-      <TopBarButton active={isLoggedIn && active} onClick={() => checkTodaySolvedProblem()}>
-        문제 풀었어요!
-      </TopBarButton>
-
-      <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
-        로그인
-      </TopBarButton>
+        {isLoggedIn ? (
+          <UserImageWrapper>
+            <UserImage src={logo} />
+          </UserImageWrapper>
+        ) : (
+          <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
+            로그인
+          </TopBarButton>
+        )}
+      </TopBarRight>
     </TopBarContainer>
   );
 };
