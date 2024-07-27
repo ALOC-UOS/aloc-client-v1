@@ -90,9 +90,10 @@ const TopBar = ({ active }) => {
           </TopBarItem>
         ))}
         {isLoggedIn ? (
-          <UserImageWrapper>
-            <UserImage src={logo} />
-          </UserImageWrapper>
+          // <UserImageWrapper>
+          //   <UserImage src={logo} />
+          // </UserImageWrapper>
+          <div></div>
         ) : (
           <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
             로그인

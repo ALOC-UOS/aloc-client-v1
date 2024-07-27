@@ -89,7 +89,7 @@ const Home = () => {
           {problemData.id}. {problemData.title}
         </ProblemName>
         {renderMemberInfo()}
-        <MarathonProblemList />
+        {/* <MarathonProblemList /> */}
       </ProblemWrapper>
     </ProblemContainer>
   );
