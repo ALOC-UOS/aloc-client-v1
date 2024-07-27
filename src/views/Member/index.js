@@ -24,6 +24,7 @@ import {
   SolvedAnimation,
   IconWrapper,
   Icon,
+  ProblemSolvedButton,
 } from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
@@ -42,6 +43,7 @@ import CoinIcon from '../../assets/coin-icon.svg';
 import LoadingIcon from '../../assets/loading-icon.svg';
 import CheckIcon from '../../assets/check-icon.svg';
 import { serverAPI } from '../../api/axios';
+import useLoginState from '../../hooks/useLoginState';
 
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +54,7 @@ const Member = () => {
   const [ProblemListData, setProblemListData] = useState([]);
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
+  const { isLoggedIn } = useLoginState();
 
   useEffect(() => {
     loadMemberData();
@@ -117,6 +120,18 @@ const Member = () => {
         console.error('API 요청 중 오류 발생:');
       });
   }
+
+  const checkTodaySolvedProblem = () => {
+    serverAPI
+      .post('/problem/today/solved', {}, { timeout: 300000 })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error('API 요청 중 오류 발생:');
+      });
+    // window.location.reload();
+  };
 
   return (
     <MemberContainer>
@@ -221,6 +236,11 @@ const Member = () => {
           </ProfileWrapper>
         ))}
       </ContentContainer>
+      {isLoggedIn && (
+        <ProblemSolvedButton onClick={() => checkTodaySolvedProblem()}>
+          문제 풀었어요!
+        </ProblemSolvedButton>
+      )}
     </MemberContainer>
   );
 };
