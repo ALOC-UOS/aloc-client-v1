@@ -73,7 +73,7 @@ const Home = () => {
   };
 
   const handleProblemClick = () => {
-    window.open(`https://www.acmicpc.net/problem/${problemData.id}`, '_blank');
+    window.open(`https://www.acmicpc.net/problem/${problemData.problemId}`, '_blank');
   };
 
   const renderProblemContent = () => (
@@ -85,7 +85,7 @@ const Home = () => {
           <ProblemDifficulty src={getDifficultyIcon(problemData.difficulty)} />
         </ProblemTitleWrapper>
         <ProblemName>
-          {problemData.id}. {problemData.title}
+          {problemData.problemId}. {problemData.title}
         </ProblemName>
         {renderMemberInfo()}
         {/* <MarathonProblemList /> */}
