@@ -412,6 +412,25 @@ const Icon = styled.img`
       scale: 1;
     `}
 `;
+const ProblemSolvedButton = styled.div`
+  margin: 20px;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  padding: 15px 30px;
+  border-radius: 12px;
+  background-color: ${props => props.theme.primary};
+
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
+    transform: scale(1.1);
+  }
+`;
 
 export {
   MemberContainer,
@@ -437,4 +456,5 @@ export {
   SolvedAnimation,
   IconWrapper,
   Icon,
+  ProblemSolvedButton,
 };

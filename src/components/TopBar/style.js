@@ -11,7 +11,8 @@ const TopBarContainer = styled('div')`
   align-items: center;
   justify-content: space-between;
 
-  padding: 8px 40px;
+  padding: 0 20px;
+  height: 64px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
@@ -32,10 +33,18 @@ const TopBarContainer = styled('div')`
 const TopBarLeft = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 10px;
+  cursor: pointer;
+`;
+const TopBarRight = styled.div`
+  display: flex;
+  flex-direction: row;
   gap: 40px;
 `;
 
 const TopBarItem = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 16px;
   font-weight: 500;
   color: ${props => props.theme.subText};
@@ -63,28 +72,43 @@ const TopBarButton = styled.div`
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  opacity: 0;
-  user-select: none;
-  pointer-events: none;
 
   &:hover {
     filter: brightness(0.9);
   }
-  &:active {
-    transition: all 0.05s;
-    filter: brightness(0.8);
-    transform: scale(0.95);
-  }
-
-  ${props =>
-    props.active
-      ? css`
-          opacity: 1;
-          pointer-events: auto;
-        `
-      : css`
-          display: none;
-        `}
 `;
 
-export { TopBarContainer, TopBarLeft, TopBarItem, TopBarButton };
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LogoImage = styled.img`
+  width: 32px;
+  height: 32px;
+`;
+
+const TypoImage = styled.img`
+  width: 55px;
+  height: 32px;
+`;
+
+const UserImage = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+`;
+const UserImageWrapper = styled.div``;
+export {
+  TopBarContainer,
+  TopBarLeft,
+  TopBarRight,
+  TopBarItem,
+  TopBarButton,
+  ImageWrapper,
+  TypoImage,
+  LogoImage,
+  UserImage,
+  UserImageWrapper,
+};

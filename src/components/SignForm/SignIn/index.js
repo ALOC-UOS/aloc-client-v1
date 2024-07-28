@@ -18,6 +18,8 @@ import {
   StyledInputBox,
 } from '../style';
 import useLoginState from '../../../hooks/useLoginState';
+import { serverAPI } from '../../../api/axios';
+import useUserState from '../../../hooks/useUserState';
 
 const SignIn = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -29,7 +31,8 @@ const SignIn = ({ setFormType }) => {
   const githubIdRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const { setLoginStatus, initLoginStatus } = useLoginState();
+  const { setLoginStatus } = useLoginState();
+  const { setUserInfo } = useUserState();
 
   useEffect(() => {
     if (githubIdRef.current) {
@@ -64,6 +67,10 @@ const SignIn = ({ setFormType }) => {
         .then(res => {
           const { accessToken, refreshToken } = res.data;
           setLoginStatus({ accessToken, refreshToken });
+          serverAPI.get('/user').then(response => {
+            const userInfo = response.data.result;
+            setUserInfo(userInfo);
+          });
           navigate('/');
         })
         .catch(error => {
