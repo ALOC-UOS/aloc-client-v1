@@ -1,7 +1,7 @@
 import logo from '../../assets/logo.svg';
 import typo from '../../assets/typo.svg';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirectDocument, useNavigate } from 'react-router-dom';
 import {
   TopBarContainer,
   TopBarLeft,
@@ -15,6 +15,8 @@ import {
   UserImageWrapper,
 } from './style';
 import useLoginState from '../../hooks/useLoginState';
+import useUserState from '../../hooks/useUserState';
+import DefaultProfile from '../../assets/default-profile.svg';
 
 const TopBarItems = [
   {
@@ -39,6 +41,9 @@ const TopBar = ({ active }) => {
   const [selectedItem, setSelectedItem] = useState(window.location.pathname);
   const [isScroll, setIsScroll] = useState(false);
   const { isLoggedIn } = useLoginState();
+  const { user } = useUserState();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const path = window.location.pathname;
     if (path === '/') {
@@ -62,12 +67,23 @@ const TopBar = ({ active }) => {
     });
   }, []);
 
-  const navigate = useNavigate();
   function goRoute(route) {
     if (route === selectedItem) return;
     window.scrollTo(0, 0);
     navigate(route);
   }
+
+  const renderUserImage = () => {
+    return user ? (
+      <UserImageWrapper>
+        <UserImage src={`https://avatars.githubusercontent.com/u/${user.profileNumber}?v=4`} />
+      </UserImageWrapper>
+    ) : (
+      <UserImageWrapper>
+        <UserImage src={DefaultProfile} />
+      </UserImageWrapper>
+    );
+  };
 
   return (
     <TopBarContainer isScroll={isScroll}>
@@ -90,10 +106,7 @@ const TopBar = ({ active }) => {
           </TopBarItem>
         ))}
         {isLoggedIn ? (
-          // <UserImageWrapper>
-          //   <UserImage src={logo} />
-          // </UserImageWrapper>
-          <div></div>
+          renderUserImage()
         ) : (
           <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
             로그인

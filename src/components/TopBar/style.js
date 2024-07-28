@@ -97,10 +97,9 @@ const TypoImage = styled.img`
 const UserImage = styled.img`
   width: 32px;
   height: 32px;
+  border-radius: 32px;
 `;
-const UserImageWrapper = styled.div`
-  // padding: 0px 27px;
-`;
+const UserImageWrapper = styled.div``;
 export {
   TopBarContainer,
   TopBarLeft,
