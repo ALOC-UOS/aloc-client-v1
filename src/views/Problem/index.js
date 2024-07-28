@@ -46,12 +46,12 @@ const Problem = () => {
   function loadProblemData(algorithmId) {
     let season = 2;
     let url =
-      'https://www.iflab.run/api2/problem/season/' +
+      'https://www.iflab.run/api2/problems?season=' +
       season +
-      '/algorithmId/' +
-      algorithmId +
-      '/course' +
-      '/FULL';
+      '&course' +
+      '=FULL' +
+      '&algorithmId=' +
+      algorithmId;
     axios
       .get(url)
       .then(response => {
@@ -80,7 +80,7 @@ const Problem = () => {
 
   function openSolvedUserList(id) {
     setIsOpenedModal(true);
-    let url = 'https://www.iflab.run/api2/problem/solved-user/' + id;
+    let url = 'https://www.iflab.run/api2/problem/' + id + '/solved-users';
     axios
       .get(url)
       .then(response => {

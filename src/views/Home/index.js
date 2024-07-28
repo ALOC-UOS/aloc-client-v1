@@ -56,7 +56,7 @@ const Home = () => {
 
   const loadProblem = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/problem/today/FULL`);
+      const response = await axios.get(`${API_BASE_URL}/today-problem?course=FULL`);
       setProblemData(response.data.result);
       setIsLoading(false);
     } catch (error) {
@@ -66,7 +66,7 @@ const Home = () => {
 
   const loadSolveMember = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/problem/solved-user/${problemData.id}`);
+      const response = await axios.get(`${API_BASE_URL}/problem/${problemData.id}/solved-users`);
       setSolvedMemberList(response.data.result);
     } catch (error) {
       console.error('Error loading solved members:', error);
