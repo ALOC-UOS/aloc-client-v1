@@ -124,9 +124,7 @@ const Member = () => {
   const checkTodaySolvedProblem = () => {
     serverAPI
       .post('/problem/today/solved', {}, { timeout: 300000 })
-      .then(response => {
-        console.log(response);
-      })
+      .then(response => {})
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
       });

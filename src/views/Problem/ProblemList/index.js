@@ -10,7 +10,6 @@ import EmptyProblemIcon from '../../../assets/empty-problem-icon.svg';
 
 export const ProblemListComponent = () => {
   const { problemList, fetchSolvedUserList } = useProblem();
-  console.log(problemList);
   const getTierIcon = problem => {
     if (problem.difficulty < 6) {
       return BronzeIcon;
