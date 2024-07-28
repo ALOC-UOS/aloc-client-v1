@@ -1,8 +1,9 @@
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
+const initUserAtomValue = { uesr: null };
+const userAtom = atom(initUserAtomValue);
 
 const useUserState = () => {
-  const initUserAtomValue = { uesr: null };
-  const [{ user }, setUser] = useAtom(initUserAtomValue);
+  const [{ user }, setUser] = useAtom(userAtom);
 
   const setUserInfo = userInfo => {
     setUser({ user: userInfo });

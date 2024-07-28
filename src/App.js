@@ -11,13 +11,30 @@ import Setting from './views/Setting';
 import Login from './views/Login';
 import { setupInterceptors } from './api/axios';
 import useLoginState from './hooks/useLoginState';
+import useUserState from './hooks/useUserState';
+import { serverAPI } from './api/axios';
 import { useEffect } from 'react';
 
 function App() {
-  const { initLoginStatus } = useLoginState();
+  const { initLoginStatus, setLoginStatus } = useLoginState();
+  const { setUserInfo, deleteUserInfo } = useUserState();
+
   useEffect(() => {
     setupInterceptors(initLoginStatus);
-  }, [initLoginStatus]);
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    serverAPI
+      .get('/user')
+      .then(response => {
+        const userInfo = response.data.result;
+        setLoginStatus({ accessToken, refreshToken });
+        setUserInfo(userInfo);
+      })
+      .catch(error => {
+        initLoginStatus();
+        deleteUserInfo();
+      });
+  }, []);
 
   const LIGHT_MODE = 'light';
   const theme = LIGHT_MODE;
