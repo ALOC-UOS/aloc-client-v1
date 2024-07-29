@@ -22,7 +22,7 @@ export const ProblemListComponent = () => {
   };
 
   const moveToProblemSite = problem => {
-    window.open(`https://www.acmicpc.net/problem/${problem.id}`);
+    window.open(`https://www.acmicpc.net/problem/${problem.problemId}`);
   };
 
   return (
@@ -39,7 +39,7 @@ export const ProblemListComponent = () => {
               <HStack style={{ gap: '4px' }}>
                 <S.ProblemTier src={getTierIcon(problem)} />
                 <S.ProblemName>
-                  {problem.id}. {problem.title}
+                  {problem.problemId}. {problem.title}
                 </S.ProblemName>
               </HStack>
               <HStack style={{ alignItems: 'center' }}>
