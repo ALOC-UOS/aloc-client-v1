@@ -15,24 +15,8 @@ import Platinum from '../../../assets/platinum-small.png';
 const ProblemList = () => {
   const [ProblemData, setProblemData] = useState([]);
 
-  useEffect(() => {
-    loadProblemData();
-  }, []);
-
   function moveProblemPage(number) {
     window.open('https://www.acmicpc.net/problem/' + number, '_blank');
-  }
-
-  function loadProblemData() {
-    let url = 'https://www.iflab.run/api2/problem';
-    axios
-      .get(url)
-      .then(response => {
-        setProblemData(response.data.result);
-      })
-      .catch(error => {
-        console.error('API 요청 중 오류 발생:');
-      });
   }
 
   return (
