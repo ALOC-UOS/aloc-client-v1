@@ -76,10 +76,10 @@ const Member = () => {
     let url = '';
 
     if (type === 'solved') {
-      url = `https://www.iflab.run/api2/problem/solved/user/${githubId}/routine/DAILY?season=2`;
+      url = `https://www.iflab.run/api2/user/${githubId}/unsolved-problems?routine=DAILY&season=2`;
       setModalTitle('해결한 문제 목록');
     } else {
-      url = `https://www.iflab.run/api2/problem/unsolved/user/${githubId}/routine/DAILY?season=2`;
+      url = `https://www.iflab.run/api2/user/${githubId}/unsolved-problems?routine=DAILY&season=2`;
       setModalTitle('해결하지 못한 문제 목록');
     }
     axios
