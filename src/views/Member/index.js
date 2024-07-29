@@ -105,7 +105,7 @@ const Member = () => {
     setIsLoading(true);
     setIsShowLoading(true);
     serverAPI
-      .post('/problem/solved')
+      .post('/problems/solved')
       .then(response => {
         loadMemberData();
         openProblemListModal(SelectedType, SelectedGithubId);
