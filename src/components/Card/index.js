@@ -4,7 +4,6 @@ import LocationIcon from '../../assets/location-icon.svg';
 import CalendarIcon from '../../assets/calendar-icon.svg';
 import CardContent from './CardContent';
 import HistoryList from './HistoryList';
-import ProblemList from './ProblemList';
 import { API } from '../../api/axios';
 
 const Card = () => {
@@ -61,13 +60,6 @@ const Card = () => {
             <CardContent key={index} subscription={data.subscription} contents={data.contents} />
           );
         })}
-      </CardWrapper>
-      <CardWrapper>
-        <CardTop>
-          <CardLabel> 지나간 문제</CardLabel>
-          <CardTitle>문제 목록</CardTitle>
-        </CardTop>
-        <ProblemList />
       </CardWrapper>
     </CardContainer>
   );
