@@ -16,7 +16,7 @@ const SignUpSecond = ({ setFormType }) => {
 
     await LoginAPI.handleOnSubmitSignUpForm(new_inputState)
       .then(() => {
-        setIsPending(false);
+        alertModal.setIsPending(false);
         setFormType('SIGNIN');
       })
       .catch(error => {
@@ -24,34 +24,29 @@ const SignUpSecond = ({ setFormType }) => {
           console.log(error.response.data);
           console.log(error.response.data.message);
           setErrorMessage(error.response.data.message);
-          hide();
-          showErrorModal();
+          alertModal.hide();
+          errorModal.show();
         }
         return;
       });
     return;
   };
-  const {
-    Modal: AlertModal,
-    show,
-    hide,
-    setIsPending,
-  } = useModal({
+  const alertModal = useModal({
     description: '코스를 설정하면 빠꾸칠 수 없어요!',
     cancelText: '취소',
     okText: '확인',
     closable: true,
     onOk: onSubmit,
   });
-  const { Modal: ErrorModal, show: showErrorModal } = useModal({
+  const errorModal = useModal({
     description: errorMessage,
     closable: false,
     onOk: () => setFormType('SIGNIN'),
   });
   return (
     <>
-      <AlertModal />
-      <ErrorModal />
+      <alertModal.render />
+      <errorModal.render />
       <SignBox>
         <ImageWrapper>
           <LogoImage src={logo} />
@@ -114,7 +109,7 @@ const SignUpSecond = ({ setFormType }) => {
           }}
           onClick={event => {
             event.preventDefault();
-            show();
+            alertModal.show();
           }}
         >
           회원가입

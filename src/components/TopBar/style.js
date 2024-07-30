@@ -98,6 +98,7 @@ const UserImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 32px;
+  cursor: pointer;
 `;
 const UserImageWrapper = styled.div``;
 export {

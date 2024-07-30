@@ -27,6 +27,7 @@ import Bronze from '../../assets/bronze-small.png';
 import Silver from '../../assets/silver-small.png';
 import Gold from '../../assets/gold-small.png';
 import Platinum from '../../assets/platinum-small.png';
+import useLoginState from '../../hooks/useLoginState';
 
 const ListModal = ({
   isOpen,
@@ -36,6 +37,7 @@ const ListModal = ({
   closeModal,
   checkSolvedProblem,
 }) => {
+  const { isLoggedIn } = useLoginState();
   const renderMember = () => (
     <>
       <ListModalTopBar>
@@ -99,7 +101,9 @@ const ListModal = ({
           </ProblemItem>
         ))}
       </ProblemList>
-      <Reloader onClick={checkSolvedProblem}>해결한 문제가 반영이 안됐나요?</Reloader>
+      {isLoggedIn && (
+        <Reloader onClick={checkSolvedProblem}>해결한 문제가 반영이 안됐나요?</Reloader>
+      )}
     </>
   );
 

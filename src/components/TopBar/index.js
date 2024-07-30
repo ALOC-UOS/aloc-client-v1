@@ -17,12 +17,11 @@ import {
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import DefaultProfile from '../../assets/default-profile.svg';
+import useContainer from '../../hooks/useContainer';
+import Button from '../Buttons';
+import useModal from '../../hooks/useModal';
 
 const TopBarItems = [
-  {
-    name: '메인 화면',
-    route: '/',
-  },
   {
     name: '문제 목록',
     route: '/problem',
@@ -40,9 +39,20 @@ const TopBarItems = [
 const TopBar = ({ active }) => {
   const [selectedItem, setSelectedItem] = useState(window.location.pathname);
   const [isScroll, setIsScroll] = useState(false);
-  const { isLoggedIn } = useLoginState();
+  const { isLoggedIn, initLoginStatus } = useLoginState();
   const { user } = useUserState();
   const navigate = useNavigate();
+
+  const userMenu = useContainer();
+  const logoutModal = useModal({
+    description: '정말로 로그아웃하시겠어요?',
+    cancelText: '취소',
+    okText: '확인',
+    closable: true,
+    onOk: () => {
+      initLoginStatus();
+    },
+  });
 
   useEffect(() => {
     const path = window.location.pathname;
@@ -76,7 +86,10 @@ const TopBar = ({ active }) => {
   const renderUserImage = () => {
     return user ? (
       <UserImageWrapper>
-        <UserImage src={`https://avatars.githubusercontent.com/u/${user.profileNumber}?v=4`} />
+        <UserImage
+          src={`https://avatars.githubusercontent.com/u/${user.profileNumber}?v=4`}
+          onClick={userMenu.toggle}
+        />
       </UserImageWrapper>
     ) : (
       <UserImageWrapper>
@@ -87,6 +100,7 @@ const TopBar = ({ active }) => {
 
   return (
     <TopBarContainer isScroll={isScroll}>
+      <logoutModal.render />
       <TopBarLeft onClick={() => navigate('/')}>
         <ImageWrapper>
           <LogoImage src={logo} />
@@ -106,7 +120,22 @@ const TopBar = ({ active }) => {
           </TopBarItem>
         ))}
         {isLoggedIn ? (
-          renderUserImage()
+          <>
+            {renderUserImage()}
+            <div style={{ position: 'absolute', right: 0, margin: 10, marginTop: 64 }}>
+              <userMenu.render>
+                <Button
+                  color={'red'}
+                  onClick={() => {
+                    userMenu.hide();
+                    logoutModal.show();
+                  }}
+                >
+                  로그아웃
+                </Button>
+              </userMenu.render>
+            </div>
+          </>
         ) : (
           <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
             로그인
