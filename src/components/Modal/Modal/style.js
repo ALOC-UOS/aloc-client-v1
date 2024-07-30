@@ -3,13 +3,10 @@ import styled, { css } from 'styled-components';
 const ModalContainer = styled.div`
   min-width: 400px;
   z-index: 300;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   opacity: 0;
-
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   background-color: #ffffff;
   padding: 16px;

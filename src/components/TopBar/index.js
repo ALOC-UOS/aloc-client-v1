@@ -122,7 +122,7 @@ const TopBar = ({ active }) => {
         {isLoggedIn ? (
           <>
             {renderUserImage()}
-            <div style={{ position: 'absolute', right: 0, margin: 10, marginTop: 25 }}>
+            <div style={{ position: 'absolute', right: 0, margin: 10, marginTop: 64 }}>
               <userMenu.render>
                 <Button
                   color={'red'}
