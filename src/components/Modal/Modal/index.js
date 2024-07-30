@@ -1,7 +1,7 @@
 import { ModalContainer, Description, ButtonWrap } from './style';
 import Button from '../../Buttons';
 
-const ModalWrapper = ({
+const Modal = ({
   isOpen,
   children,
   title,
@@ -29,4 +29,4 @@ const ModalWrapper = ({
     </ModalContainer>
   );
 };
-export default ModalWrapper;
+export default Modal;

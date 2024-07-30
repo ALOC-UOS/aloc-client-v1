@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import ModalWrapper from '../components/Modal/Modal';
+import Modal from '../components/Modal/Modal';
 import BlackScreen from '../components/BlackScreen';
-
+import styled from 'styled-components';
 const useModal = ({ title, description, cancelText, okText = '확인', onOk, closable }) => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
@@ -18,9 +18,9 @@ const useModal = ({ title, description, cancelText, okText = '확인', onOk, clo
     };
     if (!isOpen) return null;
     return (
-      <>
+      <ModalWrapper>
         <BlackScreen isOpen={isOpen} onClick={hide} />
-        <ModalWrapper
+        <Modal
           isOpen={isOpen}
           title={title}
           description={description}
@@ -31,12 +31,22 @@ const useModal = ({ title, description, cancelText, okText = '확인', onOk, clo
           hide={hide}
         >
           {children}
-        </ModalWrapper>
-      </>
+        </Modal>
+      </ModalWrapper>
     );
   };
 
   return { render, show, hide, setIsPending };
 };
-
+const ModalWrapper = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export default useModal;
