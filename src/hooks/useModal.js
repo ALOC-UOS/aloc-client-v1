@@ -2,20 +2,12 @@ import { useState } from 'react';
 import ModalWrapper from '../components/Modal/Modal';
 import BlackScreen from '../components/BlackScreen';
 
-const useModal = ({
-  children,
-  title,
-  description,
-  cancelText,
-  okText = '확인',
-  onOk,
-  closable,
-}) => {
+const useModal = ({ title, description, cancelText, okText = '확인', onOk, closable }) => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
   const [isPending, setIsPending] = useState(false);
-  const render = () => {
+  const render = ({ children }) => {
     const handleOkButtonClick = () => {
       if (cancelText === '' || isPending) {
         return;
@@ -43,7 +35,7 @@ const useModal = ({
     );
   };
 
-  return { Modal: render, show, hide, setIsPending };
+  return { render, show, hide, setIsPending };
 };
 
 export default useModal;
