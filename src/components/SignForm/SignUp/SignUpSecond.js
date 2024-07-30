@@ -8,10 +8,12 @@ import { getInputState } from '../../../utils/SignUp';
 
 const SignUpSecond = ({ setFormType }) => {
   const [course, setCourse] = useState('HALF');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onSubmit = async event => {
     const inputState = getInputState();
     const new_inputState = { ...inputState, course: course };
+
     await LoginAPI.handleOnSubmitSignUpForm(new_inputState)
       .then(() => {
         setIsPending(false);
@@ -19,6 +21,9 @@ const SignUpSecond = ({ setFormType }) => {
       })
       .catch(error => {
         if (error.response.data.code === 'COMMON400') {
+          console.log(error.response.data);
+          console.log(error.response.data.message);
+          setErrorMessage(error.response.data.message);
           hide();
           showErrorModal();
         }
@@ -39,7 +44,7 @@ const SignUpSecond = ({ setFormType }) => {
     onOk: onSubmit,
   });
   const { Modal: ErrorModal, show: showErrorModal } = useModal({
-    description: '이미 회원가입되어있습니다.',
+    description: errorMessage,
     closable: false,
     onOk: () => setFormType('SIGNIN'),
   });
