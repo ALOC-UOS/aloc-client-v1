@@ -61,3 +61,8 @@ export const serverAPI = axios.create({
   baseURL: 'https://www.iflab.run/api2',
   headers: { 'Content-type': 'application/json' },
 });
+
+export const API = axios.create({
+  baseURL: 'https://www.iflab.run/api2',
+  headers: { 'Content-type': 'application/json' },
+});
