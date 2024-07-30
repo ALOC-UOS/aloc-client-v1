@@ -16,18 +16,16 @@ import { serverAPI } from './api/axios';
 import { useEffect } from 'react';
 
 function App() {
-  const { initLoginStatus, setLoginStatus } = useLoginState();
+  const { initLoginStatus } = useLoginState();
   const { setUserInfo, deleteUserInfo } = useUserState();
 
   useEffect(() => {
     setupInterceptors(initLoginStatus);
-    const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
     serverAPI
       .get('/user')
       .then(response => {
         const userInfo = response.data.result;
-        setLoginStatus({ accessToken, refreshToken });
+        localStorage.setItem('isLoggedIn', true);
         setUserInfo(userInfo);
       })
       .catch(error => {

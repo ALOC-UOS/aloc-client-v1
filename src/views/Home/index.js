@@ -20,6 +20,8 @@ import TopBar from '../../components/TopBar';
 import ProblemBackgroundImage from '../../assets/background2.png';
 import { getDifficultyIcon, formatSolveTime } from '../../utils';
 import BottomInfo from '../../components/Card';
+import MarathonProblemList from '../../components/MarathonProblemList';
+import useLoginState from '../../hooks/useLoginState';
 
 export const API_BASE_URL = 'https://www.iflab.run/api2';
 
@@ -29,7 +31,7 @@ const Home = () => {
   const [solvedMemberList, setSolvedMemberList] = useState([]);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
   const [isShowMember, setIsShowMember] = useState(false);
-
+  const { isLoggedIn } = useLoginState();
   useEffect(() => {
     loadProblem();
   }, []);
@@ -88,7 +90,7 @@ const Home = () => {
           {problemData.problemId}. {problemData.title}
         </ProblemName>
         {renderMemberInfo()}
-        {/* <MarathonProblemList /> */}
+        {isLoggedIn && <MarathonProblemList />}
       </ProblemWrapper>
     </ProblemContainer>
   );

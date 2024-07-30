@@ -1,13 +1,29 @@
 import styled, { keyframes } from 'styled-components';
 import { getDifficultyIcon } from '../../utils';
 import { dummy } from './dummy';
+import { serverAPI } from '../../api/axios';
 
-const data = dummy;
+// const data = dummy;
+
+const getProblemList = async () => {
+  await serverAPI
+    .get('/weekly-problems')
+    .then(res => {
+      console.log(res.data.result);
+      return res.data.result;
+    })
+    .catch(error => {
+      console.log(error);
+      return error;
+    });
+};
+const data = getProblemList();
+
 const handleProblemClick = id => {
   window.open(`https://www.acmicpc.net/problem/${id}`, '_blank');
 };
 const renderProblemList = () => {
-  return data.map((problem, idx) => {
+  return Object.entries(data).map((problem, idx) => {
     return (
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
         <ProblemItem
