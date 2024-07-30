@@ -9,6 +9,7 @@ export const deleteToken = () => {
 };
 
 export const changeAccessToken = newAccessToken => {
+  console.log('바꿔끼어 엑세스토큰', newAccessToken);
   localStorage.removeItem('accessToken');
   localStorage.setItem('accessToken', newAccessToken);
 };
