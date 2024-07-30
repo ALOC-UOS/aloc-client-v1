@@ -14,6 +14,7 @@ const useModal = ({ title, description, cancelText, okText = '확인', onOk, clo
       }
       setIsPending(true);
       onOk();
+      hide();
     };
     if (!isOpen) return null;
     return (
