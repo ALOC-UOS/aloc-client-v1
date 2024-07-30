@@ -4,12 +4,10 @@ import { changeAccessToken } from '../auth/token';
 
 const getAccessByRefresh = async (refreshToken, initLoginStatus) => {
   try {
-    console.log('다시 받아 엑세스');
     const response = await axios.post('https://www.iflab.run/api2/refresh', {
       refreshToken: refreshToken,
     });
     const newAccessToken = response.data.accessToken;
-    console.log(newAccessToken, '새로 받음');
     changeAccessToken(newAccessToken);
     return newAccessToken;
   } catch (error) {
@@ -38,7 +36,6 @@ export const setupInterceptors = initLoginStatus => {
           }
         } else {
           // access 유효한 경우
-          console.log('유효해 액세스토큰', accessToken);
           config.headers.Authorization = `Bearer ${accessToken}`;
         }
       } else if (refreshToken) {
@@ -55,39 +52,10 @@ export const setupInterceptors = initLoginStatus => {
           initLoginStatus();
         }
       }
-      console.log('보내기 직전 액세스토큰: ', config.headers.Authorization);
       return config;
     },
     error => Promise.reject(error)
   );
-
-  // serverAPI.interceptors.response.use(
-  //   response => response,
-  //   async error => {
-  //     const originalRequest = error.config;
-  //     const refreshToken = localStorage.getItem('refreshToken');
-  //     if (error.response && error.response.status === 401 && !originalRequest._retry) {
-  //       originalRequest._retry = true;
-  //       if (refreshToken) {
-  //         try {
-  //           const newAccessToken = await getAccessByRefresh(refreshToken, initLoginStatus);
-  //           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-  //           return serverAPI(originalRequest);
-  //         } catch (refreshError) {
-  //           if (initLoginStatus) {
-  //             initLoginStatus();
-  //           }
-  //           return Promise.reject(refreshError);
-  //         }
-  //       } else {
-  //         if (initLoginStatus) {
-  //           initLoginStatus();
-  //         }
-  //       }
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
 };
 export const serverAPI = axios.create({
   baseURL: 'https://www.iflab.run/api2',
