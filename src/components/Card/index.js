@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardContainer, CardWrapper, CardTop, CardLabel, CardTitle } from './style';
 import LocationIcon from '../../assets/location-icon.svg';
 import CalendarIcon from '../../assets/calendar-icon.svg';
 import CardContent from './CardContent';
 import HistoryList from './HistoryList';
 import ProblemList from './ProblemList';
+import { API } from '../../api/axios';
 
 const Card = () => {
-  const SeminarData = [
-    {
-      contents: [
-        {
-          Icon: CalendarIcon,
-          Text: '7월 30일 화요일, 오후 7시',
-        },
-        {
-          Icon: LocationIcon,
-          Text: '정보기술관 106호 / 107호',
-        },
-      ],
-    },
-  ];
-
+  const [week, setWeek] = useState();
+  const [schedule, setSchedule] = useState([]);
+  const setSeminarData = schedule => {
+    return [
+      {
+        contents: [
+          {
+            Icon: CalendarIcon,
+            Text: schedule.date,
+          },
+          {
+            Icon: LocationIcon,
+            Text: schedule.location,
+          },
+        ],
+      },
+    ];
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await API.get('/notion/study-schedule')
+        .then(res => {
+          return res.data.result;
+        })
+        .catch(error => {
+          console.log(error);
+          return error;
+        });
+      const seminarData = setSeminarData(result);
+      setSchedule(seminarData);
+      setWeek(result.week);
+    };
+    fetchData();
+  }, []);
   return (
     <CardContainer>
       <CardWrapper>
@@ -34,9 +54,9 @@ const Card = () => {
       <CardWrapper>
         <CardTop>
           <CardLabel> 예정된 일정 </CardLabel>
-          <CardTitle>정기 세미나 - 10회차</CardTitle>
+          <CardTitle>정기 세미나 - {week}회차</CardTitle>
         </CardTop>
-        {SeminarData.map((data, index) => {
+        {schedule.map((data, index) => {
           return (
             <CardContent key={index} subscription={data.subscription} contents={data.contents} />
           );
