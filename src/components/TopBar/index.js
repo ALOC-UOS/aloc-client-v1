@@ -45,7 +45,7 @@ const TopBar = ({ active }) => {
 
   const userMenu = useContainer();
   const logoutModal = useModal({
-    description: '정말로 로그아웃하시겠어요?',
+    description: '정말 로그아웃하시겠어요?',
     cancelText: '취소',
     okText: '확인',
     closable: true,

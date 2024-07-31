@@ -28,7 +28,6 @@ const Description = styled.div`
   font-size: 16px;
   letter-spacing: -2px;
   user-select: none;
-  padding-bottom: 16px;
 `;
 
 const ButtonWrap = styled.div`
