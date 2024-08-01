@@ -431,6 +431,23 @@ const ProblemSolvedButton = styled.div`
     transform: scale(1.1);
   }
 `;
+const rotateAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  } 
+`;
+const BlueLoadingIcon = styled.img`
+  animation: ${rotateAnimation} 4s cubic-bezier(0.25, 0.51, 0.43, 0.7) infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 48px;
+  height: 48px;
+`;
 
 export {
   MemberContainer,
@@ -457,4 +474,5 @@ export {
   IconWrapper,
   Icon,
   ProblemSolvedButton,
+  BlueLoadingIcon,
 };
