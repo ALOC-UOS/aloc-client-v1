@@ -46,7 +46,7 @@ import CheckIcon from '../../assets/check-icon.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
-import Confetti from 'react-confetti';
+import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -135,7 +135,7 @@ const Member = () => {
       .then(() => {
         loadMemberData();
         setShowConfetti(true);
-        // setTimeout(() => setShowConfetti(false), 5000);
+        // setTimeout(() => setShowConfetti(false), 2500);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
@@ -155,6 +155,19 @@ const Member = () => {
     '#FFB3B3',
   ];
 
+  const decorateOptions = originalOptions => {
+    return {
+      ...originalOptions,
+      particleCount: 200, // 조각 개수 설정
+      spread: 120, // 퍼짐 정도 설정
+      startVelocity: 50, // 초기 속도 설정
+      ticks: 200, // 애니메이션 지속 시간 설정
+      origin: { y: 0.8 }, // 발사 위치 설정
+      shapes: ['circle', 'circle', 'square'], // 이미지 배열을 shapes로 설정
+      gravity: 1.5, // 중력 설정
+    };
+  };
+
   return (
     <MemberContainer>
       <TopBar active={true} />
@@ -170,8 +183,25 @@ const Member = () => {
         checkSolvedProblem={checkSolvedProblem}
       />
       <BlackScreen isOpen={isOpenedModal} />
-      <div>
-        {showConfetti && <Confetti recycle={false} numberOfPieces={300} colors={confettiColors} />}
+      <div
+        style={{
+          position: 'fixed',
+          width: '100%',
+          height: '100%',
+          zIndex: 100,
+          top: 0,
+          left: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        {showConfetti && (
+          <Fireworks
+            width={'100%'}
+            height={'100%'}
+            autorun={{ speed: 0.5, duration: 3, delay: 1000 }}
+            decorateOptions={decorateOptions}
+          />
+        )}
       </div>
       <ContentContainer>
         {memberDataPending ? (
