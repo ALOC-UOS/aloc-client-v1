@@ -46,6 +46,7 @@ import CheckIcon from '../../assets/check-icon.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
+import Confetti from 'react-confetti';
 
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,6 +59,7 @@ const Member = () => {
   const [modalTitle, setModalTitle] = useState('');
   const { isLoggedIn } = useLoginState();
   const [memberDataPending, setMemberDataPending] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
     loadMemberData();
@@ -132,12 +134,26 @@ const Member = () => {
       .post('/today-problem/solved', {}, { timeout: 300000 })
       .then(() => {
         loadMemberData();
+        setShowConfetti(true);
+        // setTimeout(() => setShowConfetti(false), 5000);
       })
       .catch(error => {
         console.error('API 요청 중 오류 발생:');
       });
     // window.location.reload();
   };
+
+  const confettiColors = [
+    '#408CFF',
+    '#599BFF',
+    '#98BFFA',
+    '#FFB800',
+    '#FFC839',
+    '#FFD66D',
+    '#FF5959',
+    '#FF8383',
+    '#FFB3B3',
+  ];
 
   return (
     <MemberContainer>
@@ -154,6 +170,9 @@ const Member = () => {
         checkSolvedProblem={checkSolvedProblem}
       />
       <BlackScreen isOpen={isOpenedModal} />
+      <div>
+        {showConfetti && <Confetti recycle={false} numberOfPieces={300} colors={confettiColors} />}
+      </div>
       <ContentContainer>
         {memberDataPending ? (
           <BlueLoadingIcon src={loadingIcon} />
