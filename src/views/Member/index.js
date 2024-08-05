@@ -47,6 +47,9 @@ import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
+import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
+
+import { Message } from '../../components/Message';
 
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,6 +63,8 @@ const Member = () => {
   const { isLoggedIn } = useLoginState();
   const [memberDataPending, setMemberDataPending] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const loaddingMessage = Message();
+  const coinMessage = Message();
 
   useEffect(() => {
     loadMemberData();
@@ -125,35 +130,27 @@ const Member = () => {
         }, 1500);
       })
       .catch(error => {
-        console.error('API 요청 중 오류 발생:');
+        console.error(error, 'API 요청 중 오류 발생:');
       });
   }
 
   const checkTodaySolvedProblem = () => {
+    loaddingMessage.show();
     serverAPI
       .post('/today-problem/solved', {}, { timeout: 300000 })
       .then(() => {
         loadMemberData();
+        loaddingMessage.hide();
+        coinMessage.show();
         setShowConfetti(true);
-        // setTimeout(() => setShowConfetti(false), 2500);
+        setTimeout(() => {
+          coinMessage.hide();
+        }, 2000);
       })
       .catch(error => {
-        console.error('API 요청 중 오류 발생:');
+        console.error(error, 'API 요청 중 오류 발생:');
       });
-    // window.location.reload();
   };
-
-  const confettiColors = [
-    '#408CFF',
-    '#599BFF',
-    '#98BFFA',
-    '#FFB800',
-    '#FFC839',
-    '#FFD66D',
-    '#FF5959',
-    '#FF8383',
-    '#FFB3B3',
-  ];
 
   const decorateOptions = originalOptions => {
     return {
@@ -171,6 +168,31 @@ const Member = () => {
   return (
     <MemberContainer>
       <TopBar active={true} />
+      {loaddingMessage.render({
+        icon: loadingIconWithBg,
+        children: (
+          <span
+            style={{
+              fontSize: '16px',
+              fontWeight: 500,
+            }}
+          >
+            <span style={{ color: '#408cff' }}>풀이 여부</span>를 확인하고 있어요
+          </span>
+        ),
+      })}
+      {coinMessage.render({
+        children: (
+          <span
+            style={{
+              fontSize: '16px',
+              fontWeight: 500,
+            }}
+          >
+            <span style={{ color: '#408cff' }}>1등</span>으로 문제를 풀었어요!
+          </span>
+        ),
+      })}
       <IconWrapper active={isLoading}>
         <Icon active={isShowLoading} src={LoadingIcon} />
         <Icon active={!isShowLoading && isLoading} src={CheckIcon} check={true} />
@@ -183,26 +205,6 @@ const Member = () => {
         checkSolvedProblem={checkSolvedProblem}
       />
       <BlackScreen isOpen={isOpenedModal} />
-      <div
-        style={{
-          position: 'fixed',
-          width: '100%',
-          height: '100%',
-          zIndex: 100,
-          top: 0,
-          left: 0,
-          pointerEvents: 'none',
-        }}
-      >
-        {showConfetti && (
-          <Fireworks
-            width={'100%'}
-            height={'100%'}
-            autorun={{ speed: 0.5, duration: 3, delay: 1000 }}
-            decorateOptions={decorateOptions}
-          />
-        )}
-      </div>
       <ContentContainer>
         {memberDataPending ? (
           <BlueLoadingIcon src={loadingIcon} />
@@ -299,6 +301,18 @@ const Member = () => {
         <ProblemSolvedButton onClick={() => checkTodaySolvedProblem()}>
           문제 풀었어요!
         </ProblemSolvedButton>
+      )}
+      {showConfetti && (
+        <Fireworks
+          width={window.innerWidth}
+          height={window.innerHeight}
+          autorun={{ speed: 0.5, duration: 4, delay: 500 }}
+          decorateOptions={decorateOptions}
+          style={{
+            position: 'fixed',
+            zIndex: 1000,
+          }}
+        />
       )}
     </MemberContainer>
   );
