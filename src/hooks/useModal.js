@@ -2,10 +2,20 @@ import { useState } from 'react';
 import Modal from '../components/Modal/Modal';
 import BlackScreen from '../components/BlackScreen';
 import styled from 'styled-components';
-const useModal = ({ title, description, cancelText, okText = '확인', onOk, closable }) => {
+const useModal = ({
+  title,
+  description,
+  cancelText,
+  okText = '확인',
+  onOk = () => {},
+  closable,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
-  const hide = () => setIsOpen(false);
+  const hide = () => {
+    setIsOpen(false);
+    setIsPending(false);
+  };
   const [isPending, setIsPending] = useState(false);
   const render = ({ children }) => {
     const handleOkButtonClick = () => {
@@ -48,5 +58,6 @@ const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 200;
 `;
 export default useModal;

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TopBar from '../../components/TopBar';
-import BlackScreen from '../../components/BlackScreen';
-import AlertModal from '../../components/Modal/AlertModal';
-import BuyModal from '../../components/Modal/BuyModal';
 import CoinIcon from '../../assets/coin-icon.svg';
 import DefaultProfile from '../../assets/default-profile.svg';
 import ChangeColor from '../../assets/change-color.svg';
 import DecorationCharacter from '../../components/Decorations/Character';
+import useModal from '../../hooks/useModal';
+import useLoginState from '../../hooks/useLoginState';
+import useUserState from '../../hooks/useUserState';
+import { serverAPI } from '../../api/axios';
+import { PRICE } from '../../constants/Shop';
 import {
   ShopContainer,
   ContentContainer,
@@ -23,23 +25,93 @@ import {
 } from './style';
 
 const Shop = () => {
+  const [changeColorText, setChangeColorText] = useState('');
+  const [errorText, setErrorText] = useState('');
+  const { isLoggedIn } = useLoginState();
+  const { user, setUserInfo } = useUserState();
+  const changeColor = async () => {
+    await serverAPI
+      .put('/color/change')
+      .then(response => {
+        setChangeColorText(
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              textAlign: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <div>
+              <strong>변경된 색상: </strong>
+              {response.data.result.colorName}
+            </div>
+
+            <div>
+              <strong>남은 코인: </strong>
+              {response.data.result.coin}
+            </div>
+          </div>
+        );
+        buyModal.hide();
+        changeColorSuccessModal.show();
+        serverAPI
+          .get('/user')
+          .then(response => setUserInfo(response.data.result))
+          .catch(error => console.log(error));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  const openBuyModal = () => {
+    if (!isLoggedIn) {
+      setErrorText('로그인 후 이용해주세요.');
+      errorModal.show();
+      return;
+    }
+    if (user.coin <= PRICE.CHANGE_COLOR_ITEM) {
+      setErrorText('코인이 부족합니다 🥲');
+      errorModal.show();
+      return;
+    }
+    buyModal.show();
+  };
+  const buyModal = useModal({
+    description: '구매하면 원래 상태로 돌아갈 수 없어요!',
+    cancelText: '취소',
+    okText: '확인',
+    closable: true,
+    onOk: changeColor,
+  });
+  const changeColorSuccessModal = useModal({
+    description: changeColorText,
+    okText: '확인',
+  });
+  const errorModal = useModal({
+    description: errorText,
+    okText: '확인',
+  });
+  const adminModal = useModal({
+    description: '구매 문의는 디스코드로 연락해주세요 😊',
+  });
   const DecorationItems = [
     {
       name: '초록 거북이',
       description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: '1,000',
+      price: PRICE.GREEN_TURETLE,
       type: 'GreenTurtle',
     },
     {
       name: '분홍 거북이',
       description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: '1,000',
+      price: PRICE.PINK_TURTLE,
       type: 'PinkTurtle',
     },
     {
       name: '파랑 파도',
       description: '바다로 떠나고 싶어지네요.',
-      price: '1,500',
+      price: PRICE.WAVE,
       type: 'Wave',
     },
   ];
@@ -48,37 +120,17 @@ const Shop = () => {
     {
       name: '컬러 변경권',
       description: '문제를 풀었을 때 색깔이 변경됩니다.',
-      price: '100',
+      price: PRICE.CHANGE_COLOR_ITEM,
     },
   ];
 
-  const [isOpenedModal, setIsOpenedModal] = React.useState(false);
-  const [isOpenedBuyModal, setIsOpenedBuyModal] = React.useState(false);
-
-  function openModal() {
-    setIsOpenedModal(true);
-  }
-
-  function openBuyModal() {
-    setIsOpenedBuyModal(true);
-  }
-
-  function closeModal() {
-    setIsOpenedModal(false);
-  }
-
-  function closeBuyModal() {
-    setIsOpenedBuyModal(false);
-  }
-
-  function acceptModal() {
-    setIsOpenedBuyModal(false);
-  }
-
   return (
     <ShopContainer>
+      <buyModal.render />
+      <errorModal.render />
+      <changeColorSuccessModal.render />
+      <adminModal.render />
       <TopBar />
-      <BlackScreen isOpen={isOpenedModal || isOpenedBuyModal} />
       <ContentContainer>
         <ItemContainer>
           {DecorationItems.map((item, index) => (
@@ -97,7 +149,7 @@ const Shop = () => {
                   {item.price}
                 </ItemPrice>
               </ItemInfo>
-              <Button onClick={openModal}>구매</Button>
+              <Button onClick={adminModal.show}>구매</Button>
             </ItemCard>
           ))}
           {NormalItems.map((item, index) => (
@@ -119,16 +171,6 @@ const Shop = () => {
             </ItemCard>
           ))}
         </ItemContainer>
-        <AlertModal
-          isOpen={isOpenedModal}
-          description={'구매 문의는 디스코드로 연락해주세요 😊'}
-          closeModal={closeModal}
-        />
-        <BuyModal
-          isOpen={isOpenedBuyModal}
-          description={'구매를 진행하려면 정보를 입력해주세요.'}
-          closeModal={closeBuyModal}
-        />
       </ContentContainer>
     </ShopContainer>
   );
