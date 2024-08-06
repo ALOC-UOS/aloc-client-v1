@@ -2,7 +2,15 @@ import { useState } from 'react';
 import Modal from '../components/Modal/Modal';
 import BlackScreen from '../components/BlackScreen';
 import styled from 'styled-components';
-const useModal = ({ title, description, cancelText, okText = '확인', onOk, closable }) => {
+const useModal = ({
+  title,
+  description,
+  cancelText,
+  okText = '확인',
+  onOk,
+  closable,
+  pendable = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
@@ -12,7 +20,7 @@ const useModal = ({ title, description, cancelText, okText = '확인', onOk, clo
       if (cancelText === '' || isPending) {
         return;
       }
-      setIsPending(true);
+      if (pendable) setIsPending(true);
       onOk();
       hide();
     };
@@ -48,5 +56,6 @@ const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 `;
 export default useModal;
