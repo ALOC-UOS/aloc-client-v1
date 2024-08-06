@@ -1,9 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import TopBar from '../../components/TopBar';
-import BlackScreen from '../../components/BlackScreen';
-import AlertModal from '../../components/Modal/AlertModal';
-import BuyModal from '../../components/Modal/BuyModal';
 import CoinIcon from '../../assets/coin-icon.svg';
 import DefaultProfile from '../../assets/default-profile.svg';
 import ChangeColor from '../../assets/change-color.svg';
@@ -12,6 +8,7 @@ import useModal from '../../hooks/useModal';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import { serverAPI } from '../../api/axios';
+import { PRICE } from '../../constants/Shop';
 import {
   ShopContainer,
   ContentContainer,
@@ -73,7 +70,7 @@ const Shop = () => {
       errorModal.show();
       return;
     }
-    if (user.coin <= 100) {
+    if (user.coin <= PRICE.CHANGE_COLOR_ITEM) {
       setErrorText('코인이 부족합니다 🥲');
       errorModal.show();
       return;
@@ -90,35 +87,31 @@ const Shop = () => {
   const changeColorSuccessModal = useModal({
     description: changeColorText,
     okText: '확인',
-    onOk: () => {},
   });
   const errorModal = useModal({
     description: errorText,
     okText: '확인',
-    onOk: () => {},
   });
   const adminModal = useModal({
     description: '구매 문의는 디스코드로 연락해주세요 😊',
-    okText: '확인',
-    onOk: () => {},
   });
   const DecorationItems = [
     {
       name: '초록 거북이',
       description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: '1,000',
+      price: PRICE.GREEN_TURETLE,
       type: 'GreenTurtle',
     },
     {
       name: '분홍 거북이',
       description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: '1,000',
+      price: PRICE.PINK_TURTLE,
       type: 'PinkTurtle',
     },
     {
       name: '파랑 파도',
       description: '바다로 떠나고 싶어지네요.',
-      price: '1,500',
+      price: PRICE.WAVE,
       type: 'Wave',
     },
   ];
@@ -127,7 +120,7 @@ const Shop = () => {
     {
       name: '컬러 변경권',
       description: '문제를 풀었을 때 색깔이 변경됩니다.',
-      price: '100',
+      price: PRICE.CHANGE_COLOR_ITEM,
     },
   ];
 

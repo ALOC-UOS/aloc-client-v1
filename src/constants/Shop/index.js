@@ -1,0 +1,6 @@
+export const PRICE = {
+  GREEN_TURETLE: 1000,
+  PINK_TURTLE: 1000,
+  WAVE: 1500,
+  CHANGE_COLOR_ITEM: 100,
+};
