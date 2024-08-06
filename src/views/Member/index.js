@@ -145,6 +145,7 @@ const Member = () => {
         setShowConfetti(true);
         setTimeout(() => {
           coinMessage.hide();
+          setShowConfetti(false);
         }, 2000);
       })
       .catch(error => {
