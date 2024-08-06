@@ -7,20 +7,22 @@ const useModal = ({
   description,
   cancelText,
   okText = '확인',
-  onOk,
+  onOk = () => {},
   closable,
-  pendable = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
-  const hide = () => setIsOpen(false);
+  const hide = () => {
+    setIsOpen(false);
+    setIsPending(false);
+  };
   const [isPending, setIsPending] = useState(false);
   const render = ({ children }) => {
     const handleOkButtonClick = () => {
       if (cancelText === '' || isPending) {
         return;
       }
-      if (pendable) setIsPending(true);
+      setIsPending(true);
       onOk();
       hide();
     };
@@ -56,6 +58,6 @@ const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 200;
 `;
 export default useModal;

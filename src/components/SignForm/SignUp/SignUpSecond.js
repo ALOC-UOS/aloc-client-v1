@@ -36,7 +36,6 @@ const SignUpSecond = ({ setFormType }) => {
     cancelText: '취소',
     okText: '확인',
     closable: true,
-    pendable: true,
     onOk: onSubmit,
   });
   const errorModal = useModal({
