@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from '../components/Modal/Modal';
-import BlackScreen from '../components/BlackScreen';
+import { BlackScreen } from '../components/BlackScreen';
 import styled from 'styled-components';
 const useModal = ({
   title,

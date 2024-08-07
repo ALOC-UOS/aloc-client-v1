@@ -14,4 +14,4 @@ const BlackScreenContainer = styled.div`
   pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
 `;
 
-export { BlackScreenContainer };
+export default { BlackScreenContainer };

@@ -1,8 +1,10 @@
-import React from 'react';
-import { BlackScreenContainer } from './style';
+import { useEffect } from 'react';
+import S from './style';
 
-const BlackScreen = ({ isOpen, onClick }) => {
-  return <BlackScreenContainer isOpen={isOpen} onClick={onClick} />;
+export const BlackScreen = ({ isOpen, onClick }) => {
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  }, [isOpen]);
+
+  return <S.BlackScreenContainer isOpen={isOpen} onClick={onClick} />;
 };
-
-export default BlackScreen;

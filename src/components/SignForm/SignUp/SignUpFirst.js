@@ -1,7 +1,7 @@
 import logo from '../../../assets/logo.svg';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
-import BlackScreen from '../../BlackScreen';
+import { BlackScreen } from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
 import {
   textReducer,

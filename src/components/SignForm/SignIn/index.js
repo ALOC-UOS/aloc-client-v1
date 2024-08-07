@@ -2,7 +2,7 @@ import logo from '../../../assets/logo.svg';
 import Button from '../../Buttons';
 import { useState } from 'react';
 import { useRef } from 'react';
-import BlackScreen from '../../BlackScreen';
+import { BlackScreen } from '../../BlackScreen';
 import AlertModal from '../../Modal/AlertModal';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';

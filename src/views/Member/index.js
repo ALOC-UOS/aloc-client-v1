@@ -29,7 +29,7 @@ import {
 } from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
-import BlackScreen from '../../components/BlackScreen';
+import { BlackScreen } from '../../components/BlackScreen';
 import DecorationCharacter from '../../components/Decorations/Character';
 import Bronze from '../../assets/bronze.png';
 import Silver from '../../assets/silver.png';
