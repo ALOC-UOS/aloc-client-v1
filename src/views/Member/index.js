@@ -230,13 +230,11 @@ const Member = () => {
                 <SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <ProfileBlurImage
-                    src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`}
+                    src={`https://avatars.githubusercontent.com/${member.githubId}`}
                   />
                 )}
                 <ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
-                  <ProfileImage
-                    src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`}
-                  />
+                  <ProfileImage src={`https://avatars.githubusercontent.com/${member.githubId}`} />
                 </ProfileLink>
               </ProfileBackgroundImage>
               <MemberWrapper>

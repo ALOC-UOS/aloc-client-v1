@@ -1,6 +1,5 @@
 import S from './SolvedUserList.styles';
 import { useProblem } from '../../../hooks/useProblem';
-import { useState } from 'react';
 
 export const SolvedUserListComponent = () => {
   const { solvedUserList } = useProblem();
@@ -16,7 +15,7 @@ export const SolvedUserListComponent = () => {
       {solvedUserList.map((user, index) => (
         <S.SolvedUserItem key={user.githubId} delay={index}>
           <S.ProfileImage
-            src={`https://avatars.githubusercontent.com/u/${user.profileNumber}?v=4`}
+            src={`https://avatars.githubusercontent.com/${user.githubId}`}
             onClick={() => moveToGithubSite(user.githubId)}
           />
         </S.SolvedUserItem>

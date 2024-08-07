@@ -101,9 +101,7 @@ const Home = () => {
     const currentMember = solvedMemberList[currentMemberIndex];
     return (
       <MemberWrapper isShow={isShowMember}>
-        <ProfileImage
-          src={`https://avatars.githubusercontent.com/u/${currentMember.profileNumber}`}
-        />
+        <ProfileImage src={`https://avatars.githubusercontent.com/${currentMember.githubId}`} />
         <Description>
           <MemberName>{currentMember.username}</MemberName>
           님이 문제를 풀었어요.

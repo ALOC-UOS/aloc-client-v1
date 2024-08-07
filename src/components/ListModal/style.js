@@ -82,43 +82,6 @@ const Divider = styled.div`
   margin: 8px 0 16px;
 `;
 
-const MemberList = styled.div`
-  max-height: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
-`;
-
-const MemberItem = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-`;
-
-const ProfileImage = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-`;
-
-const MemberWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const MemberName = styled.div`
-  color: ${props => props.theme.contentText};
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const MemberBaekjoonId = styled.div`
-  color: ${props => props.theme.subText};
-  font-size: 16px;
-`;
-
 const ProblemList = styled.div`
   max-height: 320px;
   overflow-y: auto;
@@ -180,12 +143,6 @@ export {
   Icon,
   CloseButton,
   Divider,
-  MemberList,
-  MemberItem,
-  ProfileImage,
-  MemberWrapper,
-  MemberName,
-  MemberBaekjoonId,
   ProblemList,
   ProblemItem,
   ProblemDifficulty,

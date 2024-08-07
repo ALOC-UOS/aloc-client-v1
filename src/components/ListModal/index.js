@@ -8,19 +8,12 @@ import {
   Icon,
   CloseButton,
   Divider,
-  MemberList,
-  MemberItem,
-  ProfileImage,
-  MemberWrapper,
-  MemberName,
-  MemberBaekjoonId,
   ProblemList,
   ProblemItem,
   ProblemDifficulty,
   ProblemName,
   Reloader,
 } from './style';
-import memberIcon from '../../assets/member-icon.svg';
 import problemIcon from '../../assets/problem-icon.svg';
 import closeButton from '../../assets/close-button.svg';
 import Bronze from '../../assets/bronze-small.png';
@@ -38,33 +31,6 @@ const ListModal = ({
   checkSolvedProblem,
 }) => {
   const { isLoggedIn } = useLoginState();
-  const renderMember = () => (
-    <>
-      <ListModalTopBar>
-        <Wrapper>
-          <ModalTitle>{modalTitle}</ModalTitle>
-          <IconWrapper>
-            <Icon src={memberIcon} /> {memberListData.length}명
-          </IconWrapper>
-        </Wrapper>
-        <CloseButton src={closeButton} onClick={closeModal} />
-      </ListModalTopBar>
-      <Divider />
-      <MemberList>
-        {memberListData.map(member => (
-          <MemberItem>
-            <ProfileImage
-              src={`https://avatars.githubusercontent.com/u/${member.profileNumber}?v=4`}
-            />
-            <MemberWrapper>
-              <MemberName>{member.username}</MemberName>
-              <MemberBaekjoonId>{member.baekjoonId}</MemberBaekjoonId>
-            </MemberWrapper>
-          </MemberItem>
-        ))}
-      </MemberList>
-    </>
-  );
 
   const renderProblem = () => (
     <>
@@ -109,7 +75,6 @@ const ListModal = ({
 
   return (
     <ListModalContainer isOpen={isOpen}>
-      {memberListData ? renderMember() : null}
       {problemListData ? renderProblem() : null}
     </ListModalContainer>
   );

@@ -87,7 +87,7 @@ const TopBar = ({ active }) => {
     return user ? (
       <UserImageWrapper>
         <UserImage
-          src={`https://avatars.githubusercontent.com/u/${user.profileNumber}?v=4`}
+          src={`https://avatars.githubusercontent.com/${user.githubId}`}
           onClick={userMenu.toggle}
         />
       </UserImageWrapper>
