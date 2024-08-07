@@ -5,11 +5,12 @@ import BronzeIcon from '../../../assets/bronze-small.png';
 import SilverIcon from '../../../assets/silver-small.png';
 import GoldIcon from '../../../assets/gold-small.png';
 import MemberIcon from '../../../assets/member-icon.svg';
+import ActiveMemberIcon from '../../../assets/active-member-icon.svg';
 import RightArrowIcon from '../../../assets/right-arrow-in-blue-circle.svg';
 import EmptyProblemIcon from '../../../assets/empty-problem-icon.svg';
 
 export const ProblemListComponent = () => {
-  const { problemList, fetchSolvedUserList } = useProblem();
+  const { problemList, fetchSolvedUserList, selectedProblemId } = useProblem();
   const getTierIcon = problem => {
     if (problem.difficulty < 6) {
       return BronzeIcon;
@@ -42,10 +43,18 @@ export const ProblemListComponent = () => {
                 </S.ProblemName>
               </HStack>
               <HStack style={{ alignItems: 'center' }}>
-                <S.Image src={MemberIcon} alt="member" width={16} height={16} />
-                <S.SolvingCount onClick={() => fetchSolvedUserList(problem.id)}>
-                  {problem.solvingCount}명
-                </S.SolvingCount>
+                <HStack
+                  style={{ alignItems: 'center', cursor: 'pointer' }}
+                  onClick={() => fetchSolvedUserList(problem.id)}
+                >
+                  <S.Image
+                    src={problem.id === selectedProblemId ? ActiveMemberIcon : MemberIcon}
+                    alt="member"
+                    width={16}
+                    height={16}
+                  />
+                  <S.SolvingCount>{problem.solvingCount}명</S.SolvingCount>
+                </HStack>
                 <S.Image
                   src={RightArrowIcon}
                   alt="right-arrow"

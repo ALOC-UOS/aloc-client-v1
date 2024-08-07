@@ -103,7 +103,6 @@ const SolvingCount = styled.p`
   font-size: 16px;
   font-weight: 500;
   margin-left: 4px;
-  cursor: pointer;
   &:hover {
     text-decoration: underline;
     font-weight: 600;

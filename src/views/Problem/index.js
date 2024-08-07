@@ -8,7 +8,7 @@ import { VStack } from '../../styles/Stack.styles';
 import { useProblem } from '../../hooks/useProblem';
 
 const Problem = () => {
-  const { selectedCourse, setSelectedCourse, solvedUserList } = useProblem();
+  const { selectedCourse, setSelectedCourse } = useProblem();
   return (
     <S.ProblemContainer>
       <TopBar />

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { atom, useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const API_URL_PREFIX = 'https://www.iflab.run/api2/';
 const CURRENT_SEASON = 2;
@@ -13,8 +13,9 @@ const solvedUserListAtom = atom([]);
 
 export const useProblem = () => {
   const [selectedCourse, setSelectedCourse] = useAtom(selectedCourseAtom);
-  const [algorithmList, setAlgorithmList] = useAtom(algorithmListAtom);
   const [selectedAlgorithm, setSelectedAlgorithm] = useAtom(selectedAlgorithmAtom);
+  const [selectedProblemId, setSelectedProblemId] = useState(null);
+  const [algorithmList, setAlgorithmList] = useAtom(algorithmListAtom);
   const [problemList, setProblemList] = useAtom(problemListAtom);
   const [solvedUserList, setSolvedUserList] = useAtom(solvedUserListAtom);
 
@@ -25,6 +26,8 @@ export const useProblem = () => {
   useEffect(() => {
     if (selectedAlgorithm && selectedCourse) {
       fetchProblemList();
+      setSelectedProblemId(null);
+      setSolvedUserList([]);
     }
   }, [selectedAlgorithm, selectedCourse]);
 
@@ -60,6 +63,7 @@ export const useProblem = () => {
       const url = `${API_URL_PREFIX}problem/${problemId}/solved-users`;
       const response = await axios.get(url);
       setSolvedUserList(response.data.result);
+      setSelectedProblemId(problemId);
     } catch (error) {
       console.error('해결한 사용자 목록을 가져오는 중 오류 발생:', error);
       return [];
@@ -75,5 +79,6 @@ export const useProblem = () => {
     setSelectedAlgorithm,
     solvedUserList,
     fetchSolvedUserList,
+    selectedProblemId,
   };
 };
