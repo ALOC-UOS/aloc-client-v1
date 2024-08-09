@@ -45,8 +45,8 @@ const SignUpSecond = ({ setFormType }) => {
   });
   return (
     <>
-      <alertModal.render />
-      <errorModal.render />
+      {alertModal.render()}
+      {errorModal.render()}
       <SignBox>
         <ImageWrapper>
           <LogoImage src={logo} />

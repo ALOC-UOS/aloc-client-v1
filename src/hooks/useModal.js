@@ -17,7 +17,7 @@ const useModal = ({
     setIsPending(false);
   };
   const [isPending, setIsPending] = useState(false);
-  const render = ({ children }) => {
+  const render = ({ children = null } = {}) => {
     const handleOkButtonClick = () => {
       if (cancelText === '' || isPending) {
         return;
@@ -26,9 +26,9 @@ const useModal = ({
       onOk();
       hide();
     };
-    if (!isOpen) return null;
+    // if (!isOpen) return null;
     return (
-      <ModalWrapper>
+      <ModalWrapper isOpen={isOpen}>
         <BlackScreen isOpen={isOpen} onClick={hide} />
         <Modal
           isOpen={isOpen}
@@ -59,5 +59,6 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 200;
+  ${props => !props.isOpen && 'opacity:0;pointer-events: none;'}
 `;
 export default useModal;
