@@ -163,24 +163,28 @@ const TopBar = ({ active }) => {
           <>
             {renderUserImage()}
             <div style={{ position: 'absolute', right: 0, margin: 10, marginTop: 64 }}>
-              <userMenu.render>
-                <Button
-                  onClick={() => {
-                    chagePasswordModal.show();
-                  }}
-                >
-                  비빌번호 변경
-                </Button>
-                <Button
-                  color={'red'}
-                  onClick={() => {
-                    userMenu.hide();
-                    logoutModal.show();
-                  }}
-                >
-                  로그아웃
-                </Button>
-              </userMenu.render>
+              {userMenu.render({
+                children: (
+                  <>
+                    <Button
+                      onClick={() => {
+                        chagePasswordModal.show();
+                      }}
+                    >
+                      비빌번호 변경
+                    </Button>
+                    <Button
+                      color={'red'}
+                      onClick={() => {
+                        userMenu.hide();
+                        logoutModal.show();
+                      }}
+                    >
+                      로그아웃
+                    </Button>
+                  </>
+                ),
+              })}
             </div>
           </>
         ) : (
