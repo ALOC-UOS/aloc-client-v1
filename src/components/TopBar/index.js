@@ -171,7 +171,7 @@ const TopBar = ({ active }) => {
                         chagePasswordModal.show();
                       }}
                     >
-                      비빌번호 변경
+                      비밀번호 변경
                     </Button>
                     <Button
                       color={'red'}
