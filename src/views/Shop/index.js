@@ -126,10 +126,10 @@ const Shop = () => {
 
   return (
     <ShopContainer>
-      <buyModal.render />
-      <errorModal.render />
-      <changeColorSuccessModal.render />
-      <adminModal.render />
+      {buyModal.render()}
+      {errorModal.render()}
+      {changeColorSuccessModal.render()}
+      {adminModal.render()}
       <TopBar />
       <ContentContainer>
         <ItemContainer>

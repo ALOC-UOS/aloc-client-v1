@@ -8,8 +8,8 @@ const useContainer = () => {
   const toggle = () => {
     setIsOpen(prev => !prev);
   };
-  const render = ({ children }) => {
-    return isOpen && <CardWrapper>{children}</CardWrapper>;
+  const render = ({ children = null } = {}) => {
+    return <CardWrapper isOpen={isOpen}>{children}</CardWrapper>;
   };
   return { show, hide, toggle, render };
 };
@@ -22,4 +22,17 @@ const CardWrapper = styled.div`
   border-radius: 16px;
   background-color: ${props => props.theme.foreground};
   padding: 10px;
+  opacity: 0;
+  box-shadow: 0 8px 16px #408cff40;
+  ${props =>
+    props.isOpen
+      ? css`
+          opacity: 1;
+          filter: blur(0px);
+          pointer-events: auto;
+        `
+      : css`
+          opacity: 0;
+          pointer-events: none;
+        `}
 `;

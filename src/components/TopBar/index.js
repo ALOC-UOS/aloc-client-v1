@@ -133,12 +133,14 @@ const TopBar = ({ active }) => {
           <div style={{ fontSize: 15, fontWeight: 400 }}> ✅&nbsp;&nbsp;&nbsp;{messageText}</div>
         ),
       })}
-      <logoutModal.render />
-      <chagePasswordModal.render>
-        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <Input ref={nextPasswordRef} placeholder={'변경할 비밀번호'} />
-        </div>
-      </chagePasswordModal.render>
+      {logoutModal.render()}
+      {chagePasswordModal.render({
+        children: (
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <Input ref={nextPasswordRef} placeholder={'변경할 비밀번호'} />
+          </div>
+        ),
+      })}
       <TopBarLeft onClick={() => navigate('/')}>
         <ImageWrapper>
           <LogoImage src={logo} />
@@ -161,24 +163,28 @@ const TopBar = ({ active }) => {
           <>
             {renderUserImage()}
             <div style={{ position: 'absolute', right: 0, margin: 10, marginTop: 64 }}>
-              <userMenu.render>
-                <Button
-                  onClick={() => {
-                    chagePasswordModal.show();
-                  }}
-                >
-                  비빌번호 변경
-                </Button>
-                <Button
-                  color={'red'}
-                  onClick={() => {
-                    userMenu.hide();
-                    logoutModal.show();
-                  }}
-                >
-                  로그아웃
-                </Button>
-              </userMenu.render>
+              {userMenu.render({
+                children: (
+                  <>
+                    <Button
+                      onClick={() => {
+                        chagePasswordModal.show();
+                      }}
+                    >
+                      비빌번호 변경
+                    </Button>
+                    <Button
+                      color={'red'}
+                      onClick={() => {
+                        userMenu.hide();
+                        logoutModal.show();
+                      }}
+                    >
+                      로그아웃
+                    </Button>
+                  </>
+                ),
+              })}
             </div>
           </>
         ) : (
