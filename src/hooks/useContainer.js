@@ -6,7 +6,6 @@ const useContainer = () => {
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
   const toggle = () => {
-    console.log(isOpen);
     setIsOpen(prev => !prev);
   };
   const render = ({ children }) => {
