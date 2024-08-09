@@ -5,6 +5,12 @@ export const Message = () => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
+  const toast = () => {
+    show();
+    setTimeout(() => {
+      hide();
+    }, 2000);
+  };
 
   const render = ({ icon = '', children }) => {
     return (
@@ -15,7 +21,7 @@ export const Message = () => {
     );
   };
 
-  return { render, show, hide };
+  return { render, show, hide, toast };
 };
 
 /*

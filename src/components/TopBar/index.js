@@ -1,7 +1,8 @@
 import logo from '../../assets/logo.svg';
 import typo from '../../assets/typo.svg';
 import React, { useEffect, useState } from 'react';
-import { redirectDocument, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Input from '../Input/Input';
 import {
   TopBarContainer,
   TopBarLeft,
@@ -20,6 +21,9 @@ import DefaultProfile from '../../assets/default-profile.svg';
 import useContainer from '../../hooks/useContainer';
 import Button from '../Buttons';
 import useModal from '../../hooks/useModal';
+import { useRef } from 'react';
+import { serverAPI } from '../../api/axios';
+import { Message } from '../Message';
 
 const TopBarItems = [
   {
@@ -42,6 +46,8 @@ const TopBar = ({ active }) => {
   const { isLoggedIn, initLoginStatus } = useLoginState();
   const { user } = useUserState();
   const navigate = useNavigate();
+  const nextPasswordRef = useRef();
+  const [messageText, setMessageText] = useState('');
 
   const userMenu = useContainer();
   const logoutModal = useModal({
@@ -53,6 +59,28 @@ const TopBar = ({ active }) => {
       initLoginStatus();
     },
   });
+  const chagePasswordModal = useModal({
+    cancelText: '취소',
+    closable: true,
+    onOk: () => {
+      serverAPI
+        .patch('/user/reset-password', { password: nextPasswordRef.current.value })
+        .then(response => {
+          setMessageText(response.data.result);
+          chagePasswordModal.setIsPending(false);
+          passwordChangeMessage.toast();
+        })
+        .catch(error => {
+          if (error.data) {
+            setMessageText(error.data.result);
+            passwordChangeMessage.toast();
+          } else {
+            console.log(error);
+          }
+        });
+    },
+  });
+  const passwordChangeMessage = Message();
 
   useEffect(() => {
     const path = window.location.pathname;
@@ -100,7 +128,17 @@ const TopBar = ({ active }) => {
 
   return (
     <TopBarContainer isScroll={isScroll}>
+      {passwordChangeMessage.render({
+        children: (
+          <div style={{ fontSize: 15, fontWeight: 400 }}> ✅&nbsp;&nbsp;&nbsp;{messageText}</div>
+        ),
+      })}
       <logoutModal.render />
+      <chagePasswordModal.render>
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Input ref={nextPasswordRef} placeholder={'변경할 비밀번호'} />
+        </div>
+      </chagePasswordModal.render>
       <TopBarLeft onClick={() => navigate('/')}>
         <ImageWrapper>
           <LogoImage src={logo} />
@@ -125,6 +163,13 @@ const TopBar = ({ active }) => {
             <div style={{ position: 'absolute', right: 0, margin: 10, marginTop: 64 }}>
               <userMenu.render>
                 <Button
+                  onClick={() => {
+                    chagePasswordModal.show();
+                  }}
+                >
+                  비빌번호 변경
+                </Button>
+                <Button
                   color={'red'}
                   onClick={() => {
                     userMenu.hide();
@@ -146,4 +191,4 @@ const TopBar = ({ active }) => {
   );
 };
 
-export default TopBar;
+export default React.memo(TopBar);
