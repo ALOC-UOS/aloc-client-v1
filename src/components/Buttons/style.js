@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const Button = styled.button`
+  letter-spacing: -1px;
   color: ${props => props.theme.titleText};
   font-size: 16px;
   font-weight: 500;
@@ -8,7 +9,7 @@ const Button = styled.button`
   min-width: 140px;
   width: 100%;
   padding: 16px 0;
-  background-color: ${props => props.theme.background};
+  background-color: ${props => props.theme.foreground};
 
   border: none;
   border-radius: 12px;
