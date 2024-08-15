@@ -33,6 +33,5 @@ const CardWrapper = styled.div`
         `
       : css`
           opacity: 0;
-          pointer-events: none;
         `}
 `;
