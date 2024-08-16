@@ -89,6 +89,8 @@ const TopBar = ({ active }) => {
           setChangePasswordFocus(false);
           nextPasswordRef.current.value = '';
           checkedNextPasswordRef.current.value = '';
+          nextPasswordRef.current.placeholder = '변경할 비밀번호';
+          checkedNextPasswordRef.current.placeholder = '비밀번호 재입력';
           changePasswordModal.setIsPending(false);
           passwordChangeMessage.toast();
         })
