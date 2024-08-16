@@ -48,8 +48,34 @@ import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
+import { HStack } from '../../styles/Stack.styles';
 
 import { Message } from '../../components/Message';
+
+const MessageText = ({ solvedStatus, rank }) => {
+  switch (solvedStatus) {
+    case 'ALREADY_SOLVED':
+      return (
+        <HStack style={{ gap: 4, fontSize: 15, fontWeight: 400 }}>
+          <div>✅</div>
+          <div>이미 문제를 풀었어요!</div>
+        </HStack>
+      );
+    case 'SOLVED':
+      return (
+        <div style={{ fontSize: 15, fontWeight: 400 }}>
+          <span style={{ color: '#408cff' }}>{rank}등</span>으로 문제를 풀었어요!
+        </div>
+      );
+    default:
+      return (
+        <HStack style={{ gap: 4, fontSize: 15, fontWeight: 400 }}>
+          <div>🤔</div>
+          <div>아직 문제를 풀지 않았어요!</div>
+        </HStack>
+      );
+  }
+};
 
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,8 +89,10 @@ const Member = () => {
   const { isLoggedIn } = useLoginState();
   const [memberDataPending, setMemberDataPending] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const loaddingMessage = Message();
+  const loadingMessage = Message();
   const coinMessage = Message();
+  const [solvedStatus, setSolvedStatus] = useState('');
+  const [rank, setRank] = useState(0);
 
   useEffect(() => {
     loadMemberData();
@@ -135,18 +163,20 @@ const Member = () => {
   }
 
   const checkTodaySolvedProblem = () => {
-    loaddingMessage.show();
+    loadingMessage.show();
     serverAPI
       .post('/today-problem/solved', {}, { timeout: 300000 })
-      .then(() => {
-        loadMemberData();
-        loaddingMessage.hide();
+      .then(res => {
+        setSolvedStatus(res.data.result.solvedStatus);
+        if (res.data.result.solvedStatus === 'SOLVED') {
+          setRank(res.data.result.place);
+          loadMemberData();
+          setShowConfetti(true);
+          setTimeout(() => setShowConfetti(false), 2000);
+        }
+        loadingMessage.hide();
         coinMessage.show();
-        setShowConfetti(true);
-        setTimeout(() => {
-          coinMessage.hide();
-          setShowConfetti(false);
-        }, 2000);
+        setTimeout(() => coinMessage.hide(), 2000);
       })
       .catch(error => {
         console.error(error, 'API 요청 중 오류 발생:');
@@ -169,7 +199,7 @@ const Member = () => {
   return (
     <MemberContainer>
       <TopBar active={true} />
-      {loaddingMessage.render({
+      {loadingMessage.render({
         icon: loadingIconWithBg,
         children: (
           <span
@@ -190,7 +220,7 @@ const Member = () => {
               fontWeight: 500,
             }}
           >
-            <span style={{ color: '#408cff' }}>1등</span>으로 문제를 풀었어요!
+            <MessageText solvedStatus={solvedStatus} rank={rank} />
           </span>
         ),
       })}
