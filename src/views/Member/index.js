@@ -48,6 +48,7 @@ import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
+import { HStack } from '../../styles/Stack.styles';
 
 import { Message } from '../../components/Message';
 
@@ -55,9 +56,10 @@ const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
     case 'ALREADY_SOLVED':
       return (
-        <div style={{ fontSize: 15, fontWeight: 400 }}>
-          ✅&nbsp;&nbsp;&nbsp;이미 문제를 풀었어요!
-        </div>
+        <HStack style={{ gap: 4, fontSize: 15, fontWeight: 400 }}>
+          <div>✅</div>
+          <div>이미 문제를 풀었어요!</div>
+        </HStack>
       );
     case 'SOLVED':
       return (
@@ -67,9 +69,10 @@ const MessageText = ({ solvedStatus, rank }) => {
       );
     default:
       return (
-        <div style={{ fontSize: 15, fontWeight: 400 }}>
-          🤔&nbsp;&nbsp;&nbsp;아직 문제를 풀지 않았어요!
-        </div>
+        <HStack style={{ gap: 4, fontSize: 15, fontWeight: 400 }}>
+          <div>🤔</div>
+          <div>아직 문제를 풀지 않았어요!</div>
+        </HStack>
       );
   }
 };
