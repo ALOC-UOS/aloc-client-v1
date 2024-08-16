@@ -47,6 +47,9 @@ const TopBar = ({ active }) => {
   const { user } = useUserState();
   const navigate = useNavigate();
   const nextPasswordRef = useRef();
+  const checkedNextPasswordRef = useRef();
+  const [changePasswordFocus, setChangePasswordFocus] = useState(false);
+  const [checkedChangePasswordFocus, setCheckedChangePasswordFocus] = useState(false);
   const [messageText, setMessageText] = useState('');
 
   const userMenu = useContainer();
@@ -59,15 +62,34 @@ const TopBar = ({ active }) => {
       initLoginStatus();
     },
   });
-  const chagePasswordModal = useModal({
+  const changePasswordModal = useModal({
     cancelText: '취소',
     closable: true,
     onOk: () => {
+      //비밀번호 검증
+      if (nextPasswordRef.current.value.length <= 3) {
+        nextPasswordRef.current.focus();
+        nextPasswordRef.current.value = '';
+        checkedNextPasswordRef.current.value = '';
+        nextPasswordRef.current.placeholder = '비밀번호는 4글자 이상이어야 합니다.';
+        setChangePasswordFocus(true);
+        return false;
+      }
+      if (nextPasswordRef.current.value !== checkedNextPasswordRef.current.value) {
+        checkedNextPasswordRef.current.focus();
+        checkedNextPasswordRef.current.value = '';
+        checkedNextPasswordRef.current.placeholder = '비밀번호가 일치하지 않습니다.';
+        setCheckedChangePasswordFocus(true);
+        return false;
+      }
       serverAPI
         .patch('/user/reset-password', { password: nextPasswordRef.current.value })
         .then(response => {
           setMessageText(response.data.result);
-          chagePasswordModal.setIsPending(false);
+          setChangePasswordFocus(false);
+          nextPasswordRef.current.value = '';
+          checkedNextPasswordRef.current.value = '';
+          changePasswordModal.setIsPending(false);
           passwordChangeMessage.toast();
         })
         .catch(error => {
@@ -134,10 +156,21 @@ const TopBar = ({ active }) => {
         ),
       })}
       {logoutModal.render()}
-      {chagePasswordModal.render({
+      {changePasswordModal.render({
         children: (
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <Input ref={nextPasswordRef} placeholder={'변경할 비밀번호'} />
+            <Input
+              type={'password'}
+              ref={nextPasswordRef}
+              isFocused={changePasswordFocus}
+              placeholder={'변경할 비밀번호'}
+            />
+            <Input
+              type={'password'}
+              ref={checkedNextPasswordRef}
+              isFocused={checkedChangePasswordFocus}
+              placeholder={'비밀번호 재입력'}
+            />
           </div>
         ),
       })}
@@ -168,7 +201,7 @@ const TopBar = ({ active }) => {
                   <>
                     <Button
                       onClick={() => {
-                        chagePasswordModal.show();
+                        changePasswordModal.show();
                       }}
                     >
                       비밀번호 변경

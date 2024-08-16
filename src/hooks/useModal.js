@@ -23,7 +23,11 @@ const useModal = ({
         return;
       }
       setIsPending(true);
-      onOk();
+      //onOk return 값을 false로 넘기면 모달 hide X
+      if (onOk() === false) {
+        setIsPending(false);
+        return;
+      }
       hide();
     };
     // if (!isOpen) return null;

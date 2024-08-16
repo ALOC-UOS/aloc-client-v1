@@ -12,6 +12,7 @@ const InputBox = styled.input`
   height: 40px;
 
   border: ${props => (props.theme.mode === 'light' ? '1px solid #f0f1f5' : '1px solid #2c3038')};
+  border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
   outline: none;
   color: ${props => props.theme.contentText};
   font-size: 14px;
