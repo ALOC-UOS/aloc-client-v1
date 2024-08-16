@@ -227,6 +227,7 @@ const Member = () => {
                 degree={member.degree}
               >
                 {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
+                {member.baekjoonId === 'jojongjojong' && <DecorationCharacter type={'Wave'} />}
                 <SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <ProfileBlurImage
