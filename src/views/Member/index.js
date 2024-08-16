@@ -89,7 +89,7 @@ const Member = () => {
   const { isLoggedIn } = useLoginState();
   const [memberDataPending, setMemberDataPending] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const loaddingMessage = Message();
+  const loadingMessage = Message();
   const coinMessage = Message();
   const [solvedStatus, setSolvedStatus] = useState('');
   const [rank, setRank] = useState(0);
@@ -163,7 +163,7 @@ const Member = () => {
   }
 
   const checkTodaySolvedProblem = () => {
-    loaddingMessage.show();
+    loadingMessage.show();
     serverAPI
       .post('/today-problem/solved', {}, { timeout: 300000 })
       .then(res => {
@@ -174,7 +174,7 @@ const Member = () => {
           setShowConfetti(true);
           setTimeout(() => setShowConfetti(false), 2000);
         }
-        loaddingMessage.hide();
+        loadingMessage.hide();
         coinMessage.show();
         setTimeout(() => coinMessage.hide(), 2000);
       })
@@ -199,7 +199,7 @@ const Member = () => {
   return (
     <MemberContainer>
       <TopBar active={true} />
-      {loaddingMessage.render({
+      {loadingMessage.render({
         icon: loadingIconWithBg,
         children: (
           <span
