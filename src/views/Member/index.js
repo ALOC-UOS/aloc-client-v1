@@ -172,15 +172,11 @@ const Member = () => {
           setRank(res.data.result.place);
           loadMemberData();
           setShowConfetti(true);
-          setTimeout(() => {
-            setShowConfetti(false);
-          }, 2000);
+          setTimeout(() => setShowConfetti(false), 2000);
         }
         loaddingMessage.hide();
         coinMessage.show();
-        setTimeout(() => {
-          coinMessage.hide();
-        }, 2000);
+        setTimeout(() => coinMessage.hide(), 2000);
       })
       .catch(error => {
         console.error(error, 'API 요청 중 오류 발생:');
