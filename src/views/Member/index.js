@@ -51,6 +51,29 @@ import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
 
 import { Message } from '../../components/Message';
 
+const MessageText = ({ solvedStatus, rank }) => {
+  switch (solvedStatus) {
+    case 'ALREADY_SOLVED':
+      return (
+        <div style={{ fontSize: 15, fontWeight: 400 }}>
+          ✅&nbsp;&nbsp;&nbsp;이미 문제를 풀었어요!
+        </div>
+      );
+    case 'SOLVED':
+      return (
+        <div style={{ fontSize: 15, fontWeight: 400 }}>
+          <span style={{ color: '#408cff' }}>{rank}등</span>으로 문제를 풀었어요!
+        </div>
+      );
+    default:
+      return (
+        <div style={{ fontSize: 15, fontWeight: 400 }}>
+          🤔&nbsp;&nbsp;&nbsp;아직 문제를 풀지 않았어요!
+        </div>
+      );
+  }
+};
+
 const Member = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoading, setIsShowLoading] = useState(false);
@@ -65,6 +88,8 @@ const Member = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const loaddingMessage = Message();
   const coinMessage = Message();
+  const [solvedStatus, setSolvedStatus] = useState('');
+  const [rank, setRank] = useState(0);
 
   useEffect(() => {
     loadMemberData();
@@ -138,14 +163,20 @@ const Member = () => {
     loaddingMessage.show();
     serverAPI
       .post('/today-problem/solved', {}, { timeout: 300000 })
-      .then(() => {
-        loadMemberData();
+      .then(res => {
+        setSolvedStatus(res.data.result.solvedStatus);
+        if (res.data.result.solvedStatus === 'SOLVED') {
+          setRank(res.data.result.place);
+          loadMemberData();
+          setShowConfetti(true);
+          setTimeout(() => {
+            setShowConfetti(false);
+          }, 2000);
+        }
         loaddingMessage.hide();
         coinMessage.show();
-        setShowConfetti(true);
         setTimeout(() => {
           coinMessage.hide();
-          setShowConfetti(false);
         }, 2000);
       })
       .catch(error => {
@@ -190,7 +221,7 @@ const Member = () => {
               fontWeight: 500,
             }}
           >
-            <span style={{ color: '#408cff' }}>1등</span>으로 문제를 풀었어요!
+            <MessageText solvedStatus={solvedStatus} rank={rank} />
           </span>
         ),
       })}
