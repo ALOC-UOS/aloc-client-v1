@@ -81,7 +81,6 @@ const DecorationCharacter = ({ type, size }) => {
 
   const renderItem = (item, index) => {
     if (!item) return null;
-    console.log(item);
     const itemStyle =
       size === 'small'
         ? {
