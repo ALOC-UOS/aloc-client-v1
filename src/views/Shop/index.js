@@ -99,7 +99,7 @@ const Shop = () => {
     {
       name: '초록 거북이',
       description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: PRICE.GREEN_TURETLE,
+      price: PRICE.GREEN_TURTLE,
       type: 'GreenTurtle',
     },
     {
@@ -113,6 +113,12 @@ const Shop = () => {
       description: '바다로 떠나고 싶어지네요.',
       price: PRICE.WAVE,
       type: 'Wave',
+    },
+    {
+      name: '비눗방울',
+      description: '뉴진스의 비눗방울이 둥실둥실 떠다닙니다.',
+      price: PRICE.BUBBLE,
+      type: 'Bubble',
     },
   ];
 

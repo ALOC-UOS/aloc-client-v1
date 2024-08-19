@@ -13,4 +13,22 @@ const DecorationItem = styled.img`
   pointer-events: none;
 `;
 
-export default DecorationItem;
+const BubbleItem = styled(DecorationItem)`
+  opacity: 0.8;
+  animation: float 4s ease-in-out infinite;
+  animation-delay: ${props => props.delay}ms;
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-16px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+`;
+
+export { DecorationItem, BubbleItem };
