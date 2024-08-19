@@ -258,7 +258,6 @@ const Member = () => {
               >
                 {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
                 {member.baekjoonId === 'jojongjojong' && <DecorationCharacter type={'Wave'} />}
-                {member.baekjoonId === 'bread4614' && <DecorationCharacter type={'Bubble'} />}
                 <SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <ProfileBlurImage

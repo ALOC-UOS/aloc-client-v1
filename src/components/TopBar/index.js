@@ -44,6 +44,7 @@ const TopBar = ({ active }) => {
   const [selectedItem, setSelectedItem] = useState(window.location.pathname);
   const [isScroll, setIsScroll] = useState(false);
   const { isLoggedIn, initLoginStatus } = useLoginState();
+  const [shopUpdated, setShopUpdated] = useState(true);
   const { user } = useUserState();
   const navigate = useNavigate();
   const nextPasswordRef = useRef();
@@ -107,6 +108,16 @@ const TopBar = ({ active }) => {
   const passwordChangeMessage = Message();
 
   useEffect(() => {
+    const shopChecked = localStorage.getItem('shopChecked');
+    if (shopChecked === null) {
+      // shopChecked 항목이 없으면 false로 초기화
+      localStorage.setItem('shopChecked', 'false');
+      setShopUpdated(true);
+    }
+    setShopUpdated(shopChecked === 'false');
+  }, []);
+
+  useEffect(() => {
     const path = window.location.pathname;
     if (path === '/') {
       setSelectedItem('/');
@@ -132,6 +143,10 @@ const TopBar = ({ active }) => {
   function goRoute(route) {
     if (route === selectedItem) return;
     window.scrollTo(0, 0);
+    if (route === '/shop') {
+      localStorage.setItem('shopChecked', 'true');
+      setShopUpdated(false);
+    }
     navigate(route);
   }
 
@@ -192,6 +207,9 @@ const TopBar = ({ active }) => {
             onClick={() => goRoute(item.route)}
           >
             {item.name}
+            {item.route === '/shop' && shopUpdated && (
+              <span style={{ color: 'red', marginLeft: '5px' }}>•</span>
+            )}
           </TopBarItem>
         ))}
         {isLoggedIn ? (
