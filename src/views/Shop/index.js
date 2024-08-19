@@ -116,7 +116,7 @@ const Shop = () => {
     },
     {
       name: '비눗방울',
-      description: '뉴진스의 비눗방울이 둥실둥실 떠다닙니다.',
+      description: '비눗방울이 두둥실 떠다닙니다.',
       price: PRICE.BUBBLE,
       type: 'Bubble',
     },
