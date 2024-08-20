@@ -56,7 +56,6 @@ const Home = () => {
 
     return () => clearInterval(timer);
   }, [solvedMemberList]);
-  console.log(user?.course);
   const loadProblem = async () => {
     try {
       const response = user
