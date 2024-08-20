@@ -36,7 +36,7 @@ const Home = () => {
   const { user } = useUserState();
   useEffect(() => {
     loadProblem();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (problemData.id) {
@@ -56,7 +56,7 @@ const Home = () => {
 
     return () => clearInterval(timer);
   }, [solvedMemberList]);
-  console.log(user);
+  console.log(user?.course);
   const loadProblem = async () => {
     try {
       const response = user
