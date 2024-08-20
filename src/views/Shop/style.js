@@ -71,14 +71,15 @@ const ItemImg = styled.img``;
 
 const ItemInfo = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   padding: 8px 12px 12px;
 `;
 const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 3fr 1fr;
 `;
 
 const ItemName = styled.div`
