@@ -8,6 +8,7 @@ import Member from './views/Member';
 import Shop from './views/Shop';
 import Setting from './views/Setting';
 import Login from './views/Login';
+import Study from './views/Study';
 import { setupInterceptors } from './api/axios';
 import useLoginState from './hooks/useLoginState';
 import useUserState from './hooks/useUserState';
@@ -74,6 +75,7 @@ function App() {
           <Route path="/member" element={<Member />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/setting" element={<Setting />} />
+          <Route path="/study" element={<Study />} />
         </Routes>
       </Router>
     </ThemeProvider>

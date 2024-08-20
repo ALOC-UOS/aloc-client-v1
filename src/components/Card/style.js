@@ -43,4 +43,23 @@ const CardTitle = styled.div`
   font-weight: bold;
 `;
 
-export { CardContainer, CardWrapper, CardTop, CardLabel, CardTitle };
+const StudyButton = styled.button`
+  width: 100%;
+  height: 52px;
+  border: none;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #408cff 0%, #8e9aff 100%);
+  cursor: pointer;
+
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+`;
+
+export { CardContainer, CardWrapper, CardTop, CardLabel, CardTitle, StudyButton };
