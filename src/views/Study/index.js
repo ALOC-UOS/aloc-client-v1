@@ -2,10 +2,11 @@ import styled, { useTheme } from 'styled-components';
 import { useState } from 'react';
 import TopContainer from './components/TopContainer';
 import MemberItem from './components/MemberItem';
+import Button from '../../components/Buttons';
 import io from 'socket.io-client';
 
 const Study = () => {
-  const [isReadyToStudy, setIsReadyToStudy] = useState(false);
+  const [isReadyToStudy, setIsReadyToStudy] = useState(true);
   const theme = useTheme();
   const TOTAL_MEMBER = 12;
   const NOW_MEMVER = 6;
@@ -33,7 +34,7 @@ const Study = () => {
   };
 
   return (
-    <div style={{ padding: 50 }}>
+    <div style={{ display: 'flex', padding: 50, flexDirection: 'column', gap: 20 }}>
       <StudyContainer>
         <div style={{ display: 'flex', flexBasis: '50%', flexDirection: 'column' }}>
           <TopContainer total_member={TOTAL_MEMBER} current_member={NOW_MEMVER} />
@@ -45,6 +46,14 @@ const Study = () => {
         </div>
         <div style={{ flexBasis: '50%', background: theme.foreground, borderRadius: 24 }}></div>
       </StudyContainer>
+      <Button
+        color={'gradationBlue'}
+        buttonType={!isReadyToStudy && 'disabled'}
+        size="big"
+        onClick={() => console.log('click')}
+      >
+        참여하기
+      </Button>
     </div>
   );
 };
@@ -60,7 +69,7 @@ const MemberContainer = styled.div`
 const StudyContainer = styled.div`
   display: flex;
   flex-direction: row;
-  height: 80vh;
+  height: 83vh;
   background: #fff;
   border-radius: 24px;
   padding: 20px;
