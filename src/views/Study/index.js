@@ -1,15 +1,12 @@
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { useState } from 'react';
-import TopContainer from './components/TopContainer';
-import MemberItem from './components/MemberItem';
+import StudyMember from './components/StudyMember';
+import StudyChat from './components/StudyChat';
 import Button from '../../components/Buttons';
 import io from 'socket.io-client';
 
 const Study = () => {
   const [isReadyToStudy, setIsReadyToStudy] = useState(true);
-  const theme = useTheme();
-  const TOTAL_MEMBER = 12;
-  const NOW_MEMVER = 6;
   // const [data, setData] = useState('');
   // const socket = io.connect('ws://www.iflab.run:8080/ws/chat');
   // console.log(!socket.connected);
@@ -21,51 +18,23 @@ const Study = () => {
   //   });
   // });
 
-  const renderDummy = () => {
-    let temp = [];
-    for (let i = 0; i < 4; i += 1) {
-      temp.push(
-        <MemberItem
-          member={{ githubId: 'jongbin26', username: '조종빈', studentId: 20, rank: 40 }}
-        />
-      );
-    }
-    return temp.map(el => el);
+  const studyStartButtonProps = {
+    color: 'gradationBlue',
+    buttonType: !isReadyToStudy && 'disabled',
+    size: 'big',
+    onClick: () => console.log('click'),
   };
 
   return (
     <div style={{ display: 'flex', padding: 50, flexDirection: 'column', gap: 20 }}>
       <StudyContainer>
-        <div style={{ display: 'flex', flexBasis: '50%', flexDirection: 'column' }}>
-          <TopContainer total_member={TOTAL_MEMBER} current_member={NOW_MEMVER} />
-          <div
-            style={{ display: 'flex', flexBasis: '95%', flexDirection: 'row', paddingRight: 20 }}
-          >
-            <MemberContainer>{renderDummy()}</MemberContainer>
-          </div>
-        </div>
-        <div style={{ flexBasis: '50%', background: theme.foreground, borderRadius: 24 }}></div>
+        <StudyMember />
+        <StudyChat />
       </StudyContainer>
-      <Button
-        color={'gradationBlue'}
-        buttonType={!isReadyToStudy && 'disabled'}
-        size="big"
-        onClick={() => console.log('click')}
-      >
-        참여하기
-      </Button>
+      <Button {...studyStartButtonProps}>참여하기</Button>
     </div>
   );
 };
-
-const MemberContainer = styled.div`
-  flex-wrap: wrap;
-  display: flex;
-  padding: 20px;
-  justify-content: flex-start;
-  align-content: flex-start;
-  gap: 30px;
-`;
 const StudyContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -74,5 +43,4 @@ const StudyContainer = styled.div`
   border-radius: 24px;
   padding: 20px;
 `;
-
 export default Study;

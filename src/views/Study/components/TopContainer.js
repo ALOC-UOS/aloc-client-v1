@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import memberIcon from '../../../assets/member-icon.svg';
 
-const TopContainer = ({ total_member, current_member }) => {
+const TopContainer = () => {
   const theme = useTheme();
+  const current_member = 6;
+  const total_member = 12;
   return (
     <Container>
       <Icon src={memberIcon} />

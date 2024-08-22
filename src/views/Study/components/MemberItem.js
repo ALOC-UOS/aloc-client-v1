@@ -85,13 +85,14 @@ const MemberImage = styled.img`
   border-radius: 40px;
 `;
 const MemberItemContainer = styled.div`
-  width: 250px;
   height: 100px;
+  flex-basis: 30%;
   padding: 10px;
   border-radius: 50px;
   background: ${props => props.theme.primary};
-  @media screen and (max-width: 1500px) {
-    width: 280px;
+  @media screen and (max-width: 1750px) {
+    flex-basis: 45%;
+    min-width: 220px;
   }
 
   display: flex;
