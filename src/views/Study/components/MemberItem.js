@@ -14,17 +14,10 @@ const MemberItem = ({ member }) => {
     <MemberItemContainer>
       <div style={{ display: 'flex', lexDirection: 'row', gap: 10 }}>
         <MemberImage src={`https://avatars.githubusercontent.com/${member.githubId}`} />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignContent: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <MemberText>
           <p style={{ color: '#98BFFA', fontWeight: 500 }}>{member.studentId}학번</p>
           <p style={{ color: '#ffffff', fontSize: 20, fontWeight: 500 }}>{member.username}</p>
-        </div>
+        </MemberText>
       </div>
       <RankContainer>
         <MemberRank
@@ -58,6 +51,7 @@ const MemberItem = ({ member }) => {
 
 export default MemberItem;
 const RankContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -83,6 +77,13 @@ const MemberImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 40px;
+`;
+
+const MemberText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const MemberItemContainer = styled.div`
   height: 100px;
