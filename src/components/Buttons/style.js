@@ -29,25 +29,34 @@ const Button = styled.button`
     filter: brightness(0.8);
   }`}
 
- ${props =>
-    props.color === 'white' &&
-    css`
-      border: 1px #a9adb9 solid;
-      background-color: #fff;
-      transition: none;
-    `}
-  ${props =>
-    props.color === 'blue' &&
-    css`
-      color: #ffffff;
-      background-color: #408cff;
-    `}
-  ${props =>
-    props.color === 'red' &&
-    css`
-      color: #ffffff;
-      background-color: #ff5a5f;
-    `}
+  ${props => {
+    switch (props.color) {
+      case 'white':
+        return css`
+          border: 1px #a9adb9 solid;
+          background-color: #fff;
+          transition: none;
+         }`;
+      case 'blue':
+        return css`
+          color: #ffffff;
+          background-color: #408cff;
+        `;
+      case 'red':
+        return css`
+          color: #ffffff;
+          background-color: #ff5a5f;
+        `;
+      case 'gradationBlue':
+        return css`
+          color: #ffffff;
+          background: linear-gradient(180deg, #408cff 0%, #8e9aff 100%);
+        `;
+      default:
+        return;
+    }
+  }}
+
   ${props =>
     props.buttonType === 'disabled' &&
     css`
@@ -64,6 +73,12 @@ const Button = styled.button`
       min-width: 40px;
       border-radius: 8px;
       align-self: flex-end;
+    `}
+    ${props =>
+    props.size === 'big' &&
+    css`
+      padding: 30px;
+      font-size: 20px;
     `}
 `;
 
