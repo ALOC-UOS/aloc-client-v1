@@ -7,7 +7,7 @@ import GoldIcon from '../../../assets/gold-small.png';
 import MemberIcon from '../../../assets/member-icon.svg';
 import ActiveMemberIcon from '../../../assets/active-member-icon.svg';
 import RightArrowIcon from '../../../assets/right-arrow-in-blue-circle.svg';
-import EmptyProblemIcon from '../../../assets/empty-problem-icon.svg';
+import Season2Logo from '../../../assets/logo-season2.png';
 
 export const ProblemListComponent = () => {
   const { problemList, fetchSolvedUserList, selectedProblemId } = useProblem();
@@ -29,8 +29,11 @@ export const ProblemListComponent = () => {
     <VStack style={{ width: '100%', height: 'fit-content', gap: '16px' }}>
       {problemList.length === 0 ? (
         <S.EmptyContainer>
-          <img src={EmptyProblemIcon} alt="empty-problem" width={64} height={64} />
-          <S.EmptyTitle>설정에 맞는 문제 목록이 없어요</S.EmptyTitle>
+          <img src={Season2Logo} alt="empty-problem" width={64} height={64} />
+          {/* <S.EmptyTitle>설정에 맞는 문제 목록이 없어요</S.EmptyTitle> */}
+          <S.EmptyTitle>
+            그동안 수고하셨어요. <br /> 시즌 3로 만나요!
+          </S.EmptyTitle>
         </S.EmptyContainer>
       ) : (
         <>
