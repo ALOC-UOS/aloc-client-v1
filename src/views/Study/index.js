@@ -38,7 +38,7 @@ const Study = () => {
 const StudyContainer = styled.div`
   display: flex;
   flex-direction: row;
-  height: 83vh;
+  height: 76vh;
   background: #fff;
   border-radius: 24px;
   padding: 20px;

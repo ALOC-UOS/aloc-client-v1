@@ -96,6 +96,12 @@ const MemberItemContainer = styled.div`
     min-width: 220px;
   }
 
+  cursor: pointer;
+  &:hover {
+    transform: scale(0.95);
+    filter: brightness(0.9);
+  }
+
   display: flex;
   flex-direction: row;
   gap: 10px;
