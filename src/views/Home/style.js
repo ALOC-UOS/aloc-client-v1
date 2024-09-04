@@ -67,7 +67,6 @@ const ProblemContainer = styled.div`
   height: 800px;
   overflow: hidden;
   background-color: #000000;
-  cursor: pointer;
   @media (max-width: 480px) {
     width: calc(100% - 32px);
   }
@@ -137,7 +136,6 @@ const MemberWrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   padding: 8px 12px 8px 8px;
-
   ${props =>
     props.isShow &&
     css`
