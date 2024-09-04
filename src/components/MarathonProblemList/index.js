@@ -1,6 +1,7 @@
 import { getDifficultyIcon } from '../../utils';
 import { serverAPI } from '../../api/axios';
 import { useEffect, useState } from 'react';
+import lock from '../../assets/lock.svg';
 import {
   ProblemListContainer,
   ProblemDifficulty,
@@ -9,20 +10,21 @@ import {
   HorizontalLine,
 } from './style';
 
+const DAYS_OF_WEEK = 7;
 const MarathonProblemList = () => {
-  const [problemList, setProblemList] = useState([]);
+  const [problemData, setproblemData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getProblemList();
-      setProblemList(result);
+      const result = await getproblemData();
+      setproblemData(result);
     };
     fetchData();
   }, []);
 
-  const getProblemList = async () => {
+  const getproblemData = async () => {
     return await serverAPI
-      .get('/weekly-problems')
+      .get('/daily-problems')
       .then(res => {
         return res.data.result;
       })
@@ -37,7 +39,7 @@ const MarathonProblemList = () => {
   };
 
   const renderProblemList = () => {
-    return problemList.map((problem, idx) => (
+    const problemList = problemData.map((problem, idx) => (
       <div
         key={problem.problemId}
         style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
@@ -50,10 +52,46 @@ const MarathonProblemList = () => {
           <ProblemDifficulty src={getDifficultyIcon(problem.problemDifficulty)} />
           <ProblemNumber>{problem.problemId}</ProblemNumber>
         </ProblemItem>
-        {idx !== problemList.length - 1 && <HorizontalLine />}
+        <HorizontalLine />
       </div>
     ));
+    const lockList = [];
+    for (let i = 0; i < DAYS_OF_WEEK - problemData.length; i++) {
+      const isLastItem = i === DAYS_OF_WEEK - problemData.length - 1;
+      lockList.push(
+        <div
+          key={i + problemData.length}
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+        >
+          <ProblemItem disabled={true} delay={(problemData.length + i) * 0.2} isSolved={false}>
+            <ProblemDifficulty src={lock} />
+          </ProblemItem>
+          {!isLastItem && <HorizontalLine />}
+        </div>
+      );
+    }
+    return [...problemList, ...lockList];
   };
+
+  //weekly
+  // const renderProblemList = () => {
+  //   return problemList.map((problem, idx) => (
+  //     <div
+  //       key={problem.problemId}
+  //       style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+  //     >
+  //       <ProblemItem
+  //         delay={idx * 0.2}
+  //         isSolved={problem.isSolved}
+  //         onClick={() => handleProblemClick(problem.problemId)}
+  //       >
+  //         <ProblemDifficulty src={getDifficultyIcon(problem.problemDifficulty)} />
+  //         <ProblemNumber>{problem.problemId}</ProblemNumber>
+  //       </ProblemItem>
+  //       {idx !== problemList.length - 1 && <HorizontalLine />}
+  //     </div>
+  //   ));
+  // };
 
   return <ProblemListContainer>{renderProblemList()}</ProblemListContainer>;
 };
