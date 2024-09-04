@@ -24,7 +24,7 @@ const MarathonProblemList = () => {
 
   const getproblemData = async () => {
     return await serverAPI
-      .get('/weekly-problems')
+      .get('/daily-problems')
       .then(res => {
         return res.data.result;
       })
@@ -52,6 +52,7 @@ const MarathonProblemList = () => {
           <ProblemDifficulty src={getDifficultyIcon(problem.problemDifficulty)} />
           <ProblemNumber>{problem.problemId}</ProblemNumber>
         </ProblemItem>
+        <HorizontalLine />
       </div>
     ));
     const lockList = [];
@@ -62,11 +63,7 @@ const MarathonProblemList = () => {
           key={i + problemData.length}
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
         >
-          <ProblemItem
-            delay={problemData.length + (i + 1) * 0.2}
-            isSolved={false}
-            onClick={() => {}}
-          >
+          <ProblemItem disabled={true} delay={(problemData.length + i) * 0.2} isSolved={false}>
             <ProblemDifficulty src={lock} />
           </ProblemItem>
           {!isLastItem && <HorizontalLine />}
