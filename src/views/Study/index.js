@@ -7,9 +7,11 @@ import io from 'socket.io-client';
 
 const Study = () => {
   const [isReadyToStudy, setIsReadyToStudy] = useState(true);
+
+  //socket
   // const [data, setData] = useState('');
-  // const socket = io.connect('ws://www.iflab.run:8080/ws/chat');
-  // console.log(!socket.connected);
+  // const socket = io.connect('wss://www.iflab.run/ws/chat');
+  // console.log(socket);
   // socket.on('connection', socket => {
   //   socket.on('send_message', data => {
   //     console.log(data);
