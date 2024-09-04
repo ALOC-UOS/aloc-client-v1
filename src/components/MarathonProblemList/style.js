@@ -68,6 +68,7 @@ const ProblemItem = styled.div`
       transform: scale(1.2);
     }
   }
+  ${props => props.disabled && `pointer-events:none; cursor:none;`}
 `;
 const HorizontalLine = styled.hr`
   animation: ${AppearHorizontalLine} 3s ease forwards;
