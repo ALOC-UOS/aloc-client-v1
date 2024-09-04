@@ -82,17 +82,28 @@ const Home = () => {
   };
 
   const renderProblemContent = () => (
-    <ProblemContainer onClick={handleProblemClick}>
+    <ProblemContainer>
       <BackgroundImage src={ProblemBackgroundImage} />
       <ProblemWrapper>
-        <ProblemTitleWrapper>
-          <ProblemTitle>오늘의 문제</ProblemTitle>
-          <ProblemDifficulty src={getDifficultyIcon(problemData.difficulty)} />
-        </ProblemTitleWrapper>
-        <ProblemName>
-          {problemData.problemId}. {problemData.title}
-        </ProblemName>
-        {renderMemberInfo()}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={handleProblemClick}
+        >
+          <ProblemTitleWrapper>
+            <ProblemTitle>오늘의 문제</ProblemTitle>
+            <ProblemDifficulty src={getDifficultyIcon(problemData.difficulty)} />
+          </ProblemTitleWrapper>
+          <ProblemName>
+            {problemData.problemId}. {problemData.title}
+          </ProblemName>
+          {renderMemberInfo()}
+        </div>
         {isLoggedIn && <MarathonProblemList />}
       </ProblemWrapper>
     </ProblemContainer>

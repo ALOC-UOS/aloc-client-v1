@@ -12,7 +12,7 @@ const Problem = () => {
   return (
     <S.ProblemContainer>
       <TopBar />
-      <VStack style={{ height: '80vh', gap: '16px' }}>
+      <VStack style={{ height: '80vh', gap: '16px', minWidth: '262px' }}>
         <S.Wrapping style={{ flexDirection: 'row', gap: '24px', flexShrink: 0 }}>
           <S.Button selected={selectedCourse === 'HALF'} onClick={() => setSelectedCourse('HALF')}>
             HALF

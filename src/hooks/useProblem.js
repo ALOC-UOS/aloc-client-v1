@@ -3,7 +3,7 @@ import { atom, useAtom } from 'jotai';
 import { useState, useEffect } from 'react';
 
 const API_URL_PREFIX = 'https://www.iflab.run/api2/';
-const CURRENT_SEASON = 2;
+const CURRENT_SEASON = 3;
 
 const selectedCourseAtom = atom('FULL');
 const algorithmListAtom = atom([]);

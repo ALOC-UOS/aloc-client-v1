@@ -67,31 +67,34 @@ const TopBar = ({ active }) => {
     cancelText: '취소',
     closable: true,
     onOk: () => {
+      const nextPassword = nextPasswordRef.current.getValue();
+      const checkedPassword = checkedNextPasswordRef.current.getValue();
       //비밀번호 검증
-      if (nextPasswordRef.current.value.length <= 3) {
+      if (nextPassword.length <= 3) {
         nextPasswordRef.current.focus();
-        nextPasswordRef.current.value = '';
-        checkedNextPasswordRef.current.value = '';
-        nextPasswordRef.current.placeholder = '비밀번호는 4글자 이상이어야 합니다.';
+        nextPasswordRef.current.setValue('');
+        checkedNextPasswordRef.current.setValue('');
+        nextPasswordRef.current.setPlaceholder('비밀번호는 4글자 이상이어야 합니다.');
         setChangePasswordFocus(true);
+
         return false;
       }
-      if (nextPasswordRef.current.value !== checkedNextPasswordRef.current.value) {
+      if (nextPassword !== checkedPassword) {
         checkedNextPasswordRef.current.focus();
-        checkedNextPasswordRef.current.value = '';
-        checkedNextPasswordRef.current.placeholder = '비밀번호가 일치하지 않습니다.';
+        checkedNextPasswordRef.current.setValue('');
+        checkedNextPasswordRef.current.setPlaceholder('비밀번호가 일치하지 않습니다.');
         setCheckedChangePasswordFocus(true);
         return false;
       }
       serverAPI
-        .patch('/user/reset-password', { password: nextPasswordRef.current.value })
+        .patch('/user/reset-password', { password: nextPasswordRef.current.getValue() })
         .then(response => {
           setMessageText(response.data.result);
           setChangePasswordFocus(false);
-          nextPasswordRef.current.value = '';
-          checkedNextPasswordRef.current.value = '';
-          nextPasswordRef.current.placeholder = '변경할 비밀번호';
-          checkedNextPasswordRef.current.placeholder = '비밀번호 재입력';
+          nextPasswordRef.current.setValue('');
+          checkedNextPasswordRef.current.setValue('');
+          nextPasswordRef.current.setPlaceholder('변경할 비밀번호');
+          checkedNextPasswordRef.current.setPlaceholder('비밀번호 재입력');
           changePasswordModal.setIsPending(false);
           passwordChangeMessage.toast();
         })
@@ -180,13 +183,13 @@ const TopBar = ({ active }) => {
               type={'password'}
               ref={nextPasswordRef}
               isFocused={changePasswordFocus}
-              placeholder={'변경할 비밀번호'}
+              initialPlaceholder={'변경할 비밀번호'}
             />
             <Input
               type={'password'}
               ref={checkedNextPasswordRef}
               isFocused={checkedChangePasswordFocus}
-              placeholder={'비밀번호 재입력'}
+              initialPlaceholder={'비밀번호 재입력'}
             />
           </div>
         ),
