@@ -52,7 +52,6 @@ const MarathonProblemList = () => {
           <ProblemDifficulty src={getDifficultyIcon(problem.problemDifficulty)} />
           <ProblemNumber>{problem.problemId}</ProblemNumber>
         </ProblemItem>
-        {idx !== problemData.length - 1 && <HorizontalLine />}
       </div>
     ));
     const lockList = [];
@@ -63,7 +62,11 @@ const MarathonProblemList = () => {
           key={i + problemData.length}
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
         >
-          <ProblemItem disabled={true} delay={problemData.length + (i + 1) * 0.2} isSolved={false}>
+          <ProblemItem
+            delay={problemData.length + (i + 1) * 0.2}
+            isSolved={false}
+            onClick={() => {}}
+          >
             <ProblemDifficulty src={lock} />
           </ProblemItem>
           {!isLastItem && <HorizontalLine />}
