@@ -25,7 +25,6 @@ const StudyChat = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
       setUser(response.data.result);
     } catch (error) {
       console.error('Failed to fetch user info:', error);
@@ -48,22 +47,29 @@ const StudyChat = () => {
       if (user) {
         const enterMessage = {
           type: 'ENTER',
-          roomId: '1ad5fa90-0b20-462b-b58c-30d84cff4746',
-          sender: user.name,
+          roomId: '5d012442-30b6-4225-b71a-bc18ae12792a',
+          sender: user.username,
+          senderInfo: {
+            githubId: user.githubId,
+            tier: user.rank,
+            studentId: user.studentId,
+          },
           message: 'Entered the room',
         };
         ws.current.send(JSON.stringify(enterMessage));
       }
     };
     ws.current.onmessage = event => {
+      console.log('WebSocket message receive222222d:', event.data);
       const receivedData = JSON.parse(event.data);
+      console.log(receivedData);
       if (receivedData.sender !== user.username) {
         setData(prev => [
           ...prev,
           <OtherMessage
             key={Date.now()}
             content={{
-              githubId: receivedData.sender,
+              githubId: receivedData.senderGithub,
               username: receivedData.sender,
               message: receivedData.message,
               messageTime: new Date().toLocaleTimeString([], {
@@ -119,8 +125,13 @@ const StudyChat = () => {
       if (ws.current && ws.current.readyState === WebSocket.OPEN) {
         const chatMessage = {
           type: 'TALK',
-          roomId: '1ad5fa90-0b20-462b-b58c-30d84cff4746',
+          roomId: '5d012442-30b6-4225-b71a-bc18ae12792a',
           sender: user.username,
+          senderInfo: {
+            githubId: user.githubId,
+            tier: user.rank,
+            studentId: user.studentId,
+          },
           message: content.message,
         };
         ws.current.send(JSON.stringify(chatMessage));
