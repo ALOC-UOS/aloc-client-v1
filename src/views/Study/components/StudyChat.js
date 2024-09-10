@@ -4,50 +4,40 @@ import OtherMessage from './OtherMessage';
 import ChatFooter from './ChatFooter';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import useUserState from '../../../hooks/useUserState';
+import { serverAPI } from '../../../api/axios';
 
 const StudyChat = () => {
   const ws = useRef(null);
   const navigate = useNavigate();
+  const [roomId, setRoomId] = useState('');
   const reconnectTimeoutRef = useRef(null);
-  const [user, setUser] = useState(null);
-  const fetchUserInfo = async () => {
-    try {
-      const token = localStorage.getItem('accessToken');
-      if (!token) {
-        console.log('로그인이 필요합니다.');
-        setUser(null);
-        return;
-      }
+  const { user } = useUserState();
 
-      const response = await axios.get('https://www.iflab.run/api2/user', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data.result);
-    } catch (error) {
-      console.error('Failed to fetch user info:', error);
-      if (error.response && error.response.status === 401) {
-        console.log('Token is invalid or expired');
-        localStorage.removeItem('jwtToken');
-      }
-      setUser(null);
-    }
+  const getRommId = async () => {
+    const data = await serverAPI
+      .get('/chat')
+      .then(response => {
+        return response.data[0].roomId;
+      })
+      .catch(error => console.log(error));
+    setRoomId(data);
   };
-  const connectWebSocket = user => {
+  useEffect(() => {
+    getRommId();
+  }, []);
+
+  const connectWebSocket = (ws, user) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-      console.log('WebSocket already connected');
       return;
     }
     ws.current = new WebSocket('wss://www.iflab.run/ws/chat');
     ws.current.onopen = () => {
-      console.log('WebSocket connected');
       clearTimeout(reconnectTimeoutRef.current);
       if (user) {
         const enterMessage = {
           type: 'ENTER',
-          roomId: '5d012442-30b6-4225-b71a-bc18ae12792a',
+          roomId: roomId,
           sender: user.username,
           senderInfo: {
             githubId: user.githubId,
@@ -60,9 +50,7 @@ const StudyChat = () => {
       }
     };
     ws.current.onmessage = event => {
-      console.log('WebSocket message receive222222d:', event.data);
       const receivedData = JSON.parse(event.data);
-      console.log(receivedData);
       if (receivedData.sender !== user.username) {
         setData(prev => [
           ...prev,
@@ -90,11 +78,8 @@ const StudyChat = () => {
     };
   };
   useEffect(() => {
-    fetchUserInfo();
-  }, []);
-  useEffect(() => {
     if (user) {
-      connectWebSocket(user);
+      connectWebSocket(ws, user);
     }
     return () => {
       clearTimeout(reconnectTimeoutRef.current);
@@ -103,6 +88,7 @@ const StudyChat = () => {
       }
     };
   }, [user]);
+
   const [data, setData] = useState([
     <OtherMessage
       key="initial"
@@ -125,7 +111,7 @@ const StudyChat = () => {
       if (ws.current && ws.current.readyState === WebSocket.OPEN) {
         const chatMessage = {
           type: 'TALK',
-          roomId: '5d012442-30b6-4225-b71a-bc18ae12792a',
+          roomId: roomId,
           sender: user.username,
           senderInfo: {
             githubId: user.githubId,
@@ -152,7 +138,7 @@ const StudyChat = () => {
         console.error('WebSocket is not open. ReadyState:', ws.current?.readyState);
       }
     },
-    [user, navigate]
+    [user]
   );
 
   return (
