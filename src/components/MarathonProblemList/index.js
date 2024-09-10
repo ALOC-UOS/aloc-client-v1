@@ -52,7 +52,7 @@ const MarathonProblemList = () => {
           <ProblemDifficulty src={getDifficultyIcon(problem.problemDifficulty)} />
           <ProblemNumber>{problem.problemId}</ProblemNumber>
         </ProblemItem>
-        <HorizontalLine />
+        {!(idx === DAYS_OF_WEEK - 1) && <HorizontalLine />}
       </div>
     ));
     const lockList = [];
