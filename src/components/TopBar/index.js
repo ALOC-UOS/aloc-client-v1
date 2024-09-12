@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
 import typo from '../../assets/typo.svg';
 import React, { useEffect, useState } from 'react';
@@ -15,6 +16,7 @@ import {
   UserImage,
   UserImageWrapper,
 } from './style';
+import ProfileChangeModalChildren from './components/ProfileChangeModalChildren';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import DefaultProfile from '../../assets/default-profile.svg';
@@ -45,9 +47,10 @@ const TopBar = ({ active }) => {
   const [isScroll, setIsScroll] = useState(false);
   const { isLoggedIn, initLoginStatus } = useLoginState();
   const [shopUpdated, setShopUpdated] = useState(true);
-  const { user } = useUserState();
+  const { user, setUserInfo } = useUserState();
   const navigate = useNavigate();
   const nextPasswordRef = useRef();
+  const [selectedFile, setselectedFile] = useState(null);
   const checkedNextPasswordRef = useRef();
   const [changePasswordFocus, setChangePasswordFocus] = useState(false);
   const [checkedChangePasswordFocus, setCheckedChangePasswordFocus] = useState(false);
@@ -61,6 +64,34 @@ const TopBar = ({ active }) => {
     closable: true,
     onOk: () => {
       initLoginStatus();
+    },
+  });
+
+  const profileChangeModal = useModal({
+    description: '변경할 이미지를 올려주세요',
+    cancelText: '취소',
+    okText: '확인',
+    closable: true,
+    onOk: async () => {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      try {
+        await serverAPI.post('/images/upload/profile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        const response = await serverAPI.get('/user');
+        setUserInfo(response.data.result);
+        setselectedFile(null);
+      } catch (error) {
+        console.log(error);
+        if (error.code === 'ERR_NETWORK') {
+          setMessageText('이미지 용량이 너무 커요!');
+          passwordChangeMessage.toast();
+        }
+      }
     },
   });
   const changePasswordModal = useModal({
@@ -157,7 +188,7 @@ const TopBar = ({ active }) => {
     return user ? (
       <UserImageWrapper>
         <UserImage
-          src={`https://avatars.githubusercontent.com/${user.githubId}`}
+          src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
           onClick={userMenu.toggle}
         />
       </UserImageWrapper>
@@ -176,6 +207,14 @@ const TopBar = ({ active }) => {
         ),
       })}
       {logoutModal.render()}
+      {profileChangeModal.render({
+        children: (
+          <ProfileChangeModalChildren
+            selectedFile={selectedFile}
+            setselectedFile={setselectedFile}
+          />
+        ),
+      })}
       {changePasswordModal.render({
         children: (
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -228,6 +267,13 @@ const TopBar = ({ active }) => {
                       }}
                     >
                       비밀번호 변경
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        profileChangeModal.show();
+                      }}
+                    >
+                      프로필 사진 변경
                     </Button>
                     <Button
                       color={'red'}
