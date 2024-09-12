@@ -16,6 +16,7 @@ import {
   MemberName,
   SolveTime,
 } from './style';
+import memberIcon from '../../assets/member-icon.svg';
 import TopBar from '../../components/TopBar';
 import ProblemBackgroundImage from '../../assets/background2.png';
 import { getDifficultyIcon, formatSolveTime } from '../../utils';
