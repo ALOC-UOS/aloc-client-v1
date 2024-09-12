@@ -23,6 +23,7 @@ import DefaultProfile from '../../assets/default-profile.svg';
 import useContainer from '../../hooks/useContainer';
 import Button from '../Buttons';
 import useModal from '../../hooks/useModal';
+import memberIcon from '../../assets/member-icon.svg';
 import { useRef } from 'react';
 import { serverAPI } from '../../api/axios';
 import { Message } from '../Message';
@@ -187,10 +188,14 @@ const TopBar = ({ active }) => {
   const renderUserImage = () => {
     return user ? (
       <UserImageWrapper>
-        <UserImage
-          src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
-          onClick={userMenu.toggle}
-        />
+        {user.profileImageFileName ? (
+          <UserImage
+            src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
+            onClick={userMenu.toggle}
+          />
+        ) : (
+          <UserImage src={memberIcon} onClick={userMenu.toggle} />
+        )}
       </UserImageWrapper>
     ) : (
       <UserImageWrapper>
