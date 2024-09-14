@@ -148,12 +148,12 @@ const Shop = () => {
               <ItemInfo>
                 <InfoWrapper>
                   <ItemName>{item.name}</ItemName>
-                  <InfoDescription>{item.description}</InfoDescription>
+                  <ItemPrice>
+                    <img src={CoinIcon} />
+                    {item.price}
+                  </ItemPrice>
                 </InfoWrapper>
-                <ItemPrice>
-                  <img src={CoinIcon} />
-                  {item.price}
-                </ItemPrice>
+                <InfoDescription>{item.description}</InfoDescription>
               </ItemInfo>
               <Button onClick={adminModal.show}>구매</Button>
             </ItemCard>
@@ -166,12 +166,12 @@ const Shop = () => {
               <ItemInfo>
                 <InfoWrapper>
                   <ItemName>{item.name}</ItemName>
-                  <InfoDescription>{item.description}</InfoDescription>
+                  <ItemPrice>
+                    <img src={CoinIcon} />
+                    {item.price}
+                  </ItemPrice>
                 </InfoWrapper>
-                <ItemPrice>
-                  <img src={CoinIcon} />
-                  {item.price}
-                </ItemPrice>
+                <InfoDescription>{item.description}</InfoDescription>
               </ItemInfo>
               <Button onClick={openBuyModal}>구매</Button>
             </ItemCard>

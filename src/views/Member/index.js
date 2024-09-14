@@ -43,6 +43,7 @@ import Number1 from '../../assets/number-1.svg';
 import CoinIcon from '../../assets/coin-icon.svg';
 import LoadingIcon from '../../assets/loading-icon.svg';
 import CheckIcon from '../../assets/check-icon.svg';
+import angryMan from '../../assets/angry-man.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
@@ -117,10 +118,10 @@ const Member = () => {
     let url = '';
 
     if (type === 'solved') {
-      url = `https://www.iflab.run/api2/user/${githubId}/solved-problems?routine=DAILY&season=2`;
+      url = `https://www.iflab.run/api2/user/${githubId}/solved-problems?routine=DAILY&season=3`;
       setModalTitle('해결한 문제 목록');
     } else {
-      url = `https://www.iflab.run/api2/user/${githubId}/unsolved-problems?routine=DAILY&season=2`;
+      url = `https://www.iflab.run/api2/user/${githubId}/unsolved-problems?routine=DAILY&season=3`;
       setModalTitle('해결하지 못한 문제 목록');
     }
     axios
@@ -265,7 +266,13 @@ const Member = () => {
                   />
                 )}
                 <ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
-                  <ProfileImage src={`https://avatars.githubusercontent.com/${member.githubId}`} />
+                  <ProfileImage
+                    src={
+                      member.profileImageFileName
+                        ? `https://www.iflab.run/files/user/profile/${member.profileImageFileName}`
+                        : angryMan
+                    }
+                  />
                 </ProfileLink>
               </ProfileBackgroundImage>
               <MemberWrapper>

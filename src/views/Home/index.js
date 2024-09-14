@@ -16,12 +16,14 @@ import {
   MemberName,
   SolveTime,
 } from './style';
+import memberIcon from '../../assets/member-icon.svg';
 import TopBar from '../../components/TopBar';
 import ProblemBackgroundImage from '../../assets/background2.png';
 import { getDifficultyIcon, formatSolveTime } from '../../utils';
 import BottomInfo from '../../components/Card';
 import MarathonProblemList from '../../components/MarathonProblemList';
 import useLoginState from '../../hooks/useLoginState';
+import useUserState from '../../hooks/useUserState';
 
 export const API_BASE_URL = 'https://www.iflab.run/api2';
 
@@ -32,9 +34,10 @@ const Home = () => {
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
   const [isShowMember, setIsShowMember] = useState(false);
   const { isLoggedIn } = useLoginState();
+  const { user } = useUserState();
   useEffect(() => {
     loadProblem();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (problemData.id) {
@@ -54,10 +57,11 @@ const Home = () => {
 
     return () => clearInterval(timer);
   }, [solvedMemberList]);
-
   const loadProblem = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/today-problem?course=FULL`);
+      const response = user
+        ? await axios.get(`${API_BASE_URL}/today-problem?course=${user.course}`)
+        : await axios.get(`${API_BASE_URL}/today-problem?course=FULL`);
       setProblemData(response.data.result);
       setIsLoading(false);
     } catch (error) {
@@ -79,17 +83,28 @@ const Home = () => {
   };
 
   const renderProblemContent = () => (
-    <ProblemContainer onClick={handleProblemClick}>
+    <ProblemContainer>
       <BackgroundImage src={ProblemBackgroundImage} />
       <ProblemWrapper>
-        <ProblemTitleWrapper>
-          <ProblemTitle>오늘의 문제</ProblemTitle>
-          <ProblemDifficulty src={getDifficultyIcon(problemData.difficulty)} />
-        </ProblemTitleWrapper>
-        <ProblemName>
-          {problemData.problemId}. {problemData.title}
-        </ProblemName>
-        {renderMemberInfo()}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={handleProblemClick}
+        >
+          <ProblemTitleWrapper>
+            <ProblemTitle>오늘의 문제</ProblemTitle>
+            <ProblemDifficulty src={getDifficultyIcon(problemData.difficulty)} />
+          </ProblemTitleWrapper>
+          <ProblemName>
+            {problemData.problemId}. {problemData.title}
+          </ProblemName>
+          {renderMemberInfo()}
+        </div>
         {isLoggedIn && <MarathonProblemList />}
       </ProblemWrapper>
     </ProblemContainer>

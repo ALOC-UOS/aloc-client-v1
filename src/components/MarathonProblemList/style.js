@@ -58,6 +58,7 @@ const ProblemItem = styled.div`
   opacity: 0;
   animation: ${props => AppearProblemItem(props.isSolved ? '1' : '0.5')} 1.6s ease forwards;
   animation-delay: ${props => props.delay}s;
+  ${props => !props.disabled && `cursor: pointer;`}
   &:hover {
     width: 80px;
     height: 80px;
