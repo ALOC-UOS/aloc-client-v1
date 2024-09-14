@@ -12,7 +12,7 @@ export default DropDownTrigger;
 
 const DropDownTriggerContainer = styled.button`
   position: relative;
-  min-width: 235px;
+  min-width: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
