@@ -12,7 +12,7 @@ import downArrowBtn from '../../assets/down-arrow-btn.svg';
 const Problem = () => {
   const { selectedCourse, setSelectedCourse } = useProblem();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSeason, setSelectedSeason] = useState('시즌 3');
+  const [selectedSeason, setSelectedSeason] = useState(3);
   return (
     <S.ProblemContainer>
       <TopBar />
@@ -33,7 +33,7 @@ const Problem = () => {
                 setIsDropdownOpen(!isDropdownOpen);
               }}
             >
-              <div>{selectedSeason}</div>
+              <div>시즌 {selectedSeason}</div>
               <img
                 alt="Down Arrow"
                 src={downArrowBtn}
@@ -46,7 +46,7 @@ const Problem = () => {
             <Dropdown.Menu isOpen={isDropdownOpen}>
               <Dropdown.Item
                 onClick={() => {
-                  setSelectedSeason('시즌 1');
+                  setSelectedSeason(1);
                   setIsDropdownOpen(false);
                 }}
               >
@@ -54,7 +54,7 @@ const Problem = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() => {
-                  setSelectedSeason('시즌 2');
+                  setSelectedSeason(2);
                   setIsDropdownOpen(false);
                 }}
               >
@@ -62,7 +62,7 @@ const Problem = () => {
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() => {
-                  setSelectedSeason('시즌 3');
+                  setSelectedSeason(3);
                   setIsDropdownOpen(false);
                 }}
               >
