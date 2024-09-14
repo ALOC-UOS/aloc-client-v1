@@ -169,6 +169,7 @@ const ProfileLink = styled.a`
 `;
 
 const ProfileImage = styled.img`
+  will-change: transform;
   position: relative;
   width: 160px;
   height: 160px;
