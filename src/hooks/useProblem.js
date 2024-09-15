@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 const API_URL_PREFIX = 'https://www.iflab.run/api2/';
 const CURRENT_SEASON = 3;
 
-//atom은 useState와 비슷하나 전역 상태관리가 가능
 const selectedSeasonAtom = atom(CURRENT_SEASON);
 const selectedCourseAtom = atom('FULL');
 const algorithmListAtom = atom([]);
@@ -22,13 +21,10 @@ export const useProblem = () => {
   const [problemList, setProblemList] = useAtom(problemListAtom);
   const [solvedUserList, setSolvedUserList] = useAtom(solvedUserListAtom);
 
-  //useEffect: 컴포넌트 렌더링 된 이후에 특정 동작 수행하도록 함
-  //AlgorithmList fetch해옴
   useEffect(() => {
     fetchAlgorithmList(selectedSeason);
   }, [selectedSeason]);
 
-  //사용자가 새로운 알고리즘, 코스를 선택하면 문제를 다시 가져오고, 사용자 상태 초기화
   useEffect(() => {
     if (selectedAlgorithm && selectedCourse) {
       fetchProblemList();
@@ -46,7 +42,6 @@ export const useProblem = () => {
 
       const response = await axios.get(url);
       const algorithms = response.data.result.algorithms;
-      // console.log(algorithms);
       setAlgorithmList(algorithms);
       setSelectedAlgorithm(algorithms[0]);
     } catch (error) {

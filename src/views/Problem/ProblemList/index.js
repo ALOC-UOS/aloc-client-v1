@@ -30,12 +30,15 @@ export const ProblemListComponent = () => {
       {problemList.length === 0 ? (
         <S.EmptyContainer>
           <img src={Season2Logo} alt="empty-problem" width={64} height={64} />
-          {/* <S.EmptyTitle>설정에 맞는 문제 목록이 없어요</S.EmptyTitle> */}
           {selectedSeason === 1 ? (
-            <S.EmptyTitle>시즌 1에는 HALF 코스가 없어요!</S.EmptyTitle>
+            <S.EmptyTitle>
+              시즌 1에는 <br />
+              HALF 코스가 없어요!
+            </S.EmptyTitle>
           ) : (
             <S.EmptyTitle>
-              그동안 수고하셨어요. <br /> 시즌 3로 만나요!
+              해당 알고리즘의
+              <br /> 문제가 없어요!
             </S.EmptyTitle>
           )}
         </S.EmptyContainer>
