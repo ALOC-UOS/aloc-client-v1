@@ -10,9 +10,10 @@ import Dropdown from '../../components/Dropdown';
 import downArrowBtn from '../../assets/down-arrow-btn.svg';
 
 const Problem = () => {
+  const { selectedSeason, setSelectedSeason } = useProblem();
   const { selectedCourse, setSelectedCourse } = useProblem();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSeason, setSelectedSeason] = useState(3);
+  // const [selectedSeason, setSelectedSeason] = useState(3);
   return (
     <S.ProblemContainer>
       <TopBar />

@@ -10,7 +10,7 @@ import RightArrowIcon from '../../../assets/right-arrow-in-blue-circle.svg';
 import Season2Logo from '../../../assets/logo-season2.png';
 
 export const ProblemListComponent = () => {
-  const { problemList, fetchSolvedUserList, selectedProblemId } = useProblem();
+  const { problemList, fetchSolvedUserList, selectedProblemId, selectedSeason } = useProblem();
   const getTierIcon = problem => {
     if (problem.difficulty < 6) {
       return BronzeIcon;
@@ -31,9 +31,13 @@ export const ProblemListComponent = () => {
         <S.EmptyContainer>
           <img src={Season2Logo} alt="empty-problem" width={64} height={64} />
           {/* <S.EmptyTitle>설정에 맞는 문제 목록이 없어요</S.EmptyTitle> */}
-          <S.EmptyTitle>
-            그동안 수고하셨어요. <br /> 시즌 3로 만나요!
-          </S.EmptyTitle>
+          {selectedSeason === 1 ? (
+            <S.EmptyTitle>시즌 1에는 HALF 코스가 없어요!</S.EmptyTitle>
+          ) : (
+            <S.EmptyTitle>
+              그동안 수고하셨어요. <br /> 시즌 3로 만나요!
+            </S.EmptyTitle>
+          )}
         </S.EmptyContainer>
       ) : (
         <>
