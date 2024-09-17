@@ -10,22 +10,22 @@ import { serverAPI } from '../../../api/axios';
 const StudyChat = () => {
   const ws = useRef(null);
   const navigate = useNavigate();
-  const [roomId, setRoomId] = useState('');
+  const [roomId, setRoomId] = useState('686a086e-ab25-4017-84f8-eab9b8a9de31');
   const reconnectTimeoutRef = useRef(null);
   const { user } = useUserState();
 
-  const getRommId = async () => {
-    const data = await serverAPI
-      .get('/chat')
-      .then(response => {
-        return response.data[0].roomId;
-      })
-      .catch(error => console.log(error));
-    setRoomId(data);
-  };
-  useEffect(() => {
-    getRommId();
-  }, []);
+  // const getRommId = async () => {
+  //   const data = await serverAPI
+  //     .get('/chat')
+  //     .then(response => {
+  //       return response.data[0].roomId;
+  //     })
+  //     .catch(error => console.log(error));
+  //   setRoomId(data);
+  // };
+  // useEffect(() => {
+  //   getRommId();
+  // }, []);
 
   const connectWebSocket = (ws, user) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
@@ -37,7 +37,6 @@ const StudyChat = () => {
       if (user) {
         const enterMessage = {
           type: 'ENTER',
-          roomId: roomId,
           sender: user.username,
           senderInfo: {
             githubId: user.githubId,
@@ -111,7 +110,6 @@ const StudyChat = () => {
       if (ws.current && ws.current.readyState === WebSocket.OPEN) {
         const chatMessage = {
           type: 'TALK',
-          roomId: roomId,
           sender: user.username,
           senderInfo: {
             githubId: user.githubId,
