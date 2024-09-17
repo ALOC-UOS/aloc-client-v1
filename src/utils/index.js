@@ -16,6 +16,19 @@ export const getDifficultyIcon = difficulty => {
   return Platinum;
 };
 
+export const getMemberRank = rank => {
+  switch (rank / 10) {
+    case 1:
+      return 'bronze';
+    case 2:
+      return 'silver';
+    case 3:
+      return 'gold';
+    default:
+      return 'platinum';
+  }
+};
+
 export const formatSolveTime = solvedAt => {
   const now = dayjs();
   const currentDate = now.format('YYYY-MM-DD');
