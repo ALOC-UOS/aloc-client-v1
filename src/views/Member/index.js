@@ -50,8 +50,8 @@ import loadingIcon from '../../assets/blue-loading-icon.svg';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
 import { HStack } from '../../styles/Stack.styles';
-
 import { Message } from '../../components/Message';
+import CoinComponent from '../../components/Message/CoinComponent';
 
 const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
@@ -91,9 +91,13 @@ const Member = () => {
   const [memberDataPending, setMemberDataPending] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const loadingMessage = Message();
+  const rankMessage = Message();
   const coinMessage = Message();
   const [solvedStatus, setSolvedStatus] = useState('');
   const [rank, setRank] = useState(0);
+  const [userCoin, setUserCoin] = useState(0);
+  const [obtainCoin, setObatinCoin] = useState(0);
+  const [coinTriggerAnimation, setCoinTriggerAnimation] = useState(false);
 
   useEffect(() => {
     loadMemberData();
@@ -171,13 +175,24 @@ const Member = () => {
         setSolvedStatus(res.data.result.solvedStatus);
         if (res.data.result.solvedStatus === 'SOLVED') {
           setRank(res.data.result.place);
+          setUserCoin(res.data.result.userCoin);
+          setObatinCoin(res.data.result.obtainCoin);
           loadMemberData();
           setShowConfetti(true);
           setTimeout(() => setShowConfetti(false), 2000);
         }
         loadingMessage.hide();
-        coinMessage.show();
-        setTimeout(() => coinMessage.hide(), 2000);
+        rankMessage.toast();
+        if (res.data.result.solvedStatus === 'SOLVED') {
+          setTimeout(() => {
+            setCoinTriggerAnimation(true);
+            coinMessage.show();
+          }, 2000);
+          setTimeout(() => {
+            setCoinTriggerAnimation(false);
+            coinMessage.hide();
+          }, 6000);
+        }
       })
       .catch(error => {
         console.error(error, 'API 요청 중 오류 발생:');
@@ -202,6 +217,7 @@ const Member = () => {
       <TopBar active={true} />
       {loadingMessage.render({
         icon: loadingIconWithBg,
+        isLoading: true,
         children: (
           <span
             style={{
@@ -213,7 +229,7 @@ const Member = () => {
           </span>
         ),
       })}
-      {coinMessage.render({
+      {rankMessage.render({
         children: (
           <span
             style={{
@@ -223,6 +239,17 @@ const Member = () => {
           >
             <MessageText solvedStatus={solvedStatus} rank={rank} />
           </span>
+        ),
+      })}
+      {coinMessage.render({
+        icon: CoinIcon,
+        isCoin: true,
+        children: (
+          <CoinComponent
+            userCoin={userCoin}
+            obtainCoin={obtainCoin}
+            triggerAnimation={coinTriggerAnimation}
+          />
         ),
       })}
       <IconWrapper active={isLoading}>
