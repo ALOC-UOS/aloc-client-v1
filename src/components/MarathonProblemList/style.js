@@ -57,7 +57,7 @@ const ProblemItem = styled.div`
   border-radius: 50%;
   opacity: 0;
   animation: ${props => AppearProblemItem(props.isSolved ? '1' : '0.5')} 1.6s ease forwards;
-  animation-delay: ${props => props.delay}s;
+  animation-delay: ${props => props.delay + 2}s;
   ${props => !props.disabled && `cursor: pointer;`}
   &:hover {
     width: 80px;
@@ -71,10 +71,9 @@ const ProblemItem = styled.div`
   }
 `;
 const HorizontalLine = styled.hr`
-  animation: ${AppearHorizontalLine} 3s ease forwards;
+  animation: ${AppearHorizontalLine} 5s ease forwards;
   border: 0;
   width: 26px;
-  align: left;
   height: 1px;
   background: #fff;
 `;

@@ -242,7 +242,7 @@ const Member = () => {
           <BlueLoadingIcon src={loadingIcon} />
         ) : (
           MemberData.map((member, index) => (
-            <ProfileWrapper delay={index * 0.25}>
+            <ProfileWrapper delay={index * 0.15}>
               <MemberUserInfoCoin>
                 <img src={CoinIcon} />
                 {member.coin}
@@ -257,12 +257,17 @@ const Member = () => {
                 color5={member.color5}
                 degree={member.degree}
               >
+                {member.baekjoonId === 'alicehrk' && <DecorationCharacter type={'Bubble'} />}
                 {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
                 {member.baekjoonId === 'jojongjojong' && <DecorationCharacter type={'Wave'} />}
                 <SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <ProfileBlurImage
-                    src={`https://avatars.githubusercontent.com/${member.githubId}`}
+                    src={
+                      member.profileImageFileName
+                        ? `https://www.iflab.run/files/user/profile/${member.profileImageFileName}`
+                        : angryMan
+                    }
                   />
                 )}
                 <ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
@@ -305,8 +310,8 @@ const Member = () => {
                 <MemberName>{member.username}</MemberName>
                 <MemberUserInfoWrapper>
                   <MemberUserInfoText>{member.studentId}학번</MemberUserInfoText>
-                  <MemberUserInfoBar />
-                  <MemberUserInfoText>{member.joinedAt}</MemberUserInfoText>
+                  {/* <MemberUserInfoBar />
+                  <MemberUserInfoText>{member.joinedAt}</MemberUserInfoText> */}
                 </MemberUserInfoWrapper>
                 <MemberBar />
                 <MemberInfoWrapper>

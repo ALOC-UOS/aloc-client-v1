@@ -33,9 +33,18 @@ const DisappearUp = keyframes`
   }
 `;
 
-const AppearBackground = keyframes`
+const AppearOpacity = keyframes`
   0% {
-    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const AppearScale = keyframes`
+  0% {
+    transform: scale(1.5);
     opacity: 0;
   }
   100% {
@@ -44,87 +53,124 @@ const AppearBackground = keyframes`
   }
 `;
 
-const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${props => props.theme.background};
-  min-height: 100vh;
-  padding-bottom: 48px;
-`;
-
-const ContentContainer = styled.div`
+const Container = styled.div`
+  animation: ${AppearOpacity} 1s ease-in-out;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-`;
-
-const ProblemContainer = styled.div`
-  position: relative;
-  display: flex;
   justify-content: center;
   width: 100%;
-  height: 800px;
+  height: 100dvh;
   overflow: hidden;
-  background-color: #000000;
-  @media (max-width: 480px) {
-    width: calc(100% - 32px);
-  }
+  background-image: linear-gradient(105deg, ${props => props.backgroundColor}, #000000);
+  perspective: 1000px;
 `;
 
 const ProblemWrapper = styled.div`
+  animation: ${MoveUp} 1s ease-in-out;
   z-index: 1;
+  position: relative;
+  min-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 64px 0 40px;
-`;
-
-const ProblemTitleWrapper = styled.div`
-  animation: ${MoveDown} 1s ease-in-out;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-  background-color: #1a1a1a;
+  padding: 24px 0 32px 0;
+  background-color: #ffffff18;
+  gap: 80px;
   border-radius: 24px;
-  padding: 8px 8px 8px 16px;
-  margin-bottom: 4px;
-  flex-shrink: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, #ffffff80, #ffffff00);
+    padding: 1px;
+    border-radius: 24px;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  &:after {
+    transition: all 0.3s;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      to bottom,
+      ${props => props.color}00,
+      ${props => props.color}40
+    );
+    border-radius: 24px;
+    opacity: 0;
+  }
+  &:hover {
+    transform: scale(1.03);
+    &:after {
+      opacity: 1;
+    }
+  }
+  &:active {
+    transform: rotateX(15deg);
+  }
+
+  &:active > p {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 const ProblemTitle = styled.div`
-  color: #ffffff;
+  animation: ${MoveUp} 1s 0.4s ease-in-out forwards;
+  color: ${props => props.color};
   font-size: 16px;
   font-weight: 500;
-`;
-
-const ProblemDifficulty = styled.img`
-  width: 24px;
-  height: 24px;
+  padding: 8px 12px;
+  border-radius: 32px;
+  border: 1px solid ${props => props.color};
+  user-select: none;
+  opacity: 0;
 `;
 
 const ProblemName = styled.div`
-  animation: ${MoveDown} 1s ease-in-out;
+  animation: ${MoveUp} 1s 0.55s ease-in-out forwards;
   color: #ffffff;
   font-size: 40px;
   font-weight: 500;
-  flex-shrink: 0;
   text-align: center;
-  margin-bottom: 48px;
+  user-select: none;
+  opacity: 0;
 `;
 
-const BackgroundImage = styled.img`
-  animation: ${AppearBackground} 1s ease-in-out;
-  position: absolute;
-  top: 0;
+const BottomText = styled.p`
+  position: fixed;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  right: 0;
+  bottom: 0;
+  height: 24px;
+  transform: translateY(-8px);
+  opacity: 0;
+  text-align: center;
+  color: #ffffffce;
+  font-size: 12px;
+  user-select: none;
+`;
+
+const DefaultMemberWrapper = styled.div`
+  animation: ${MoveUp} 1s 0.7s ease-in-out forwards;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 32px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  padding: 8px 12px 8px 8px;
+  opacity: 0;
 `;
 
 const MemberWrapper = styled.div`
@@ -158,33 +204,47 @@ const Description = styled.div`
   font-size: 14px;
   font-weight: 500;
   margin-right: 12px;
+  user-select: none;
 `;
 
 const MemberName = styled.div`
   color: #408cff;
   font-size: 14px;
   font-weight: 500;
+  user-select: none;
 `;
 
 const SolveTime = styled.div`
   color: #ffffff80;
   font-size: 12px;
   font-weight: 500;
+  user-select: none;
 `;
 
-export {
-  HomeContainer,
-  ContentContainer,
-  ProblemContainer,
+const TierIcon = styled.img`
+  position: relative;
+  transition: background-color 0.3s;
+  opacity: 0;
+  border-radius: 50%;
+  &:hover {
+    background-color: ${props => props.backgroundColor}80;
+  }
+  &:active {
+    background-color: ${props => props.backgroundColor};
+  }
+`;
+
+export default {
+  Container,
   ProblemWrapper,
-  ProblemTitleWrapper,
   ProblemTitle,
-  ProblemDifficulty,
   ProblemName,
-  BackgroundImage,
+  BottomText,
+  DefaultMemberWrapper,
   MemberWrapper,
   ProfileImage,
   Description,
   MemberName,
   SolveTime,
+  TierIcon,
 };
