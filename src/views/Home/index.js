@@ -201,7 +201,7 @@ const Home = () => {
           </S.ProblemName>
         </VStack>
         {renderMemberInfo()}
-        <S.BottomText> 오늘도 파이팅! </S.BottomText>
+        <S.BottomText> 오늘도 파이팅 😁 </S.BottomText>
       </S.ProblemWrapper>
       {isLoggedIn && <MarathonProblemList />}
     </S.Container>
