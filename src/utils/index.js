@@ -1,7 +1,3 @@
-import Bronze from '../assets/bronze-small.png';
-import Silver from '../assets/silver-small.png';
-import Gold from '../assets/gold-small.png';
-import Platinum from '../assets/platinum-small.png';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
@@ -9,11 +5,12 @@ import 'dayjs/locale/ko';
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
-export const getDifficultyIcon = difficulty => {
-  if (difficulty < 6) return Bronze;
-  if (difficulty < 11) return Silver;
-  if (difficulty < 16) return Gold;
-  return Platinum;
+export const getProblemTier = difficulty => {
+  if (difficulty >= 1 && difficulty <= 5) return 'bronze';
+  if (difficulty >= 6 && difficulty <= 10) return 'silver';
+  if (difficulty >= 11 && difficulty <= 15) return 'gold';
+  if (difficulty >= 16 && difficulty <= 20) return 'platinum';
+  return 'unknown';
 };
 
 export const formatSolveTime = solvedAt => {

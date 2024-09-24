@@ -1,6 +1,7 @@
-import { getDifficultyIcon } from '../../utils';
+import { getProblemTier } from '../../utils';
 import { serverAPI } from '../../api/axios';
 import { useEffect, useState } from 'react';
+import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import lock from '../../assets/lock.svg';
 import {
   ProblemListContainer,
@@ -49,7 +50,9 @@ const MarathonProblemList = () => {
           isSolved={problem.isSolved}
           onClick={() => handleProblemClick(problem.problemId)}
         >
-          <ProblemDifficulty src={getDifficultyIcon(problem.problemDifficulty)} />
+          <ProblemDifficulty
+            src={tierStyleConfig[getProblemTier(problem.problemDifficulty)].icon.small}
+          />
           <ProblemNumber>{problem.problemId}</ProblemNumber>
         </ProblemItem>
         {!(idx === DAYS_OF_WEEK - 1) && <HorizontalLine />}

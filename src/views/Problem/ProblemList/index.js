@@ -1,25 +1,15 @@
 import S from './ProblemList.styles';
 import { HStack, VStack } from '../../../styles/Stack.styles';
 import { useProblem } from '../../../hooks/useProblem';
-import BronzeIcon from '../../../assets/bronze-small.png';
-import SilverIcon from '../../../assets/silver-small.png';
-import GoldIcon from '../../../assets/gold-small.png';
 import MemberIcon from '../../../assets/member-icon.svg';
 import ActiveMemberIcon from '../../../assets/active-member-icon.svg';
 import RightArrowIcon from '../../../assets/right-arrow-in-blue-circle.svg';
 import Season2Logo from '../../../assets/logo-season2.png';
+import { tierStyleConfig } from '../../../styles/tierStyleConfig';
+import { getProblemTier } from '../../../utils';
 
 export const ProblemListComponent = () => {
   const { problemList, fetchSolvedUserList, selectedProblemId, selectedSeason } = useProblem();
-  const getTierIcon = problem => {
-    if (problem.difficulty < 6) {
-      return BronzeIcon;
-    }
-    if (problem.difficulty < 11) {
-      return SilverIcon;
-    }
-    return GoldIcon;
-  };
 
   const moveToProblemSite = problem => {
     window.open(`https://www.acmicpc.net/problem/${problem.problemId}`);
@@ -47,7 +37,9 @@ export const ProblemListComponent = () => {
           {problemList.map((problem, index) => (
             <S.ProblemItem key={problem.id} delay={index}>
               <HStack style={{ gap: 4 }}>
-                <S.ProblemTier src={getTierIcon(problem)} />
+                <S.ProblemTier
+                  src={tierStyleConfig[getProblemTier(problem.difficulty)]?.icon.small}
+                />
                 <S.ProblemName>
                   {problem.problemId}. {problem.title}
                 </S.ProblemName>
