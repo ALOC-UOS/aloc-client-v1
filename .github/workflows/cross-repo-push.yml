@@ -22,11 +22,14 @@ jobs:
       - name: Push to target repo
         env:
           TARGET_REPO: git@github.com:baebae02/aloc-client.git
+          GH_USERNAME: 'baebae02'
+          GH_EMAIL: 'bae4614@gmail.com'
         run: |
-          git config --global user.name 'baebae02'
-          git config --global user.email 'bae4614@gmail.com'
+          git config --global user.name "$GH_USERNAME"
+          git config --global user.email "$GH_EMAIL"
+          git commit --amend --author="$GH_USERNAME <$GH_EMAIL>" --no-edit
           git remote add target_repo $TARGET_REPO
-          git push target_repo deploy:main --force
+          GIT_COMMITTER_NAME="$GH_USERNAME" GIT_COMMITTER_EMAIL="$GH_EMAIL" git push target_repo deploy:main --force
       - name: Send deployment status to Discord
         if: success()
         uses: tsickert/discord-webhook@v5.3.0
