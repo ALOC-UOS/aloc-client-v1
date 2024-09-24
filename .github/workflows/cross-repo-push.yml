@@ -23,8 +23,8 @@ jobs:
         env:
           TARGET_REPO: git@github.com:baebae02/aloc-client.git
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
+          git config --global user.name 'baebae02'
+          git config --global user.email 'bae4614@gmail.com'
           git remote add target_repo $TARGET_REPO
           git push target_repo deploy:main --force
       - name: Send deployment status to Discord
