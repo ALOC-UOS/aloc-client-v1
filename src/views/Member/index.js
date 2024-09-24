@@ -26,6 +26,7 @@ import {
   Icon,
   ProblemSolvedButton,
   BlueLoadingIcon,
+  MessageComponentText,
 } from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
@@ -57,21 +58,21 @@ const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
     case 'ALREADY_SOLVED':
       return (
-        <HStack style={{ gap: 4, fontSize: 15, fontWeight: 400 }}>
-          <div>✅</div>
-          <div>이미 문제를 풀었어요!</div>
+        <HStack style={{ gap: 4 }}>
+          <span>✅</span>
+          <span>이미 문제를 풀었어요!</span>
         </HStack>
       );
     case 'SOLVED':
       return (
-        <div style={{ fontSize: 15, fontWeight: 400 }}>
+        <HStack>
           <span style={{ color: '#408cff' }}>{rank}등</span>으로 문제를 풀었어요!
-        </div>
+        </HStack>
       );
     default:
       return (
-        <HStack style={{ gap: 4, fontSize: 15, fontWeight: 400 }}>
-          <div>🤔</div>
+        <HStack style={{ gap: 4 }}>
+          <span>🤔</span>
           <div>아직 문제를 풀지 않았어요!</div>
         </HStack>
       );
@@ -219,37 +220,29 @@ const Member = () => {
         icon: loadingIconWithBg,
         isLoading: true,
         children: (
-          <span
-            style={{
-              fontSize: '16px',
-              fontWeight: 500,
-            }}
-          >
+          <MessageComponentText>
             <span style={{ color: '#408cff' }}>풀이 여부</span>를 확인하고 있어요
-          </span>
+          </MessageComponentText>
         ),
       })}
       {rankMessage.render({
         children: (
-          <span
-            style={{
-              fontSize: '16px',
-              fontWeight: 500,
-            }}
-          >
+          <MessageComponentText>
             <MessageText solvedStatus={solvedStatus} rank={rank} />
-          </span>
+          </MessageComponentText>
         ),
       })}
       {coinMessage.render({
         icon: CoinIcon,
         isCoin: true,
         children: (
-          <CoinMessage
-            userCoin={userCoin}
-            obtainCoin={obtainCoin}
-            triggerAnimation={coinTriggerAnimation}
-          />
+          <MessageComponentText>
+            <CoinMessage
+              userCoin={userCoin}
+              obtainCoin={obtainCoin}
+              triggerAnimation={coinTriggerAnimation}
+            />
+          </MessageComponentText>
         ),
       })}
       <IconWrapper active={isLoading}>
