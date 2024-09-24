@@ -51,7 +51,7 @@ import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
 import { HStack } from '../../styles/Stack.styles';
 import { Message } from '../../components/Message';
-import CoinComponent from '../../components/Message/CoinComponent';
+import CoinMessage from '../../components/Message/CoinMessage';
 
 const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
@@ -245,7 +245,7 @@ const Member = () => {
         icon: CoinIcon,
         isCoin: true,
         children: (
-          <CoinComponent
+          <CoinMessage
             userCoin={userCoin}
             obtainCoin={obtainCoin}
             triggerAnimation={coinTriggerAnimation}
