@@ -97,7 +97,7 @@ const Member = () => {
   const [solvedStatus, setSolvedStatus] = useState('');
   const [rank, setRank] = useState(0);
   const [userCoin, setUserCoin] = useState(0);
-  const [obtainCoin, setObatinCoin] = useState(0);
+  const [obtainCoin, setObtainCoin] = useState(0);
   const [coinTriggerAnimation, setCoinTriggerAnimation] = useState(false);
 
   useEffect(() => {
@@ -177,7 +177,7 @@ const Member = () => {
         if (res.data.result.solvedStatus === 'SOLVED') {
           setRank(res.data.result.place);
           setUserCoin(res.data.result.userCoin);
-          setObatinCoin(res.data.result.obtainCoin);
+          setObtainCoin(res.data.result.obtainCoin);
           loadMemberData();
           setShowConfetti(true);
           setTimeout(() => setShowConfetti(false), 2000);
