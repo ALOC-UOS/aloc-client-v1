@@ -1,7 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
 const DropDownMenu = ({ children, isOpen }) => {
-  return isOpen ? <DropDownMenuContainer>{children}</DropDownMenuContainer> : null;
+  if (!isOpen) return null;
+  return <DropDownMenuContainer>{children}</DropDownMenuContainer>;
 };
 
 export default DropDownMenu;
