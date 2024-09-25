@@ -8,11 +8,13 @@ import { VStack } from '../../styles/Stack.styles';
 import { useProblem } from '../../hooks/useProblem';
 import Dropdown from '../../components/Dropdown';
 import downArrowBtn from '../../assets/down-arrow-btn.svg';
+import DropdownItem from '../../components/Dropdown/Item';
 
 const Problem = () => {
   const { selectedCourse, setSelectedCourse } = useProblem();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSeason, setSelectedSeason] = useState(3);
+  const seasons = [1, 2, 3];
   return (
     <S.ProblemContainer>
       <TopBar />
@@ -44,30 +46,17 @@ const Problem = () => {
               />
             </Dropdown.Trigger>
             <Dropdown.Menu isOpen={isDropdownOpen}>
-              <Dropdown.Item
-                onClick={() => {
-                  setSelectedSeason(1);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 1
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setSelectedSeason(2);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 2
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setSelectedSeason(3);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 3
-              </Dropdown.Item>
+              {seasons.map(season => (
+                <Dropdown.Item
+                  key={season}
+                  onClick={() => {
+                    setSelectedSeason(season);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  시즌 {season}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </div>
