@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
 const DropdownItem = ({ children, onClick }) => {
-  return (
-    <DropdownItemContainer onClick={onClick}>
-      {children}
-    </DropdownItemContainer>
-  );
+  return <DropdownItemContainer onClick={onClick}>{children}</DropdownItemContainer>;
 };
 
 export default DropdownItem;
