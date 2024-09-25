@@ -25,6 +25,5 @@ const DropdownItemContainer = styled.button`
 
   font-size: 14px;
   color: ${props => props.theme.titleText};
-  letter-spacing: -1.12px;
   text-align: left;
 `;
