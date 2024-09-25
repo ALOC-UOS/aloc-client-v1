@@ -5,13 +5,13 @@ import { HStack } from '../../../styles/Stack.styles';
 const CoinComponent = ({ userCoin, obtainCoin, triggerAnimation }) => {
   const [coin, setCoin] = useState(userCoin);
   const [isVisible, setIsVisible] = useState(true);
-  const plusCoinSpanRef = useRef();
+  const earnedCoinRef = useRef();
 
   useEffect(() => {
     if (triggerAnimation) {
       const fadeOutTimeout = setTimeout(() => {
         setIsVisible(false);
-        setCoin(userCoin + obtainCoin);
+        setCoin(prev => prev + obtainCoin);
       }, 2000);
 
       return () => {
@@ -19,6 +19,10 @@ const CoinComponent = ({ userCoin, obtainCoin, triggerAnimation }) => {
       };
     }
   }, [triggerAnimation]);
+
+  useEffect(() => {
+    setCoin(userCoin);
+  }, [userCoin]);
 
   return (
     <HStack
@@ -31,11 +35,7 @@ const CoinComponent = ({ userCoin, obtainCoin, triggerAnimation }) => {
       }}
     >
       <S.CurrentCoin isVisible={isVisible}>{coin}코인 </S.CurrentCoin>
-      <S.EarnedCoin
-        ref={plusCoinSpanRef}
-        isVisible={isVisible}
-        width={isVisible ? plusCoinSpanRef.current?.offsetWidth : 0}
-      >
+      <S.EarnedCoin ref={earnedCoinRef} isVisible={isVisible} width={isVisible ? 23 : 0}>
         +{obtainCoin}
       </S.EarnedCoin>
     </HStack>
