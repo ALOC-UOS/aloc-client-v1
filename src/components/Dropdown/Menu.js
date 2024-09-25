@@ -29,7 +29,7 @@ const DropDownMenuContainer = styled.div`
   padding: 8px;
   gap: 4px;
 
-  background-color: #ffffff;
+  background-color: ${props => props.theme.white};
   border-radius: 24px;
   z-index: 1000;
 
