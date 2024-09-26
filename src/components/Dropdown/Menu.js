@@ -23,10 +23,11 @@ const DropDownMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  top: calc(100% + 12px);
-  right: 0;
+  top: calc(100% - 12px);
+  left: 50%
+  transform: translateX(-50%);
 
-  width: 100%;
+  width: calc(100% - 48px);
   padding: 8px;
   gap: 4px;
 

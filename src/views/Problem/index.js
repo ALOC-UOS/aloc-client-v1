@@ -8,7 +8,6 @@ import { VStack } from '../../styles/Stack.styles';
 import { useProblem } from '../../hooks/useProblem';
 import Dropdown from '../../components/Dropdown';
 import downArrowBtn from '../../assets/down-arrow-btn.svg';
-import DropdownItem from '../../components/Dropdown/Item';
 
 const Problem = () => {
   const { selectedCourse, setSelectedCourse } = useProblem();
@@ -19,47 +18,37 @@ const Problem = () => {
     <S.ProblemContainer>
       <TopBar />
       <VStack style={{ height: '80vh', gap: '16px', minWidth: '262px' }}>
-        <div
-          style={{
-            height: '88px',
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '24px',
-            backgroundColor: '#f0f1f5',
-            borderRadius: '48px',
-          }}
-        >
-          <Dropdown>
-            <Dropdown.Trigger
-              onClick={() => {
-                setIsDropdownOpen(!isDropdownOpen);
+        <Dropdown>
+          <Dropdown.Trigger
+            onClick={() => {
+              setIsDropdownOpen(!isDropdownOpen);
+            }}
+          >
+            <div>시즌 {selectedSeason}</div>
+            <img
+              alt="Down Arrow"
+              src={downArrowBtn}
+              style={{
+                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.3s ease',
               }}
-            >
-              <div>시즌 {selectedSeason}</div>
-              <img
-                alt="Down Arrow"
-                src={downArrowBtn}
-                style={{
-                  transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.3s ease',
+            />
+          </Dropdown.Trigger>
+          <Dropdown.Menu isOpen={isDropdownOpen}>
+            {seasons.map(season => (
+              <Dropdown.Item
+                key={season}
+                onClick={() => {
+                  setSelectedSeason(season);
+                  setIsDropdownOpen(false);
                 }}
-              />
-            </Dropdown.Trigger>
-            <Dropdown.Menu isOpen={isDropdownOpen}>
-              {seasons.map(season => (
-                <Dropdown.Item
-                  key={season}
-                  onClick={() => {
-                    setSelectedSeason(season);
-                    setIsDropdownOpen(false);
-                  }}
-                >
-                  시즌 {season}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+              >
+                시즌 {season}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+
         <S.Wrapping style={{ flexDirection: 'row', gap: '24px', flexShrink: 0 }}>
           <S.Button selected={selectedCourse === 'HALF'} onClick={() => setSelectedCourse('HALF')}>
             HALF
