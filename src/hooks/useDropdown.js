@@ -2,12 +2,17 @@ import { useState } from 'react';
 import Dropdown from '../components/Dropdown';
 import downArrowBtn from '../assets/down-arrow-btn.svg';
 
-const useDropdown = ({ itemList, defaultIdx }) => {
+const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(itemList[defaultIdx]);
   const open = () => setIsDropdownOpen(true);
   const close = () => setIsDropdownOpen(false);
   const render = () => {
+    const handleClickItem = item => {
+      setSelectedItem(item);
+      setIsDropdownOpen(false);
+      onClickItem(item);
+    };
     return (
       <Dropdown>
         <Dropdown.Trigger
@@ -27,13 +32,7 @@ const useDropdown = ({ itemList, defaultIdx }) => {
         </Dropdown.Trigger>
         <Dropdown.Menu isOpen={isDropdownOpen}>
           {itemList.map(item => (
-            <Dropdown.Item
-              key={item}
-              onClick={() => {
-                setSelectedItem(item);
-                setIsDropdownOpen(false);
-              }}
-            >
+            <Dropdown.Item key={item} onClick={() => handleClickItem(item)}>
               {item}
             </Dropdown.Item>
           ))}

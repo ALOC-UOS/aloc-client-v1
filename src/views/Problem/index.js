@@ -9,9 +9,16 @@ import { useProblem } from '../../hooks/useProblem';
 import useDropdown from '../../hooks/useDropdown';
 
 const Problem = () => {
-  const { selectedCourse, setSelectedCourse } = useProblem();
+  const { selectedCourse, setSelectedCourse, setSelectedSeason } = useProblem();
   const seasons = ['시즌 1', '시즌 2', '시즌 3'];
-  const seasonDropdown = useDropdown({ itemList: seasons, defaultIdx: 2 });
+  const seasonDropdown = useDropdown({
+    itemList: seasons,
+    defaultIdx: 2,
+    onClickItem: item => {
+      const season = item.split(' ');
+      setSelectedSeason(season[1]);
+    },
+  });
   return (
     <S.ProblemContainer>
       <TopBar />
