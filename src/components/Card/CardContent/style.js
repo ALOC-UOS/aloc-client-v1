@@ -35,21 +35,5 @@ const Text = styled.div`
   color: ${props => props.theme.contentText};
   font-size: 16px;
   font-weight: 500;
-
-  ${props =>
-    props.textColor === 'blue' &&
-    css`
-      color: ${props.theme.primary};
-    `}
-  ${props =>
-    props.textColor === 'gold' &&
-    css`
-      color: #ffb800;
-    `}
-  ${props =>
-    props.textColor === 'silver' &&
-    css`
-      color: #bcbfc7;
-    `}
 `;
 export { CardContentWrapper, CardSubscription, CardContent, Icon, Text };

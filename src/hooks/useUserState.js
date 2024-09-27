@@ -1,5 +1,5 @@
 import { atom, useAtom } from 'jotai';
-const initUserAtomValue = { uesr: null };
+const initUserAtomValue = { user: null };
 const userAtom = atom(initUserAtomValue);
 
 const useUserState = () => {

@@ -25,10 +25,10 @@ const MoveBackground = keyframes`
 
 const rotate360 = keyframes`
   from {
-    transform: rotate(0deg) translate(-50%, -50%);
+    rotate: 0;
   }
   to {
-    transform: rotate(360deg) translate(-50%, -50%);
+    rotate: 360deg;
   }
 `;
 
@@ -173,20 +173,21 @@ const ProfileImage = styled.img`
   position: relative;
   width: 160px;
   height: 160px;
+  background-color: ${props => props.theme.background};
 `;
 
 const ProfileBlurImage = styled.img`
-  animation: ${rotate360} 12s linear infinite;
   transform-origin: top left;
   position: absolute;
   top: 50%;
   left: 50%;
   width: 480px;
   height: 378px;
+  scale: 1.5 1;
+  transform: translate(-50%, -50%);
   filter: blur(64px);
   &:hover {
-    filter: blur(80px) brightness(1.3);
-    scale: 1.2;
+    filter: blur(64px) brightness(1.3);
   }
 `;
 
@@ -450,6 +451,12 @@ const BlueLoadingIcon = styled.img`
   height: 48px;
 `;
 
+const MessageComponentText = styled.span`
+  font-weight: 500;
+  font-size: 16;
+  color: ${props => props.theme.titleText};
+`;
+
 export {
   MemberContainer,
   ContentContainer,
@@ -476,4 +483,5 @@ export {
   Icon,
   ProblemSolvedButton,
   BlueLoadingIcon,
+  MessageComponentText,
 };

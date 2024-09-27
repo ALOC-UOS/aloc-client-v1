@@ -55,19 +55,24 @@ const Text = styled.div`
       color: ${props.theme.primary};
     `}
   ${props =>
+    props.textColor === 'bronze' &&
+    css`
+      color: #b97c63;
+    `}
+  ${props =>
+    props.textColor === 'silver' &&
+    css`
+      color: #abbac7;
+    `}
+  ${props =>
     props.textColor === 'gold' &&
     css`
       color: #ffb800;
     `}
   ${props =>
-    props.textColor === 'silver' &&
+    props.textColor === 'platinum' &&
     css`
-      color: #bcbfc7;
-    `}
-  ${props =>
-    props.textColor === 'bronze' &&
-    css`
-      color: #b97c63;
+      color: #00c697;
     `}
 `;
 export { HistoryListContainer, CardWrapper, CardSubscription, CardContent, Icon, Text };
