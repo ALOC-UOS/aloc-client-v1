@@ -28,4 +28,5 @@ const DropDownTriggerContainer = styled.button`
 
   font-size: 14px;
   color: ${props => props.theme.primary};
+  cursor: pointer;
 `;
