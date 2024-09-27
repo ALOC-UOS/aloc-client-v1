@@ -6,49 +6,17 @@ import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
 import { VStack } from '../../styles/Stack.styles';
 import { useProblem } from '../../hooks/useProblem';
-import Dropdown from '../../components/Dropdown';
-import downArrowBtn from '../../assets/down-arrow-btn.svg';
+import useDropdown from '../../hooks/useDropdown';
 
 const Problem = () => {
   const { selectedCourse, setSelectedCourse } = useProblem();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSeason, setSelectedSeason] = useState(3);
-  const seasons = [1, 2, 3];
+  const seasons = ['시즌 1', '시즌 2', '시즌 3'];
+  const seasonDropdown = useDropdown({ itemList: seasons, defaultIdx: 2 });
   return (
     <S.ProblemContainer>
       <TopBar />
       <VStack style={{ height: '80vh', gap: '16px', minWidth: '262px' }}>
-        <Dropdown>
-          <Dropdown.Trigger
-            onClick={() => {
-              setIsDropdownOpen(!isDropdownOpen);
-            }}
-          >
-            <div>시즌 {selectedSeason}</div>
-            <img
-              alt="Down Arrow"
-              src={downArrowBtn}
-              style={{
-                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.3s ease',
-              }}
-            />
-          </Dropdown.Trigger>
-          <Dropdown.Menu isOpen={isDropdownOpen}>
-            {seasons.map(season => (
-              <Dropdown.Item
-                key={season}
-                onClick={() => {
-                  setSelectedSeason(season);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 {season}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-
+        {seasonDropdown.render()}
         <S.Wrapping style={{ flexDirection: 'row', gap: '24px', flexShrink: 0 }}>
           <S.Button selected={selectedCourse === 'HALF'} onClick={() => setSelectedCourse('HALF')}>
             HALF
