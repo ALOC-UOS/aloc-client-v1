@@ -3,21 +3,21 @@ import Dropdown from '../components/Dropdown';
 import downArrowBtn from '../assets/down-arrow-btn.svg';
 
 const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
-  const [isOpen, setIsDOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(itemList[defaultIdx]);
-  const open = () => setIsDropdownOpen(true);
-  const close = () => setIsDropdownOpen(false);
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
   const render = () => {
     const handleClickItem = item => {
       setSelectedItem(item);
-      setIsDropdownOpen(false);
+      close();
       onClickItem(item);
     };
     return (
       <Dropdown>
         <Dropdown.Trigger
           onClick={() => {
-            setIsDropdownOpen(!isDropdownOpen);
+            setIsOpen(!isOpen);
           }}
         >
           <div>{selectedItem}</div>
@@ -25,12 +25,12 @@ const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
             alt="Down Arrow"
             src={downArrowBtn}
             style={{
-              transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.3s ease',
             }}
           />
         </Dropdown.Trigger>
-        <Dropdown.Menu isOpen={isDropdownOpen}>
+        <Dropdown.Menu isOpen={isOpen}>
           {itemList.map(item => (
             <Dropdown.Item key={item} onClick={() => handleClickItem(item)}>
               {item}
