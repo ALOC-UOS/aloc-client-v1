@@ -3,7 +3,7 @@ import Dropdown from '../components/Dropdown';
 import downArrowBtn from '../assets/down-arrow-btn.svg';
 
 const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOpen, setIsDOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(itemList[defaultIdx]);
   const open = () => setIsDropdownOpen(true);
   const close = () => setIsDropdownOpen(false);
