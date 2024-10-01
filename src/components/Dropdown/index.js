@@ -15,7 +15,6 @@ export default Dropdown;
 
 const DropDownContainer = styled.div`
   position: relative;
-  height: 88px;
   display: flex;
   justify-content: center;
   padding: 24px;
