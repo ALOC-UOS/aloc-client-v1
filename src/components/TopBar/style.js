@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const TopBarContainer = styled('div')`
   z-index: 100;
@@ -25,27 +25,24 @@ const TopBarContainer = styled('div')`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  cursor: pointer;
+`;
 const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
 const LogoImage = styled.img`
   width: 32px;
   height: 32px;
 `;
-
 const TypoImage = styled.img`
   width: 55px;
   height: 32px;
 `;
 
-const UserImage = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 32px;
-  cursor: pointer;
-`;
-const UserImageWrapper = styled.div``;
-export { TopBarContainer };
+export default { TopBarContainer, Container, ImageWrapper, LogoImage, TypoImage };

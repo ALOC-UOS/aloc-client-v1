@@ -1,4 +1,5 @@
-import Input from '../../Input/Input';
+import Input from '../../Input';
+import { VStack } from '../../../styles/Stack.styles';
 import { forwardRef } from 'react';
 
 const ChangePasswordModalChildren = forwardRef(
@@ -7,7 +8,7 @@ const ChangePasswordModalChildren = forwardRef(
     ref
   ) => {
     return (
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <VStack style={{ width: '100%', gap: 10 }}>
         <Input
           type={'password'}
           ref={nextPasswordRef}
@@ -20,7 +21,7 @@ const ChangePasswordModalChildren = forwardRef(
           isFocused={checkedChangePasswordFocus}
           initialPlaceholder={'비밀번호 재입력'}
         />
-      </div>
+      </VStack>
     );
   }
 );

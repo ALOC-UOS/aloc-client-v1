@@ -1,14 +1,14 @@
 import TopBarLeft from './components/TopBarLeft';
 import TopBarRight from './components/TopBarRight';
 import React from 'react';
-import { TopBarContainer } from './style';
+import S from './style';
 
 const TopBar = () => {
   return (
-    <TopBarContainer>
+    <S.TopBarContainer>
       <TopBarLeft />
       <TopBarRight />
-    </TopBarContainer>
+    </S.TopBarContainer>
   );
 };
 
