@@ -4,25 +4,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLoginState from '../../../hooks/useLoginState';
 import UserMenuConainer from './UserMenuContainer';
-
-const TopBarItems = [
-  {
-    name: '문제 목록',
-    route: '/problem',
-  },
-  {
-    name: '구성원',
-    route: '/member',
-  },
-  {
-    name: '상점',
-    route: '/shop',
-  },
-];
+import { TopBarItems } from '../constants';
+import { goRoute } from '../utils';
 
 const TopBarRight = () => {
-  const [selectedItem, _setSelectedItem] = useState(window.location.pathname);
-  const [shopUpdated, setShopUpdated] = useState(true);
+  const [selectedItem, _] = useState(window.location.pathname);
   const { isLoggedIn } = useLoginState();
   const navigate = useNavigate();
 
@@ -31,20 +17,8 @@ const TopBarRight = () => {
     if (shopChecked === null) {
       // shopChecked 항목이 없으면 false로 초기화
       localStorage.setItem('shopChecked', 'false');
-      setShopUpdated(true);
     }
-    setShopUpdated(shopChecked === 'false');
   }, []);
-
-  function goRoute(route) {
-    if (route === selectedItem) return;
-    window.scrollTo(0, 0);
-    if (route === '/shop') {
-      localStorage.setItem('shopChecked', 'true');
-      setShopUpdated(false);
-    }
-    navigate(route);
-  }
 
   return (
     <HStack style={{ gap: 40 }}>
@@ -52,12 +26,9 @@ const TopBarRight = () => {
         <S.TopBarItem
           key={index}
           selected={selectedItem === item.route}
-          onClick={() => goRoute(item.route)}
+          onClick={() => goRoute(item.route, selectedItem, navigate)}
         >
           {item.name}
-          {item.route === '/shop' && shopUpdated && (
-            <span style={{ color: 'red', marginLeft: 5 }}>•</span>
-          )}
         </S.TopBarItem>
       ))}
       {isLoggedIn ? (
