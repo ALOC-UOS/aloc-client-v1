@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
-const TopBarContainer = styled('div')`
+const TopBarContainer = styled.div`
   z-index: 100;
   position: fixed;
-  top: 0px;
+  top: 0;
   left: 0;
   right: 0;
   display: flex;
@@ -17,29 +17,17 @@ const TopBarContainer = styled('div')`
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
 
-  ${props =>
-    props.isScroll &&
-    css`
-      background-color: ${props => props.theme.foreground}18;
-    `}
   @media (max-width: 480px) {
     top: 0;
     margin: 0;
     padding: 8px 16px;
-    border-radius: 0px;
+    border-radius: 0;
   }
 `;
-
-const TopBarLeft = styled.div`
+const ImageWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 10px;
-  cursor: pointer;
-`;
-const TopBarRight = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TopBarItem = styled.div`
@@ -68,7 +56,7 @@ const TopBarButton = styled.div`
   border-radius: 12px;
   background-color: ${props => props.theme.primary};
 
-  color: #ffffff;
+  color: ${props => props.theme.white};
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -78,38 +66,9 @@ const TopBarButton = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const LogoImage = styled.img`
-  width: 32px;
-  height: 32px;
-`;
-
-const TypoImage = styled.img`
-  width: 55px;
-  height: 32px;
-`;
-
-const UserImage = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 32px;
-  cursor: pointer;
-`;
-const UserImageWrapper = styled.div``;
-export {
+export default {
   TopBarContainer,
-  TopBarLeft,
-  TopBarRight,
+  ImageWrapper,
   TopBarItem,
   TopBarButton,
-  ImageWrapper,
-  TypoImage,
-  LogoImage,
-  UserImage,
-  UserImageWrapper,
 };
