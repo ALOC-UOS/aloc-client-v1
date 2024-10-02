@@ -5,7 +5,7 @@ const CardContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   gap: 24px;
-  margin-top: 24px;
+  padding: 24px;
   width: calc(100% - 80px);
   @media (max-width: 480px) {
     width: calc(100% - 32px);
