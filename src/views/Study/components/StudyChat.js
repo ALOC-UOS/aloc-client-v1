@@ -1,84 +1,72 @@
 import styled from 'styled-components';
 import MyMessage from './MyMessage';
-import OtherMessage from './OtherMessage';
 import ChatFooter from './ChatFooter';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserState from '../../../hooks/useUserState';
-import { serverAPI } from '../../../api/axios';
+import { connectWebSocket } from '../utils/websocket';
 
 const StudyChat = () => {
+  const [data, setData] = useState([]);
+  const [isNewMessageState, setIsNewMessageState] = useState(false);
   const ws = useRef(null);
-  const navigate = useNavigate();
-  const [roomId, setRoomId] = useState('686a086e-ab25-4017-84f8-eab9b8a9de31');
+  const bottomRef = useRef(null);
+  const scrollRef = useRef(null);
   const reconnectTimeoutRef = useRef(null);
+
+  const navigate = useNavigate();
   const { user } = useUserState();
 
-  // const getRommId = async () => {
-  //   const data = await serverAPI
-  //     .get('/chat')
-  //     .then(response => {
-  //       return response.data[0].roomId;
-  //     })
-  //     .catch(error => console.log(error));
-  //   setRoomId(data);
-  // };
-  // useEffect(() => {
-  //   getRommId();
-  // }, []);
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  };
 
-  const connectWebSocket = (ws, user) => {
-    if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+  const isAtBottom = () => {
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    return scrollHeight - scrollTop <= clientHeight + 30;
+  };
+
+  const isAtScreen = () => {
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+    return scrollHeight - scrollTop <= clientHeight + 200;
+  };
+
+  //scroll 이벤트 등록
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isAtBottom()) {
+        setIsNewMessageState(false);
+      }
+    };
+    const messageWrapper = scrollRef.current;
+    if (messageWrapper) {
+      messageWrapper.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      if (messageWrapper) {
+        messageWrapper.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const lastMessageUserName = data[data.length - 1]?.props?.content?.username;
+    if (lastMessageUserName === user?.username) {
+      scrollToBottom();
       return;
     }
-    ws.current = new WebSocket('wss://www.iflab.run/ws/chat');
-    ws.current.onopen = () => {
-      clearTimeout(reconnectTimeoutRef.current);
-      if (user) {
-        const enterMessage = {
-          type: 'ENTER',
-          sender: user.username,
-          senderInfo: {
-            githubId: user.githubId,
-            tier: user.rank,
-            studentId: user.studentId,
-          },
-          message: 'Entered the room',
-        };
-        ws.current.send(JSON.stringify(enterMessage));
-      }
-    };
-    ws.current.onmessage = event => {
-      const receivedData = JSON.parse(event.data);
-      if (receivedData.sender !== user.username) {
-        setData(prev => [
-          ...prev,
-          <OtherMessage
-            key={Date.now()}
-            content={{
-              githubId: receivedData.senderGithub,
-              username: receivedData.sender,
-              message: receivedData.message,
-              messageTime: new Date().toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              }),
-            }}
-          />,
-        ]);
-      }
-    };
-    ws.current.onclose = event => {
-      console.log('WebSocket disconnected. Attempting to reconnect...', event.reason);
-      reconnectTimeoutRef.current = setTimeout(() => connectWebSocket(user), 5000);
-    };
-    ws.current.onerror = error => {
-      console.error('WebSocket error:', error);
-    };
-  };
+    if (isAtScreen()) {
+      scrollToBottom();
+      return;
+    }
+    if (!isAtBottom()) {
+      setIsNewMessageState(true);
+    }
+  }, [data, user?.username]);
+
   useEffect(() => {
     if (user) {
-      connectWebSocket(ws, user);
+      connectWebSocket({ ws, user, reconnectTimeoutRef, setData });
     }
     return () => {
       clearTimeout(reconnectTimeoutRef.current);
@@ -88,18 +76,6 @@ const StudyChat = () => {
     };
   }, [user]);
 
-  const [data, setData] = useState([
-    <OtherMessage
-      key="initial"
-      content={{
-        githubId: 'jongbin26',
-        username: '조종빈',
-        message: '채팅방에 들어오면 텍스트를 입력하세요',
-        messageTime: '14:30',
-      }}
-    />,
-  ]);
-
   const sendMessage = useCallback(
     content => {
       if (!user) {
@@ -107,7 +83,7 @@ const StudyChat = () => {
         navigate('/login');
         return;
       }
-      if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+      if (ws && ws.current?.readyState === WebSocket.OPEN) {
         const chatMessage = {
           type: 'TALK',
           sender: user.username,
@@ -125,6 +101,7 @@ const StudyChat = () => {
             key={Date.now()}
             content={{
               ...content,
+              username: user.username,
               messageTime: new Date().toLocaleTimeString([], {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -132,6 +109,7 @@ const StudyChat = () => {
             }}
           />,
         ]);
+        scrollToBottom();
       } else {
         console.error('WebSocket is not open. ReadyState:', ws.current?.readyState);
       }
@@ -141,7 +119,30 @@ const StudyChat = () => {
 
   return (
     <ChatWrapper>
-      <MessageWrapper>{data.map(message => message)}</MessageWrapper>
+      <MessageWrapper ref={scrollRef}>
+        {data.map(message => message)}
+
+        <div ref={bottomRef} />
+      </MessageWrapper>
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 90,
+          left: '50%',
+          transform: 'translate(-50%, 0)',
+        }}
+      >
+        {isNewMessageState && (
+          <NewMessageButton
+            onClick={() => {
+              scrollToBottom();
+              setIsNewMessageState(false);
+            }}
+          >
+            새로운 채팅이 있어요.
+          </NewMessageButton>
+        )}
+      </div>
       <ChatFooter addMyMessage={sendMessage} />
     </ChatWrapper>
   );
@@ -149,6 +150,7 @@ const StudyChat = () => {
 export default StudyChat;
 
 const ChatWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
@@ -158,6 +160,7 @@ const ChatWrapper = styled.div`
 `;
 
 const MessageWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-basis: 92%;
   flex-direction: column;
@@ -165,4 +168,14 @@ const MessageWrapper = styled.div`
   overflow: scroll;
   padding: 20px 20px 10px 20px;
   scrollbar-width: none;
+`;
+
+const NewMessageButton = styled.button`
+  color: white;
+  width: 300px;
+  height: 30px;
+  border: none;
+  background: ${props => props.theme.contentText};
+  opacity: 0.8;
+  border-radius: 10px;
 `;
