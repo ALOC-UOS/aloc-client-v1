@@ -77,3 +77,12 @@ export const uploadImage = async (
     }
   }
 };
+
+export function goRoute(route, selectedItem, navigate) {
+  if (route === selectedItem) return;
+  window.scrollTo(0, 0);
+  if (route === '/shop') {
+    localStorage.setItem('shopChecked', 'true');
+  }
+  navigate(route);
+}
