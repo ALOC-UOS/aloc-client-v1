@@ -12,6 +12,8 @@ import ChangePasswordModalChildren from '../components/ChangePasswordModalChildr
 import ProfileChangeModalChildren from '../components/ProfileChangeModalChildren';
 import UserMenuChildren from '../components/UserMenuChildren';
 
+import { HStack } from '../../../styles/Stack.styles';
+
 const UserMenuConainer = () => {
   const [messageText, setMessageText] = useState('');
   const [selectedFile, setselectedFile] = useState(null);
@@ -63,7 +65,10 @@ const UserMenuConainer = () => {
     <>
       {toastMessage.render({
         children: (
-          <div style={{ fontSize: 15, fontWeight: 400 }}> ✅&nbsp;&nbsp;&nbsp;{messageText}</div>
+          <HStack style={{ gap: 10 }}>
+            <div style={{ fontSize: 16, fontWeight: 400 }}>✅</div>
+            <div style={{ fontSize: 16, fontWeight: 400 }}>{messageText}</div>
+          </HStack>
         ),
       })}
       {profileChangeModal.render({
