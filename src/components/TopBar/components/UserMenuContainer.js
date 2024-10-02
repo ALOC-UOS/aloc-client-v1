@@ -6,7 +6,8 @@ import { Message } from '../../Message';
 import useModal from '../../../hooks/useModal';
 import useContainer from '../../../hooks/useContainer';
 
-import { checkPasswordValidate, renderUserImage, uploadImage } from '../utils';
+import { checkPasswordValidate, uploadImage } from '../utils';
+import { renderUserImage } from '../utils/renderUserImage';
 
 import ChangePasswordModalChildren from '../components/ChangePasswordModalChildren';
 import ProfileChangeModalChildren from '../components/ProfileChangeModalChildren';

@@ -1,7 +1,5 @@
 import { serverAPI } from '../../../api/axios';
-import styled from 'styled-components';
-import memberIcon from '../../../assets/member-icon.svg';
-import DefaultProfile from '../../../assets/default-profile.svg';
+import { MIN_PASSWORD_LENGTH } from '../constants';
 
 const resetInput = (ref, placeholderText) => {
   ref.current.setValue('');
@@ -20,7 +18,7 @@ export const checkPasswordValidate = (
   const nextPassword = nextPasswordRef.current.getValue();
   const checkedPassword = checkedNextPasswordRef.current.getValue();
   //비밀번호 검증
-  if (nextPassword.length <= 3) {
+  if (nextPassword.length < MIN_PASSWORD_LENGTH) {
     resetInput(nextPasswordRef, '비밀번호는 4글자 이상이어야 합니다.');
     checkedNextPasswordRef.current.setValue('');
     setChangePasswordFocus(true);
@@ -79,25 +77,3 @@ export const uploadImage = async (
     }
   }
 };
-
-export const renderUserImage = (user, userMenu) => {
-  return user ? (
-    user.profileImageFileName ? (
-      <UserImage
-        src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
-        onClick={userMenu.toggle}
-      />
-    ) : (
-      <UserImage src={memberIcon} onClick={userMenu.toggle} />
-    )
-  ) : (
-    <UserImage src={DefaultProfile} />
-  );
-};
-
-const UserImage = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 32px;
-  cursor: pointer;
-`;
