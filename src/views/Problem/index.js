@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import S from './Problem.styles';
 import TopBar from '../../components/TopBar';
 import { AlgorithmListComponent as AlgorithmList } from './AlgorithmList';
@@ -6,13 +6,24 @@ import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
 import { VStack } from '../../styles/Stack.styles';
 import { useProblem } from '../../hooks/useProblem';
+import useDropdown from '../../hooks/useDropdown';
 
 const Problem = () => {
-  const { selectedCourse, setSelectedCourse } = useProblem();
+  const { selectedCourse, setSelectedCourse, setSelectedSeason } = useProblem();
+  const seasons = ['시즌 1', '시즌 2', '시즌 3'];
+  const seasonDropdown = useDropdown({
+    itemList: seasons,
+    defaultIdx: 2,
+    onClickItem: item => {
+      const season = item.split(' ');
+      setSelectedSeason(season[1]);
+    },
+  });
   return (
     <S.ProblemContainer>
       <TopBar />
       <VStack style={{ height: '80vh', gap: '16px', minWidth: '262px' }}>
+        {seasonDropdown.render()}
         <S.Wrapping style={{ flexDirection: 'row', gap: '24px', flexShrink: 0 }}>
           <S.Button selected={selectedCourse === 'HALF'} onClick={() => setSelectedCourse('HALF')}>
             HALF

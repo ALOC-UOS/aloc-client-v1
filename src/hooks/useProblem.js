@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 const API_URL_PREFIX = 'https://www.iflab.run/api2/';
 const CURRENT_SEASON = 3;
 
+const selectedSeasonAtom = atom(CURRENT_SEASON);
 const selectedCourseAtom = atom('FULL');
 const algorithmListAtom = atom([]);
 const selectedAlgorithmAtom = atom(null);
@@ -12,6 +13,7 @@ const problemListAtom = atom([]);
 const solvedUserListAtom = atom([]);
 
 export const useProblem = () => {
+  const [selectedSeason, setSelectedSeason] = useAtom(selectedSeasonAtom);
   const [selectedCourse, setSelectedCourse] = useAtom(selectedCourseAtom);
   const [selectedAlgorithm, setSelectedAlgorithm] = useAtom(selectedAlgorithmAtom);
   const [selectedProblemId, setSelectedProblemId] = useState(null);
@@ -20,8 +22,8 @@ export const useProblem = () => {
   const [solvedUserList, setSolvedUserList] = useAtom(solvedUserListAtom);
 
   useEffect(() => {
-    fetchAlgorithmList(CURRENT_SEASON);
-  }, []);
+    fetchAlgorithmList(selectedSeason);
+  }, [selectedSeason]);
 
   useEffect(() => {
     if (selectedAlgorithm && selectedCourse) {
@@ -29,13 +31,13 @@ export const useProblem = () => {
       setSelectedProblemId(null);
       setSolvedUserList([]);
     }
-  }, [selectedAlgorithm, selectedCourse]);
+  }, [selectedSeason, selectedAlgorithm, selectedCourse]);
 
   const fetchAlgorithmList = async season => {
     try {
       const url =
         season !== undefined
-          ? `${API_URL_PREFIX}algorithm/${season}`
+          ? `${API_URL_PREFIX}algorithm/${selectedSeason}`
           : `${API_URL_PREFIX}algorithm`;
 
       const response = await axios.get(url);
@@ -49,7 +51,7 @@ export const useProblem = () => {
 
   const fetchProblemList = async () => {
     try {
-      const url = `${API_URL_PREFIX}problems?season=${CURRENT_SEASON}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
+      const url = `${API_URL_PREFIX}problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
       const response = await axios.get(url);
       setProblemList(response.data.result);
     } catch (error) {
@@ -71,6 +73,8 @@ export const useProblem = () => {
   };
 
   return {
+    selectedSeason,
+    setSelectedSeason,
     selectedCourse,
     setSelectedCourse,
     selectedAlgorithm,
