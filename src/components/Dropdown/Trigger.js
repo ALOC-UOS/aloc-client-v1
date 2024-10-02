@@ -23,10 +23,10 @@ const DropDownTriggerContainer = styled.button`
   border: none;
   border-radius: 24px;
   outline: none;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.white};
   padding: 0px 16px;
 
   font-size: 14px;
   color: ${props => props.theme.primary};
-  letter-spacing: -1.12px;
+  cursor: pointer;
 `;

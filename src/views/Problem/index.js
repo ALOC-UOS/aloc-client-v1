@@ -6,70 +6,24 @@ import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
 import { VStack } from '../../styles/Stack.styles';
 import { useProblem } from '../../hooks/useProblem';
-import Dropdown from '../../components/Dropdown';
-import downArrowBtn from '../../assets/down-arrow-btn.svg';
+import useDropdown from '../../hooks/useDropdown';
 
 const Problem = () => {
-  const { selectedCourse, setSelectedCourse, selectedSeason, setSelectedSeason } = useProblem();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { selectedCourse, setSelectedCourse, setSelectedSeason } = useProblem();
+  const seasons = ['시즌 1', '시즌 2', '시즌 3'];
+  const seasonDropdown = useDropdown({
+    itemList: seasons,
+    defaultIdx: 2,
+    onClickItem: item => {
+      const season = item.split(' ');
+      setSelectedSeason(season[1]);
+    },
+  });
   return (
     <S.ProblemContainer>
       <TopBar />
       <VStack style={{ height: '80vh', gap: '16px', minWidth: '262px' }}>
-        <div
-          style={{
-            height: '88px',
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '24px',
-            backgroundColor: '#f0f1f5',
-            borderRadius: '48px',
-          }}
-        >
-          <Dropdown>
-            <Dropdown.Trigger
-              onClick={() => {
-                setIsDropdownOpen(!isDropdownOpen);
-              }}
-            >
-              <div>시즌 {selectedSeason}</div>
-              <img
-                alt="Down Arrow"
-                src={downArrowBtn}
-                style={{
-                  transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.3s ease',
-                }}
-              />
-            </Dropdown.Trigger>
-            <Dropdown.Menu isOpen={isDropdownOpen}>
-              <Dropdown.Item
-                onClick={() => {
-                  setSelectedSeason(1);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 1
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setSelectedSeason(2);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 2
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setSelectedSeason(3);
-                  setIsDropdownOpen(false);
-                }}
-              >
-                시즌 3
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+        {seasonDropdown.render()}
         <S.Wrapping style={{ flexDirection: 'row', gap: '24px', flexShrink: 0 }}>
           <S.Button selected={selectedCourse === 'HALF'} onClick={() => setSelectedCourse('HALF')}>
             HALF

@@ -1,7 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
 const DropDownMenu = ({ children, isOpen }) => {
-  return isOpen ? <DropDownMenuContainer>{children}</DropDownMenuContainer> : null;
+  if (!isOpen) return null;
+  return <DropDownMenuContainer>{children}</DropDownMenuContainer>;
 };
 
 export default DropDownMenu;
@@ -22,14 +23,15 @@ const DropDownMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  top: 130%;
-  right: 0;
+  top: calc(100% - 12px);
+  left: 50%
+  transform: translateX(-50%);
 
-  width: 100%;
+  width: calc(100% - 48px);
   padding: 8px;
   gap: 4px;
 
-  background-color: #ffffff;
+  background-color: ${props => props.theme.white};
   border-radius: 24px;
   z-index: 1000;
 
