@@ -82,16 +82,14 @@ export const uploadImage = async (
 
 export const renderUserImage = (user, userMenu) => {
   return user ? (
-    <div>
-      {user.profileImageFileName ? (
-        <UserImage
-          src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
-          onClick={userMenu.toggle}
-        />
-      ) : (
-        <UserImage src={memberIcon} onClick={userMenu.toggle} />
-      )}
-    </div>
+    user.profileImageFileName ? (
+      <UserImage
+        src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
+        onClick={userMenu.toggle}
+      />
+    ) : (
+      <UserImage src={memberIcon} onClick={userMenu.toggle} />
+    )
   ) : (
     <UserImage src={DefaultProfile} />
   );

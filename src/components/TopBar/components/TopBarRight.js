@@ -56,7 +56,7 @@ const TopBarRight = () => {
         >
           {item.name}
           {item.route === '/shop' && shopUpdated && (
-            <span style={{ color: 'red', marginLeft: '5px' }}>•</span>
+            <span style={{ color: 'red', marginLeft: 5 }}>•</span>
           )}
         </S.TopBarItem>
       ))}

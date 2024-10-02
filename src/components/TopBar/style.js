@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
-const TopBarContainer = styled('div')`
+const TopBarContainer = styled.div`
   z-index: 100;
   position: fixed;
-  top: 0px;
+  top: 0;
   left: 0;
   right: 0;
   display: flex;
@@ -21,7 +21,7 @@ const TopBarContainer = styled('div')`
     top: 0;
     margin: 0;
     padding: 8px 16px;
-    border-radius: 0px;
+    border-radius: 0;
   }
 `;
 const ImageWrapper = styled.div`
