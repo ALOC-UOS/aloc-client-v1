@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import S from '../style';
+import { HStack } from '../../../styles/Stack.styles';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLoginState from '../../../hooks/useLoginState';
@@ -46,9 +47,9 @@ const TopBarRight = () => {
   }
 
   return (
-    <Container>
+    <HStack style={{ gap: 40 }}>
       {TopBarItems.map((item, index) => (
-        <TopBarItem
+        <S.TopBarItem
           key={index}
           selected={selectedItem === item.route}
           onClick={() => goRoute(item.route)}
@@ -57,57 +58,16 @@ const TopBarRight = () => {
           {item.route === '/shop' && shopUpdated && (
             <span style={{ color: 'red', marginLeft: '5px' }}>•</span>
           )}
-        </TopBarItem>
+        </S.TopBarItem>
       ))}
       {isLoggedIn ? (
         <UserMenuConainer />
       ) : (
-        <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
+        <S.TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
           로그인
-        </TopBarButton>
+        </S.TopBarButton>
       )}
-    </Container>
+    </HStack>
   );
 };
 export default TopBarRight;
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-`;
-
-const TopBarItem = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${props => props.theme.subText};
-  cursor: pointer;
-  user-select: none;
-  &:hover {
-    color: ${props => props.theme.titleText};
-  }
-  ${props =>
-    props.selected &&
-    css`
-      color: ${props => props.theme.primary};
-      &:hover {
-        color: ${props => props.theme.primary};
-      }
-    `}
-`;
-
-const TopBarButton = styled.div`
-  padding: 12px;
-  border-radius: 12px;
-  background-color: ${props => props.theme.primary};
-
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-`;

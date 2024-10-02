@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const TopBarContainer = styled('div')`
   z-index: 100;
@@ -45,4 +45,48 @@ const TypoImage = styled.img`
   height: 32px;
 `;
 
-export default { TopBarContainer, Container, ImageWrapper, LogoImage, TypoImage };
+const TopBarItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${props => props.theme.subText};
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    color: ${props => props.theme.titleText};
+  }
+  ${props =>
+    props.selected &&
+    css`
+      color: ${props => props.theme.primary};
+      &:hover {
+        color: ${props => props.theme.primary};
+      }
+    `}
+`;
+
+const TopBarButton = styled.div`
+  padding: 12px;
+  border-radius: 12px;
+  background-color: ${props => props.theme.primary};
+
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+`;
+
+export default {
+  TopBarContainer,
+  Container,
+  ImageWrapper,
+  LogoImage,
+  TypoImage,
+  TopBarItem,
+  TopBarButton,
+};
