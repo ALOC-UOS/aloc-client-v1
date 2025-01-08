@@ -451,6 +451,12 @@ const BlueLoadingIcon = styled.img`
   height: 48px;
 `;
 
+const MessageComponentText = styled.span`
+  font-weight: 500;
+  font-size: 16;
+  color: ${props => props.theme.titleText};
+`;
+
 export {
   MemberContainer,
   ContentContainer,
@@ -477,4 +483,5 @@ export {
   Icon,
   ProblemSolvedButton,
   BlueLoadingIcon,
+  MessageComponentText,
 };

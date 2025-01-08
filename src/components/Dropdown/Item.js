@@ -9,7 +9,7 @@ export default DropdownItem;
 const DropdownItemContainer = styled.button`
   padding: 12px 16px;
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.white};
   border: none;
   outline: none;
   border-radius: 24px;
@@ -24,7 +24,6 @@ const DropdownItemContainer = styled.button`
   }
 
   font-size: 14px;
-  color: #3c414c;
-  letter-spacing: -1.12px;
+  color: ${props => props.theme.titleText};
   text-align: left;
 `;

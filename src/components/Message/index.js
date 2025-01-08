@@ -12,10 +12,10 @@ export const Message = () => {
     }, 2000);
   };
 
-  const render = ({ icon = '', children }) => {
+  const render = ({ icon = '', isLoading = false, children }) => {
     return (
-      <S.MessageContainer isOpen={isOpen}>
-        {icon && <S.LoadingIcon src={icon} />}
+      <S.MessageContainer isOpen={isOpen} isLoading={isLoading}>
+        {icon && (isLoading ? <S.LoadingIcon src={icon} /> : <S.CoinIcon src={icon} />)}
         {children}
       </S.MessageContainer>
     );

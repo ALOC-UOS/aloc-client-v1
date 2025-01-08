@@ -12,6 +12,7 @@ import DefaultProfile from '../../assets/default-profile.svg';
 import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
+import angryMan from '../../assets/angry-man.svg';
 
 const dummyProblemData = {
   id: 12865,
@@ -208,7 +209,7 @@ const Home = () => {
           </S.ProblemName>
         </VStack>
         {renderMemberInfo()}
-        <S.BottomText> 오늘도 파이팅! </S.BottomText>
+        <S.BottomText> 오늘도 파이팅 😁 </S.BottomText>
       </S.ProblemWrapper>
       {isLoggedIn && <MarathonProblemList />}
     </S.Container>
@@ -228,7 +229,13 @@ const Home = () => {
     const currentMember = solvedMemberList[currentMemberIndex];
     return (
       <S.MemberWrapper isShow={isShowMember}>
-        <S.ProfileImage src={`https://avatars.githubusercontent.com/${currentMember.githubId}`} />
+        <S.ProfileImage
+          src={
+            currentMember.profileImageFileName
+              ? `https://www.iflab.run/files/user/profile/${currentMember.profileImageFileName}`
+              : angryMan
+          }
+        />
         <S.Description>
           <S.MemberName>{currentMember.username}</S.MemberName>
           님이 문제를 풀었어요.
