@@ -4,7 +4,7 @@ import { changeAccessToken } from '../auth/token';
 
 const getAccessByRefresh = async (refreshToken, initLoginStatus) => {
   try {
-    const response = await axios.post('https://www.iflab.run/api2/refresh', {
+    const response = await axios.post(`${process.env.API_BASE_URL}/refresh`, {
       refreshToken: refreshToken,
     });
     const newAccessToken = response.data.accessToken;
@@ -58,11 +58,11 @@ export const setupInterceptors = initLoginStatus => {
   );
 };
 export const serverAPI = axios.create({
-  baseURL: 'https://www.iflab.run/api2',
+  baseURL: process.env.API_BASE_URL,
   headers: { 'Content-type': 'application/json' },
 });
 
 export const API = axios.create({
-  baseURL: 'https://www.iflab.run/api2',
+  baseURL: process.env.API_BASE_URL,
   headers: { 'Content-type': 'application/json' },
 });

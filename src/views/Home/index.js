@@ -13,17 +13,21 @@ import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
 
-export const API_BASE_URL = 'https://www.iflab.run/api2';
+const dummyProblemData = {
+  id: 12865,
+  problemId: 12865,
+  title: '평범한 배낭',
+  difficulty: 12,
+  tier: {
+    backgroundColor: tierStyleConfig.gold.backgroundColor,
+    color: tierStyleConfig.gold.color,
+    icon: tierStyleConfig.gold.icon,
+  },
+};
 
 const Home = () => {
-  const [problemData, setProblemData] = useState({
-    tier: {
-      backgroundColor: '#000',
-      color: '#fff',
-      icon: '',
-    },
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  const [problemData, setProblemData] = useState(dummyProblemData);
+  const [isLoading, setIsLoading] = useState(false);
   const [solvedMemberList, setSolvedMemberList] = useState([]);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
   const [isShowMember, setIsShowMember] = useState(false);
@@ -94,15 +98,15 @@ const Home = () => {
     };
   }, [problemData]);
 
-  useEffect(() => {
-    if (!isLoggedIn || user) loadProblem();
-  }, [user]);
+  // useEffect(() => {
+  //   if (!isLoggedIn || user) loadProblem();
+  // }, [user]);
 
-  useEffect(() => {
-    if (problemData.id) {
-      loadSolveMember();
-    }
-  }, [problemData]);
+  // useEffect(() => {
+  //   if (problemData.id) {
+  //     loadSolveMember();
+  //   }
+  // }, [problemData]);
 
   useEffect(() => {
     if (!solvedMemberList) return;
@@ -117,10 +121,11 @@ const Home = () => {
 
     return () => clearInterval(timer);
   }, [solvedMemberList]);
+
   const loadProblem = async () => {
     try {
       const course = user ? user.course : 'FULL';
-      const response = await axios.get(`${API_BASE_URL}/today-problem`, {
+      const response = await axios.get(`${process.env.API_BASE_URL}/today-problem`, {
         params: { course },
       });
       const { difficulty, ...rest } = response.data.result;
@@ -144,7 +149,9 @@ const Home = () => {
 
   const loadSolveMember = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/problem/${problemData.id}/solved-users`);
+      const response = await axios.get(
+        `${process.env.API_BASE_URL}/problem/${problemData.id}/solved-users`
+      );
       setSolvedMemberList(response.data.result);
     } catch (error) {
       console.error('Error loading solved members:', error);

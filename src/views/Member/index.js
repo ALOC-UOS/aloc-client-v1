@@ -101,7 +101,7 @@ const Member = () => {
 
   function loadMemberData() {
     setMemberDataPending(true);
-    let url = 'https://www.iflab.run/api2/users';
+    let url = `${process.env.API_BASE_URL}/users`;
     axios
       .get(url)
       .then(response => {
@@ -118,10 +118,10 @@ const Member = () => {
     let url = '';
 
     if (type === 'solved') {
-      url = `https://www.iflab.run/api2/user/${githubId}/solved-problems?routine=DAILY&season=3`;
+      url = `${process.env.API_BASE_URL}/user/${githubId}/solved-problems?routine=DAILY&season=3`;
       setModalTitle('해결한 문제 목록');
     } else {
-      url = `https://www.iflab.run/api2/user/${githubId}/unsolved-problems?routine=DAILY&season=3`;
+      url = `${process.env.API_BASE_URL}/user/${githubId}/unsolved-problems?routine=DAILY&season=3`;
       setModalTitle('해결하지 못한 문제 목록');
     }
     axios

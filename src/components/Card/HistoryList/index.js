@@ -20,7 +20,7 @@ const HistoryList = () => {
   }, []);
 
   const loadHistoryData = () => {
-    let url = 'https://www.iflab.run/api2/history';
+    let url = `${process.env.API_BASE_URL}/history`;
     axios
       .get(url)
       .then(response => {

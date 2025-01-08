@@ -2,7 +2,6 @@ import axios from 'axios';
 import { atom, useAtom } from 'jotai';
 import { useState, useEffect } from 'react';
 
-const API_URL_PREFIX = 'https://www.iflab.run/api2/';
 const CURRENT_SEASON = 3;
 
 const selectedSeasonAtom = atom(CURRENT_SEASON);
@@ -37,8 +36,8 @@ export const useProblem = () => {
     try {
       const url =
         season !== undefined
-          ? `${API_URL_PREFIX}algorithm/${selectedSeason}`
-          : `${API_URL_PREFIX}algorithm`;
+          ? `${process.env.API_BASE_URL}/algorithm/${selectedSeason}`
+          : `${process.env.API_BASE_URL}/algorithm`;
 
       const response = await axios.get(url);
       const algorithms = response.data.result.algorithms;
@@ -51,7 +50,7 @@ export const useProblem = () => {
 
   const fetchProblemList = async () => {
     try {
-      const url = `${API_URL_PREFIX}problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
+      const url = `${process.env.API_BASE_URL}/problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
       const response = await axios.get(url);
       setProblemList(response.data.result);
     } catch (error) {
@@ -62,7 +61,7 @@ export const useProblem = () => {
 
   const fetchSolvedUserList = async problemId => {
     try {
-      const url = `${API_URL_PREFIX}problem/${problemId}/solved-users`;
+      const url = `${process.env.API_BASE_URL}/problem/${problemId}/solved-users`;
       const response = await axios.get(url);
       setSolvedUserList(response.data.result);
       setSelectedProblemId(problemId);
