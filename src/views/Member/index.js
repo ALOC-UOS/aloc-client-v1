@@ -26,6 +26,7 @@ import { HStack } from '../../styles/Stack.styles';
 import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
 import Confetti from '../../components/Confetti';
+import useMember from '../../hooks/useMember';
 
 const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
@@ -53,16 +54,14 @@ const MessageText = ({ solvedStatus, rank }) => {
 };
 
 const Member = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingSolvedProblem, setIsLoadingSolvedProblem] = useState(false);
   const [isShowLoading, setIsShowLoading] = useState(false);
-  const [MemberData, setMemberData] = useState([]);
   const [SelectedGithubId, setSelectedGithubId] = useState('');
   const [SelectedType, setSelectedType] = useState('');
   const [ProblemListData, setProblemListData] = useState([]);
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const { isLoggedIn } = useLoginState();
-  const [memberDataPending, setMemberDataPending] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const loadingMessage = Message();
   const rankMessage = Message();
@@ -72,26 +71,7 @@ const Member = () => {
   const [userCoin, setUserCoin] = useState(0);
   const [obtainCoin, setObtainCoin] = useState(0);
   const [coinTriggerAnimation, setCoinTriggerAnimation] = useState(false);
-
-  const loadMemberData = () => {
-    setMemberDataPending(true);
-    const url = `${process.env.REACT_APP_API_BASE_URL}/users`;
-    axios
-      .get(url)
-      .then(response => {
-        setMemberData(response.data.result);
-      })
-      .catch(error => {
-        console.error(error, 'API 요청 중 오류 발생:');
-      })
-      .finally(() => {
-        setMemberDataPending(false);
-      });
-  };
-
-  useEffect(() => {
-    loadMemberData();
-  }, []);
+  const { getMembers, isLoading, members } = useMember();
 
   function openProblemListModal(type, githubId) {
     const url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/${type === 'solved' ? 'solved' : 'unsolved'}-problems?routine=DAILY&season=3`;
@@ -117,18 +97,18 @@ const Member = () => {
   }
 
   function checkSolvedProblem() {
-    setIsLoading(true);
+    setIsLoadingSolvedProblem(true);
     setIsShowLoading(true);
     serverAPI
       .post('/problems/solved')
       .then(response => {
-        loadMemberData();
+        getMembers();
         openProblemListModal(SelectedType, SelectedGithubId);
         setTimeout(() => {
           setIsShowLoading(false);
         }, 500);
         setTimeout(() => {
-          setIsLoading(false);
+          setIsLoadingSolvedProblem(false);
         }, 1500);
       })
       .catch(error => {
@@ -146,7 +126,7 @@ const Member = () => {
           setRank(res.data.result.place);
           setUserCoin(res.data.result.userCoin);
           setObtainCoin(res.data.result.obtainCoin);
-          loadMemberData();
+          getMembers();
           setShowConfetti(true);
           setTimeout(() => setShowConfetti(false), 2000);
         }
@@ -173,7 +153,7 @@ const Member = () => {
       <TopBar active={true} />
       {loadingMessage.render({
         icon: loadingIconWithBg,
-        isLoading: true,
+        isLoadingSolvedProblem: true,
         children: (
           <S.MessageComponentText>
             <span style={{ color: '#408cff' }}>풀이 여부</span>를 확인하고 있어요
@@ -200,9 +180,9 @@ const Member = () => {
           </S.MessageComponentText>
         ),
       })}
-      <S.IconWrapper active={isLoading}>
+      <S.IconWrapper active={isLoadingSolvedProblem}>
         <S.Icon active={isShowLoading} src={LoadingIcon} />
-        <S.Icon active={!isShowLoading && isLoading} src={CheckIcon} check={true} />
+        <S.Icon active={!isShowLoading && isLoadingSolvedProblem} src={CheckIcon} check={true} />
       </S.IconWrapper>
       <ListModal
         isOpen={isOpenedModal}
@@ -213,10 +193,10 @@ const Member = () => {
       />
       <BlackScreen isOpen={isOpenedModal} />
       <S.ContentContainer>
-        {memberDataPending ? (
+        {isLoading ? (
           <S.BlueLoadingIcon src={loadingIcon} />
         ) : (
-          MemberData.map((member, index) => (
+          members.map((member, index) => (
             <S.ProfileWrapper delay={index * 0.15}>
               <S.MemberUserInfoCoin>
                 <img src={CoinIcon} alt="coin" />
