@@ -457,7 +457,7 @@ const MessageComponentText = styled.span`
   color: ${props => props.theme.titleText};
 `;
 
-export {
+export default {
   MemberContainer,
   ContentContainer,
   ProfileWrapper,

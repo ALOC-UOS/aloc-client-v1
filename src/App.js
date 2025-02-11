@@ -68,7 +68,7 @@ function App() {
   };
   return (
     <ThemeProvider theme={themeObject[theme]}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.REACT_APP_PUBLIC_URL}>
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Home />} />

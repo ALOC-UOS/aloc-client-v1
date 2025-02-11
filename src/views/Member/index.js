@@ -1,33 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import {
-  MemberContainer,
-  ContentContainer,
-  ProfileWrapper,
-  ProfileBackgroundImage,
-  ProfileLink,
-  ProfileImage,
-  ProfileBlurImage,
-  ProfileRankWrap,
-  ProfileRank,
-  ProfileNumber,
-  MemberWrapper,
-  MemberName,
-  MemberUserInfoWrapper,
-  MemberUserInfoText,
-  MemberUserInfoBar,
-  MemberUserInfoCoin,
-  MemberBar,
-  MemberInfoWrapper,
-  MemberInfoRow,
-  MemberInfoItem,
-  SolvedAnimation,
-  IconWrapper,
-  Icon,
-  ProblemSolvedButton,
-  BlueLoadingIcon,
-  MessageComponentText,
-} from './style';
+import S from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import { BlackScreen } from '../../components/BlackScreen';
@@ -48,11 +21,11 @@ import DefaultProfile from '../../assets/default-profile.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
-import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
 import { HStack } from '../../styles/Stack.styles';
 import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
+import Confetti from '../../components/Confetti';
 
 const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
@@ -100,36 +73,30 @@ const Member = () => {
   const [obtainCoin, setObtainCoin] = useState(0);
   const [coinTriggerAnimation, setCoinTriggerAnimation] = useState(false);
 
-  useEffect(() => {
-    loadMemberData();
-  }, []);
-
-  function loadMemberData() {
+  const loadMemberData = () => {
     setMemberDataPending(true);
-    let url = `${process.env.REACT_APP_API_BASE_URL}/users`;
-    console.log(url);
+    const url = `${process.env.REACT_APP_API_BASE_URL}/users`;
     axios
       .get(url)
       .then(response => {
         setMemberData(response.data.result);
-        setMemberDataPending(false);
       })
       .catch(error => {
+        console.error(error, 'API 요청 중 오류 발생:');
+      })
+      .finally(() => {
         setMemberDataPending(false);
-        console.error('API 요청 중 오류 발생:');
       });
-  }
+  };
+
+  useEffect(() => {
+    loadMemberData();
+  }, []);
 
   function openProblemListModal(type, githubId) {
-    let url = '';
+    const url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/${type === 'solved' ? 'solved' : 'unsolved'}-problems?routine=DAILY&season=3`;
+    setModalTitle(type === 'solved' ? '해결한 문제 목록' : '해결하지 못한 문제 목록');
 
-    if (type === 'solved') {
-      url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/solved-problems?routine=DAILY&season=3`;
-      setModalTitle('해결한 문제 목록');
-    } else {
-      url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/unsolved-problems?routine=DAILY&season=3`;
-      setModalTitle('해결하지 못한 문제 목록');
-    }
     axios
       .get(url)
       .then(response => {
@@ -139,7 +106,7 @@ const Member = () => {
         setSelectedType(type);
       })
       .catch(error => {
-        console.error('API 요청 중 오류 발생:');
+        console.error(error, 'API 요청 중 오류 발생:');
       });
   }
 
@@ -201,55 +168,42 @@ const Member = () => {
       });
   };
 
-  const decorateOptions = originalOptions => {
-    return {
-      ...originalOptions,
-      particleCount: 200, // 조각 개수 설정
-      spread: 120, // 퍼짐 정도 설정
-      startVelocity: 50, // 초기 속도 설정
-      ticks: 200, // 애니메이션 지속 시간 설정
-      origin: { y: 0.8 }, // 발사 위치 설정
-      shapes: ['circle', 'circle', 'square'], // 이미지 배열을 shapes로 설정
-      gravity: 1.5, // 중력 설정
-    };
-  };
-
   return (
-    <MemberContainer>
+    <S.MemberContainer>
       <TopBar active={true} />
       {loadingMessage.render({
         icon: loadingIconWithBg,
         isLoading: true,
         children: (
-          <MessageComponentText>
+          <S.MessageComponentText>
             <span style={{ color: '#408cff' }}>풀이 여부</span>를 확인하고 있어요
-          </MessageComponentText>
+          </S.MessageComponentText>
         ),
       })}
       {rankMessage.render({
         children: (
-          <MessageComponentText>
+          <S.MessageComponentText>
             <MessageText solvedStatus={solvedStatus} rank={rank} />
-          </MessageComponentText>
+          </S.MessageComponentText>
         ),
       })}
       {coinMessage.render({
         icon: CoinIcon,
         isCoin: true,
         children: (
-          <MessageComponentText>
+          <S.MessageComponentText>
             <CoinMessage
               userCoin={userCoin}
               obtainCoin={obtainCoin}
               triggerAnimation={coinTriggerAnimation}
             />
-          </MessageComponentText>
+          </S.MessageComponentText>
         ),
       })}
-      <IconWrapper active={isLoading}>
-        <Icon active={isShowLoading} src={LoadingIcon} />
-        <Icon active={!isShowLoading && isLoading} src={CheckIcon} check={true} />
-      </IconWrapper>
+      <S.IconWrapper active={isLoading}>
+        <S.Icon active={isShowLoading} src={LoadingIcon} />
+        <S.Icon active={!isShowLoading && isLoading} src={CheckIcon} check={true} />
+      </S.IconWrapper>
       <ListModal
         isOpen={isOpenedModal}
         modalTitle={modalTitle}
@@ -258,17 +212,17 @@ const Member = () => {
         checkSolvedProblem={checkSolvedProblem}
       />
       <BlackScreen isOpen={isOpenedModal} />
-      <ContentContainer>
+      <S.ContentContainer>
         {memberDataPending ? (
-          <BlueLoadingIcon src={loadingIcon} />
+          <S.BlueLoadingIcon src={loadingIcon} />
         ) : (
           MemberData.map((member, index) => (
-            <ProfileWrapper delay={index * 0.15}>
-              <MemberUserInfoCoin>
-                <img src={CoinIcon} />
+            <S.ProfileWrapper delay={index * 0.15}>
+              <S.MemberUserInfoCoin>
+                <img src={CoinIcon} alt="coin" />
                 {member.coin}
-              </MemberUserInfoCoin>
-              <ProfileBackgroundImage
+              </S.MemberUserInfoCoin>
+              <S.ProfileBackgroundImage
                 solved={member.todaySolved}
                 category={member.colorCategory}
                 color1={member.color1}
@@ -281,9 +235,9 @@ const Member = () => {
                 {member.baekjoonId === 'alicehrk' && <DecorationCharacter type={'Bubble'} />}
                 {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
                 {member.baekjoonId === 'jojongjojong' && <DecorationCharacter type={'Wave'} />}
-                <SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
+                <S.SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
-                  <ProfileBlurImage
+                  <S.ProfileBlurImage
                     src={
                       member.profileImageFileName
                         ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
@@ -291,19 +245,19 @@ const Member = () => {
                     }
                   />
                 )}
-                <ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
-                  <ProfileImage
+                <S.ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
+                  <S.ProfileImage
                     src={
                       member.profileImageFileName
                         ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />
-                </ProfileLink>
-              </ProfileBackgroundImage>
-              <MemberWrapper>
-                <ProfileRankWrap href={`https://solved.ac/${member.baekjoonId}`} target="_blank">
-                  <ProfileRank
+                </S.ProfileLink>
+              </S.ProfileBackgroundImage>
+              <S.MemberWrapper>
+                <S.ProfileRankWrap href={`https://solved.ac/${member.baekjoonId}`} target="_blank">
+                  <S.ProfileRank
                     src={
                       parseInt(member.rank / 10) === 1
                         ? Bronze
@@ -314,7 +268,7 @@ const Member = () => {
                             : Platinum
                     }
                   />
-                  <ProfileNumber
+                  <S.ProfileNumber
                     src={
                       member.rank % 10 === 1
                         ? Number1
@@ -327,57 +281,46 @@ const Member = () => {
                               : Number5
                     }
                   />
-                </ProfileRankWrap>
-                <MemberName>{member.username}</MemberName>
-                <MemberUserInfoWrapper>
-                  <MemberUserInfoText>{member.studentId}학번</MemberUserInfoText>
+                </S.ProfileRankWrap>
+                <S.MemberName>{member.username}</S.MemberName>
+                <S.MemberUserInfoWrapper>
+                  <S.MemberUserInfoText>{member.studentId}학번</S.MemberUserInfoText>
                   {/* <MemberUserInfoBar />
                   <MemberUserInfoText>{member.joinedAt}</MemberUserInfoText> */}
-                </MemberUserInfoWrapper>
-                <MemberBar />
-                <MemberInfoWrapper>
-                  <MemberInfoRow>
-                    <MemberInfoItem>해결한 문제 수</MemberInfoItem>
-                    <MemberInfoItem
+                </S.MemberUserInfoWrapper>
+                <S.MemberBar />
+                <S.MemberInfoWrapper>
+                  <S.MemberInfoRow>
+                    <S.MemberInfoItem>해결한 문제 수</S.MemberInfoItem>
+                    <S.MemberInfoItem
                       blue={true}
                       onClick={() => openProblemListModal('solved', member.githubId)}
                     >
                       {member.solvedCount}개
-                    </MemberInfoItem>
-                  </MemberInfoRow>
-                  <MemberInfoRow>
-                    <MemberInfoItem>해결하지 못한 문제 수</MemberInfoItem>
-                    <MemberInfoItem
+                    </S.MemberInfoItem>
+                  </S.MemberInfoRow>
+                  <S.MemberInfoRow>
+                    <S.MemberInfoItem>해결하지 못한 문제 수</S.MemberInfoItem>
+                    <S.MemberInfoItem
                       blue={true}
                       onClick={() => openProblemListModal('unsolved', member.githubId)}
                     >
                       {member.unsolvedCount}개
-                    </MemberInfoItem>
-                  </MemberInfoRow>
-                </MemberInfoWrapper>
-              </MemberWrapper>
-            </ProfileWrapper>
+                    </S.MemberInfoItem>
+                  </S.MemberInfoRow>
+                </S.MemberInfoWrapper>
+              </S.MemberWrapper>
+            </S.ProfileWrapper>
           ))
         )}
-      </ContentContainer>
+      </S.ContentContainer>
       {isLoggedIn && (
-        <ProblemSolvedButton onClick={() => checkTodaySolvedProblem()}>
+        <S.ProblemSolvedButton onClick={() => checkTodaySolvedProblem()}>
           문제 풀었어요!
-        </ProblemSolvedButton>
+        </S.ProblemSolvedButton>
       )}
-      {showConfetti && (
-        <Fireworks
-          width={window.innerWidth}
-          height={window.innerHeight}
-          autorun={{ speed: 0.5, duration: 4, delay: 500 }}
-          decorateOptions={decorateOptions}
-          style={{
-            position: 'fixed',
-            zIndex: 1000,
-          }}
-        />
-      )}
-    </MemberContainer>
+      {showConfetti && <Confetti />}
+    </S.MemberContainer>
   );
 };
 
