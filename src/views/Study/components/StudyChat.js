@@ -31,7 +31,7 @@ const StudyChat = () => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
       return;
     }
-    ws.current = new WebSocket('wss://www.iflab.run/ws/chat');
+    ws.current = new WebSocket('wss://api.aloc.kr/ws/chat');
     ws.current.onopen = () => {
       clearTimeout(reconnectTimeoutRef.current);
       if (user) {

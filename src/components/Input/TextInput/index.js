@@ -9,7 +9,7 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
   const [inputTextArray, setInputTextArray] = useState(Array(inputList.length).fill(''));
 
   const clickSaveButton = () => {
-    const url = 'https://www.iflab.run/api/' + apiURL;
+    const url = `${process.env.REACT_APP_API_BASE_URL}${apiURL}`;
 
     const JSONData = {};
     inputList.map((item, index) => {

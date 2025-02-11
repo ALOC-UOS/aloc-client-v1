@@ -44,7 +44,7 @@ import Number1 from '../../assets/number-1.svg';
 import CoinIcon from '../../assets/coin-icon.svg';
 import LoadingIcon from '../../assets/loading-icon.svg';
 import CheckIcon from '../../assets/check-icon.svg';
-import angryMan from '../../assets/angry-man.svg';
+import DefaultProfile from '../../assets/default-profile.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import loadingIcon from '../../assets/blue-loading-icon.svg';
@@ -106,7 +106,8 @@ const Member = () => {
 
   function loadMemberData() {
     setMemberDataPending(true);
-    let url = `${process.env.API_BASE_URL}/users`;
+    let url = `${process.env.REACT_APP_API_BASE_URL}/users`;
+    console.log(url);
     axios
       .get(url)
       .then(response => {
@@ -123,10 +124,10 @@ const Member = () => {
     let url = '';
 
     if (type === 'solved') {
-      url = `${process.env.API_BASE_URL}/user/${githubId}/solved-problems?routine=DAILY&season=3`;
+      url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/solved-problems?routine=DAILY&season=3`;
       setModalTitle('해결한 문제 목록');
     } else {
-      url = `${process.env.API_BASE_URL}/user/${githubId}/unsolved-problems?routine=DAILY&season=3`;
+      url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/unsolved-problems?routine=DAILY&season=3`;
       setModalTitle('해결하지 못한 문제 목록');
     }
     axios
@@ -285,8 +286,8 @@ const Member = () => {
                   <ProfileBlurImage
                     src={
                       member.profileImageFileName
-                        ? `https://www.iflab.run/files/user/profile/${member.profileImageFileName}`
-                        : angryMan
+                        ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        : DefaultProfile
                     }
                   />
                 )}
@@ -294,8 +295,8 @@ const Member = () => {
                   <ProfileImage
                     src={
                       member.profileImageFileName
-                        ? `https://www.iflab.run/files/user/profile/${member.profileImageFileName}`
-                        : angryMan
+                        ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        : DefaultProfile
                     }
                   />
                 </ProfileLink>

@@ -20,7 +20,7 @@ const HistoryList = () => {
   }, []);
 
   const loadHistoryData = () => {
-    let url = `${process.env.API_BASE_URL}/history`;
+    let url = `${process.env.REACT_APP_API_BASE_URL}/history`;
     axios
       .get(url)
       .then(response => {

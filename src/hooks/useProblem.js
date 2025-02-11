@@ -36,8 +36,8 @@ export const useProblem = () => {
     try {
       const url =
         season !== undefined
-          ? `${process.env.API_BASE_URL}/algorithm/${selectedSeason}`
-          : `${process.env.API_BASE_URL}/algorithm`;
+          ? `${process.env.REACT_APP_API_BASE_URL}/algorithm/${selectedSeason}`
+          : `${process.env.REACT_APP_API_BASE_URL}/algorithm`;
 
       const response = await axios.get(url);
       const algorithms = response.data.result.algorithms;
@@ -50,7 +50,7 @@ export const useProblem = () => {
 
   const fetchProblemList = async () => {
     try {
-      const url = `${process.env.API_BASE_URL}/problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
+      const url = `${process.env.REACT_APP_API_BASE_URL}/problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
       const response = await axios.get(url);
       setProblemList(response.data.result);
     } catch (error) {
@@ -61,7 +61,7 @@ export const useProblem = () => {
 
   const fetchSolvedUserList = async problemId => {
     try {
-      const url = `${process.env.API_BASE_URL}/problem/${problemId}/solved-users`;
+      const url = `${process.env.REACT_APP_API_BASE_URL}/problem/${problemId}/solved-users`;
       const response = await axios.get(url);
       setSolvedUserList(response.data.result);
       setSelectedProblemId(problemId);

@@ -25,7 +25,7 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
   const [isBookmarkToast, setIsBookmarkToast] = useState(false);
 
   function accpetModal() {
-    const url = 'https://www.iflab.run/api/buy/item';
+    const url = `${process.env.REACT_APP_API_BASE_URL}/buy/item`;
 
     const JSONData = {};
     buyList.map((item, index) => {

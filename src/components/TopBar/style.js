@@ -89,8 +89,8 @@ const LogoImage = styled.img`
   height: 32px;
 `;
 
-const TypoImage = styled.img`
-  width: 55px;
+const AlocTextImage = styled.img`
+  width: 64px;
   height: 32px;
 `;
 
@@ -108,7 +108,7 @@ export {
   TopBarItem,
   TopBarButton,
   ImageWrapper,
-  TypoImage,
+  AlocTextImage,
   LogoImage,
   UserImage,
   UserImageWrapper,

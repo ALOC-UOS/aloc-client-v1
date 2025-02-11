@@ -8,11 +8,10 @@ import MarathonProblemList from '../../components/MarathonProblemList';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import { VStack } from '../../styles/Stack.styles';
-import DefaultProfile from '../../assets/default-profile.svg';
 import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
-import angryMan from '../../assets/angry-man.svg';
+import DefaultProfile from '../../assets/default-profile.svg';
 
 const dummyProblemData = {
   id: 12865,
@@ -126,7 +125,7 @@ const Home = () => {
   const loadProblem = async () => {
     try {
       const course = user ? user.course : 'FULL';
-      const response = await axios.get(`${process.env.API_BASE_URL}/today-problem`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/today-problem`, {
         params: { course },
       });
       const { difficulty, ...rest } = response.data.result;
@@ -151,7 +150,7 @@ const Home = () => {
   const loadSolveMember = async () => {
     try {
       const response = await axios.get(
-        `${process.env.API_BASE_URL}/problem/${problemData.id}/solved-users`
+        `${process.env.REACT_APP_API_BASE_URL}/problem/${problemData.id}/solved-users`
       );
       setSolvedMemberList(response.data.result);
     } catch (error) {
@@ -232,8 +231,8 @@ const Home = () => {
         <S.ProfileImage
           src={
             currentMember.profileImageFileName
-              ? `https://www.iflab.run/files/user/profile/${currentMember.profileImageFileName}`
-              : angryMan
+              ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${currentMember.profileImageFileName}`
+              : DefaultProfile
           }
         />
         <S.Description>

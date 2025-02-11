@@ -11,7 +11,7 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    const url = 'https://www.iflab.run/api/' + apiURL;
+    const url = `${process.env.REACT_APP_API_BASE_URL}/${apiURL}`;
     axios
       .get(url)
       .then(response => {
@@ -38,7 +38,7 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   };
 
   const clickSaveButton = () => {
-    const url = 'https://www.iflab.run/api/' + apiURL;
+    const url = `${process.env.REACT_APP_API_BASE_URL}/${apiURL}`;
     axios.post(url, {
       id: selectedItemId,
       name: selectedItemName,

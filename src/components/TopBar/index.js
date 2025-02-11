@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 import logo from '../../assets/logo.svg';
-import typo from '../../assets/typo.svg';
+import AlocText from '../../assets/aloc-text.svg';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
@@ -12,7 +11,7 @@ import {
   TopBarButton,
   ImageWrapper,
   LogoImage,
-  TypoImage,
+  AlocTextImage,
   UserImage,
   UserImageWrapper,
 } from './style';
@@ -190,7 +189,7 @@ const TopBar = ({ active }) => {
       <UserImageWrapper>
         {user.profileImageFileName ? (
           <UserImage
-            src={`https://www.iflab.run/files/user/profile/${user.profileImageFileName}`}
+            src={`https://api.aloc.kr/files/user/profile/${user.profileImageFileName}`}
             onClick={userMenu.toggle}
           />
         ) : (
@@ -243,7 +242,7 @@ const TopBar = ({ active }) => {
           <LogoImage src={logo} />
         </ImageWrapper>
         <ImageWrapper>
-          <TypoImage src={typo} />
+          <AlocTextImage src={AlocText} />
         </ImageWrapper>
       </TopBarLeft>
       <TopBarRight>
