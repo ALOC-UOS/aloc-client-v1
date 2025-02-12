@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Problem from './views/Problem';
 import Member from './views/Member';
@@ -68,16 +68,16 @@ function App() {
   };
   return (
     <ThemeProvider theme={themeObject[theme]}>
-      <Router basename={process.env.REACT_APP_PUBLIC_URL}>
+      <BrowserRouter>
         <Routes>
-          <Route path="/Login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/problem" element={<Problem />} />
           <Route path="/member" element={<Member />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/setting" element={<Setting />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

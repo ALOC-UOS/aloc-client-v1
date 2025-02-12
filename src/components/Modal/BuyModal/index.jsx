@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { ModalContainer, Description } from './style';
-import Toast from '../../../components/Toast';
-import Button from '../../../components/Buttons';
+import Toast from '../../Toast';
+import Button from '../../Buttons';
 import TextInputBox from '../../Input/TextInput/TextInputBox';
 import errorIcon from '../../../assets/error-icon.svg';
 
@@ -25,7 +25,7 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
   const [isBookmarkToast, setIsBookmarkToast] = useState(false);
 
   function accpetModal() {
-    const url = `${process.env.REACT_APP_API_BASE_URL}/buy/item`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/buy/item`;
 
     const JSONData = {};
     buyList.map((item, index) => {

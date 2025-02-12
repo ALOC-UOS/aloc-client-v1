@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { InputContainer, InputLabel } from './style';
-import Button from '../../../components/Buttons';
+import Button from '../../Buttons';
 import ListInputBox from './ListInputBox';
 
 const ListInput = ({ label, apiURL, listName, listData }) => {
@@ -11,7 +11,7 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    const url = `${process.env.REACT_APP_API_BASE_URL}/${apiURL}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/${apiURL}`;
     axios
       .get(url)
       .then(response => {
@@ -38,7 +38,7 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   };
 
   const clickSaveButton = () => {
-    const url = `${process.env.REACT_APP_API_BASE_URL}/${apiURL}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/${apiURL}`;
     axios.post(url, {
       id: selectedItemId,
       name: selectedItemName,

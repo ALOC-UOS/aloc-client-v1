@@ -4,7 +4,7 @@ import { changeAccessToken } from '../auth/token';
 
 const getAccessByRefresh = async (refreshToken, initLoginStatus) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/refresh`, {
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/refresh`, {
       refreshToken: refreshToken,
     });
     const newAccessToken = response.data.accessToken;
@@ -58,11 +58,11 @@ export const setupInterceptors = initLoginStatus => {
   );
 };
 export const serverAPI = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { 'Content-type': 'application/json' },
 });
 
 export const API = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { 'Content-type': 'application/json' },
 });

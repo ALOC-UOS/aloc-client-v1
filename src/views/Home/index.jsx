@@ -125,7 +125,7 @@ const Home = () => {
   const loadProblem = async () => {
     try {
       const course = user ? user.course : 'FULL';
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/today-problem`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/today-problem`, {
         params: { course },
       });
       const { difficulty, ...rest } = response.data.result;
@@ -150,7 +150,7 @@ const Home = () => {
   const loadSolveMember = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/problem/${problemData.id}/solved-users`
+        `${import.meta.env.VITE_API_BASE_URL}/problem/${problemData.id}/solved-users`
       );
       setSolvedMemberList(response.data.result);
     } catch (error) {
@@ -231,7 +231,7 @@ const Home = () => {
         <S.ProfileImage
           src={
             currentMember.profileImageFileName
-              ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${currentMember.profileImageFileName}`
+              ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${currentMember.profileImageFileName}`
               : DefaultProfile
           }
         />

@@ -74,7 +74,7 @@ const Member = () => {
   const { getMembers, isLoading, members } = useMember();
 
   function openProblemListModal(type, githubId) {
-    const url = `${process.env.REACT_APP_API_BASE_URL}/user/${githubId}/${type === 'solved' ? 'solved' : 'unsolved'}-problems?routine=DAILY&season=3`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/user/${githubId}/${type === 'solved' ? 'solved' : 'unsolved'}-problems?routine=DAILY&season=3`;
     setModalTitle(type === 'solved' ? '해결한 문제 목록' : '해결하지 못한 문제 목록');
 
     axios
@@ -220,7 +220,7 @@ const Member = () => {
                   <S.ProfileBlurImage
                     src={
                       member.profileImageFileName
-                        ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />
@@ -229,7 +229,7 @@ const Member = () => {
                   <S.ProfileImage
                     src={
                       member.profileImageFileName
-                        ? `https://${process.env.REACT_APP_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />

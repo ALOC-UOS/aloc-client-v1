@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { InputContainer, InputLabel, TextInputBoxWrap } from './style';
-import Button from '../../../components/Buttons';
+import Button from '../../Buttons';
 import TextInputBox from './TextInputBox';
 
 const TextInputWrap = ({ label, apiURL, inputList }) => {
@@ -9,7 +9,7 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
   const [inputTextArray, setInputTextArray] = useState(Array(inputList.length).fill(''));
 
   const clickSaveButton = () => {
-    const url = `${process.env.REACT_APP_API_BASE_URL}${apiURL}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}${apiURL}`;
 
     const JSONData = {};
     inputList.map((item, index) => {

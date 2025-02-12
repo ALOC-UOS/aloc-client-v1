@@ -7,7 +7,7 @@ const useMember = () => {
 
   const loadMembers = () => {
     setIsLoading(true);
-    const url = `${process.env.REACT_APP_API_BASE_URL}/users`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/users`;
     axios
       .get(url)
       .then(response => {
