@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import S from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
-import { BlackScreen } from '../../components/BlackScreen';
+import { BlackOverlay } from '../../components/BlackOverlay';
 import DecorationCharacter from '../../components/Decorations/Character';
 import Bronze from '../../assets/bronze.png';
 import Silver from '../../assets/silver.png';
@@ -191,7 +191,7 @@ const Member = () => {
         closeModal={closeModal}
         checkSolvedProblem={checkSolvedProblem}
       />
-      <BlackScreen isOpen={isOpenedModal} />
+      <BlackOverlay isOpen={isOpenedModal} />
       <S.ContentContainer>
         {isLoading ? (
           <S.BlueLoadingIcon src={loadingIcon} />

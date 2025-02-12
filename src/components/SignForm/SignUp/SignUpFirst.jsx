@@ -1,7 +1,7 @@
 import logo from '../../../assets/logo.svg';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
-import { BlackScreen } from '../../BlackScreen';
+import { BlackOverlay } from '../../BlackOverlay';
 import AlertModal from '../../Modal/AlertModal';
 import {
   textReducer,
@@ -141,7 +141,7 @@ const SignUpFirst = ({ setFormType, onNext }) => {
   };
   return (
     <SignBox onSubmit={onSubmit}>
-      <BlackScreen isOpen={isOpenedModal} />
+      <BlackOverlay isOpen={isOpenedModal} />
       <AlertModal
         isOpen={isOpenedModal}
         description={modalText}

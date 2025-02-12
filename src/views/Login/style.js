@@ -8,4 +8,4 @@ const SignInContainer = styled.div`
   flex-direction: column;
 `;
 
-export default SignInContainer;
+export default { SignInContainer };
