@@ -20,9 +20,8 @@ const HistoryList = () => {
   }, []);
 
   const loadHistoryData = () => {
-    let url = `${import.meta.env.VITE_API_BASE_URL}/history`;
     axios
-      .get(url)
+      .get('/history')
       .then(response => {
         setHistoryData(response.data.result);
       })

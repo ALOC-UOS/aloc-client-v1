@@ -7,9 +7,8 @@ const useMember = () => {
 
   const loadMembers = () => {
     setIsLoading(true);
-    const url = `${import.meta.env.VITE_API_BASE_URL}/users`;
     axios
-      .get(url)
+      .get('/users')
       .then(response => {
         console.log(response.data.result);
         setMembers(response.data.result);

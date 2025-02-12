@@ -130,21 +130,24 @@ const Home = () => {
   const loadProblem = async () => {
     try {
       const course = user ? user.course : 'FULL';
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/today-problem`, {
-        params: { course },
-      });
-      const { difficulty, ...rest } = response.data.result;
-      const tier = getProblemTier(difficulty);
+      await axios
+        .get('/today-problem', {
+          params: { course },
+        })
+        .then(response => {
+          const { difficulty, ...rest } = response.data.result;
+          const tier = getProblemTier(difficulty);
 
-      setProblemData({
-        ...rest,
-        difficulty,
-        tier: {
-          backgroundColor: TIER_STYLE_CONFIG[tier].backgroundColor,
-          color: TIER_STYLE_CONFIG[tier].color,
-          icon: TIER_STYLE_CONFIG[tier].icon,
-        },
-      });
+          setProblemData({
+            ...rest,
+            difficulty,
+            tier: {
+              backgroundColor: TIER_STYLE_CONFIG[tier].backgroundColor,
+              color: TIER_STYLE_CONFIG[tier].color,
+              icon: TIER_STYLE_CONFIG[tier].icon,
+            },
+          });
+        });
     } catch (error) {
       console.error('Error loading problem:', error);
     } finally {
@@ -154,9 +157,7 @@ const Home = () => {
 
   const loadSolveMember = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/problem/${problemData.id}/solved-users`
-      );
+      const response = await axios.get(`/problem/${problemData.id}/solved-users`);
       setSolvedMemberList(response.data.result);
     } catch (error) {
       console.error('Error loading solved members:', error);

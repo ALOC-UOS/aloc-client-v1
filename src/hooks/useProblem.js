@@ -34,10 +34,7 @@ export const useProblem = () => {
 
   const fetchAlgorithmList = async season => {
     try {
-      const url =
-        season !== undefined
-          ? `${import.meta.env.VITE_API_BASE_URL}/algorithm/${selectedSeason}`
-          : `${import.meta.env.VITE_API_BASE_URL}/algorithm`;
+      const url = season !== undefined ? `/algorithm/${selectedSeason}` : '/algorithm';
 
       const response = await axios.get(url);
       const algorithms = response.data.result.algorithms;
@@ -50,8 +47,9 @@ export const useProblem = () => {
 
   const fetchProblemList = async () => {
     try {
-      const url = `${import.meta.env.VITE_API_BASE_URL}/problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`;
-      const response = await axios.get(url);
+      const response = await axios.get(
+        `/problems?season=${selectedSeason}&algorithmId=${selectedAlgorithm.algorithmId}&course=${selectedCourse}`
+      );
       setProblemList(response.data.result);
     } catch (error) {
       console.error('문제 목록을 가져오는 중 오류 발생:', error);
@@ -61,8 +59,7 @@ export const useProblem = () => {
 
   const fetchSolvedUserList = async problemId => {
     try {
-      const url = `${import.meta.env.VITE_API_BASE_URL}/problem/${problemId}/solved-users`;
-      const response = await axios.get(url);
+      const response = await axios.get(`/problem/${problemId}/solved-users`);
       setSolvedUserList(response.data.result);
       setSelectedProblemId(problemId);
     } catch (error) {
