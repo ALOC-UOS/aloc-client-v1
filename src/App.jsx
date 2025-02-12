@@ -1,6 +1,5 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Problem from './views/Problem';

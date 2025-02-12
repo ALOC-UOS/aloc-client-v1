@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { BannerContainer, BannerContent } from './style';
+import React from 'react';
+import S from './style';
 
-const Banner = () => {
+const Banner = ({ text }) => {
   return (
-    <BannerContainer>
-      <BannerContent>🎉 2024년 3월 4일, 김영진 멤버가 합류하였습니다! 🎉</BannerContent>
-    </BannerContainer>
+    <S.BannerContainer>
+      <S.BannerContent>{text}</S.BannerContent>
+    </S.BannerContainer>
   );
 };
 

@@ -8,7 +8,7 @@ import useModal from '../../hooks/useModal';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import { serverAPI } from '../../api/axios';
-import { PRICE } from '../../constants/Shop';
+import { PRICE, DecorationItems, NormalItems } from '../../constants/Shop';
 import {
   ShopContainer,
   ContentContainer,
@@ -95,40 +95,6 @@ const Shop = () => {
   const adminModal = useModal({
     description: '구매 문의는 디스코드로 연락해주세요 😊',
   });
-  const DecorationItems = [
-    {
-      name: '초록 거북이',
-      description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: PRICE.GREEN_TURTLE,
-      type: 'GreenTurtle',
-    },
-    {
-      name: '분홍 거북이',
-      description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
-      price: PRICE.PINK_TURTLE,
-      type: 'PinkTurtle',
-    },
-    {
-      name: '파랑 파도',
-      description: '바다로 떠나고 싶어지네요.',
-      price: PRICE.WAVE,
-      type: 'Wave',
-    },
-    {
-      name: '비눗방울',
-      description: '비눗방울이 두둥실 떠다닙니다.',
-      price: PRICE.BUBBLE,
-      type: 'Bubble',
-    },
-  ];
-
-  const NormalItems = [
-    {
-      name: '컬러 변경권',
-      description: '문제를 풀었을 때 색깔이 변경됩니다.',
-      price: PRICE.CHANGE_COLOR_ITEM,
-    },
-  ];
 
   return (
     <ShopContainer>

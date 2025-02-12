@@ -98,18 +98,23 @@ const Home = () => {
     };
   }, [problemData]);
 
-  // useEffect(() => {
-  //   if (!isLoggedIn || user) loadProblem();
-  // }, [user]);
-
-  // useEffect(() => {
-  //   if (problemData.id) {
-  //     loadSolveMember();
-  //   }
-  // }, [problemData]);
+  useEffect(() => {
+    if (!isLoggedIn || user) {
+      loadProblem();
+    }
+  }, [user]);
 
   useEffect(() => {
-    if (!solvedMemberList) return;
+    if (problemData.id) {
+      loadSolveMember();
+    }
+  }, [problemData]);
+
+  useEffect(() => {
+    if (!solvedMemberList) {
+      return;
+    }
+
     const showMemberInterval = 5000;
     const hideMemberDelay = 4000;
 

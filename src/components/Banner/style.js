@@ -8,7 +8,7 @@ const BannerContainer = styled.div`
 
   padding: 16px;
   margin-bottom: 16px;
-  background-color: ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.primary};
   border-radius: 16px;
 `;
 
@@ -18,4 +18,4 @@ const BannerContent = styled.div`
   font-weight: 500;
 `;
 
-export { BannerContainer, BannerContent };
+export default { BannerContainer, BannerContent };
