@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
@@ -7,11 +7,9 @@ import Member from './views/Member';
 import Shop from './views/Shop';
 import Setting from './views/Setting';
 import Login from './views/Login';
-import { setupInterceptors } from './api/axios';
+import { serverAPI, setupInterceptors } from './api/axios';
 import useLoginState from './hooks/useLoginState';
 import useUserState from './hooks/useUserState';
-import { serverAPI } from './api/axios';
-import { useEffect } from 'react';
 import { THEME_OBJECT } from './styles/Theme';
 
 function App() {
