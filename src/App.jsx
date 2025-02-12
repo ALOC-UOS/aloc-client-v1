@@ -12,6 +12,7 @@ import useLoginState from './hooks/useLoginState';
 import useUserState from './hooks/useUserState';
 import { serverAPI } from './api/axios';
 import { useEffect } from 'react';
+import { THEME_OBJECT } from './styles/Theme';
 
 function App() {
   const { initLoginStatus } = useLoginState();
@@ -35,38 +36,8 @@ function App() {
   const LIGHT_MODE = 'light';
   const theme = LIGHT_MODE;
 
-  const themeObject = {
-    light: {
-      mode: 'light',
-      background: '#e5e6ec',
-      foreground: '#f0f1f5',
-      titleText: '#3c414c',
-      contentText: '#5c5e66',
-      subText: '#a9adb9',
-      primary: '#408cff',
-      secondary: '#98bffa',
-      white: '#ffffff',
-      black: '#000000',
-      yellow: '#ffb800',
-      boxShadow: '0 4px 24px 0 #cecece',
-    },
-    dark: {
-      mode: 'dark',
-      background: '#1d2128',
-      foreground: '#2c3038',
-      titleText: '#a0a4b3',
-      contentText: '#b4b7c4',
-      subText: '#5d616f',
-      primary: '#408cff',
-      secondary: '#98bffa',
-      white: '#ffffff',
-      black: '#000000',
-      yellow: '#ffb800',
-      boxShadow: '0 4px 24px 0 #3c414c',
-    },
-  };
   return (
-    <ThemeProvider theme={themeObject[theme]}>
+    <ThemeProvider theme={THEME_OBJECT[theme]}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
