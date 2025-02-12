@@ -32,7 +32,7 @@ const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
     case 'ALREADY_SOLVED':
       return (
-        <HStack style={{ gap: 4 }}>
+        <HStack gap={4}>
           <span>✅</span>
           <span>이미 문제를 풀었어요!</span>
         </HStack>
@@ -45,7 +45,7 @@ const MessageText = ({ solvedStatus, rank }) => {
       );
     default:
       return (
-        <HStack style={{ gap: 4 }}>
+        <HStack gap={4}>
           <span>🤔</span>
           <div>아직 문제를 풀지 않았어요!</div>
         </HStack>

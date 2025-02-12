@@ -26,10 +26,10 @@ const CoinComponent = ({ userCoin, obtainCoin, triggerAnimation }) => {
 
   return (
     <HStack
+      alignItems="center"
+      justifyContent="center"
       styled={{
         position: 'relative',
-        justifyContent: 'center',
-        alignItems: 'center',
         width: '100%',
         transition: 'all 1s ease-in-out',
       }}

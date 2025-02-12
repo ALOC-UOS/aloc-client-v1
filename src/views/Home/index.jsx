@@ -206,7 +206,7 @@ const Home = () => {
         />
       </div>
       <S.ProblemWrapper color={problemData.tier.color} onClick={moveToProblemPage}>
-        <VStack style={{ alignItems: 'center', gap: 8 }}>
+        <VStack alignItems="center" gap={8}>
           <S.ProblemTitle color={problemData.tier.color}>오늘의 문제</S.ProblemTitle>
           <S.ProblemName>
             {problemData.problemId}. {problemData.title}

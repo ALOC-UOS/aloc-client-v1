@@ -16,7 +16,7 @@ export const ProblemListComponent = () => {
   };
 
   return (
-    <VStack style={{ width: '100%', height: 'fit-content', gap: 16 }}>
+    <VStack gap={16} style={{ width: '100%', height: 'fit-content' }}>
       {problemList.length === 0 ? (
         <S.EmptyContainer>
           <img src={Season2Logo} alt="empty-problem" width={64} height={64} />
@@ -36,7 +36,7 @@ export const ProblemListComponent = () => {
         <>
           {problemList.map((problem, index) => (
             <S.ProblemItem key={problem.id} delay={index}>
-              <HStack style={{ gap: 4 }}>
+              <HStack gap={4}>
                 <S.ProblemTier
                   src={TIER_STYLE_CONFIG[getProblemTier(problem.difficulty)]?.icon.small}
                 />
@@ -44,7 +44,7 @@ export const ProblemListComponent = () => {
                   {problem.problemId}. {problem.title}
                 </S.ProblemName>
               </HStack>
-              <HStack style={{ alignItems: 'center' }}>
+              <HStack alignItems="center">
                 <HStack
                   style={{ alignItems: 'center', cursor: 'pointer' }}
                   onClick={() => fetchSolvedUserList(problem.id)}
