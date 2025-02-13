@@ -8,7 +8,7 @@ import MarathonProblemList from '../../components/MarathonProblemList';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import { VStack } from '../../components/Stack';
-import { tierStyleConfig } from '../../styles/tierStyleConfig';
+import { tierStyleConfig } from '../../styles/tier.config';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
 import DefaultProfile from '../../assets/images/default-profile.svg';
