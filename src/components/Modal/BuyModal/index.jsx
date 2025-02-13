@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { ModalContainer, Description } from './style';
 import Toast from '../../Toast';
 import Button from '../../Buttons';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Modal from '../components/Modal/Modal';
 import { BlackOverlay } from '../components/BlackOverlay';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 const useModal = ({
   title,
   description,

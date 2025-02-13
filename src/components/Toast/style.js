@@ -1,4 +1,6 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
+
 const ToastContainer = styled.div`
   z-index: 9999;
   position: fixed;
@@ -6,7 +8,7 @@ const ToastContainer = styled.div`
   left: 50%;
 
   opacity: 0;
-  box-shadow: ${props => props.theme.boxShadow};
+  box-shadow: var(--color-box-shadow);
   display: flex;
   flex-direction: column;
   min-width: 320px;
@@ -27,7 +29,7 @@ const ToastIcon = styled.img`
   height: 24px;
 `;
 const ToastText = styled.div`
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -2px;

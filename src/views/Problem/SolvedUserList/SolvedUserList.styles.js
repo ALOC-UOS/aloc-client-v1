@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 
 const fadeInUp = keyframes`
   0% {
@@ -20,7 +21,7 @@ const SolvedUserListContainer = styled.div`
   padding: ${props => (props.isOpen ? '24px' : '24px 0px')};
   border-radius: 48px;
   overflow: scroll;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   flex-shrink: 0;
 `;
 
@@ -37,7 +38,7 @@ const ProfileImage = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1px solid ${props => props.theme.black}18;
+  border: 1px solid var(--color-black-10);
   cursor: pointer;
 
   &:hover {

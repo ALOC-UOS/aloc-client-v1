@@ -40,7 +40,7 @@ const MessageText = ({ solvedStatus, rank }) => {
     case 'SOLVED':
       return (
         <HStack>
-          <span style={{ color: '#408cff' }}>{rank}등</span>으로 문제를 풀었어요!
+          <span style={{ color: 'var(--color-blue)' }}>{rank}등</span>으로 문제를 풀었어요!
         </HStack>
       );
     default:
@@ -156,7 +156,7 @@ const Member = () => {
         isLoadingSolvedProblem: true,
         children: (
           <S.MessageComponentText>
-            <span style={{ color: '#408cff' }}>풀이 여부</span>를 확인하고 있어요
+            <span style={{ color: 'var(--color-blue)' }}>풀이 여부</span>를 확인하고 있어요
           </S.MessageComponentText>
         ),
       })}

@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const CardContentWrapper = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const CardContentWrapper = styled.div`
 `;
 
 const CardSubscription = styled.div`
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   font-size: 12px;
   font-weight: 500;
 `;
@@ -32,7 +33,7 @@ const Icon = styled.img`
 const Text = styled.div`
   display: flex;
   flex-direction: row;
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 16px;
   font-weight: 500;
 `;

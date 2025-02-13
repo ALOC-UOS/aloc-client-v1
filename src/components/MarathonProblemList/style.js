@@ -1,4 +1,6 @@
-import { keyframes, styled } from 'styled-components';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
+
 const AppearProblemItem = opacity => keyframes`
   0% {
     opacity: 0;

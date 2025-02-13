@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Problem from './views/Problem';
@@ -10,7 +9,7 @@ import Login from './views/Login';
 import { serverAPI, setupInterceptors } from './api/axios';
 import useLoginState from './hooks/useLoginState';
 import useUserState from './hooks/useUserState';
-import { THEME_OBJECT } from './styles/theme';
+import GlobalStyles from './styles/global';
 
 function App() {
   const { initLoginStatus } = useLoginState();
@@ -31,11 +30,9 @@ function App() {
       });
   }, []);
 
-  const LIGHT_MODE = 'light';
-  const theme = LIGHT_MODE;
-
   return (
-    <ThemeProvider theme={THEME_OBJECT[theme]}>
+    <>
+      <GlobalStyles />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -46,7 +43,7 @@ function App() {
           <Route path="/setting" element={<Setting />} />
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
+    </>
   );
 }
 

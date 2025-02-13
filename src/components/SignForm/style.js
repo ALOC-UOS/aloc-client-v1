@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { InputBox } from '../Input/TextInput/TextInputBox/style';
 
 const StyledInputBox = styled(InputBox)`
@@ -29,7 +29,7 @@ const Phrase = styled.div`
   font-size: 24px;
   font-weight: bold;
   letter-spacing: -2.56px;
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
 `;
 const ImageWrapper = styled.div`
   display: flex;

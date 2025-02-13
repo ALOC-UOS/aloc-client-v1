@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useRef, useState, useEffect } from 'react';
 import Button from '../../Buttons';
 import ImageIcon from '../../../assets/icons/image.svg';

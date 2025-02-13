@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const ProblemContainer = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: ${props => props.theme.background};
+  background-color: var(--color-background);
   width: 100%;
   min-height: 100vh;
   padding: 110px 48px 0;
@@ -17,17 +18,17 @@ const Wrapping = styled.div`
   padding: 24px;
   border-radius: 48px;
   overflow: scroll;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
 `;
 
 const Button = styled.div`
   width: 100%;
   height: fit-content;
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 16px;
   text-align: center;
   padding: 16px 0;
-  background-color: ${props => props.theme.white};
+  background-color: var(--color-white);
   border-radius: 48px;
   cursor: pointer;
   user-select: none;
@@ -35,9 +36,9 @@ const Button = styled.div`
   ${props =>
     props.selected &&
     css`
-      color: ${props.theme.white};
+      color: var(--color-white);
       pointer-events: none;
-      background-color: ${props.theme.primary};
+      background-color: var(--color-blue);
     `}
 
   &:hover {

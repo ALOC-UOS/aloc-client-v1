@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
 
 const AppearProfile = keyframes`
   0% {
@@ -35,7 +36,7 @@ const rotate360 = keyframes`
 const MemberContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.background};
+  background-color: var(--color-background);
   height: 100vh;
 `;
 
@@ -142,13 +143,13 @@ const ProfileLink = styled.a`
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  box-shadow: 0 0 16px #ffffff40;
+  box-shadow: 0 0 16px var(--color-white-25);
   overflow: hidden;
   &::after {
     position: absolute;
     transition: all 0.3s ease;
     content: 'Github 보기';
-    color: #ffffff;
+    color: var(--color-white);
     opacity: 0;
   }
   &:hover {
@@ -173,7 +174,7 @@ const ProfileImage = styled.img`
   position: relative;
   width: 160px;
   height: 160px;
-  background-color: ${props => props.theme.background};
+  background-color: var(--color-background);
 `;
 
 const ProfileBlurImage = styled.img`
@@ -235,12 +236,12 @@ const ProfileNumber = styled.img`
 
 const MemberWrapper = styled.div`
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 12px 12px 24px 12px;
 `;
 
 const MemberName = styled.div`
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 24px;
   font-weight: 500;
   margin-left: 12px;
@@ -254,7 +255,7 @@ const MemberUserInfoWrapper = styled.div`
 `;
 
 const MemberUserInfoText = styled.div`
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   font-size: 16px;
 `;
 
@@ -276,7 +277,7 @@ const MemberUserInfoCoin = styled.div`
   flex-direction: row;
   align-items: center;
 
-  color: #ffb800;
+  color: var(--color-yellow);
   font-size: 16px;
   font-weight: 500;
   gap: 4px;
@@ -284,7 +285,7 @@ const MemberUserInfoCoin = styled.div`
   user-select: none;
 
   padding: 4px 8px;
-  background-color: #00000080;
+  background-color: var(--color-black-50);
   border-radius: 24px;
   & > img {
     width: 24px;
@@ -321,13 +322,13 @@ const MemberInfoRow = styled.div`
 `;
 
 const MemberInfoItem = styled.div`
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   font-size: 16px;
 
   ${props =>
     props.blue &&
     css`
-      color: ${props => props.theme.primary};
+      color: var(--color-blue);
       cursor: pointer;
       &:hover {
         text-decoration: underline;
@@ -347,12 +348,12 @@ const SolvedAnimation = styled.div`
   background-image: linear-gradient(
     60deg,
     transparent 20%,
-    #ffffff80 20%,
-    #ffffff80 35%,
+    var(--color-white-50) 20%,
+    var(--color-white-50) 35%,
     transparent 35%,
     transparent 40%,
-    #ffffff40 40%,
-    #ffffff40 45%,
+    var(--color-white-25) 40%,
+    var(--color-white-25) 45%,
     transparent 45%,
     transparent
   );
@@ -374,7 +375,7 @@ const IconWrapper = styled.div`
   height: 48px;
   transform: translateX(-50%);
   opacity: 0;
-  background-color: ${props => props.theme.primary};
+  background-color: var(--color-blue);
   border-radius: 50%;
 
   ${props =>
@@ -421,9 +422,9 @@ const ProblemSolvedButton = styled.div`
   right: 0px;
   padding: 15px 30px;
   border-radius: 12px;
-  background-color: ${props => props.theme.primary};
+  background-color: var(--color-blue);
 
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -454,7 +455,7 @@ const BlueLoadingIcon = styled.img`
 const MessageComponentText = styled.span`
   font-weight: 500;
   font-size: 16;
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
 `;
 
 export default {
