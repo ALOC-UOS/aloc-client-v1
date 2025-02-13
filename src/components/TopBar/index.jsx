@@ -1,5 +1,5 @@
-import logo from '../../assets/logo.svg';
-import AlocText from '../../assets/aloc-text.svg';
+import LogoWhite from '../../assets/images/logo.season2.white.svg';
+import AlocText from '../../assets/images/aloc-text.svg';
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
@@ -18,7 +18,7 @@ import {
 import ProfileChangeModalChildren from './components/ProfileChangeModalChildren';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
-import DefaultProfile from '../../assets/default-profile.svg';
+import DefaultProfile from '../../assets/images/default-profile.svg';
 import useContainer from '../../hooks/useContainer';
 import Button from '../Buttons';
 import useModal from '../../hooks/useModal';
@@ -237,7 +237,7 @@ const TopBar = ({ active }) => {
       })}
       <TopBarLeft onClick={() => navigate('/')}>
         <ImageWrapper>
-          <LogoImage src={logo} />
+          <LogoImage src={LogoWhite} />
         </ImageWrapper>
         <ImageWrapper>
           <AlocTextImage src={AlocText} />

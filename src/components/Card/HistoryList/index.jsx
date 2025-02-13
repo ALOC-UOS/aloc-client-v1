@@ -8,9 +8,9 @@ import {
   Icon,
   Text,
 } from './style';
-import AllSolveIcon from '../../../assets/all-solve-icon.svg';
-import changeRank from '../../../assets/change-rank-icon.svg';
-import plusMember from '../../../assets/plus-member-icon.svg';
+import AllSolveIcon from '../../../assets/icons/all-solve.svg';
+import ChangeRankIcon from '../../../assets/icons/change-rank.svg';
+import PlusMemberIcon from '../../../assets/icons/member.plus.svg';
 
 const HistoryList = () => {
   const [historyData, setHistoryData] = useState([]);
@@ -77,9 +77,9 @@ const HistoryList = () => {
                   <Icon
                     src={
                       content.icon === 'plusMember'
-                        ? plusMember
+                        ? PlusMemberIcon
                         : content.icon === 'changeRank'
-                          ? changeRank
+                          ? ChangeRankIcon
                           : AllSolveIcon
                     }
                   />

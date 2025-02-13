@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logo from '../../../assets/logo.svg';
+import LogoWhite from '../../../assets/images/logo.season2.white.svg';
 import { SignBox, ImageWrapper, LogoImage, PhraseWrapper, Phrase, BreakLine } from '../style';
 import Button from '../../Buttons';
 import useModal from '../../../hooks/useModal';
@@ -49,7 +49,7 @@ const SignUpSecond = ({ setFormType }) => {
       {errorModal.render()}
       <SignBox>
         <ImageWrapper>
-          <LogoImage src={logo} />
+          <LogoImage src={LogoWhite} />
         </ImageWrapper>
         <PhraseWrapper>
           <Phrase>코스를 선택하세요</Phrase>

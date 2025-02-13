@@ -1,4 +1,4 @@
-import logo from '../../../assets/logo.svg';
+import LogoWhite from '../../../assets/images/logo.season2.white.svg';
 import Button from '../../Buttons';
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -93,7 +93,7 @@ const SignIn = ({ setFormType }) => {
         }}
       />
       <ImageWrapper>
-        <LogoImage src={logo} />
+        <LogoImage src={LogoWhite} />
       </ImageWrapper>
       <PhraseWrapper>
         <Phrase>오늘도 알록하세요</Phrase>

@@ -1,4 +1,4 @@
-import logo from '../../../assets/logo.svg';
+import LogoWhite from '../../../assets/images/logo.season2.white.svg';
 import Button from '../../Buttons';
 import { useRef, useState, useEffect } from 'react';
 import { BlackOverlay } from '../../BlackOverlay';
@@ -151,7 +151,7 @@ const SignUpFirst = ({ setFormType, onNext }) => {
         }}
       />
       <ImageWrapper>
-        <LogoImage src={logo} />
+        <LogoImage src={LogoWhite} />
       </ImageWrapper>
       <PhraseWrapper>
         <Phrase>알록에 온 것을 환영해요!</Phrase>
