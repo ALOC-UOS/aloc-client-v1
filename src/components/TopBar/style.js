@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const TopBarContainer = styled('div')`
   z-index: 100;
@@ -20,7 +21,7 @@ const TopBarContainer = styled('div')`
   ${props =>
     props.isScroll &&
     css`
-      background-color: ${props => props.theme.foreground}18;
+      background-color: var(--color-foreground-10);
     `}
   @media (max-width: 480px) {
     top: 0;
@@ -47,18 +48,18 @@ const TopBarItem = styled.div`
   align-items: center;
   font-size: 16px;
   font-weight: 500;
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   cursor: pointer;
   user-select: none;
   &:hover {
-    color: ${props => props.theme.titleText};
+    color: var(--color-title-text);
   }
   ${props =>
     props.selected &&
     css`
-      color: ${props => props.theme.primary};
+      color: var(--color-blue);
       &:hover {
-        color: ${props => props.theme.primary};
+        color: var(--color-blue);
       }
     `}
 `;
@@ -66,9 +67,9 @@ const TopBarItem = styled.div`
 const TopBarButton = styled.div`
   padding: 12px;
   border-radius: 12px;
-  background-color: ${props => props.theme.primary};
+  background-color: var(--color-blue);
 
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;

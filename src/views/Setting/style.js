@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const SettingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.background};
+  background-color: var(--color-background);
   height: 100vh;
   align-items: center;
 `;
@@ -31,17 +31,17 @@ const InputBox = styled.div`
   justify-content: space-between;
 
   min-width: 240px;
-  max-wdith: 400px;
+  max-width: 400px;
   width: 100%;
   height: 40px;
 
-  border: ${props => (props.theme.mode === 'light' ? '1px solid #f0f1f5' : '1px solid #2c3038')};
+  border: 1px solid var(--color-foreground);
   outline: none;
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 14px;
   letter-spacing: -1px;
 
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   padding: 4px 4px 4px 8px;
   border-radius: 8px;
   cursor: pointer;
@@ -79,7 +79,7 @@ const InputItem = styled.div`
   align-items: center;
   justify-content: flex-start;
   padding: 8px 16px 8px 8px;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   &:hover {
@@ -92,7 +92,7 @@ const InputItem = styled.div`
 
   cursor: pointer;
   user-select: none;
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 14px;
 
   ${props =>
@@ -100,12 +100,12 @@ const InputItem = styled.div`
     `
     cursor: default;
     pointer-events: none;
-    color: ${props.theme.subText}
+    color: var(--color-sub-text);
   `}
 `;
 
 const SelectedText = styled.div`
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 14px;
   user-select: none;
 `;

@@ -1,5 +1,5 @@
 import S from './AlgorithmList.styles';
-import { VStack } from '../../../styles/Stack.styles';
+import { VStack } from '../../../components/Stack';
 import { useProblem } from '../../../hooks/useProblem';
 
 export const AlgorithmListComponent = () => {

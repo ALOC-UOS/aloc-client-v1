@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const DropDownTrigger = ({ children, onClick }) => {
   return (
@@ -23,10 +23,10 @@ const DropDownTriggerContainer = styled.button`
   border: none;
   border-radius: 24px;
   outline: none;
-  background-color: ${props => props.theme.white};
+  background-color: var(--color-white);
   padding: 0px 16px;
 
   font-size: 14px;
-  color: ${props => props.theme.primary};
+  color: var(--color-blue);
   cursor: pointer;
 `;

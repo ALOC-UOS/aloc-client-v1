@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const useContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,10 +19,10 @@ const CardWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   border-radius: 16px;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   padding: 10px;
   opacity: 0;
-  box-shadow: 0 8px 16px #408cff40;
+  box-shadow: 0 8px 16px var(--color-blue-25);
   ${props =>
     props.isOpen
       ? css`

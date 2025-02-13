@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const CardContainer = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const CardContainer = styled.div`
 const CardWrapper = styled.div`
   min-width: 320px;
   border-radius: 16px;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   padding: 24px 16px;
   @media (max-width: 480px) {
     width: 100%;
@@ -32,13 +32,13 @@ const CardTop = styled.div`
 `;
 
 const CardLabel = styled.div`
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   font-size: 12px;
   font-weight: bold;
 `;
 
 const CardTitle = styled.div`
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 24px;
   font-weight: bold;
 `;

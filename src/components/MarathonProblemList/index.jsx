@@ -1,7 +1,7 @@
 import { getProblemTier } from '../../utils';
 import { serverAPI } from '../../api/axios';
 import { useEffect, useState } from 'react';
-import { tierStyleConfig } from '../../styles/tierStyleConfig';
+import { tierStyleConfig } from '../../styles/tier.config';
 import LockIcon from '../../assets/icons/lock.svg';
 import {
   ProblemListContainer,

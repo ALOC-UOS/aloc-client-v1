@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const ListModalContainer = styled.div`
   min-width: 400px;
@@ -12,7 +13,7 @@ const ListModalContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   padding: 16px;
   border-radius: 16px;
   filter: blur(12px);
@@ -40,7 +41,7 @@ const ModalTitle = styled.div`
   display: flex;
   flex-direction: column;
 
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 16px;
   font-weight: 500;
 `;
@@ -55,7 +56,7 @@ const IconWrapper = styled.div`
   flex-direction: row;
   align-items: center;
 
-  color: ${props => props.theme.primary};
+  color: var(--color-blue);
   font-size: 12px;
   gap: 2px;
 `;
@@ -97,11 +98,11 @@ const ProblemItem = styled.a`
   align-items: center;
   gap: 4px;
   padding: 4px;
-  background-color: ${props => props.theme.background}00;
+  background-color: transparent;
   border-radius: 8px;
   text-decoration: none;
   &:hover {
-    background-color: ${props => props.theme.background};
+    background-color: var(--color-background);
   }
 `;
 
@@ -111,7 +112,7 @@ const ProblemDifficulty = styled.img`
 `;
 
 const ProblemName = styled.div`
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 16px;
   font-weight: 500;
 `;
@@ -123,14 +124,14 @@ const Reloader = styled.div`
   bottom: 16px;
   display: flex;
   flex-direction: column;
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   font-size: 12px;
   text-decoration: underline;
   text-align: center;
 
   cursor: pointer;
   &:hover {
-    color: ${props => props.theme.contentText};
+    color: var(--color-content-text);
   }
 `;
 

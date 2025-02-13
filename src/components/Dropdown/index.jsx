@@ -1,7 +1,7 @@
 import DropdownItem from './Item';
 import DropDownMenu from './Menu';
 import DropDownTrigger from './Trigger';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const Dropdown = ({ children }) => {
   return <DropDownContainer>{children}</DropDownContainer>;
@@ -18,6 +18,6 @@ const DropDownContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 24px;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   border-radius: 48px;
 `;

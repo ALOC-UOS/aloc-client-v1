@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import S from './style';
-import { decorationStyleConfig } from '../../../styles/decorationStyleConfig';
+import { decorationStyleConfig } from '../../../styles/decoration.config';
 
 const DecorationItem = ({ type, size }) => {
   const [selectedDecorationItem, setSelectedDecorationItem] = useState(null);

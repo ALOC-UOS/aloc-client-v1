@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const AlgorithmListContainer = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const AlgorithmItem = styled.div`
   align-items: center;
   padding: 16px;
   border-radius: 48px;
-  background-color: ${props => props.theme.white};
+  background-color: var(--color-white);
   gap: 8px;
   cursor: pointer;
   user-select: none;
@@ -19,7 +20,7 @@ const AlgorithmItem = styled.div`
     props.selected &&
     css`
       pointer-events: none;
-      background-color: ${props.theme.primary};
+      background-color: var(--color-blue);
     `}
 
   &:hover {
@@ -33,28 +34,28 @@ const AlgorithmItem = styled.div`
 `;
 
 const WeekText = styled.p`
-  color: ${props => props.theme.primary};
+  color: var(--color-blue);
   font-size: 12px;
   padding: 4px 8px;
-  border: 1px solid ${props => props.theme.primary};
+  border: 1px solid var(--color-blue);
   border-radius: 24px;
 
   ${props =>
     props.selected &&
     css`
-      color: ${props.theme.white};
-      border: 1px solid ${props.theme.white};
+      color: var(--color-white);
+      border: 1px solid var(--color-white);
     `}
 `;
 
 const AlgorithmName = styled.p`
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 16px;
 
   ${props =>
     props.selected &&
     css`
-      color: ${props.theme.white};
+      color: var(--color-white);
     `}
 `;
 

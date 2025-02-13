@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const ModalContainer = styled.div`
   min-width: 400px;
@@ -8,7 +9,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 16px;
   border-radius: 16px;
   filter: blur(12px);
@@ -24,7 +25,7 @@ const ModalContainer = styled.div`
     `}
 `;
 const Description = styled.div`
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 16px;
   letter-spacing: -2px;
   user-select: none;
