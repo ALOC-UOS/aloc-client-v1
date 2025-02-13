@@ -10,7 +10,7 @@ import Login from './views/Login';
 import { serverAPI, setupInterceptors } from './api/axios';
 import useLoginState from './hooks/useLoginState';
 import useUserState from './hooks/useUserState';
-import { THEME_OBJECT } from './styles/Theme';
+import { THEME_OBJECT } from './styles/theme';
 
 function App() {
   const { initLoginStatus } = useLoginState();
