@@ -1,15 +1,15 @@
-import GreenTurtle1 from '../assets/green-turtle-1.svg';
-import GreenTurtle2 from '../assets/green-turtle-2.svg';
-import GreenTurtle3 from '../assets/green-turtle-3.svg';
-import GreenTurtle4 from '../assets/green-turtle-4.svg';
-import PinkTurtle1 from '../assets/pink-turtle-1.svg';
-import PinkTurtle2 from '../assets/pink-turtle-2.svg';
-import PinkTurtle3 from '../assets/pink-turtle-3.svg';
-import PinkTurtle4 from '../assets/pink-turtle-4.svg';
-import Wave1 from '../assets/wave-1.svg';
-import Wave2 from '../assets/wave-2.svg';
-import Wave3 from '../assets/wave-3.svg';
-import Bubble from '../assets/bubble.svg';
+import GreenTurtle1 from '../assets/items/green-turtle/1.svg';
+import GreenTurtle2 from '../assets/items/green-turtle/2.svg';
+import GreenTurtle3 from '../assets/items/green-turtle/3.svg';
+import GreenTurtle4 from '../assets/items/green-turtle/4.svg';
+import PinkTurtle1 from '../assets/items/pink-turtle/1.svg';
+import PinkTurtle2 from '../assets/items/pink-turtle/2.svg';
+import PinkTurtle3 from '../assets/items/pink-turtle/3.svg';
+import PinkTurtle4 from '../assets/items/pink-turtle/4.svg';
+import Wave1 from '../assets/items/wave/1.svg';
+import Wave2 from '../assets/items/wave/2.svg';
+import Wave3 from '../assets/items/wave/3.svg';
+import Bubble from '../assets/items/bubble.svg';
 
 export const decorationStyleConfig = {
   GreenTurtle: {

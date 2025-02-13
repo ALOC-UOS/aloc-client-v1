@@ -11,7 +11,7 @@ import { VStack } from '../../styles/Stack.styles';
 import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
-import DefaultProfile from '../../assets/default-profile.svg';
+import DefaultProfile from '../../assets/images/default-profile.svg';
 
 const dummyProblemData = {
   id: 12865,

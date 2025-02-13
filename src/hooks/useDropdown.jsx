@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Dropdown from '../components/Dropdown';
-import downArrowBtn from '../assets/down-arrow-btn.svg';
+import ArrowDownFillGray from '../assets/icons/arrow.down.fill.gray.svg';
 
 const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,7 @@ const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
           <div>{selectedItem}</div>
           <img
             alt="Down Arrow"
-            src={downArrowBtn}
+            src={ArrowDownFillGray}
             style={{
               transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.3s ease',

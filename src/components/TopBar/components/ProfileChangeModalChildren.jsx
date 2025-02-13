@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useRef, useState, useEffect } from 'react';
 import Button from '../../Buttons';
-import image from '../../../assets/image.svg';
+import ImageIcon from '../../../assets/icons/image.svg';
 const ProfileChangeModalChildren = ({ selectedFile, setselectedFile }) => {
   const fileInputRef = useRef();
   const [fileErrorText, setFileErrorText] = useState('');
@@ -74,7 +74,7 @@ const ProfileChangeModalChildren = ({ selectedFile, setselectedFile }) => {
           </div>
         </div>
       ) : (
-        <Icon src={image} />
+        <Icon src={ImageIcon} />
       )}
       {fileErrorText && <div style={{ color: 'red' }}>{fileErrorText}</div>}
     </div>
