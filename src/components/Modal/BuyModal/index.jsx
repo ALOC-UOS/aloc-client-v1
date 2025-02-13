@@ -25,8 +25,6 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
   const [isBookmarkToast, setIsBookmarkToast] = useState(false);
 
   function accpetModal() {
-    const url = `${import.meta.env.VITE_API_BASE_URL}/buy/item`;
-
     const JSONData = {};
     buyList.map((item, index) => {
       JSONData[item.id] = inputTextArray[index];
@@ -34,7 +32,7 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
     JSONData['item'] = 'changeProfileColor';
 
     axios
-      .post(url, JSONData)
+      .post('/buy/item', JSONData)
       .then(response => {
         const message =
           'colorCode: ' + response.data.color_code + '\n' + '남은 Coin: ' + response.data.coin;

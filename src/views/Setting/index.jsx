@@ -164,12 +164,12 @@ const Setting = () => {
     <SettingContainer>
       <ListInputWrap
         label={'알고리즘 변경'}
-        apiURL={'algorithm'}
+        apiURL={'/algorithm'}
         listName={'algorithm'}
         listData={algorithmList}
       />
-      <TextInputWrap label={'멤버 추가하기'} apiURL={'add/user'} inputList={memberAddList} />
-      <TextInputWrap label={'색상 추가하기'} apiURL={'add/color'} inputList={colorAddList} />
+      <TextInputWrap label={'멤버 추가하기'} apiURL={'/add/user'} inputList={memberAddList} />
+      <TextInputWrap label={'색상 추가하기'} apiURL={'/add/color'} inputList={colorAddList} />
     </SettingContainer>
   );
 };

@@ -11,9 +11,8 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_API_BASE_URL}/${apiURL}`;
     axios
-      .get(url)
+      .get(apiURL)
       .then(response => {
         setSelectedItemName(listData.find(item => item.id === response.data).name);
       })
@@ -38,8 +37,7 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   };
 
   const clickSaveButton = () => {
-    const url = `${import.meta.env.VITE_API_BASE_URL}/${apiURL}`;
-    axios.post(url, {
+    axios.post(apiURL, {
       id: selectedItemId,
       name: selectedItemName,
     });

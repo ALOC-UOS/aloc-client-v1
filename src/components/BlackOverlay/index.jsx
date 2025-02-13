@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import S from './style';
 
-export const BlackScreen = ({ isOpen, onClick }) => {
+export const BlackOverlay = ({ isOpen, onClick }) => {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
-  return <S.BlackScreenContainer isOpen={isOpen} onClick={onClick} />;
+  return <S.BlackOverlayContainer isOpen={isOpen} onClick={onClick} />;
 };

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import S from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
-import { BlackScreen } from '../../components/BlackScreen';
-import DecorationCharacter from '../../components/Decorations/Character';
+import { BlackOverlay } from '../../components/BlackOverlay';
+import DecorationItem from '../../components/Decorations/Item';
 import Bronze from '../../assets/bronze.png';
 import Silver from '../../assets/silver.png';
 import Gold from '../../assets/gold.png';
@@ -32,7 +32,7 @@ const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
     case 'ALREADY_SOLVED':
       return (
-        <HStack style={{ gap: 4 }}>
+        <HStack gap={4}>
           <span>✅</span>
           <span>이미 문제를 풀었어요!</span>
         </HStack>
@@ -45,7 +45,7 @@ const MessageText = ({ solvedStatus, rank }) => {
       );
     default:
       return (
-        <HStack style={{ gap: 4 }}>
+        <HStack gap={4}>
           <span>🤔</span>
           <div>아직 문제를 풀지 않았어요!</div>
         </HStack>
@@ -191,7 +191,7 @@ const Member = () => {
         closeModal={closeModal}
         checkSolvedProblem={checkSolvedProblem}
       />
-      <BlackScreen isOpen={isOpenedModal} />
+      <BlackOverlay isOpen={isOpenedModal} />
       <S.ContentContainer>
         {isLoading ? (
           <S.BlueLoadingIcon src={loadingIcon} />
@@ -212,15 +212,15 @@ const Member = () => {
                 color5={member.color5}
                 degree={member.degree}
               >
-                {member.baekjoonId === 'alicehrk' && <DecorationCharacter type={'Bubble'} />}
-                {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
-                {member.baekjoonId === 'jojongjojong' && <DecorationCharacter type={'Wave'} />}
+                {member.baekjoonId === 'alicehrk' && <DecorationItem type={'Bubble'} />}
+                {member.baekjoonId === 'parkne0114' && <DecorationItem type={'PinkTurtle'} />}
+                {member.baekjoonId === 'jojongjojong' && <DecorationItem type={'Wave'} />}
                 <S.SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <S.ProfileBlurImage
                     src={
                       member.profileImageFileName
-                        ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />
@@ -229,7 +229,7 @@ const Member = () => {
                   <S.ProfileImage
                     src={
                       member.profileImageFileName
-                        ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />

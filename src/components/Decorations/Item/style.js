@@ -31,4 +31,4 @@ const BubbleItem = styled(DecorationItem)`
   }
 `;
 
-export { DecorationItem, BubbleItem };
+export default { DecorationItem, BubbleItem };

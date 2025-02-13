@@ -4,7 +4,7 @@ import { changeAccessToken } from '../auth/token';
 
 const getAccessByRefresh = async (refreshToken, initLoginStatus) => {
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/refresh`, {
+    const response = await axios.post('/refresh', {
       refreshToken: refreshToken,
     });
     const newAccessToken = response.data.accessToken;
@@ -57,6 +57,7 @@ export const setupInterceptors = initLoginStatus => {
     error => Promise.reject(error)
   );
 };
+
 export const serverAPI = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: { 'Content-type': 'application/json' },

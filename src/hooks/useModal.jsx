@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from '../components/Modal/Modal';
-import { BlackScreen } from '../components/BlackScreen';
+import { BlackOverlay } from '../components/BlackOverlay';
 import styled from 'styled-components';
 const useModal = ({
   title,
@@ -33,7 +33,7 @@ const useModal = ({
     // if (!isOpen) return null;
     return (
       <ModalWrapper isOpen={isOpen}>
-        <BlackScreen isOpen={isOpen} onClick={hide} />
+        <BlackOverlay isOpen={isOpen} onClick={hide} />
         <Modal
           isOpen={isOpen}
           title={title}

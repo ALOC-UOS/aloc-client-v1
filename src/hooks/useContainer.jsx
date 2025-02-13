@@ -5,9 +5,7 @@ const useContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
-  const toggle = () => {
-    setIsOpen(prev => !prev);
-  };
+  const toggle = () => setIsOpen(prev => !prev);
   const render = ({ children = null } = {}) => {
     return <CardWrapper isOpen={isOpen}>{children}</CardWrapper>;
   };

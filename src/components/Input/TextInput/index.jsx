@@ -9,14 +9,12 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
   const [inputTextArray, setInputTextArray] = useState(Array(inputList.length).fill(''));
 
   const clickSaveButton = () => {
-    const url = `${import.meta.env.VITE_API_BASE_URL}${apiURL}`;
-
     const JSONData = {};
     inputList.map((item, index) => {
       JSONData[item.id] = inputTextArray[index];
     });
 
-    axios.post(url, JSONData).catch(error => {
+    axios.post(apiURL, JSONData).catch(error => {
       console.log(error);
     });
     setIsDisabled(true);

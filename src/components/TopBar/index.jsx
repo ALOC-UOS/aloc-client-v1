@@ -1,6 +1,6 @@
 import logo from '../../assets/logo.svg';
 import AlocText from '../../assets/aloc-text.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
 import {
@@ -22,8 +22,6 @@ import DefaultProfile from '../../assets/default-profile.svg';
 import useContainer from '../../hooks/useContainer';
 import Button from '../Buttons';
 import useModal from '../../hooks/useModal';
-import memberIcon from '../../assets/member-icon.svg';
-import { useRef } from 'react';
 import { serverAPI } from '../../api/axios';
 import { Message } from '../Message';
 
@@ -189,11 +187,11 @@ const TopBar = ({ active }) => {
       <UserImageWrapper>
         {user.profileImageFileName ? (
           <UserImage
-            src={`https://api.aloc.kr/files/user/profile/${user.profileImageFileName}`}
+            src={`${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${user.profileImageFileName}`}
             onClick={userMenu.toggle}
           />
         ) : (
-          <UserImage src={memberIcon} onClick={userMenu.toggle} />
+          <UserImage src={DefaultProfile} onClick={userMenu.toggle} />
         )}
       </UserImageWrapper>
     ) : (

@@ -98,18 +98,23 @@ const Home = () => {
     };
   }, [problemData]);
 
-  // useEffect(() => {
-  //   if (!isLoggedIn || user) loadProblem();
-  // }, [user]);
-
-  // useEffect(() => {
-  //   if (problemData.id) {
-  //     loadSolveMember();
-  //   }
-  // }, [problemData]);
+  useEffect(() => {
+    if (!isLoggedIn || user) {
+      loadProblem();
+    }
+  }, [user]);
 
   useEffect(() => {
-    if (!solvedMemberList) return;
+    if (problemData.id) {
+      loadSolveMember();
+    }
+  }, [problemData]);
+
+  useEffect(() => {
+    if (!solvedMemberList) {
+      return;
+    }
+
     const showMemberInterval = 5000;
     const hideMemberDelay = 4000;
 
@@ -125,21 +130,24 @@ const Home = () => {
   const loadProblem = async () => {
     try {
       const course = user ? user.course : 'FULL';
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/today-problem`, {
-        params: { course },
-      });
-      const { difficulty, ...rest } = response.data.result;
-      const tier = getProblemTier(difficulty);
+      await axios
+        .get('/today-problem', {
+          params: { course },
+        })
+        .then(response => {
+          const { difficulty, ...rest } = response.data.result;
+          const tier = getProblemTier(difficulty);
 
-      setProblemData({
-        ...rest,
-        difficulty,
-        tier: {
-          backgroundColor: tierStyleConfig[tier].backgroundColor,
-          color: tierStyleConfig[tier].color,
-          icon: tierStyleConfig[tier].icon,
-        },
-      });
+          setProblemData({
+            ...rest,
+            difficulty,
+            tier: {
+              backgroundColor: tierStyleConfig[tier].backgroundColor,
+              color: tierStyleConfig[tier].color,
+              icon: tierStyleConfig[tier].icon,
+            },
+          });
+        });
     } catch (error) {
       console.error('Error loading problem:', error);
     } finally {
@@ -149,9 +157,7 @@ const Home = () => {
 
   const loadSolveMember = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/problem/${problemData.id}/solved-users`
-      );
+      const response = await axios.get(`/problem/${problemData.id}/solved-users`);
       setSolvedMemberList(response.data.result);
     } catch (error) {
       console.error('Error loading solved members:', error);
@@ -201,7 +207,7 @@ const Home = () => {
         />
       </div>
       <S.ProblemWrapper color={problemData.tier.color} onClick={moveToProblemPage}>
-        <VStack style={{ alignItems: 'center', gap: 8 }}>
+        <VStack alignItems="center" gap={8}>
           <S.ProblemTitle color={problemData.tier.color}>오늘의 문제</S.ProblemTitle>
           <S.ProblemName>
             {problemData.problemId}. {problemData.title}
@@ -231,7 +237,7 @@ const Home = () => {
         <S.ProfileImage
           src={
             currentMember.profileImageFileName
-              ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${currentMember.profileImageFileName}`
+              ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${user.profileImageFileName}`
               : DefaultProfile
           }
         />

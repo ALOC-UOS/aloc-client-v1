@@ -2,7 +2,7 @@ import logo from '../../../assets/logo.svg';
 import Button from '../../Buttons';
 import { useState } from 'react';
 import { useRef } from 'react';
-import { BlackScreen } from '../../BlackScreen';
+import { BlackOverlay } from '../../BlackOverlay';
 import AlertModal from '../../Modal/AlertModal';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -84,7 +84,7 @@ const SignIn = ({ setFormType }) => {
 
   return (
     <SignBox onSubmit={onSubmit}>
-      <BlackScreen isOpen={isOpenedModal} />
+      <BlackOverlay isOpen={isOpenedModal} />
       <AlertModal
         isOpen={isOpenedModal}
         description={modalText}

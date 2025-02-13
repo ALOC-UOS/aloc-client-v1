@@ -1,29 +1,19 @@
-import styled from 'styled-components';
-import SignIn from '../../components/SignForm/SignIn';
 import { useState } from 'react';
+import SignIn from '../../components/SignForm/SignIn';
 import SignUp from '../../components/SignForm/SignUp';
+import S from './style';
 
 const Login = () => {
   const [formType, setFormType] = useState('SIGNIN');
 
   return (
-    <div>
-      <SigninContainer>
-        {formType === 'SIGNIN' ? (
-          <SignIn setFormType={setFormType} />
-        ) : (
-          <SignUp setFormType={setFormType} />
-        )}
-      </SigninContainer>
-    </div>
+    <S.SignInContainer>
+      {formType === 'SIGNIN' ? (
+        <SignIn setFormType={setFormType} />
+      ) : (
+        <SignUp setFormType={setFormType} />
+      )}
+    </S.SignInContainer>
   );
 };
 export default Login;
-
-const SigninContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-`;
