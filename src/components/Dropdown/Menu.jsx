@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 
 const DropDownMenu = ({ children, isOpen }) => {
   if (!isOpen) return null;
@@ -24,14 +25,14 @@ const DropDownMenuContainer = styled.div`
   flex-direction: column;
 
   top: calc(100% - 12px);
-  left: 50%
+  left: 50%;
   transform: translateX(-50%);
 
   width: calc(100% - 48px);
   padding: 8px;
   gap: 4px;
 
-  background-color: ${props => props.theme.white};
+  background-color: var(--color-white);
   border-radius: 24px;
   z-index: 1000;
 

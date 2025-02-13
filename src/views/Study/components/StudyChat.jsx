@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import MyMessage from './MyMessage';
 import OtherMessage from './OtherMessage';
 import ChatFooter from './ChatFooter';
@@ -152,7 +152,7 @@ const ChatWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
-  background: ${props => props.theme.foreground};
+  background: var(--color-foreground);
   border-radius: 24px;
   overflow: hidden;
 `;

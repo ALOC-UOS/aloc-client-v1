@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
 
 const rotateAnimation = keyframes`
   from {
@@ -23,8 +24,8 @@ const MessageContainer = styled.div`
   gap: 4px;
   opacity: 0;
 
-  background-color: ${props => props.theme.white};
-  box-shadow: 0 8px 16px #408cff40;
+  background-color: var(--color-white);
+  box-shadow: 0 8px 16px var(--color-blue-25);
   min-height: 48px;
   padding: 8px 12px;
   border-radius: 32px;
@@ -52,7 +53,7 @@ const CoinIcon = styled.img`
 `;
 
 const Text = styled.span`
-  color: ${props => (props.blue ? props.theme.primary : props.theme.titleTxt)};
+  color: ${props => (props.blue ? 'var(--color-blue)' : 'var(--color-title-text)')};
   font-size: 16px;
   font-weight: 500;
 `;

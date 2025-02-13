@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 const InputBox = styled.input`
   position: relative;
   display: flex;
@@ -7,18 +7,18 @@ const InputBox = styled.input`
   justify-content: space-between;
 
   min-width: 240px;
-  max-wdith: 400px;
+  max-width: 400px;
   width: 100%;
   height: 40px;
 
-  border: ${props => (props.theme.mode === 'light' ? '1px solid #f0f1f5' : '1px solid #2c3038')};
+  border: 1px solid var(--color-foreground);
   border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
   outline: none;
-  color: ${props => props.theme.contentText};
+  color: var(--color-content-text);
   font-size: 14px;
   letter-spacing: -1px;
 
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
   padding: 4px 4px 4px 8px;
   border-radius: 8px;
   cursor: pointer;

@@ -1,15 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const Button = styled.button`
   letter-spacing: -1px;
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 16px;
   font-weight: 500;
 
   min-width: 140px;
   width: 100%;
   padding: 16px 0;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
 
   border: none;
   border-radius: 12px;
@@ -39,14 +40,14 @@ const Button = styled.button`
   ${props =>
     props.color === 'blue' &&
     css`
-      color: #ffffff;
-      background-color: #408cff;
+      color: var(--color-white);
+      background-color: var(--color-blue);
     `}
   ${props =>
     props.color === 'red' &&
     css`
-      color: #ffffff;
-      background-color: #ff5a5f;
+      color: var(--color-white);
+      background-color: var(--color-red);
     `}
   ${props =>
     props.buttonType === 'disabled' &&

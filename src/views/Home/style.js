@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
 
 const MoveUp = keyframes`
   0% {
@@ -77,7 +78,7 @@ const ProblemWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 24px 0 32px 0;
-  background-color: #ffffff18;
+  background-color: var(--color-white-10);
   gap: 80px;
   border-radius: 24px;
   backdrop-filter: blur(12px);
@@ -87,7 +88,7 @@ const ProblemWrapper = styled.div`
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to bottom, #ffffff80, #ffffff00);
+    background-image: linear-gradient(to bottom, var(--color-white-50), transparent);
     padding: 1px;
     border-radius: 24px;
     -webkit-mask:
@@ -139,7 +140,7 @@ const ProblemTitle = styled.div`
 
 const ProblemName = styled.div`
   animation: ${MoveUp} 1s 0.55s ease-in-out forwards;
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 40px;
   font-weight: 500;
   text-align: center;
@@ -200,7 +201,7 @@ const Description = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 14px;
   font-weight: 500;
   margin-right: 12px;
@@ -208,14 +209,14 @@ const Description = styled.div`
 `;
 
 const MemberName = styled.div`
-  color: #408cff;
+  color: var(--color-blue);
   font-size: 14px;
   font-weight: 500;
   user-select: none;
 `;
 
 const SolveTime = styled.div`
-  color: #ffffff80;
+  color: var(--color-white-50);
   font-size: 12px;
   font-weight: 500;
   user-select: none;

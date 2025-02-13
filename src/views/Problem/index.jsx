@@ -4,7 +4,7 @@ import TopBar from '../../components/TopBar';
 import { AlgorithmListComponent as AlgorithmList } from './AlgorithmList';
 import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
-import { VStack } from '../../styles/Stack.styles';
+import { VStack } from '../../components/Stack';
 import { useProblem } from '../../hooks/useProblem';
 import useDropdown from '../../hooks/useDropdown';
 

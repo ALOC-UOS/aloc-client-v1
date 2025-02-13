@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 
 const AppearCard = keyframes`
   0% {
@@ -14,7 +15,7 @@ const AppearCard = keyframes`
 const ShopContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.background};
+  background-color: var(--color-background);
   min-height: 100vh;
   padding-bottom: 48px;
 `;
@@ -52,7 +53,7 @@ const ItemCard = styled.div`
   flex-direction: column;
   border-radius: 16px;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--color-white);
 `;
 
 const ItemImgWrapper = styled.div`
@@ -64,7 +65,7 @@ const ItemImgWrapper = styled.div`
   min-width: 240px;
   min-height: 176px;
   padding: 24px;
-  background-color: ${props => props.theme.foreground};
+  background-color: var(--color-foreground);
 `;
 
 const ItemImg = styled.img``;
@@ -83,13 +84,13 @@ const InfoWrapper = styled.div`
 `;
 
 const ItemName = styled.div`
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   font-size: 16px;
   font-weight: 500;
 `;
 
 const InfoDescription = styled.div`
-  color: ${props => props.theme.subText};
+  color: var(--color-sub-text);
   font-size: 12px;
 `;
 
@@ -98,7 +99,7 @@ const ItemPrice = styled.div`
   flex-direction: row;
   align-items: center;
 
-  color: #ffb800;
+  color: var(--color-yellow);
   font-size: 14px;
   font-weight: 500;
 
@@ -118,14 +119,14 @@ const ItemPrice = styled.div`
 `;
 
 const Button = styled.div`
-  background-color: ${props => props.theme.primary};
+  background-color: var(--color-blue);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
   margin: 0 12px 12px 12px;
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 12px;
   font-weight: 500;
 

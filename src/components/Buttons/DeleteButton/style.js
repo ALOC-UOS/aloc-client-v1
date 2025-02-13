@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const DeleteButton = styled.div`
   position: absolute;
@@ -7,9 +7,9 @@ const DeleteButton = styled.div`
   transform: translateX(-50%);
   padding: 12px 24px;
   border-radius: 12px;
-  background-color: #ff5a5f;
+  background-color: var(--color-red);
 
-  color: #ffffff;
+  color: var(--color-white);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;

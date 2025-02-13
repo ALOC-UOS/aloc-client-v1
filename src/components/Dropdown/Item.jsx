@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const DropdownItem = ({ children, onClick }) => {
   return <DropdownItemContainer onClick={onClick}>{children}</DropdownItemContainer>;
@@ -9,7 +9,7 @@ export default DropdownItem;
 const DropdownItemContainer = styled.button`
   padding: 12px 16px;
   cursor: pointer;
-  background-color: ${props => props.theme.white};
+  background-color: var(--color-white);
   border: none;
   outline: none;
   border-radius: 24px;
@@ -24,6 +24,6 @@ const DropdownItemContainer = styled.button`
   }
 
   font-size: 14px;
-  color: ${props => props.theme.titleText};
+  color: var(--color-title-text);
   text-align: left;
 `;

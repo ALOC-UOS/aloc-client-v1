@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import S from './style';
-import { HStack } from '../../../styles/Stack.styles';
+import { HStack } from '../../../components/Stack';
 
 const CoinComponent = ({ userCoin, obtainCoin, triggerAnimation }) => {
   const [coin, setCoin] = useState(userCoin);
