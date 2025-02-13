@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.13.5",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "8.22.0",
     "eslint-config-prettier": "^9.1.0",

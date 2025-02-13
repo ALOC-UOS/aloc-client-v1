@@ -2,7 +2,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: ['@emotion'],
+      },
+    }),
+  ],
   server: {
     port: 3000, // Vite 서버 포트 설정
     host: 'localhost',
