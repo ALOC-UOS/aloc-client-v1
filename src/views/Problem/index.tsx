@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import S from './Problem.styles';
 import TopBar from '../../components/TopBar';
 import { AlgorithmListComponent as AlgorithmList } from './AlgorithmList';

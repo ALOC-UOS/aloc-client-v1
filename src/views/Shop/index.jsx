@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TopBar from '../../components/TopBar';
 import CoinIcon from '../../assets/icons/coin.svg';
 import DefaultProfile from '../../assets/images/default-profile.svg';
 import ChangeColor from '../../assets/items/change-color.svg';
-import DecorationItem from '../../components/Decorations/Item';
+import DecorationItemComponent from '../../components/Decorations/Item';
 import useModal from '../../hooks/useModal';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
@@ -108,7 +108,7 @@ const Shop = () => {
           {DECORATION_ITEMS.map((item, index) => (
             <ItemCard key={index}>
               <ItemImgWrapper>
-                <DecorationItem type={item.type} size={'small'} />
+                <DecorationItemComponent type={item.type} size={'small'} />
                 <ItemImg src={DefaultProfile} />
               </ItemImgWrapper>
               <ItemInfo>

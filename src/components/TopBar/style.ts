@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-const TopBarContainer = styled('div')`
+const TopBarContainer = styled.div<{ isScroll: boolean }>`
   z-index: 100;
   position: fixed;
   top: 0px;
@@ -43,7 +43,7 @@ const TopBarRight = styled.div`
   gap: 40px;
 `;
 
-const TopBarItem = styled.div`
+const TopBarItem = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
   font-size: 16px;

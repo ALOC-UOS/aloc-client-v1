@@ -21,7 +21,7 @@ const Wrapping = styled.div`
   background-color: var(--color-foreground);
 `;
 
-const Button = styled.div`
+const Button = styled.div<{ selected: boolean }>`
   width: 100%;
   height: fit-content;
   color: var(--color-title-text);

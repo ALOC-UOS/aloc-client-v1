@@ -40,16 +40,16 @@ const TopBarItems = [
   },
 ];
 
-const TopBar = ({ active }) => {
+const TopBar = () => {
   const [selectedItem, setSelectedItem] = useState(window.location.pathname);
   const [isScroll, setIsScroll] = useState(false);
   const { isLoggedIn, initLoginStatus } = useLoginState();
   const [shopUpdated, setShopUpdated] = useState(true);
   const { user, setUserInfo } = useUserState();
   const navigate = useNavigate();
-  const nextPasswordRef = useRef();
+  const nextPasswordRef = useRef(null);
   const [selectedFile, setselectedFile] = useState(null);
-  const checkedNextPasswordRef = useRef();
+  const checkedNextPasswordRef = useRef(null);
   const [changePasswordFocus, setChangePasswordFocus] = useState(false);
   const [checkedChangePasswordFocus, setCheckedChangePasswordFocus] = useState(false);
   const [messageText, setMessageText] = useState('');
@@ -292,9 +292,7 @@ const TopBar = ({ active }) => {
             </div>
           </>
         ) : (
-          <TopBarButton active={!isLoggedIn} onClick={() => navigate('/login')}>
-            로그인
-          </TopBarButton>
+          <TopBarButton onClick={() => navigate('/login')}>로그인</TopBarButton>
         )}
       </TopBarRight>
     </TopBarContainer>

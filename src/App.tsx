@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './views/Home';
-import Problem from './views/Problem';
-import Member from './views/Member';
-import Shop from './views/Shop';
-import Setting from './views/Setting';
-import Login from './views/Login';
-import { serverAPI, setupInterceptors } from './api/axios';
-import useLoginState from './hooks/useLoginState';
-import useUserState from './hooks/useUserState';
-import GlobalStyles from './styles/global';
+import Home from '@/views/Home';
+import Problem from '@/views/Problem';
+import Member from '@/views/Member';
+import Shop from '@/views/Shop';
+import Setting from '@/views/Setting';
+import Login from '@/views/Login';
+import { serverAPI, setupInterceptors } from '@/api/axios';
+import useLoginState from '@/hooks/useLoginState';
+import useUserState from '@/hooks/useUserState';
+import GlobalStyles from '@/styles/global';
 
 function App() {
   const { initLoginStatus } = useLoginState();
@@ -21,10 +21,11 @@ function App() {
       .get('/user')
       .then(response => {
         const userInfo = response.data.result;
-        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('isLoggedIn', 'true');
         setUserInfo(userInfo);
       })
       .catch(error => {
+        console.error(error);
         initLoginStatus();
         deleteUserInfo();
       });

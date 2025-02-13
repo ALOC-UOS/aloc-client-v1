@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import S from './style';
 import TopBar from '../../components/TopBar';
 import { formatSolveTime } from '../../utils';
