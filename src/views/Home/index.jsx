@@ -237,7 +237,7 @@ const Home = () => {
         <S.ProfileImage
           src={
             currentMember.profileImageFileName
-              ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${currentMember.profileImageFileName}`
+              ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${user.profileImageFileName}`
               : DefaultProfile
           }
         />

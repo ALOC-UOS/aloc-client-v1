@@ -220,7 +220,7 @@ const Member = () => {
                   <S.ProfileBlurImage
                     src={
                       member.profileImageFileName
-                        ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />
@@ -229,7 +229,7 @@ const Member = () => {
                   <S.ProfileImage
                     src={
                       member.profileImageFileName
-                        ? `https://${import.meta.env.VITE_API_BASE_URL}/files/user/profile/${member.profileImageFileName}`
+                        ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${member.profileImageFileName}`
                         : DefaultProfile
                     }
                   />
