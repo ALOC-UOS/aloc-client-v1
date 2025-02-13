@@ -7,7 +7,7 @@ import BottomInfo from '../../components/Card';
 import MarathonProblemList from '../../components/MarathonProblemList';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
-import { VStack } from '../../styles/Stack.styles';
+import { VStack } from '../../components/Stack';
 import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
