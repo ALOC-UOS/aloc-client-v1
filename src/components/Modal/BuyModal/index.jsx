@@ -5,7 +5,7 @@ import { ModalContainer, Description } from './style';
 import Toast from '../../Toast';
 import Button from '../../Buttons';
 import TextInputBox from '../../Input/TextInput/TextInputBox';
-import errorIcon from '../../../assets/error-icon.svg';
+import ErrorIcon from '../../../assets/icons/error.svg';
 
 const buyList = [
   {
@@ -93,7 +93,7 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
           </Button>
         </ButtonWrap>
       </ModalContainer>
-      <Toast icon={errorIcon} text={toastText} toastState={isBookmarkToast} />
+      <Toast icon={ErrorIcon} text={toastText} toastState={isBookmarkToast} />
     </>
   );
 };

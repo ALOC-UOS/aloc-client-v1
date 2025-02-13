@@ -1,10 +1,10 @@
 import S from './ProblemList.styles';
 import { HStack, VStack } from '../../../styles/Stack.styles';
 import { useProblem } from '../../../hooks/useProblem';
-import MemberIcon from '../../../assets/member-icon.svg';
-import ActiveMemberIcon from '../../../assets/active-member-icon.svg';
-import RightArrowIcon from '../../../assets/right-arrow-in-blue-circle.svg';
-import Season2Logo from '../../../assets/logo-season2.png';
+import MemberIcon from '../../../assets/icons/member.svg';
+import ActiveMemberIcon from '../../../assets/icons/active-member.svg';
+import ArrowRightCircleFillBlueIcon from '../../../assets/icons/arrow.right.circle.fill.blue.svg';
+import LogoDark from '../../../assets/images/logo.season2.dark.png';
 import { tierStyleConfig } from '../../../styles/tierStyleConfig';
 import { getProblemTier } from '../../../utils';
 
@@ -19,7 +19,7 @@ export const ProblemListComponent = () => {
     <VStack gap={16} style={{ width: '100%', height: 'fit-content' }}>
       {problemList.length === 0 ? (
         <S.EmptyContainer>
-          <img src={Season2Logo} alt="empty-problem" width={64} height={64} />
+          <img src={LogoDark} alt="empty-problem" width={64} height={64} />
           {selectedSeason === 1 ? (
             <S.EmptyTitle>
               시즌 1에는 <br />
@@ -58,7 +58,7 @@ export const ProblemListComponent = () => {
                   <S.SolvingCount>{problem.solvingCount}명</S.SolvingCount>
                 </HStack>
                 <S.Image
-                  src={RightArrowIcon}
+                  src={ArrowRightCircleFillBlueIcon}
                   alt="right-arrow"
                   width={36}
                   height={36}

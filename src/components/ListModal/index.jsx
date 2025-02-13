@@ -14,12 +14,12 @@ import {
   ProblemName,
   Reloader,
 } from './style';
-import problemIcon from '../../assets/problem-icon.svg';
-import closeButton from '../../assets/close-button.svg';
-import Bronze from '../../assets/bronze-small.png';
-import Silver from '../../assets/silver-small.png';
-import Gold from '../../assets/gold-small.png';
-import Platinum from '../../assets/platinum-small.png';
+import ProblemIcon from '../../assets/icons/problem.svg';
+import CloseIcon from '../../assets/icons/close.svg';
+import Bronze from '../../assets/icons/tier/bronze.small.svg';
+import Silver from '../../assets/icons/tier/silver.small.svg';
+import Gold from '../../assets/icons/tier/gold.small.svg';
+import Platinum from '../../assets/icons/tier/platinum.small.svg';
 import useLoginState from '../../hooks/useLoginState';
 
 const ListModal = ({
@@ -38,10 +38,10 @@ const ListModal = ({
         <Wrapper>
           <ModalTitle>{modalTitle}</ModalTitle>
           <IconWrapper>
-            <Icon src={problemIcon} /> {problemListData.length}개
+            <Icon src={ProblemIcon} /> {problemListData.length}개
           </IconWrapper>
         </Wrapper>
-        <CloseButton src={closeButton} onClick={closeModal} />
+        <CloseButton src={CloseIcon} onClick={closeModal} />
       </ListModalTopBar>
       <Divider />
       <ProblemList>

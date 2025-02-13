@@ -2,7 +2,7 @@ import { getProblemTier } from '../../utils';
 import { serverAPI } from '../../api/axios';
 import { useEffect, useState } from 'react';
 import { tierStyleConfig } from '../../styles/tierStyleConfig';
-import lock from '../../assets/lock.svg';
+import LockIcon from '../../assets/icons/lock.svg';
 import {
   ProblemListContainer,
   ProblemDifficulty,
@@ -67,7 +67,7 @@ const MarathonProblemList = () => {
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
         >
           <ProblemItem disabled={true} delay={(problemData.length + i) * 0.2} isSolved={false}>
-            <ProblemDifficulty src={lock} />
+            <ProblemDifficulty src={LockIcon} alt="lock" />
           </ProblemItem>
           {!isLastItem && <HorizontalLine />}
         </div>

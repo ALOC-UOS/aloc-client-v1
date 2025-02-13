@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CardContainer, CardWrapper, CardTop, CardLabel, CardTitle } from './style';
-import LocationIcon from '../../assets/location-icon.svg';
-import CalendarIcon from '../../assets/calendar-icon.svg';
+import LocationIcon from '../../assets/icons/location.svg';
+import CalendarIcon from '../../assets/icons/calendar.svg';
 import CardContent from './CardContent';
 import HistoryList from './HistoryList';
 import { API } from '../../api/axios';

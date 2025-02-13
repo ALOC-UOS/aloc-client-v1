@@ -5,23 +5,23 @@ import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import { BlackOverlay } from '../../components/BlackOverlay';
 import DecorationItem from '../../components/Decorations/Item';
-import Bronze from '../../assets/bronze.png';
-import Silver from '../../assets/silver.png';
-import Gold from '../../assets/gold.png';
-import Platinum from '../../assets/platinum.png';
-import Number5 from '../../assets/number-5.svg';
-import Number4 from '../../assets/number-4.svg';
-import Number3 from '../../assets/number-3.svg';
-import Number2 from '../../assets/number-2.svg';
-import Number1 from '../../assets/number-1.svg';
-import CoinIcon from '../../assets/coin-icon.svg';
-import LoadingIcon from '../../assets/loading-icon.svg';
-import CheckIcon from '../../assets/check-icon.svg';
-import DefaultProfile from '../../assets/default-profile.svg';
+import TierBronzeEmblem from '../../assets/icons/tier/bronze.emblem.png';
+import TierSilverEmblem from '../../assets/icons/tier/silver.emblem.png';
+import TierGoldEmblem from '../../assets/icons/tier/gold.emblem.png';
+import TierPlatinumEmblem from '../../assets/icons/tier/platinum.emblem.png';
+import Number1 from '../../assets/icons/roman-number/1.svg';
+import Number2 from '../../assets/icons/roman-number/2.svg';
+import Number3 from '../../assets/icons/roman-number/3.svg';
+import Number4 from '../../assets/icons/roman-number/4.svg';
+import Number5 from '../../assets/icons/roman-number/5.svg';
+import CoinIcon from '../../assets/icons/coin.svg';
+import LoadingWhiteIcon from '../../assets/icons/loading.white.svg';
+import LoadingBlueIcon from '../../assets/icons/loading.blue.svg';
+import CheckIcon from '../../assets/icons/check.white.svg';
+import DefaultProfile from '../../assets/images/default-profile.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
-import loadingIcon from '../../assets/blue-loading-icon.svg';
-import loadingIconWithBg from '../../assets/with-bg-blue-loading-icon.svg';
+import LoadingFillBlueIcon from '../../assets/icons/loading.fill.blue.svg';
 import { HStack } from '../../styles/Stack.styles';
 import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
@@ -152,7 +152,7 @@ const Member = () => {
     <S.MemberContainer>
       <TopBar active={true} />
       {loadingMessage.render({
-        icon: loadingIconWithBg,
+        icon: LoadingFillBlueIcon,
         isLoadingSolvedProblem: true,
         children: (
           <S.MessageComponentText>
@@ -181,7 +181,7 @@ const Member = () => {
         ),
       })}
       <S.IconWrapper active={isLoadingSolvedProblem}>
-        <S.Icon active={isShowLoading} src={LoadingIcon} />
+        <S.Icon active={isShowLoading} src={LoadingWhiteIcon} />
         <S.Icon active={!isShowLoading && isLoadingSolvedProblem} src={CheckIcon} check={true} />
       </S.IconWrapper>
       <ListModal
@@ -194,7 +194,7 @@ const Member = () => {
       <BlackOverlay isOpen={isOpenedModal} />
       <S.ContentContainer>
         {isLoading ? (
-          <S.BlueLoadingIcon src={loadingIcon} />
+          <S.BlueLoadingIcon src={LoadingBlueIcon} />
         ) : (
           members.map((member, index) => (
             <S.ProfileWrapper delay={index * 0.15}>
@@ -240,12 +240,12 @@ const Member = () => {
                   <S.ProfileRank
                     src={
                       parseInt(member.rank / 10) === 1
-                        ? Bronze
+                        ? TierBronzeEmblem
                         : parseInt(member.rank / 10) === 2
-                          ? Silver
+                          ? TierSilverEmblem
                           : parseInt(member.rank / 10) === 3
-                            ? Gold
-                            : Platinum
+                            ? TierGoldEmblem
+                            : TierPlatinumEmblem
                     }
                   />
                   <S.ProfileNumber
