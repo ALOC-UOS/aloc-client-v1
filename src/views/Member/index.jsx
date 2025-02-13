@@ -4,7 +4,7 @@ import S from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import { BlackOverlay } from '../../components/BlackOverlay';
-import DecorationCharacter from '../../components/Decorations/Character';
+import DecorationItem from '../../components/Decorations/Item';
 import Bronze from '../../assets/bronze.png';
 import Silver from '../../assets/silver.png';
 import Gold from '../../assets/gold.png';
@@ -212,9 +212,9 @@ const Member = () => {
                 color5={member.color5}
                 degree={member.degree}
               >
-                {member.baekjoonId === 'alicehrk' && <DecorationCharacter type={'Bubble'} />}
-                {member.baekjoonId === 'parkne0114' && <DecorationCharacter type={'PinkTurtle'} />}
-                {member.baekjoonId === 'jojongjojong' && <DecorationCharacter type={'Wave'} />}
+                {member.baekjoonId === 'alicehrk' && <DecorationItem type={'Bubble'} />}
+                {member.baekjoonId === 'parkne0114' && <DecorationItem type={'PinkTurtle'} />}
+                {member.baekjoonId === 'jojongjojong' && <DecorationItem type={'Wave'} />}
                 <S.SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <S.ProfileBlurImage

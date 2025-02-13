@@ -6,7 +6,7 @@ export const PRICE = {
   BUBBLE: 2000,
 };
 
-export const DecorationItems = [
+export const DECORATION_ITEMS = [
   {
     name: '초록 거북이',
     description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
@@ -33,7 +33,7 @@ export const DecorationItems = [
   },
 ];
 
-export const NormalItems = [
+export const NORMAL_ITEMS = [
   {
     name: '컬러 변경권',
     description: '문제를 풀었을 때 색깔이 변경됩니다.',

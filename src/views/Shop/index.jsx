@@ -3,12 +3,12 @@ import TopBar from '../../components/TopBar';
 import CoinIcon from '../../assets/coin-icon.svg';
 import DefaultProfile from '../../assets/default-profile.svg';
 import ChangeColor from '../../assets/change-color.svg';
-import DecorationCharacter from '../../components/Decorations/Character';
+import DecorationItem from '../../components/Decorations/Item';
 import useModal from '../../hooks/useModal';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import { serverAPI } from '../../api/axios';
-import { PRICE, DecorationItems, NormalItems } from '../../constants/Shop';
+import { PRICE, DECORATION_ITEMS, NORMAL_ITEMS } from '../../constants/Shop';
 import {
   ShopContainer,
   ContentContainer,
@@ -105,10 +105,10 @@ const Shop = () => {
       <TopBar />
       <ContentContainer>
         <ItemContainer>
-          {DecorationItems.map((item, index) => (
+          {DECORATION_ITEMS.map((item, index) => (
             <ItemCard key={index}>
               <ItemImgWrapper>
-                <DecorationCharacter type={item.type} size={'small'} />
+                <DecorationItem type={item.type} size={'small'} />
                 <ItemImg src={DefaultProfile} />
               </ItemImgWrapper>
               <ItemInfo>
@@ -124,7 +124,7 @@ const Shop = () => {
               <Button onClick={adminModal.show}>구매</Button>
             </ItemCard>
           ))}
-          {NormalItems.map((item, index) => (
+          {NORMAL_ITEMS.map((item, index) => (
             <ItemCard key={index}>
               <ItemImgWrapper>
                 <ItemImg src={ChangeColor} />

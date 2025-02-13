@@ -5,7 +5,7 @@ import MemberIcon from '../../../assets/member-icon.svg';
 import ActiveMemberIcon from '../../../assets/active-member-icon.svg';
 import RightArrowIcon from '../../../assets/right-arrow-in-blue-circle.svg';
 import Season2Logo from '../../../assets/logo-season2.png';
-import { TIER_STYLE_CONFIG } from '../../../styles/tierStyleConfig';
+import { tierStyleConfig } from '../../../styles/tierStyleConfig';
 import { getProblemTier } from '../../../utils';
 
 export const ProblemListComponent = () => {
@@ -38,7 +38,7 @@ export const ProblemListComponent = () => {
             <S.ProblemItem key={problem.id} delay={index}>
               <HStack gap={4}>
                 <S.ProblemTier
-                  src={TIER_STYLE_CONFIG[getProblemTier(problem.difficulty)]?.icon.small}
+                  src={tierStyleConfig[getProblemTier(problem.difficulty)]?.icon.small}
                 />
                 <S.ProblemName>
                   {problem.problemId}. {problem.title}

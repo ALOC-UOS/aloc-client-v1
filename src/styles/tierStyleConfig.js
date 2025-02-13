@@ -8,7 +8,7 @@ import SilverSmall from '../assets/silver-small.svg';
 import GoldSmall from '../assets/gold-small.svg';
 import PlatinumSmall from '../assets/platinum-small.svg';
 
-export const TIER_STYLE_CONFIG = {
+export const tierStyleConfig = {
   bronze: {
     backgroundColor: '#4E332B',
     color: '#B97C63',

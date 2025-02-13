@@ -8,7 +8,7 @@ import MarathonProblemList from '../../components/MarathonProblemList';
 import useLoginState from '../../hooks/useLoginState';
 import useUserState from '../../hooks/useUserState';
 import { VStack } from '../../styles/Stack.styles';
-import { TIER_STYLE_CONFIG } from '../../styles/tierStyleConfig';
+import { tierStyleConfig } from '../../styles/tierStyleConfig';
 import { getProblemTier } from '../../utils';
 import { gsap } from 'gsap';
 import DefaultProfile from '../../assets/default-profile.svg';
@@ -19,9 +19,9 @@ const dummyProblemData = {
   title: '평범한 배낭',
   difficulty: 12,
   tier: {
-    backgroundColor: TIER_STYLE_CONFIG.gold.backgroundColor,
-    color: TIER_STYLE_CONFIG.gold.color,
-    icon: TIER_STYLE_CONFIG.gold.icon,
+    backgroundColor: tierStyleConfig.gold.backgroundColor,
+    color: tierStyleConfig.gold.color,
+    icon: tierStyleConfig.gold.icon,
   },
 };
 
@@ -142,9 +142,9 @@ const Home = () => {
             ...rest,
             difficulty,
             tier: {
-              backgroundColor: TIER_STYLE_CONFIG[tier].backgroundColor,
-              color: TIER_STYLE_CONFIG[tier].color,
-              icon: TIER_STYLE_CONFIG[tier].icon,
+              backgroundColor: tierStyleConfig[tier].backgroundColor,
+              color: tierStyleConfig[tier].color,
+              icon: tierStyleConfig[tier].icon,
             },
           });
         });
