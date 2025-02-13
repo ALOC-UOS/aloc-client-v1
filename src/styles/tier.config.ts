@@ -8,7 +8,18 @@ import TierSilverSmall from '../assets/icons/tier/silver.small.svg';
 import TierGoldSmall from '../assets/icons/tier/gold.small.svg';
 import TierPlatinumSmall from '../assets/icons/tier/platinum.small.svg';
 
-export const tierStyleConfig = {
+type Tier = 'bronze' | 'silver' | 'gold' | 'platinum';
+
+interface TierStyleConfig {
+  backgroundColor: string;
+  color: string;
+  icon: {
+    small: string;
+    circle: string;
+  };
+}
+
+export const tierStyleConfig: Record<Tier, TierStyleConfig> = {
   bronze: {
     backgroundColor: '#4E332B',
     color: '#B97C63',

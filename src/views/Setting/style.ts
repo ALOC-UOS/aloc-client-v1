@@ -23,7 +23,7 @@ const ButtonWrap = styled.div`
 `
 */
 
-const InputBox = styled.div`
+const InputBox = styled.div<{ disabled: boolean }>`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -53,7 +53,7 @@ const InputBox = styled.div`
   }
 `;
 
-const InputList = styled.div`
+const InputList = styled.div<{ isOpen: boolean; ItemNumber: number }>`
   z-index: 400;
   position: absolute;
   top: calc(100% + 12px);
@@ -74,7 +74,7 @@ const InputList = styled.div`
         : '0px'};
 `;
 
-const InputItem = styled.div`
+const InputItem = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -110,7 +110,7 @@ const SelectedText = styled.div`
   user-select: none;
 `;
 
-const ArrowIcon = styled.img`
+const ArrowIcon = styled.img<{ selected: boolean }>`
   position: absolute;
   right: 8px;
 

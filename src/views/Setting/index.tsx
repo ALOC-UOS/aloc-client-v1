@@ -1,4 +1,3 @@
-import React from 'react';
 import { SettingContainer } from './style';
 import ListInputWrap from '../../components/Input/ListInput';
 import TextInputWrap from '../../components/Input/TextInput';
