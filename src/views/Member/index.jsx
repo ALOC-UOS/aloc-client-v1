@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import S from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import { BlackOverlay } from '../../components/BlackOverlay';
-import DecorationItem from '../../components/Decorations/Item';
+import DecorationItemComponent from '../../components/Decorations/Item';
 import TierBronzeEmblem from '../../assets/icons/tier/bronze.emblem.png';
 import TierSilverEmblem from '../../assets/icons/tier/silver.emblem.png';
 import TierGoldEmblem from '../../assets/icons/tier/gold.emblem.png';
@@ -150,7 +150,7 @@ const Member = () => {
 
   return (
     <S.MemberContainer>
-      <TopBar active={true} />
+      <TopBar />
       {loadingMessage.render({
         icon: LoadingFillBlueIcon,
         isLoadingSolvedProblem: true,
@@ -212,9 +212,15 @@ const Member = () => {
                 color5={member.color5}
                 degree={member.degree}
               >
-                {member.baekjoonId === 'alicehrk' && <DecorationItem type={'Bubble'} />}
-                {member.baekjoonId === 'parkne0114' && <DecorationItem type={'PinkTurtle'} />}
-                {member.baekjoonId === 'jojongjojong' && <DecorationItem type={'Wave'} />}
+                {member.baekjoonId === 'alicehrk' && (
+                  <DecorationItemComponent type="Bubble" size="normal" />
+                )}
+                {member.baekjoonId === 'parkne0114' && (
+                  <DecorationItemComponent type="PinkTurtle" size="normal" />
+                )}
+                {member.baekjoonId === 'jojongjojong' && (
+                  <DecorationItemComponent type="Wave" size="normal" />
+                )}
                 <S.SolvedAnimation solved={member.todaySolved} delay={index * 0.25} />
                 {!member.todaySolved && (
                   <S.ProfileBlurImage

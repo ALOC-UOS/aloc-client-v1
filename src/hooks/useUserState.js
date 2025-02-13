@@ -1,4 +1,5 @@
 import { atom, useAtom } from 'jotai';
+
 const initUserAtomValue = { user: null };
 const userAtom = atom(initUserAtomValue);
 
