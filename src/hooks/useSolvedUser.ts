@@ -18,10 +18,13 @@ const useSolvedUser = () => {
     }
   };
 
+  const isEmpty = solvedUserList.length === 0;
+
   return {
     isLoading,
     solvedUserList,
-    loadSolveMember
+    loadSolveMember,
+    isEmpty,
   }
 }
 

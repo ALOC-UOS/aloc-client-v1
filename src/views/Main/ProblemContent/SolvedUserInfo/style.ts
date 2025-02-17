@@ -52,10 +52,7 @@ const UserWrapper = styled.div<{ isShow: boolean }>`
     `}
 `;
 
-const Description = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+const Description = styled.span`
   color: var(--color-white);
   font-size: 14px;
   font-weight: 500;
@@ -63,7 +60,7 @@ const Description = styled.div`
   user-select: none;
 `;
 
-const SolveTime = styled.div`
+const SolveTime = styled.span`
   color: var(--color-white-50);
   font-size: 12px;
   font-weight: 500;

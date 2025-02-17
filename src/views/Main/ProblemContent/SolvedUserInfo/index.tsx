@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import useSolvedUser from "@/hooks/useSolvedUser";
 import { formatSolveTime } from '@/utils/index';
 import UserProfileImage from "@/components/UserProfileImage";
+import { HStack } from "@/components/Stack";
 
 const ONE_SECOND = 1000;
 
 const SolvedUserInfo = () => {
-  const { solvedUserList } = useSolvedUser();
+  const { solvedUserList, isEmpty } = useSolvedUser();
   const [listIndex, setListIndex] = useState(0);
   const [isShowUser, setIsShowUser] = useState(false);
 
@@ -29,7 +30,7 @@ const SolvedUserInfo = () => {
   }, [solvedUserList]);
     
 
-  if (solvedUserList.length === 0) {
+  if (isEmpty) {
     return (
       <S.DefaultUserWrapper>
         <UserProfileImage user={null} />
@@ -39,16 +40,17 @@ const SolvedUserInfo = () => {
     );
   }
 
-
   return (
     <S.UserWrapper isShow={isShowUser}>
       <UserProfileImage user={solvedUserList[listIndex]} />
-      <S.Description>
-        <span style={{color: 'var(--color-blue)'}}>
-          {solvedUserList[listIndex].username}
-        </span>
-        님이 문제를 풀었어요.
-      </S.Description>
+      <HStack alignItems="center">
+        <S.Description>
+          <span style={{color: 'var(--color-blue)'}}>
+            {solvedUserList[listIndex].username}
+          </span>
+          님이 문제를 풀었어요.
+        </S.Description>
+      </HStack>
       <S.SolveTime>{formatSolveTime(solvedUserList[listIndex].solvedAt)}</S.SolveTime>
     </S.UserWrapper>
   );
