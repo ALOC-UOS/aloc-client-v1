@@ -4,7 +4,7 @@ import BottomInfo from '../../components/Card';
 import { VStack } from '../../components/Stack';
 import ProblemContent from './ProblemContent';
 
-const Home = () => {
+const Main = () => {
   return (
     <VStack style={{ backgroundColor: '#000000' }}>
       <TopBar />
@@ -14,4 +14,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Main;
