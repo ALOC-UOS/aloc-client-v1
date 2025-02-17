@@ -1,12 +1,5 @@
 import { Course } from "./algorithm.types";
 
-export interface User {
-  authority: string;
-  username: string;
-  profileImageFileName: string;
-  solvedAt: string;
-}
-
 export interface ProfileBackground {
   category: "common" | "rare" | "special";
   colorName: string;
@@ -18,7 +11,11 @@ export interface ProfileBackground {
   degree: number | null;
 }
 
-export interface UserDetail extends User {
+export interface UserInfo {
+  authority: string;
+  username: string;
+  profileImageFileName: string;
+  solvedAt: string;
   coin: number;
   rank: number;
   background: ProfileBackground;

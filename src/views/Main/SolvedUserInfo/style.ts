@@ -33,6 +33,7 @@ const DefaultMemberWrapper = styled.div`
   backdrop-filter: blur(16px);
   padding: 8px 12px 8px 8px;
   opacity: 0;
+  gap: 4px;
 `;
 
 const MemberWrapper = styled.div<{ isShow: boolean }>`
@@ -49,13 +50,6 @@ const MemberWrapper = styled.div<{ isShow: boolean }>`
     css`
       animation: ${DisappearUp} 1s ease-in-out forwards;
     `}
-`;
-
-const ProfileImage = styled.img`
-  width: 32px;
-  height: 32px;
-  margin-right: 4px;
-  border-radius: 50%;
 `;
 
 const Description = styled.div`
@@ -87,7 +81,6 @@ const SolveTime = styled.div`
 export default {
   DefaultMemberWrapper,
   MemberWrapper,
-  ProfileImage,
   Description,
   MemberName,
   SolveTime,

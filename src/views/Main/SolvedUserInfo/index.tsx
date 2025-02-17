@@ -2,7 +2,7 @@ import S from "./style";
 import { useEffect, useState } from "react";
 import useSolvedUser from "@/hooks/useSolvedUser";
 import { formatSolveTime } from '@/utils/index';
-import DefaultProfile from '@/assets/images/default-profile.svg';
+import UserProfileImage from "@/components/UserProfileImage";
 
 const ONE_SECOND = 1000;
 
@@ -32,7 +32,7 @@ const SolvedUserInfo = () => {
   if (solvedUserList.length === 0) {
     return (
       <S.DefaultMemberWrapper>
-        <S.ProfileImage src={DefaultProfile} />
+        <UserProfileImage user={null} />
         <S.Description>아무도 문제를 풀지 않았어요.</S.Description>
         <S.SolveTime>-</S.SolveTime>
       </S.DefaultMemberWrapper>
@@ -42,13 +42,7 @@ const SolvedUserInfo = () => {
 
   return (
     <S.MemberWrapper isShow={isShowUser}>
-      <S.ProfileImage
-        src={
-          solvedUserList[listIndex].profileImageFileName
-            ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${solvedUserList[listIndex].profileImageFileName}`
-            : DefaultProfile
-        }
-      />
+      <UserProfileImage user={solvedUserList[listIndex]} />
       <S.Description>
         <S.MemberName>{solvedUserList[listIndex].username}</S.MemberName>
         님이 문제를 풀었어요.

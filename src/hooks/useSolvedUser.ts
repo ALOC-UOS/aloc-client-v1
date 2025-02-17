@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
-import { User } from "@/types/user.types";
+import { UserInfo } from "@/types/user.types";
 
 const useSolvedUser = () => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const [ solvedUserList, setSolvedUserList ] = useState<User[]>([]);
+  const [ solvedUserList, setSolvedUserList ] = useState<UserInfo[]>([]);
 
   const loadSolveMember = async (problemId: number) => {
     try {
