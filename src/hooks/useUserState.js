@@ -7,7 +7,6 @@ const useUserState = () => {
   const [{ user }, setUser] = useAtom(userAtom);
 
   const setUserInfo = userInfo => {
-    console.log(userInfo);
     setUser({ user: userInfo });
   };
 

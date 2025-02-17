@@ -10,7 +10,6 @@ const useMember = () => {
     axios
       .get('/users')
       .then(response => {
-        console.log(response.data.result);
         setMembers(response.data.result);
       })
       .catch(error => {
