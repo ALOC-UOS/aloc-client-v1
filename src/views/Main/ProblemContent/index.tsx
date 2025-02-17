@@ -1,7 +1,7 @@
 import S from './style';
 import { gsap } from 'gsap';
 import MarathonProblemList from '@/components/MarathonProblemList';
-import SolvedUserInfo from '../SolvedUserInfo';
+import SolvedUserInfo from './SolvedUserInfo';
 import { useEffect, useRef } from 'react';
 import useLoginState from '@/hooks/useLoginState';
 import useUserState from '@/hooks/useUserState';
