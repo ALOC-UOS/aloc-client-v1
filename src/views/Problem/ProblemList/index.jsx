@@ -1,19 +1,15 @@
 import S from './ProblemList.styles';
 import { HStack, VStack } from '../../../components/Stack';
-import { useAlgorithm } from '../../../hooks/useAlgorithm';
+import { useAlgorithm } from '@/hooks/useAlgorithm';
 import MemberIcon from '../../../assets/icons/member.svg';
 import ActiveMemberIcon from '../../../assets/icons/active-member.svg';
 import ArrowRightCircleFillBlueIcon from '../../../assets/icons/arrow.right.circle.fill.blue.svg';
 import LogoDark from '../../../assets/images/logo.season2.dark.png';
 import { tierStyleConfig } from '../../../styles/tier.config';
-import { getProblemTier } from '../../../utils';
+import { getProblemTier, moveToProblemSite } from '@/utils/index';
 
 export const ProblemListComponent = () => {
   const { problemList, fetchSolvedUserList, selectedProblemId, selectedSeason } = useAlgorithm();
-
-  const moveToProblemSite = problem => {
-    window.open(`https://www.acmicpc.net/problem/${problem.problemId}`);
-  };
 
   return (
     <VStack gap={16} style={{ width: '100%', height: 'fit-content' }}>
@@ -63,7 +59,7 @@ export const ProblemListComponent = () => {
                   width={36}
                   height={36}
                   style={{ marginLeft: 16 }}
-                  onClick={() => moveToProblemSite(problem)}
+                  onClick={() => moveToProblemSite(problem.problemId)}
                 />
               </HStack>
             </S.ProblemItem>

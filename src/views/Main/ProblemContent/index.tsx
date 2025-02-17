@@ -1,5 +1,5 @@
 import S from './style';
-import MarathonProblemList from '@/components/MarathonProblemList';
+import MarathonProblemList from './MarathonProblemList';
 import SolvedUserInfo from './SolvedUserInfo';
 import { useEffect } from 'react';
 import useLoginState from '@/hooks/useLoginState';
@@ -7,15 +7,12 @@ import useUserState from '@/hooks/useUserState';
 import useProblem from '@/hooks/useProblem';
 import { VStack } from '@/components/Stack';
 import TierIcons from './TierIcons';
+import { moveToProblemSite } from '@/utils/index';
 
 const PreblemContent = () => {
   const {isLoading, todayProblem, fetchTodayProblem} = useProblem();
   const { user } = useUserState();
   const { isLoggedIn } = useLoginState();
-
-  const moveToProblemPage = (problemId: number) => {
-    window.open(`https://www.acmicpc.net/problem/${problemId}`, '_blank');
-  };
 
   useEffect(() => {
     if (isLoggedIn && !user) {
@@ -33,7 +30,7 @@ const PreblemContent = () => {
   return (
     <S.Container backgroundColor={todayProblem.tier.backgroundColor}>
       <TierIcons tier={todayProblem.tier} />
-      <S.ProblemWrapper color={todayProblem.tier.color} onClick={() => moveToProblemPage(todayProblem.problemId)}>
+      <S.ProblemWrapper color={todayProblem.tier.color} onClick={() => moveToProblemSite(todayProblem.problemId)}>
         <VStack alignItems="center" gap={8}>
           <S.ProblemTitle color={todayProblem.tier.color}>오늘의 문제</S.ProblemTitle>
           <S.ProblemName>

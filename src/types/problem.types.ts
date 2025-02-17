@@ -7,3 +7,7 @@ export type Problem = {
   difficulty: number;
   tier: TierStyleConfig
 }
+
+export interface SolvedProblem extends Problem {
+  isSolved: boolean;
+}

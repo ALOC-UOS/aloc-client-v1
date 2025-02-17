@@ -32,3 +32,7 @@ export const formatSolveTime = (solvedAt: string) => {
     return '방금 전';
   }
 };
+
+export const moveToProblemSite = (problemId: number) => {
+  window.open(`https://www.acmicpc.net/problem/${problemId}`, '_blank');
+};
