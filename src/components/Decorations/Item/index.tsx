@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import S from './style';
 import { decorationStyleConfig } from '@/styles/decoration.config';
-import { DecorationStyleConfig, ItemName } from '@/types/decoration.types';
+import { DecorationStyleConfig, DecorationItemName } from '@/types/decorationItem.types';
 
 interface DecorationItemProps {
-  type: ItemName;
+  type: DecorationItemName;
   size: 'small' | 'normal';
 }
 

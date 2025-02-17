@@ -2,22 +2,12 @@ import TierBronzeCircle from '../assets/icons/tier/bronze.circle.svg';
 import TierSilverCircle from '../assets/icons/tier/silver.circle.svg';
 import TierGoldCircle from '../assets/icons/tier/gold.circle.svg';
 import TierPlatinumCircle from '../assets/icons/tier/platinum.circle.svg';
-
 import TierBronzeSmall from '../assets/icons/tier/bronze.small.svg';
 import TierSilverSmall from '../assets/icons/tier/silver.small.svg';
 import TierGoldSmall from '../assets/icons/tier/gold.small.svg';
 import TierPlatinumSmall from '../assets/icons/tier/platinum.small.svg';
+import { Tier, TierStyleConfig } from '@/types/tier.types';
 
-type Tier = 'bronze' | 'silver' | 'gold' | 'platinum';
-
-interface TierStyleConfig {
-  backgroundColor: string;
-  color: string;
-  icon: {
-    small: string;
-    circle: string;
-  };
-}
 
 export const tierStyleConfig: Record<Tier, TierStyleConfig> = {
   bronze: {

@@ -5,15 +5,16 @@ import 'dayjs/locale/ko';
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
 
-export const getProblemTier = difficulty => {
-  if (difficulty >= 1 && difficulty <= 5) return 'bronze';
-  if (difficulty >= 6 && difficulty <= 10) return 'silver';
-  if (difficulty >= 11 && difficulty <= 15) return 'gold';
-  if (difficulty >= 16 && difficulty <= 20) return 'platinum';
-  return 'unknown';
+export const getProblemTier = (difficulty: number) => {
+  if (1 <= difficulty && difficulty <= 5) return 'bronze';
+  if (6 <= difficulty && difficulty <= 10) return 'silver';
+  if (11 <= difficulty && difficulty <= 15) return 'gold';
+  if (16 <= difficulty && difficulty <= 20) return 'platinum';
+
+  return 'bronze'; // Todo: 추후에 bronze말고 unknown이든 추가해야함.
 };
 
-export const formatSolveTime = solvedAt => {
+export const formatSolveTime = (solvedAt: string) => {
   const now = dayjs();
   const currentDate = now.format('YYYY-MM-DD');
   const solved = dayjs(`${currentDate} ${solvedAt}`, 'YYYY-MM-DD HH:mm:ss');
@@ -30,4 +31,8 @@ export const formatSolveTime = solvedAt => {
   } else {
     return '방금 전';
   }
+};
+
+export const moveToProblemSite = (problemId: number) => {
+  window.open(`https://www.acmicpc.net/problem/${problemId}`, '_blank');
 };

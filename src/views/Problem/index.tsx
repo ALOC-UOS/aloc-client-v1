@@ -4,11 +4,11 @@ import { AlgorithmListComponent as AlgorithmList } from './AlgorithmList';
 import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
 import { VStack } from '../../components/Stack';
-import { useProblem } from '../../hooks/useProblem';
+import { useAlgorithm } from '../../hooks/useAlgorithm';
 import useDropdown from '../../hooks/useDropdown';
 
 const Problem = () => {
-  const { selectedCourse, setSelectedCourse, setSelectedSeason } = useProblem();
+  const { selectedCourse, setSelectedCourse, setSelectedSeason } = useAlgorithm();
   const seasons = ['시즌 1', '시즌 2', '시즌 3'];
   const seasonDropdown = useDropdown({
     itemList: seasons,

@@ -27,6 +27,7 @@ import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
 import Confetti from '../../components/Confetti';
 import useMember from '../../hooks/useMember';
+import UserProfileImage from '@/components/UserProfileImage';
 
 const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
@@ -232,13 +233,7 @@ const Member = () => {
                   />
                 )}
                 <S.ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
-                  <S.ProfileImage
-                    src={
-                      member.profileImageFileName
-                        ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${member.profileImageFileName}`
-                        : DefaultProfile
-                    }
-                  />
+                  <UserProfileImage user={member} width='160px' height='160px' />
                 </S.ProfileLink>
               </S.ProfileBackgroundImage>
               <S.MemberWrapper>

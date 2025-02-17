@@ -1,0 +1,1 @@
+export type Course = "FULL" | "HALF";

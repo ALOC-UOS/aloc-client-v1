@@ -1,9 +1,9 @@
 import S from './AlgorithmList.styles';
 import { VStack } from '../../../components/Stack';
-import { useProblem } from '../../../hooks/useProblem';
+import { useAlgorithm } from '../../../hooks/useAlgorithm';
 
 export const AlgorithmListComponent = () => {
-  const { selectedAlgorithm, algorithmList, setSelectedAlgorithm } = useProblem();
+  const { selectedAlgorithm, algorithmList, setSelectedAlgorithm } = useAlgorithm();
 
   const handleAlgorithmItemClick = algorithm => {
     setSelectedAlgorithm(algorithm);
