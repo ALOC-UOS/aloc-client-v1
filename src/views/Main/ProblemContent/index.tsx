@@ -8,7 +8,7 @@ import useUserState from '@/hooks/useUserState';
 import useProblem from '@/hooks/useProblem';
 import { VStack } from '@/components/Stack';
 
-const problemContent = () => {
+const PreblemContent = () => {
   const {isLoading, todayProblem, fetchTodayProblem} = useProblem();
   const { user } = useUserState();
   const { isLoggedIn } = useLoginState();
@@ -148,4 +148,4 @@ const problemContent = () => {
   )
 };
 
-export default problemContent;
+export default PreblemContent;
