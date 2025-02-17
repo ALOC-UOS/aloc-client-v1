@@ -169,14 +169,6 @@ const ProfileLink = styled.a`
   }
 `;
 
-const ProfileImage = styled.img`
-  will-change: transform;
-  position: relative;
-  width: 160px;
-  height: 160px;
-  background-color: var(--color-background);
-`;
-
 const ProfileBlurImage = styled.img`
   transform-origin: top left;
   position: absolute;
@@ -464,7 +456,6 @@ export default {
   ProfileWrapper,
   ProfileBackgroundImage,
   ProfileLink,
-  ProfileImage,
   ProfileBlurImage,
   ProfileRankWrap,
   ProfileRank,

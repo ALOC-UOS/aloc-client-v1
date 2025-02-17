@@ -11,7 +11,7 @@ const selectedAlgorithmAtom = atom(null);
 const problemListAtom = atom([]);
 const solvedUserListAtom = atom([]);
 
-export const useProblem = () => {
+export const useAlgorithm = () => {
   const [selectedSeason, setSelectedSeason] = useAtom(selectedSeasonAtom);
   const [selectedCourse, setSelectedCourse] = useAtom(selectedCourseAtom);
   const [selectedAlgorithm, setSelectedAlgorithm] = useAtom(selectedAlgorithmAtom);

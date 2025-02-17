@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardContainer, CardWrapper, CardTop, CardLabel, CardTitle } from './style';
 import LocationIcon from '../../assets/icons/location.svg';
 import CalendarIcon from '../../assets/icons/calendar.svg';
