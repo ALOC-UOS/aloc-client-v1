@@ -23,7 +23,7 @@ const DisappearUp = keyframes`
   }
 `;
 
-const DefaultMemberWrapper = styled.div`
+const DefaultUserWrapper = styled.div`
   animation: ${MoveUp} 1s 0.7s ease-in-out forwards;
   display: flex;
   flex-direction: row;
@@ -36,7 +36,7 @@ const DefaultMemberWrapper = styled.div`
   gap: 4px;
 `;
 
-const MemberWrapper = styled.div<{ isShow: boolean }>`
+const UserWrapper = styled.div<{ isShow: boolean }>`
   animation: ${MoveUp} 1s ease-in-out;
   display: flex;
   flex-direction: row;
@@ -63,13 +63,6 @@ const Description = styled.div`
   user-select: none;
 `;
 
-const MemberName = styled.div`
-  color: var(--color-blue);
-  font-size: 14px;
-  font-weight: 500;
-  user-select: none;
-`;
-
 const SolveTime = styled.div`
   color: var(--color-white-50);
   font-size: 12px;
@@ -79,9 +72,8 @@ const SolveTime = styled.div`
 
 
 export default {
-  DefaultMemberWrapper,
-  MemberWrapper,
+  DefaultUserWrapper,
+  UserWrapper,
   Description,
-  MemberName,
   SolveTime,
 };

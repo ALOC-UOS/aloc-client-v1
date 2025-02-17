@@ -16,14 +16,14 @@ const SolvedUserInfo = () => {
       return;
     }
 
-    const showMemberInterval = 5 * ONE_SECOND;
-    const hideMemberDelay = 4 * ONE_SECOND;
+    const showUserInterval = 5 * ONE_SECOND;
+    const hideUserDelay = 4 * ONE_SECOND;
 
     const timer = setInterval(() => {
       setListIndex(prevIndex => (prevIndex + 1) % solvedUserList.length);
       setIsShowUser(false);
-      setTimeout(() => setIsShowUser(true), hideMemberDelay);
-    }, showMemberInterval);
+      setTimeout(() => setIsShowUser(true), hideUserDelay);
+    }, showUserInterval);
 
     return () => clearInterval(timer);
   }, [solvedUserList]);
@@ -31,24 +31,26 @@ const SolvedUserInfo = () => {
 
   if (solvedUserList.length === 0) {
     return (
-      <S.DefaultMemberWrapper>
+      <S.DefaultUserWrapper>
         <UserProfileImage user={null} />
         <S.Description>아무도 문제를 풀지 않았어요.</S.Description>
         <S.SolveTime>-</S.SolveTime>
-      </S.DefaultMemberWrapper>
+      </S.DefaultUserWrapper>
     );
   }
 
 
   return (
-    <S.MemberWrapper isShow={isShowUser}>
+    <S.UserWrapper isShow={isShowUser}>
       <UserProfileImage user={solvedUserList[listIndex]} />
       <S.Description>
-        <S.MemberName>{solvedUserList[listIndex].username}</S.MemberName>
+        <span style={{color: 'var(--color-blue)'}}>
+          {solvedUserList[listIndex].username}
+        </span>
         님이 문제를 풀었어요.
       </S.Description>
       <S.SolveTime>{formatSolveTime(solvedUserList[listIndex].solvedAt)}</S.SolveTime>
-    </S.MemberWrapper>
+    </S.UserWrapper>
   );
 };
 
