@@ -1,8 +1,8 @@
 import S from './SolvedUserList.styles';
-import { useProblem } from '../../../hooks/useProblem';
+import { useAlgorithm } from '../../../hooks/useAlgorithm';
 
 export const SolvedUserListComponent = () => {
-  const { solvedUserList } = useProblem();
+  const { solvedUserList } = useAlgorithm();
 
   const isSolvedUserListEmpty = solvedUserList.length === 0;
 

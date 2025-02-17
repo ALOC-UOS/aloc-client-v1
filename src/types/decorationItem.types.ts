@@ -1,4 +1,6 @@
-export type ItemName = 'GreenTurtle' | 'PinkTurtle' | 'Wave' | 'Bubble';
+export type DecorationItemName = 'GreenTurtle' | 'PinkTurtle' | 'Wave' | 'Bubble';
+
+export type DecorationItemSize = 'small' | 'normal';
 
 export interface DecorationStyleConfig {
   type: string;

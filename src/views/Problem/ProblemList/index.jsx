@@ -1,6 +1,6 @@
 import S from './ProblemList.styles';
 import { HStack, VStack } from '../../../components/Stack';
-import { useProblem } from '../../../hooks/useProblem';
+import { useAlgorithm } from '../../../hooks/useAlgorithm';
 import MemberIcon from '../../../assets/icons/member.svg';
 import ActiveMemberIcon from '../../../assets/icons/active-member.svg';
 import ArrowRightCircleFillBlueIcon from '../../../assets/icons/arrow.right.circle.fill.blue.svg';
@@ -9,7 +9,7 @@ import { tierStyleConfig } from '../../../styles/tier.config';
 import { getProblemTier } from '../../../utils';
 
 export const ProblemListComponent = () => {
-  const { problemList, fetchSolvedUserList, selectedProblemId, selectedSeason } = useProblem();
+  const { problemList, fetchSolvedUserList, selectedProblemId, selectedSeason } = useAlgorithm();
 
   const moveToProblemSite = problem => {
     window.open(`https://www.acmicpc.net/problem/${problem.problemId}`);

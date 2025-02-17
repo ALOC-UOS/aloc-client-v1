@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from '@/views/Home';
+import Main from '@/views/Main';
 import Problem from '@/views/Problem';
 import Member from '@/views/Member';
 import Shop from '@/views/Shop';
@@ -37,7 +37,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Main />} />
           <Route path="/problem" element={<Problem />} />
           <Route path="/member" element={<Member />} />
           <Route path="/shop" element={<Shop />} />

@@ -1,11 +1,11 @@
-import { ItemName, DecorationStyleConfig } from '@/types/decoration.types';
+import { DecorationItemName, DecorationStyleConfig } from '@/types/decorationItem.types';
 import GreenTurtle from '../assets/items/green-turtle.gif';
 import PinkTurtle from '../assets/items/pink-turtle.gif';
 import Wave from '../assets/items/wave.gif';
 import Bubble from '../assets/items/bubble.gif';
 
 // 추후에 Interface 분리
-export const decorationStyleConfig: Record<ItemName, DecorationStyleConfig> = {
+export const decorationStyleConfig: Record<DecorationItemName, DecorationStyleConfig> = {
   GreenTurtle: {
     type: 'gif',
     position: { top: -48, left: 64 },
