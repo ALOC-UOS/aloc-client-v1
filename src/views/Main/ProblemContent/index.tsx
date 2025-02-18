@@ -24,13 +24,13 @@ const PreblemContent = () => {
 
   if (isLoading) {
     return (
-      <S.Container backgroundColor={'#000000'} />
+      <S.Container backgroundColor={'var(--color-black)'} />
     )
   }
 
-  if (error || !todayProblem) {
+  if (!error || !todayProblem) {
     return (
-      <S.Container backgroundColor={'#000000'}>
+      <S.Container backgroundColor={'var(--color-black)'}>
         <ProblemContentError error={error} />
       </S.Container>
     )
