@@ -12,7 +12,7 @@ const InputBox = styled.input`
   height: 40px;
 
   border: 1px solid var(--color-foreground);
-  border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
+  border-color: ${(props) => (props.isFocused && props.value.length === 0 ? 'red' : '')};
   outline: none;
   color: var(--color-content-text);
   font-size: 14px;
@@ -23,10 +23,10 @@ const InputBox = styled.input`
   border-radius: 8px;
   cursor: pointer;
 
-  opacity: ${props => (props.disabled ? '0.5' : '1')};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
 
   &:hover {
-    border: ${props => (props.disabled ? '1px solid #00000000' : '1px solid #00000040')};
+    border: ${(props) => (props.disabled ? '1px solid #00000000' : '1px solid #00000040')};
   }
 `;
 export { InputBox };

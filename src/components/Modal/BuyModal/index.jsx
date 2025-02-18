@@ -33,12 +33,12 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
 
     axios
       .post('/buy/item', JSONData)
-      .then(response => {
+      .then((response) => {
         const message =
           'colorCode: ' + response.data.color_code + '\n' + '남은 Coin: ' + response.data.coin;
         alert(message);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response.status === 404) {
           setToastText('해당하는 정보가 없습니다.');
         } else if (error.response.status === 400) {
@@ -71,7 +71,7 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
             <TextInputBox
               key={index}
               placeholder={item.placeholder}
-              onChange={e => {
+              onChange={(e) => {
                 inputTextArray[index] = e.target.value;
                 setInputTextArray(inputTextArray);
                 checkAllInput();

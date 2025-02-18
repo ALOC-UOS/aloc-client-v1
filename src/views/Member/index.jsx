@@ -80,13 +80,13 @@ const Member = () => {
 
     axios
       .get(url)
-      .then(response => {
+      .then((response) => {
         setProblemListData(response.data.result);
         setIsOpenedModal(true);
         setSelectedGithubId(githubId);
         setSelectedType(type);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error, 'API 요청 중 오류 발생:');
       });
   }
@@ -102,7 +102,7 @@ const Member = () => {
     setIsShowLoading(true);
     serverAPI
       .post('/problems/solved')
-      .then(response => {
+      .then((response) => {
         getMembers();
         openProblemListModal(SelectedType, SelectedGithubId);
         setTimeout(() => {
@@ -112,7 +112,7 @@ const Member = () => {
           setIsLoadingSolvedProblem(false);
         }, 1500);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error, 'API 요청 중 오류 발생:');
       });
   }
@@ -121,7 +121,7 @@ const Member = () => {
     loadingMessage.show();
     serverAPI
       .post('/today-problem/solved', {}, { timeout: 300000 })
-      .then(res => {
+      .then((res) => {
         setSolvedStatus(res.data.result.solvedStatus);
         if (res.data.result.solvedStatus === 'SOLVED') {
           setRank(res.data.result.place);
@@ -144,7 +144,7 @@ const Member = () => {
           }, 6000);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error, 'API 요청 중 오류 발생:');
       });
   };
@@ -233,7 +233,7 @@ const Member = () => {
                   />
                 )}
                 <S.ProfileLink href={`https://github.com/${member.githubId}`} target="_blank">
-                  <UserProfileImage user={member} width='160px' height='160px' />
+                  <UserProfileImage user={member} width="160px" height="160px" />
                 </S.ProfileLink>
               </S.ProfileBackgroundImage>
               <S.MemberWrapper>

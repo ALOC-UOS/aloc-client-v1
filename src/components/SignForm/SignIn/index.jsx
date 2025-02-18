@@ -60,20 +60,20 @@ const SignIn = ({ setFormType }) => {
     return checkBool;
   };
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     if (checkFormValidity()) {
       await LoginAPI.handleOnSubmitLoginForm(githubId, password)
-        .then(res => {
+        .then((res) => {
           const { accessToken, refreshToken } = res.data;
           setLoginStatus({ accessToken, refreshToken });
-          serverAPI.get('/user').then(response => {
+          serverAPI.get('/user').then((response) => {
             const userInfo = response.data.result;
             setUserInfo(userInfo);
           });
           navigate('/');
         })
-        .catch(error => {
+        .catch((error) => {
           passwordRef.current.placeholder = '비밀번호가 일치하지 않거나 없는 회원입니다.';
           setPassword('');
           setPasswordFocus(true);
@@ -104,7 +104,7 @@ const SignIn = ({ setFormType }) => {
         placeholder={'깃허브 닉네임'}
         value={githubId}
         isFocused={githubIdFocus}
-        onChange={e => setGithubId(e.target.value)}
+        onChange={(e) => setGithubId(e.target.value)}
       ></StyledInputBox>
       <StyledInputBox
         ref={passwordRef}
@@ -112,7 +112,7 @@ const SignIn = ({ setFormType }) => {
         placeholder={'비밀번호'}
         value={password}
         isFocused={passwordFocus}
-        onChange={e => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
       ></StyledInputBox>
       <Button
         color={'blue'}

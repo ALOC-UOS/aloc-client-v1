@@ -11,7 +11,7 @@ const CoinComponent = ({ userCoin, obtainCoin, triggerAnimation }) => {
     if (triggerAnimation) {
       const fadeOutTimeout = setTimeout(() => {
         setIsVisible(false);
-        setCoin(prev => prev + obtainCoin);
+        setCoin((prev) => prev + obtainCoin);
       }, 2000);
 
       return () => {

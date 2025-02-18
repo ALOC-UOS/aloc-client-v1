@@ -6,10 +6,10 @@ const TierIcon = styled.img<{ backgroundColor: string }>`
   opacity: 0;
   border-radius: 50%;
   &:hover {
-    background-color: ${props => props.backgroundColor}80;
+    background-color: ${(props) => props.backgroundColor}80;
   }
   &:active {
-    background-color: ${props => props.backgroundColor};
+    background-color: ${(props) => props.backgroundColor};
   }
 `;
 

@@ -45,7 +45,7 @@ const UserWrapper = styled.div<{ isShow: boolean }>`
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   padding: 8px 12px 8px 8px;
-  ${props =>
+  ${(props) =>
     props.isShow &&
     css`
       animation: ${DisappearUp} 1s ease-in-out forwards;
@@ -66,7 +66,6 @@ const SolveTime = styled.span`
   font-weight: 500;
   user-select: none;
 `;
-
 
 export default {
   DefaultUserWrapper,

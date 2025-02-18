@@ -9,7 +9,7 @@ import { API } from '../../api/axios';
 const Card = () => {
   const [week, setWeek] = useState();
   const [schedule, setSchedule] = useState([]);
-  const setSeminarData = schedule => {
+  const setSeminarData = (schedule) => {
     return [
       {
         contents: [
@@ -28,10 +28,10 @@ const Card = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await API.get('/notion/study-schedule')
-        .then(res => {
+        .then((res) => {
           return res.data.result;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           return error;
         });

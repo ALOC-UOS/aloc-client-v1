@@ -18,7 +18,7 @@ const TopBarContainer = styled.div<{ isScroll: boolean }>`
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
 
-  ${props =>
+  ${(props) =>
     props.isScroll &&
     css`
       background-color: var(--color-foreground-10);
@@ -54,7 +54,7 @@ const TopBarItem = styled.div<{ selected: boolean }>`
   &:hover {
     color: var(--color-title-text);
   }
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       color: var(--color-blue);

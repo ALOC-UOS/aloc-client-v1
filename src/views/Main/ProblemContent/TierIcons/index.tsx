@@ -8,7 +8,6 @@ interface TierIconsProps {
 }
 
 const TierIcons = ({ tier }: TierIconsProps) => {
-
   const bigTierIconWrapperRef = useRef(null);
   const bigTierIconRef = useRef(null);
   const smallIconWrapperRef = useRef(null);

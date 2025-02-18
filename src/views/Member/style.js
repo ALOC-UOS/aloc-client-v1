@@ -61,7 +61,7 @@ const ContentContainer = styled.div`
 
 const ProfileWrapper = styled.div`
   animation: ${AppearProfile} 1s ease forwards;
-  animation-delay: ${props => props.delay}s;
+  animation-delay: ${(props) => props.delay}s;
   display: flex;
   flex-direction: column;
   border-radius: 24px;
@@ -95,21 +95,21 @@ const ProfileBackgroundImage = styled.div`
   height: 220px;
   overflow: hidden;
 
-  ${props =>
+  ${(props) =>
     props.solved &&
     css`
       &:hover {
         filter: brightness(1.2);
       }
     `}
-  ${props =>
+  ${(props) =>
     props.solved &&
     props.category === 'common' &&
     css`
-      background-color: ${props => props.color1};
+      background-color: ${(props) => props.color1};
     `}
 
-  ${props =>
+  ${(props) =>
     props.solved &&
     props.category === 'rare' &&
     css`
@@ -120,7 +120,7 @@ const ProfileBackgroundImage = styled.div`
       );
     `}
 
-  ${props =>
+  ${(props) =>
     props.solved &&
     props.category === 'special' &&
     css`
@@ -317,7 +317,7 @@ const MemberInfoItem = styled.div`
   color: var(--color-sub-text);
   font-size: 16px;
 
-  ${props =>
+  ${(props) =>
     props.blue &&
     css`
       color: var(--color-blue);
@@ -330,7 +330,7 @@ const MemberInfoItem = styled.div`
 
 const SolvedAnimation = styled.div`
   animation: ${MoveBackground} 3s ease forwards;
-  animation-delay: ${props => props.delay}s;
+  animation-delay: ${(props) => props.delay}s;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -351,7 +351,7 @@ const SolvedAnimation = styled.div`
   );
   opacity: 0;
 
-  ${props =>
+  ${(props) =>
     props.solved &&
     css`
       opacity: 1;
@@ -370,7 +370,7 @@ const IconWrapper = styled.div`
   background-color: var(--color-blue);
   border-radius: 50%;
 
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       opacity: 1;
@@ -388,7 +388,7 @@ const Icon = styled.img`
   opacity: 0;
   transform-origin: top left;
   scale: 0.5;
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       top: 50%;
@@ -397,7 +397,7 @@ const Icon = styled.img`
       scale: 1;
     `}
 
-  ${props =>
+  ${(props) =>
     props.active &&
     props.check &&
     css`

@@ -13,7 +13,7 @@ const Problem = () => {
   const seasonDropdown = useDropdown({
     itemList: seasons,
     defaultIdx: 2,
-    onClickItem: item => {
+    onClickItem: (item) => {
       const season = item.split(' ');
       setSelectedSeason(season[1]);
     },

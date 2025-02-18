@@ -17,7 +17,7 @@ const ToastContainer = styled.div`
   justify-content: center;
   overflow: hidden;
   transform: translate(-50%, 0%);
-  ${props =>
+  ${(props) =>
     props.$toastState &&
     css`
       opacity: 1;
@@ -57,7 +57,7 @@ const Progress = styled.div`
   height: 4px;
   position: absolute;
   bottom: 0;
-  animation: ${props =>
+  animation: ${(props) =>
     props.$runAnimation
       ? css`
           ${progressbar} 1.8s linear forwards

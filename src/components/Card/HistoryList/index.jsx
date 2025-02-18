@@ -22,15 +22,15 @@ const HistoryList = () => {
   const loadHistoryData = () => {
     axios
       .get('/history')
-      .then(response => {
+      .then((response) => {
         setHistoryData(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('API 요청 중 오류 발생:');
       });
   };
 
-  const getRank = rank => {
+  const getRank = (rank) => {
     const tier = parseInt(rank / 10);
     const level = rank % 10;
     const rankText = ['I', 'II', 'III', 'IV', 'V'];
@@ -49,7 +49,7 @@ const HistoryList = () => {
     }
   };
 
-  const getTier = rank => {
+  const getTier = (rank) => {
     const tier = parseInt(rank / 10);
 
     switch (tier) {

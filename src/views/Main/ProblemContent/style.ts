@@ -31,7 +31,7 @@ const Container = styled.div<{ backgroundColor: string }>`
   width: 100%;
   height: 100dvh;
   overflow: hidden;
-  background-image: linear-gradient(105deg, ${props => props.backgroundColor}, #000000);
+  background-image: linear-gradient(105deg, ${(props) => props.backgroundColor}, #000000);
   perspective: 1000px;
 `;
 
@@ -58,8 +58,12 @@ const ContentWrapper = styled.div`
     background-image: linear-gradient(to bottom, var(--color-white-50), transparent);
     padding: 1px;
     border-radius: 24px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
   }
@@ -70,8 +74,8 @@ const ContentWrapper = styled.div`
     inset: 0;
     background-image: linear-gradient(
       to bottom,
-      ${props => props.color}00,
-      ${props => props.color}40
+      ${(props) => props.color}00,
+      ${(props) => props.color}40
     );
     border-radius: 24px;
     opacity: 0;
@@ -94,12 +98,12 @@ const ContentWrapper = styled.div`
 
 const Callout = styled.div`
   animation: ${MoveUp} 1s 0.4s ease-in-out forwards;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   font-size: 16px;
   font-weight: 500;
   padding: 8px 12px;
   border-radius: 32px;
-  border: 1px solid ${props => props.color};
+  border: 1px solid ${(props) => props.color};
   user-select: none;
   opacity: 0;
 `;
@@ -121,7 +125,7 @@ const Description = styled.p`
   text-align: center;
   user-select: none;
   opacity: 0;
-`
+`;
 
 const BottomText = styled.p`
   position: fixed;

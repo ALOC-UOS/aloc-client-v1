@@ -22,7 +22,7 @@ const InputBox = styled.input`
   padding: 4px 4px 4px 8px;
   border-radius: 8px;
 
-  opacity: ${props => (props.disabled ? '0.5' : '1')};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
   &::placeholder {
     opacity: 0.5;
   }

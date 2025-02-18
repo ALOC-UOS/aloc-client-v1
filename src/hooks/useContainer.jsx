@@ -6,7 +6,7 @@ const useContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const show = () => setIsOpen(true);
   const hide = () => setIsOpen(false);
-  const toggle = () => setIsOpen(prev => !prev);
+  const toggle = () => setIsOpen((prev) => !prev);
   const render = ({ children = null } = {}) => {
     return <CardWrapper isOpen={isOpen}>{children}</CardWrapper>;
   };
@@ -23,7 +23,7 @@ const CardWrapper = styled.div`
   padding: 10px;
   opacity: 0;
   box-shadow: 0 8px 16px var(--color-blue-25);
-  ${props =>
+  ${(props) =>
     props.isOpen
       ? css`
           opacity: 1;

@@ -10,7 +10,7 @@ const SignUpSecond = ({ setFormType }) => {
   const [course, setCourse] = useState('HALF');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     const inputState = getInputState();
     const new_inputState = { ...inputState, course: course };
 
@@ -19,7 +19,7 @@ const SignUpSecond = ({ setFormType }) => {
         alertModal.setIsPending(false);
         setFormType('SIGNIN');
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response.data.code === 'COMMON400') {
           console.log(error.response.data);
           console.log(error.response.data.message);
@@ -107,7 +107,7 @@ const SignUpSecond = ({ setFormType }) => {
             fontSize: 14,
             borderRadius: 8,
           }}
-          onClick={event => {
+          onClick={(event) => {
             event.preventDefault();
             alertModal.show();
           }}

@@ -63,6 +63,6 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 200;
-  ${props => !props.isOpen && 'opacity:0;pointer-events: none;'}
+  ${(props) => !props.isOpen && 'opacity:0;pointer-events: none;'}
 `;
 export default useModal;

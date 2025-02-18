@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { InputBox } from '../Input/TextInput/TextInputBox/style';
 
 const StyledInputBox = styled(InputBox)`
-  border-color: ${props => (props.isFocused && props.value.length === 0 ? 'red' : '')};
+  border-color: ${(props) => (props.isFocused && props.value.length === 0 ? 'red' : '')};
 `;
 
 const SignBox = styled.form`

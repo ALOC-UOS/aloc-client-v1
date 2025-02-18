@@ -50,27 +50,27 @@ const Text = styled.div`
   font-size: 16px;
   font-weight: 500;
 
-  ${props =>
+  ${(props) =>
     props.textColor === 'blue' &&
     css`
       color: var(--color-blue);
     `}
-  ${props =>
+  ${(props) =>
     props.textColor === 'bronze' &&
     css`
       color: #b97c63;
     `}
-  ${props =>
+  ${(props) =>
     props.textColor === 'silver' &&
     css`
       color: #abbac7;
     `}
-  ${props =>
+  ${(props) =>
     props.textColor === 'gold' &&
     css`
       color: #ffb800;
     `}
-  ${props =>
+  ${(props) =>
     props.textColor === 'platinum' &&
     css`
       color: #00c697;
