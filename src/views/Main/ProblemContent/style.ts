@@ -35,7 +35,7 @@ const Container = styled.div<{ backgroundColor: string }>`
   perspective: 1000px;
 `;
 
-const ProblemWrapper = styled.div`
+const ContentWrapper = styled.div`
   animation: ${MoveUp} 1s ease-in-out;
   z-index: 1;
   position: relative;
@@ -92,7 +92,7 @@ const ProblemWrapper = styled.div`
   }
 `;
 
-const ProblemTitle = styled.div`
+const Callout = styled.div`
   animation: ${MoveUp} 1s 0.4s ease-in-out forwards;
   color: ${props => props.color};
   font-size: 16px;
@@ -104,7 +104,7 @@ const ProblemTitle = styled.div`
   opacity: 0;
 `;
 
-const ProblemName = styled.div`
+const Title = styled.div`
   animation: ${MoveUp} 1s 0.55s ease-in-out forwards;
   color: var(--color-white);
   font-size: 40px;
@@ -113,6 +113,15 @@ const ProblemName = styled.div`
   user-select: none;
   opacity: 0;
 `;
+
+const Description = styled.p`
+  animation: ${MoveUp} 1s 0.8s ease-in-out forwards;
+  color: var(--color-white-50);
+  font-size: 14px;
+  text-align: center;
+  user-select: none;
+  opacity: 0;
+`
 
 const BottomText = styled.p`
   position: fixed;
@@ -130,8 +139,9 @@ const BottomText = styled.p`
 
 export default {
   Container,
-  ProblemWrapper,
-  ProblemTitle,
-  ProblemName,
+  ContentWrapper,
+  Callout,
+  Title,
+  Description,
   BottomText,
 };
