@@ -72,8 +72,9 @@ const BuyModal = ({ isOpen, description, closeModal }) => {
               key={index}
               placeholder={item.placeholder}
               onChange={(e) => {
-                inputTextArray[index] = e.target.value;
-                setInputTextArray(inputTextArray);
+                const newArray = [...inputTextArray];
+                newArray[index] = e.target.value;
+                setInputTextArray(newArray);
                 checkAllInput();
               }}
             />
