@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 const InputBox = styled.input`
   position: relative;
   display: flex;

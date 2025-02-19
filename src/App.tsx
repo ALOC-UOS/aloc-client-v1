@@ -4,7 +4,6 @@ import Main from '@/views/Main';
 import Problem from '@/views/Problem';
 import Member from '@/views/Member';
 import Shop from '@/views/Shop';
-import Setting from '@/views/Setting';
 import Login from '@/views/Login';
 import { serverAPI, setupInterceptors } from '@/api/axios';
 import useLoginState from '@/hooks/useLoginState';
@@ -41,7 +40,6 @@ function App() {
           <Route path="/problem" element={<Problem />} />
           <Route path="/member" element={<Member />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/setting" element={<Setting />} />
         </Routes>
       </BrowserRouter>
     </>

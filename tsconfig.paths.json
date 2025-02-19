@@ -5,6 +5,7 @@
       "@/views/*": ["views/*"],
       "@/hooks/*": ["hooks/*"],
       "@/components/*": ["components/*"],
+      "@/constants/*": ["constants/*"],
       "@/assets/*": ["assets/*"],
       "@/utils/*": ["utils/*"],
       "@/api/*": ["api/*"],

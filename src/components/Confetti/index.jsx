@@ -19,8 +19,7 @@ const Confetti = () => {
       height={window.innerHeight}
       autorun={{ speed: 0.5, duration: 4, delay: 500 }}
       decorateOptions={decorateOptions}
-      style={{
-        position: 'fixed',
+      style={{ position: 'fixed',
         zIndex: 1000,
       }}
     />
