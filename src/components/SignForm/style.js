@@ -1,17 +1,19 @@
 import styled from '@emotion/styled';
 
-const InputBox = styled.input`
+const InputWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
   min-width: 240px;
   max-width: 400px;
   width: 100%;
-  height: 40px;
+`;
 
+const InputBox = styled.input`
+  width: 100%;
+  height: 40px;
   border: 1px solid var(--color-foreground);
   border-color: ${(props) => (props.isFocused && props.value.length === 0 ? 'red' : '')};
   outline: none;
