@@ -30,5 +30,4 @@ const InputBox = styled.input`
     border: ${(props) => (props.disabled ? '1px solid #00000000' : '1px solid #00000040')};
   }
 `;
-
-export default { InputBox };
+export { InputBox };
