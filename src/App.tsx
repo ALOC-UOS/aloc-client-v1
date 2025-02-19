@@ -19,12 +19,12 @@ function App() {
     setupInterceptors(initLoginStatus);
     serverAPI
       .get('/user')
-      .then(response => {
+      .then((response) => {
         const userInfo = response.data.result;
         localStorage.setItem('isLoggedIn', 'true');
         setUserInfo(userInfo);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         initLoginStatus();
         deleteUserInfo();

@@ -32,7 +32,7 @@ const Shop = () => {
   const changeColor = async () => {
     await serverAPI
       .put('/color/change')
-      .then(response => {
+      .then((response) => {
         setChangeColorText(
           <div
             style={{
@@ -57,10 +57,10 @@ const Shop = () => {
         changeColorSuccessModal.show();
         serverAPI
           .get('/user')
-          .then(response => setUserInfo(response.data.result))
-          .catch(error => console.log(error));
+          .then((response) => setUserInfo(response.data.result))
+          .catch((error) => console.log(error));
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };

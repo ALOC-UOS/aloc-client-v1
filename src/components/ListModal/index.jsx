@@ -45,7 +45,7 @@ const ListModal = ({
       </ListModalTopBar>
       <Divider />
       <ProblemList>
-        {problemListData.map(problem => (
+        {problemListData.map((problem) => (
           <ProblemItem
             href={`https://www.acmicpc.net/problem/${problem.problemId}`}
             target="_blank"

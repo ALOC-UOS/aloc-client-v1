@@ -1,10 +1,10 @@
-import axios from "axios";
-import { useState } from "react";
-import { UserInfo } from "@/types/user.types";
+import axios from 'axios';
+import { useState } from 'react';
+import { UserInfo } from '@/types/user.types';
 
 const useSolvedUser = () => {
-  const [ isLoading, setIsLoading ] = useState<boolean>(false);
-  const [ solvedUserList, setSolvedUserList ] = useState<UserInfo[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [solvedUserList, setSolvedUserList] = useState<UserInfo[]>([]);
 
   const loadSolveMember = async (problemId: number) => {
     try {
@@ -25,7 +25,7 @@ const useSolvedUser = () => {
     solvedUserList,
     loadSolveMember,
     isEmpty,
-  }
-}
+  };
+};
 
 export default useSolvedUser;

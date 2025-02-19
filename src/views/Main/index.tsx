@@ -1,4 +1,3 @@
-
 import TopBar from '@/components/TopBar';
 import BottomInfo from '@/components/Card';
 import { VStack } from '@/components/Stack';

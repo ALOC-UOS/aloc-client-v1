@@ -13,15 +13,15 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
   useEffect(() => {
     axios
       .get(apiURL)
-      .then(response => {
-        setSelectedItemName(listData.find(item => item.id === response.data).name);
+      .then((response) => {
+        setSelectedItemName(listData.find((item) => item.id === response.data).name);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }, [apiURL, listData]);
 
-  const openList = id => {
+  const openList = (id) => {
     if (id === isOpenList) {
       setOpenList('');
       return;
@@ -29,8 +29,8 @@ const ListInput = ({ label, apiURL, listName, listData }) => {
     setOpenList(id);
   };
 
-  const selectItem = selectedItem => {
-    setSelectedItemId(listData.find(item => item.name === selectedItem).id);
+  const selectItem = (selectedItem) => {
+    setSelectedItemId(listData.find((item) => item.name === selectedItem).id);
     setSelectedItemName(selectedItem);
     setOpenList('');
     setIsDisabled(false);

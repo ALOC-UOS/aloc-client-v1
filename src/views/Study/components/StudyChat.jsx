@@ -48,10 +48,10 @@ const StudyChat = () => {
         ws.current.send(JSON.stringify(enterMessage));
       }
     };
-    ws.current.onmessage = event => {
+    ws.current.onmessage = (event) => {
       const receivedData = JSON.parse(event.data);
       if (receivedData.sender !== user.username) {
-        setData(prev => [
+        setData((prev) => [
           ...prev,
           <OtherMessage
             key={Date.now()}
@@ -68,11 +68,11 @@ const StudyChat = () => {
         ]);
       }
     };
-    ws.current.onclose = event => {
+    ws.current.onclose = (event) => {
       console.log('WebSocket disconnected. Attempting to reconnect...', event.reason);
       reconnectTimeoutRef.current = setTimeout(() => connectWebSocket(user), 5000);
     };
-    ws.current.onerror = error => {
+    ws.current.onerror = (error) => {
       console.error('WebSocket error:', error);
     };
   };
@@ -101,7 +101,7 @@ const StudyChat = () => {
   ]);
 
   const sendMessage = useCallback(
-    content => {
+    (content) => {
       if (!user) {
         alert('로그인이 필요합니다.');
         navigate('/login');
@@ -119,7 +119,7 @@ const StudyChat = () => {
           message: content.message,
         };
         ws.current.send(JSON.stringify(chatMessage));
-        setData(prev => [
+        setData((prev) => [
           ...prev,
           <MyMessage
             key={Date.now()}
@@ -141,7 +141,7 @@ const StudyChat = () => {
 
   return (
     <ChatWrapper>
-      <MessageWrapper>{data.map(message => message)}</MessageWrapper>
+      <MessageWrapper>{data.map((message) => message)}</MessageWrapper>
       <ChatFooter addMyMessage={sendMessage} />
     </ChatWrapper>
   );

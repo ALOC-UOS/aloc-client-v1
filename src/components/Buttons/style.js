@@ -17,46 +17,46 @@ const Button = styled.button`
   outline: none;
 
   cursor: pointer;
-  ${props =>
+  ${(props) =>
     props.hover !== 'none' &&
     `&:hover {
     filter: brightness(0.9);
   }`}
 
-  ${props =>
+  ${(props) =>
     props.active !== 'none' &&
     `&:active {
     transition: all 0.05s;
     filter: brightness(0.8);
   }`}
 
- ${props =>
+ ${(props) =>
     props.color === 'white' &&
     css`
       border: 1px #a9adb9 solid;
       background-color: #fff;
       transition: none;
     `}
-  ${props =>
+  ${(props) =>
     props.color === 'blue' &&
     css`
       color: var(--color-white);
       background-color: var(--color-blue);
     `}
-  ${props =>
+  ${(props) =>
     props.color === 'red' &&
     css`
       color: var(--color-white);
       background-color: var(--color-red);
     `}
-  ${props =>
+  ${(props) =>
     props.buttonType === 'disabled' &&
     css`
       opacity: 0.5;
       user-select: none;
       pointer-events: none;
     `}
-  ${props =>
+  ${(props) =>
     props.size === 'small' &&
     css`
       width: fit-content;

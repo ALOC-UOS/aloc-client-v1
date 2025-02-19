@@ -33,7 +33,7 @@ const Button = styled.div<{ selected: boolean }>`
   cursor: pointer;
   user-select: none;
 
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       color: var(--color-white);

@@ -11,7 +11,7 @@ export const SolvedUserListComponent = () => {
     <S.SolvedUserListContainer isOpen={!isSolvedUserListEmpty}>
       {solvedUserList.map((user, index) => (
         <S.SolvedUserItem key={user.githubId} delay={index}>
-          <UserProfileImage user={user} width='48px' height='48px' />
+          <UserProfileImage user={user} width="48px" height="48px" />
         </S.SolvedUserItem>
       ))}
     </S.SolvedUserListContainer>

@@ -8,7 +8,7 @@ const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
   const render = () => {
-    const handleClickItem = item => {
+    const handleClickItem = (item) => {
       setSelectedItem(item);
       close();
       onClickItem(item);
@@ -31,7 +31,7 @@ const useDropdown = ({ itemList, defaultIdx, onClickItem }) => {
           />
         </Dropdown.Trigger>
         <Dropdown.Menu isOpen={isOpen}>
-          {itemList.map(item => (
+          {itemList.map((item) => (
             <Dropdown.Item key={item} onClick={() => handleClickItem(item)}>
               {item}
             </Dropdown.Item>

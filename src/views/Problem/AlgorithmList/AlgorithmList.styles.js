@@ -16,7 +16,7 @@ const AlgorithmItem = styled.div`
   cursor: pointer;
   user-select: none;
 
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       pointer-events: none;
@@ -40,7 +40,7 @@ const WeekText = styled.p`
   border: 1px solid var(--color-blue);
   border-radius: 24px;
 
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       color: var(--color-white);
@@ -52,7 +52,7 @@ const AlgorithmName = styled.p`
   color: var(--color-content-text);
   font-size: 16px;
 
-  ${props =>
+  ${(props) =>
     props.selected &&
     css`
       color: var(--color-white);

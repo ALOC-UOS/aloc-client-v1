@@ -5,13 +5,13 @@ import { useAlgorithm } from '../../../hooks/useAlgorithm';
 export const AlgorithmListComponent = () => {
   const { selectedAlgorithm, algorithmList, setSelectedAlgorithm } = useAlgorithm();
 
-  const handleAlgorithmItemClick = algorithm => {
+  const handleAlgorithmItemClick = (algorithm) => {
     setSelectedAlgorithm(algorithm);
   };
 
   return (
     <VStack style={{ height: 'fit-content', gap: '12px' }}>
-      {algorithmList.map(algorithm => (
+      {algorithmList.map((algorithm) => (
         <S.AlgorithmItem
           key={algorithm.algorithmId}
           selected={selectedAlgorithm.week === algorithm.week}

@@ -11,7 +11,7 @@ import { moveToProblemSite } from '@/utils/index';
 import ProblemContentError from './error';
 
 const PreblemContent = () => {
-  const {isLoading, error, todayProblem, fetchTodayProblem} = useProblem();
+  const { isLoading, error, todayProblem, fetchTodayProblem } = useProblem();
   const { user } = useUserState();
   const { isLoggedIn } = useLoginState();
 
@@ -23,9 +23,7 @@ const PreblemContent = () => {
   }, [user]);
 
   if (isLoading) {
-    return (
-      <S.Container backgroundColor={'var(--color-black)'} />
-    )
+    return <S.Container backgroundColor={'var(--color-black)'} />;
   }
 
   if (error || !todayProblem) {
@@ -33,13 +31,16 @@ const PreblemContent = () => {
       <S.Container backgroundColor={'var(--color-black)'}>
         <ProblemContentError error={error} />
       </S.Container>
-    )
+    );
   }
 
   return (
     <S.Container backgroundColor={todayProblem.tier.backgroundColor}>
       <TierIcons tier={todayProblem.tier} />
-      <S.ContentWrapper color={todayProblem.tier.color} onClick={() => moveToProblemSite(todayProblem.problemId)}>
+      <S.ContentWrapper
+        color={todayProblem.tier.color}
+        onClick={() => moveToProblemSite(todayProblem.problemId)}
+      >
         <VStack alignItems="center" gap={8}>
           <S.Callout color={todayProblem.tier.color}>오늘의 문제</S.Callout>
           <S.Title>
@@ -51,7 +52,7 @@ const PreblemContent = () => {
       </S.ContentWrapper>
       {isLoggedIn && <MarathonProblemList />}
     </S.Container>
-  )
+  );
 };
 
 export default PreblemContent;

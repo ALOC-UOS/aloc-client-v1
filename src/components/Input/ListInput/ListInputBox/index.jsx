@@ -16,7 +16,7 @@ const ListInputBox = ({
       <SelectedText>{selectedItemName}</SelectedText>
       <ArrowIcon src={ArrowDownFillGray} selected={isOpenList === listName} />
       <InputList isOpen={isOpenList === listName} ItemNumber={listData.length}>
-        {listData.map(ListItem => (
+        {listData.map((ListItem) => (
           <InputItem
             key={ListItem.list_id}
             onClick={() => selectItem(ListItem.name)}

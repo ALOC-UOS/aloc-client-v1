@@ -1,9 +1,9 @@
-import S from "./style";
-import { useEffect, useState } from "react";
-import useSolvedUser from "@/hooks/useSolvedUser";
+import S from './style';
+import { useEffect, useState } from 'react';
+import useSolvedUser from '@/hooks/useSolvedUser';
 import { formatSolveTime } from '@/utils/index';
-import UserProfileImage from "@/components/UserProfileImage";
-import { HStack } from "@/components/Stack";
+import UserProfileImage from '@/components/UserProfileImage';
+import { HStack } from '@/components/Stack';
 
 const ONE_SECOND = 1000;
 
@@ -21,14 +21,13 @@ const SolvedUserInfo = () => {
     const hideUserDelay = 4 * ONE_SECOND;
 
     const timer = setInterval(() => {
-      setListIndex(prevIndex => (prevIndex + 1) % solvedUserList.length);
+      setListIndex((prevIndex) => (prevIndex + 1) % solvedUserList.length);
       setIsShowUser(false);
       setTimeout(() => setIsShowUser(true), hideUserDelay);
     }, showUserInterval);
 
     return () => clearInterval(timer);
   }, [solvedUserList]);
-    
 
   if (isEmpty) {
     return (
@@ -45,9 +44,7 @@ const SolvedUserInfo = () => {
       <UserProfileImage user={solvedUserList[listIndex]} />
       <HStack alignItems="center">
         <S.Description>
-          <span style={{color: 'var(--color-blue)'}}>
-            {solvedUserList[listIndex].username}
-          </span>
+          <span style={{ color: 'var(--color-blue)' }}>{solvedUserList[listIndex].username}</span>
           님이 문제를 풀었어요.
         </S.Description>
       </HStack>

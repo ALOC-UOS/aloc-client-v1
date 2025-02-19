@@ -19,7 +19,7 @@ const getAccessByRefresh = async (refreshToken, initLoginStatus) => {
   }
 };
 
-export const setupInterceptors = initLoginStatus => {
+export const setupInterceptors = (initLoginStatus) => {
   serverAPI.interceptors.request.use(
     async function (config) {
       let accessToken = localStorage.getItem('accessToken');
@@ -54,7 +54,7 @@ export const setupInterceptors = initLoginStatus => {
       }
       return config;
     },
-    error => Promise.reject(error)
+    (error) => Promise.reject(error)
   );
 };
 

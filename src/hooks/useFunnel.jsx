@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-export const useFunnel = defaultStep => {
+export const useFunnel = (defaultStep) => {
   const [step, setStep] = useState(defaultStep);
-  const Step = props => {
+  const Step = (props) => {
     return <>{props.children}</>;
   };
   const Funnel = ({ children }) => {
-    const targetStep = children.find(childStep => childStep.props.name === step);
+    const targetStep = children.find((childStep) => childStep.props.name === step);
     return <>{targetStep}</>;
   };
   return { Funnel, Step, setStep, currentStep: step };

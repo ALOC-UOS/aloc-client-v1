@@ -1,7 +1,7 @@
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 
 const Confetti = () => {
-  const decorateOptions = originalOptions => {
+  const decorateOptions = (originalOptions) => {
     return {
       ...originalOptions,
       particleCount: 200, // 조각 개수 설정

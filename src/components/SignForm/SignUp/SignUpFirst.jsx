@@ -117,12 +117,12 @@ const SignUpFirst = ({ setFormType, onNext }) => {
     });
   }, []);
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
     dispatchText({ type: name, text: value });
   };
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     if (checkFormValidity(inputObject, dispatchText, dispatchFocus)) {
       setInputState(inputState);
@@ -130,7 +130,7 @@ const SignUpFirst = ({ setFormType, onNext }) => {
     }
   };
 
-  const onKeyDown = event => {
+  const onKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       if (checkFormValidity(inputObject, dispatchText, dispatchFocus)) {

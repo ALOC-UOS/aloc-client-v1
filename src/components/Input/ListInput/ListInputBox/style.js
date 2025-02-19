@@ -23,10 +23,10 @@ const InputBox = styled.input`
   border-radius: 8px;
   cursor: pointer;
 
-  opacity: ${props => (props.disabled ? '0.5' : '1')};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
 
   &:hover {
-    border: ${props => (props.disabled ? '1px solid #00000000' : '1px solid #00000040')};
+    border: ${(props) => (props.disabled ? '1px solid #00000000' : '1px solid #00000040')};
   }
 `;
 
@@ -41,9 +41,9 @@ const InputList = styled.div`
   border-radius: 8px;
   overflow: auto;
 
-  opacity: ${props => (props.isOpen ? '1' : '0')};
-  outline: ${props => (props.isOpen ? '1px solid #D8D9DD' : '1px solid #D8D9DD00')};
-  height: ${props =>
+  opacity: ${(props) => (props.isOpen ? '1' : '0')};
+  outline: ${(props) => (props.isOpen ? '1px solid #D8D9DD' : '1px solid #D8D9DD00')};
+  height: ${(props) =>
     props.ItemNumber <= 8 && props.isOpen
       ? `${props.ItemNumber * 37}px`
       : props.ItemNumber && props.isOpen
@@ -72,7 +72,7 @@ const InputItem = styled.div`
   color: var(--color-content-text);
   font-size: 14px;
 
-  ${props =>
+  ${(props) =>
     props.selected &&
     `
     cursor: default;
@@ -93,7 +93,7 @@ const ArrowIcon = styled.img`
 
   width: 16px;
   height: 16px;
-  transform: ${props => (props.selected ? 'rotateX(180deg)' : 'rotateX(0deg)')};
+  transform: ${(props) => (props.selected ? 'rotateX(180deg)' : 'rotateX(0deg)')};
 `;
 
 export { InputBox, InputList, InputItem, SelectedText, ArrowIcon };

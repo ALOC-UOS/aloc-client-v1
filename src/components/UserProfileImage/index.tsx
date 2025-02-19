@@ -1,5 +1,5 @@
-import S from "./style";
-import { UserInfo } from "@/types/user.types";
+import S from './style';
+import { UserInfo } from '@/types/user.types';
 import DefaultProfile from '@/assets/images/default-profile.svg';
 
 interface UserProfileImageProps {
@@ -9,7 +9,7 @@ interface UserProfileImageProps {
   backgroundColor?: string;
 }
 
-const UserProfileImage = ({user, width, height, backgroundColor}: UserProfileImageProps) => {
+const UserProfileImage = ({ user, width, height, backgroundColor }: UserProfileImageProps) => {
   if (!user || !user.profileImageFileName) {
     return (
       <S.ProfileImage
@@ -34,6 +34,6 @@ const UserProfileImage = ({user, width, height, backgroundColor}: UserProfileIma
       onClick={() => moveToGithubSite(user.githubId)}
     />
   );
-}
+};
 
 export default UserProfileImage;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { InputContainer, InputLabel, TextInputBoxWrap } from './style';
 import Button from '../../Buttons';
 import TextInputBox from './TextInputBox';
@@ -14,7 +14,7 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
       JSONData[item.id] = inputTextArray[index];
     });
 
-    axios.post(apiURL, JSONData).catch(error => {
+    axios.post(apiURL, JSONData).catch((error) => {
       console.log(error);
     });
     setIsDisabled(true);
@@ -38,7 +38,7 @@ const TextInputWrap = ({ label, apiURL, inputList }) => {
           <TextInputBox
             key={index}
             placeholder={item.placeholder}
-            onChange={e => {
+            onChange={(e) => {
               inputTextArray[index] = e.target.value;
               setInputTextArray(inputTextArray);
               checkAllInput();

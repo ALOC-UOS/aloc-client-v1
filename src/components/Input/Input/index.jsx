@@ -6,7 +6,7 @@ const Input = React.forwardRef(({ initialPlaceholder, isFocused, type }, ref) =>
   const inputRef = useRef(null);
 
   useImperativeHandle(ref, () => ({
-    setValue: value => {
+    setValue: (value) => {
       setText(value);
     },
     getValue: () => {
@@ -17,7 +17,7 @@ const Input = React.forwardRef(({ initialPlaceholder, isFocused, type }, ref) =>
         inputRef.current.focus();
       }
     },
-    setPlaceholder: value => {
+    setPlaceholder: (value) => {
       setPlaceholder(value);
     },
   }));
@@ -31,7 +31,7 @@ const Input = React.forwardRef(({ initialPlaceholder, isFocused, type }, ref) =>
       type={type}
       ref={inputRef}
       value={text}
-      onChange={e => setText(e.target.value)}
+      onChange={(e) => setText(e.target.value)}
       placeholder={placeholder}
       isFocused={isFocused}
     />
