@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { InputBox } from './style';
+import S from './style';
 const Input = React.forwardRef(({ initialPlaceholder, isFocused, type }, ref) => {
   const [text, setText] = useState('');
   const [placeholder, setPlaceholder] = useState(initialPlaceholder);
@@ -27,7 +27,7 @@ const Input = React.forwardRef(({ initialPlaceholder, isFocused, type }, ref) =>
   }, [isFocused]);
 
   return (
-    <InputBox
+    <S.InputBox
       type={type}
       ref={inputRef}
       value={text}

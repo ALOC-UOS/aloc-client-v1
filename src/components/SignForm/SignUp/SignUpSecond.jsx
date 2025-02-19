@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LogoWhite from '../../../assets/images/logo.season2.white.svg';
-import { SignBox, ImageWrapper, LogoImage, PhraseWrapper, Phrase, BreakLine } from '../style';
+import S from '../style';
 import Button from '../../Buttons';
 import useModal from '../../../hooks/useModal';
 import LoginAPI from '../../../api/login/loginAPI';
@@ -47,14 +47,14 @@ const SignUpSecond = ({ setFormType }) => {
     <>
       {alertModal.render()}
       {errorModal.render()}
-      <SignBox>
-        <ImageWrapper>
-          <LogoImage src={LogoWhite} />
-        </ImageWrapper>
-        <PhraseWrapper>
-          <Phrase>코스를 선택하세요</Phrase>
-        </PhraseWrapper>
-        <BreakLine />
+      <S.SignBox>
+        <S.ImageWrapper>
+          <S.LogoImage src={LogoWhite} />
+        </S.ImageWrapper>
+        <S.PhraseWrapper>
+          <S.Phrase>코스를 선택하세요</S.Phrase>
+        </S.PhraseWrapper>
+        <S.BreakLine />
         <div style={{ display: 'flex', flexDirection: 'row', gap: 30, marginBottom: 20 }}>
           <Button
             color={'white'}
@@ -114,7 +114,7 @@ const SignUpSecond = ({ setFormType }) => {
         >
           회원가입
         </Button>
-      </SignBox>
+      </S.SignBox>
     </>
   );
 };

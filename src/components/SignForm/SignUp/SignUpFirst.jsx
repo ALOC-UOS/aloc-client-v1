@@ -1,27 +1,17 @@
-import LogoWhite from '../../../assets/images/logo.season2.white.svg';
-import Button from '../../Buttons';
-import { useRef, useState, useEffect } from 'react';
-import { BlackOverlay } from '../../BlackOverlay';
-import AlertModal from '../../Modal/AlertModal';
+import { useRef, useState, useEffect, useReducer } from 'react';
+import S from '../style';
+import LogoWhite from '@/assets/images/logo.season2.white.svg';
+import Button from '@/components/Buttons';
+import { BlackOverlay } from '@/components/BlackOverlay';
+import AlertModal from '@/components/Modal/AlertModal';
 import {
   textReducer,
   focusReducer,
   isValidEmail,
   checkFormValidity,
   setInputState,
-} from '../../../utils/SignUp';
-import { SIGNUP_PLACEHOLDER } from '../../../constants/SignUp';
-import {
-  SignBox,
-  ImageWrapper,
-  LogoImage,
-  PhraseWrapper,
-  Phrase,
-  UnderlinedText,
-  BreakLine,
-  StyledInputBox,
-} from '../style';
-import { useReducer } from 'react';
+} from '@/utils/SignUp';
+import { SIGNUP_PLACEHOLDER } from '@/constants/SignUp';
 
 const SignUpFirst = ({ setFormType, onNext }) => {
   const [inputState, dispatchText] = useReducer(textReducer, {
@@ -47,14 +37,14 @@ const SignUpFirst = ({ setFormType, onNext }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [modalText, setModalText] = useState('');
 
-  const githubIdRef = useRef();
-  const passwordRef = useRef();
-  const checkedPasswordRef = useRef();
-  const nameRef = useRef();
-  const studentIdRef = useRef();
-  const baekjoonIdRef = useRef();
-  const discordIdRef = useRef();
-  const notionEmailRef = useRef();
+  const githubIdRef = useRef(null);
+  const passwordRef = useRef(null);
+  const checkedPasswordRef = useRef(null);
+  const nameRef = useRef(null);
+  const studentIdRef = useRef(null);
+  const baekjoonIdRef = useRef(null);
+  const discordIdRef = useRef(null);
+  const notionEmailRef = useRef(null);
 
   const inputObject = {
     GITHUB_ID: {
@@ -140,7 +130,7 @@ const SignUpFirst = ({ setFormType, onNext }) => {
     }
   };
   return (
-    <SignBox onSubmit={onSubmit}>
+    <S.SignBox onSubmit={onSubmit}>
       <BlackOverlay isOpen={isOpenedModal} />
       <AlertModal
         isOpen={isOpenedModal}
@@ -150,16 +140,16 @@ const SignUpFirst = ({ setFormType, onNext }) => {
           setFormType('SIGNIN');
         }}
       />
-      <ImageWrapper>
-        <LogoImage src={LogoWhite} />
-      </ImageWrapper>
-      <PhraseWrapper>
-        <Phrase>알록에 온 것을 환영해요!</Phrase>
-      </PhraseWrapper>
-      <BreakLine />
+      <S.ImageWrapper>
+        <S.LogoImage src={LogoWhite} />
+      </S.ImageWrapper>
+      <S.PhraseWrapper>
+        <S.Phrase>알록에 온 것을 환영해요!</S.Phrase>
+      </S.PhraseWrapper>
+      <S.BreakLine />
       {Object.entries(inputObject).map(([key, value]) => {
         return (
-          <StyledInputBox
+          <S.InputBox
             name={key}
             ref={value.ref}
             isFocused={value.focusState}
@@ -185,14 +175,14 @@ const SignUpFirst = ({ setFormType, onNext }) => {
       >
         다음으로
       </Button>
-      <UnderlinedText
+      <S.UnderlinedText
         onClick={() => {
           setFormType('SIGNIN');
         }}
       >
         로그인하기
-      </UnderlinedText>
-    </SignBox>
+      </S.UnderlinedText>
+    </S.SignBox>
   );
 };
 export default SignUpFirst;

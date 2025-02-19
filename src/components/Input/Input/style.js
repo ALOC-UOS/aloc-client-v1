@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 const InputBox = styled.input`
   position: relative;
   display: flex;
@@ -29,4 +30,5 @@ const InputBox = styled.input`
     border: ${(props) => (props.disabled ? '1px solid #00000000' : '1px solid #00000040')};
   }
 `;
-export { InputBox };
+
+export default { InputBox };
