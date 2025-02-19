@@ -1,8 +1,9 @@
-import { useFunnel } from '../../../hooks/useFunnel';
+import { useFunnel } from '@/hooks/useFunnel';
 import SignUpFirst from './SignUpFirst';
 import SignUpSecond from './SignUpSecond';
+
 const SignUp = ({ setFormType }) => {
-  const { Step, Funnel, setStep, currentStep } = useFunnel('회원가입');
+  const { Step, Funnel, setStep } = useFunnel('회원가입');
   return (
     <Funnel>
       <Step name="회원가입">

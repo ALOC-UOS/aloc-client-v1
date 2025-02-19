@@ -1,25 +1,14 @@
-import LogoWhite from '../../../assets/images/logo.season2.white.svg';
-import Button from '../../Buttons';
-import { useState } from 'react';
-import { useRef } from 'react';
-import { BlackOverlay } from '../../BlackOverlay';
-import AlertModal from '../../Modal/AlertModal';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import LoginAPI from '../../../api/login/loginAPI';
-import {
-  SignBox,
-  ImageWrapper,
-  LogoImage,
-  PhraseWrapper,
-  Phrase,
-  UnderlinedText,
-  BreakLine,
-  StyledInputBox,
-} from '../style';
-import useLoginState from '../../../hooks/useLoginState';
-import { serverAPI } from '../../../api/axios';
-import useUserState from '../../../hooks/useUserState';
+import S from '../style';
+import LogoWhite from '@/assets/images/logo.season2.white.svg';
+import Button from '@/components/Buttons';
+import { BlackOverlay } from '@/components/BlackOverlay';
+import AlertModal from '@/components/Modal/AlertModal';
+import LoginAPI from '@/api/login/loginAPI';
+import { serverAPI } from '@/api/axios';
+import useLoginState from '@/hooks/useLoginState';
+import useUserState from '@/hooks/useUserState';
 
 const SignIn = ({ setFormType }) => {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -83,7 +72,7 @@ const SignIn = ({ setFormType }) => {
   };
 
   return (
-    <SignBox onSubmit={onSubmit}>
+    <S.SignBox onSubmit={onSubmit}>
       <BlackOverlay isOpen={isOpenedModal} />
       <AlertModal
         isOpen={isOpenedModal}
@@ -92,28 +81,28 @@ const SignIn = ({ setFormType }) => {
           setIsOpenedModal(false);
         }}
       />
-      <ImageWrapper>
-        <LogoImage src={LogoWhite} />
-      </ImageWrapper>
-      <PhraseWrapper>
-        <Phrase>오늘도 알록하세요</Phrase>
-      </PhraseWrapper>
-      <BreakLine />
-      <StyledInputBox
+      <S.ImageWrapper>
+        <S.LogoImage src={LogoWhite} />
+      </S.ImageWrapper>
+      <S.PhraseWrapper>
+        <S.Phrase>오늘도 알록하세요</S.Phrase>
+      </S.PhraseWrapper>
+      <S.BreakLine />
+      <S.InputBox
         ref={githubIdRef}
         placeholder={'깃허브 닉네임'}
         value={githubId}
         isFocused={githubIdFocus}
         onChange={(e) => setGithubId(e.target.value)}
-      ></StyledInputBox>
-      <StyledInputBox
+      ></S.InputBox>
+      <S.InputBox
         ref={passwordRef}
         type="password"
         placeholder={'비밀번호'}
         value={password}
         isFocused={passwordFocus}
         onChange={(e) => setPassword(e.target.value)}
-      ></StyledInputBox>
+      ></S.InputBox>
       <Button
         color={'blue'}
         type="submit"
@@ -128,14 +117,14 @@ const SignIn = ({ setFormType }) => {
       >
         로그인
       </Button>
-      <UnderlinedText
+      <S.UnderlinedText
         onClick={() => {
           setFormType('SIGNUP');
         }}
       >
         알록 회원이 아니신가요?
-      </UnderlinedText>
-    </SignBox>
+      </S.UnderlinedText>
+    </S.SignBox>
   );
 };
 export default SignIn;
