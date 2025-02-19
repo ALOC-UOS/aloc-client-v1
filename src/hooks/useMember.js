@@ -9,10 +9,10 @@ const useMember = () => {
     setIsLoading(true);
     axios
       .get('/users')
-      .then(response => {
+      .then((response) => {
         setMembers(response.data.result);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error, 'API 요청 중 오류 발생:');
       })
       .finally(() => {

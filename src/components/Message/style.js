@@ -30,7 +30,7 @@ const MessageContainer = styled.div`
   padding: 8px 12px;
   border-radius: 32px;
 
-  ${props =>
+  ${(props) =>
     props.isOpen &&
     css`
       transform: translate(-50%, 0px);
@@ -53,7 +53,7 @@ const CoinIcon = styled.img`
 `;
 
 const Text = styled.span`
-  color: ${props => (props.blue ? 'var(--color-blue)' : 'var(--color-title-text)')};
+  color: ${(props) => (props.blue ? 'var(--color-blue)' : 'var(--color-title-text)')};
   font-size: 16px;
   font-weight: 500;
 `;

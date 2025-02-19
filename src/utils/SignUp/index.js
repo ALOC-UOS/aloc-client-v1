@@ -69,7 +69,7 @@ export const checkFormValidity = (inputObject, dispatchText, dispatchFocus) => {
   return checkBool;
 };
 
-export const setInputState = inputState => {
+export const setInputState = (inputState) => {
   localStorage.setItem('githubId', inputState.githubId);
   localStorage.setItem('password', inputState.password);
   localStorage.setItem('name', inputState.name);

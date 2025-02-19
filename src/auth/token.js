@@ -8,7 +8,7 @@ export const deleteToken = () => {
   localStorage.removeItem('accessToken');
 };
 
-export const changeAccessToken = newAccessToken => {
+export const changeAccessToken = (newAccessToken) => {
   localStorage.removeItem('accessToken');
   localStorage.setItem('accessToken', newAccessToken);
 };

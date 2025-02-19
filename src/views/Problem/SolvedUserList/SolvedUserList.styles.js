@@ -18,7 +18,7 @@ const SolvedUserListContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: ${props => (props.isOpen ? '24px' : '24px 0px')};
+  padding: ${(props) => (props.isOpen ? '24px' : '24px 0px')};
   border-radius: 48px;
   overflow: scroll;
   background-color: var(--color-foreground);

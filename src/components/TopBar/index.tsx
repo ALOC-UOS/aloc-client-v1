@@ -117,7 +117,7 @@ const TopBar = () => {
       }
       serverAPI
         .patch('/user/reset-password', { password: nextPasswordRef.current.getValue() })
-        .then(response => {
+        .then((response) => {
           setMessageText(response.data.result);
           setChangePasswordFocus(false);
           nextPasswordRef.current.setValue('');
@@ -127,7 +127,7 @@ const TopBar = () => {
           changePasswordModal.setIsPending(false);
           passwordChangeMessage.toast();
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.data) {
             setMessageText(error.data.result);
             passwordChangeMessage.toast();

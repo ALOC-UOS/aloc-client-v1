@@ -32,7 +32,7 @@ export const useAlgorithm = () => {
     }
   }, [selectedSeason, selectedAlgorithm, selectedCourse]);
 
-  const fetchAlgorithmList = async season => {
+  const fetchAlgorithmList = async (season) => {
     try {
       const url = season !== undefined ? `/algorithm/${selectedSeason}` : '/algorithm';
 
@@ -57,7 +57,7 @@ export const useAlgorithm = () => {
     }
   };
 
-  const fetchSolvedUserList = async problemId => {
+  const fetchSolvedUserList = async (problemId) => {
     try {
       const response = await axios.get(`/problem/${problemId}/solved-users`);
       setSolvedUserList(response.data.result);

@@ -8,9 +8,9 @@ const BlackOverlayContainer = styled.div`
   right: 0;
   bottom: 0;
   background-color: var(--color-black);
-  opacity: ${props => (props.isOpen ? '0.7' : '0')};
-  user-select: ${props => (props.isOpen ? 'auto' : 'none')};
-  pointer-events: ${props => (props.isOpen ? 'auto' : 'none')};
+  opacity: ${(props) => (props.isOpen ? '0.7' : '0')};
+  user-select: ${(props) => (props.isOpen ? 'auto' : 'none')};
+  pointer-events: ${(props) => (props.isOpen ? 'auto' : 'none')};
 `;
 
 export default { BlackOverlayContainer };

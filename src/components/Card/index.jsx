@@ -9,7 +9,7 @@ import { API } from '../../api/axios';
 const Card = () => {
   const [week, setWeek] = useState();
   const [schedule, setSchedule] = useState([]);
-  const setSeminarData = schedule => {
+  const setSeminarData = (schedule) => {
     return [
       {
         contents: [
@@ -27,17 +27,15 @@ const Card = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const result = await API.get('/notion/study-schedule')
-        .then(res => {
-          return res.data.result;
-        })
-        .catch(error => {
-          console.log(error);
-          return error;
-        });
-      const seminarData = setSeminarData(result);
-      setSchedule(seminarData);
-      setWeek(result.week);
+      try {
+        const res = await API.get('/notion/study-schedule');
+        const result = res.data.result;
+        const seminarData = setSeminarData(result);
+        setSchedule(seminarData);
+        setWeek(result.week);
+      } catch (error) {
+        console.error('Notion으로부터 데이터를 불러오는데 실패했습니다.', error);
+      }
     };
     fetchData();
   }, []);

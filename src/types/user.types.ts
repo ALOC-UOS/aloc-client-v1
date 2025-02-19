@@ -1,7 +1,7 @@
-import { Course } from "./algorithm.types";
+import { Course } from './algorithm.types';
 
 export interface ProfileBackground {
-  category: "common" | "rare" | "special";
+  category: 'common' | 'rare' | 'special';
   colorName: string;
   color1: string;
   color2: string | null;
@@ -27,4 +27,4 @@ export interface UserInfo {
   todaySolved: boolean;
   solvedCount: number;
   unsolvedCount: number;
-};
+}

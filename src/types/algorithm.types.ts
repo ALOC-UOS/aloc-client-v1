@@ -1,1 +1,1 @@
-export type Course = "FULL" | "HALF";
+export type Course = 'FULL' | 'HALF';

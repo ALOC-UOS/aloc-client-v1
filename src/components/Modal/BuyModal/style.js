@@ -18,7 +18,7 @@ const ModalContainer = styled.div`
   filter: blur(12px);
   pointer-events: none;
 
-  ${props =>
+  ${(props) =>
     props.isOpen &&
     css`
       min-width: 320px;

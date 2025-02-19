@@ -20,9 +20,12 @@ const MarathonProblemList = () => {
           backgroundColor: tierStyleConfig[getProblemTier(problem.difficulty)].backgroundColor,
           color: tierStyleConfig[getProblemTier(problem.difficulty)].color,
           icon: tierStyleConfig[getProblemTier(problem.difficulty)].icon,
-        }
+        },
       }));
-      setProblemData([...resultWithTier, ...Array(DAYS_OF_WEEK - resultWithTier.length).fill(null)]);
+      setProblemData([
+        ...resultWithTier,
+        ...Array(DAYS_OF_WEEK - resultWithTier.length).fill(null),
+      ]);
     };
     fetchData();
   }, []);
@@ -30,10 +33,10 @@ const MarathonProblemList = () => {
   const getProblemData = async () => {
     return await serverAPI
       .get('/daily-problems')
-      .then(response => {
+      .then((response) => {
         return response.data.result;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         return error;
       });
@@ -42,29 +45,29 @@ const MarathonProblemList = () => {
   const ProblemItem = ({ problem }: { problem: SolvedProblem | null }) => {
     if (!problem) {
       return (
-        <S.ProblemItem isSolved={false} backgroundColor='transparent'>
+        <S.ProblemItem isSolved={false} backgroundColor="transparent">
           <img src={LockIcon} alt="lock" width="18px" height="26px" />
         </S.ProblemItem>
-      )
+      );
     }
 
     return (
-        <S.ProblemItem
-          isSolved={problem.isSolved}
-          backgroundColor={problem.tier.backgroundColor}
-          onClick={() => moveToProblemSite(problem.problemId)}
-        >
-          <img
-            src={problem.tier.icon.small}
-            alt="tier"
-            width="24px"
-            height="24px"
-            style={{zIndex: 1}}
-          />
-          <S.ProblemNumber>{problem.problemId}</S.ProblemNumber>
-        </S.ProblemItem>
-    )
-  }
+      <S.ProblemItem
+        isSolved={problem.isSolved}
+        backgroundColor={problem.tier.backgroundColor}
+        onClick={() => moveToProblemSite(problem.problemId)}
+      >
+        <img
+          src={problem.tier.icon.small}
+          alt="tier"
+          width="24px"
+          height="24px"
+          style={{ zIndex: 1 }}
+        />
+        <S.ProblemNumber>{problem.problemId}</S.ProblemNumber>
+      </S.ProblemItem>
+    );
+  };
 
   //weekly
   // const renderProblemList = () => {
@@ -88,8 +91,8 @@ const MarathonProblemList = () => {
 
   return (
     <HStack
-      alignItems='center'
-      justifyContent='center'
+      alignItems="center"
+      justifyContent="center"
       style={{
         position: 'absolute',
         top: '80%',
@@ -97,19 +100,13 @@ const MarathonProblemList = () => {
       }}
     >
       {problemData.map((problem, index) => (
-      <>
-        <S.ProblemItemWrapper
-          key={index}
-          delay={index * 0.2}
-          disabled={!problem}
-        >
-          <ProblemItem
-            problem={problem}
-          />
-        </S.ProblemItemWrapper>
-        {index !== DAYS_OF_WEEK - 1 && <S.HorizontalLine delay={index * 0.1} />}
-      </>
-    ))}
+        <>
+          <S.ProblemItemWrapper key={index} delay={index * 0.2} disabled={!problem}>
+            <ProblemItem problem={problem} />
+          </S.ProblemItemWrapper>
+          {index !== DAYS_OF_WEEK - 1 && <S.HorizontalLine delay={index * 0.1} />}
+        </>
+      ))}
     </HStack>
   );
 };

@@ -10,7 +10,7 @@ const ProfileChangeModalChildren = ({ selectedFile, setselectedFile }) => {
   useEffect(() => {
     if (selectedFile) {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         setSelectedImage(e.target.result);
       };
       reader.readAsDataURL(selectedFile);
@@ -18,7 +18,7 @@ const ProfileChangeModalChildren = ({ selectedFile, setselectedFile }) => {
       setSelectedImage(null);
     }
   }, [selectedFile]);
-  const handleFileChange = event => {
+  const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       if (!file.type.startsWith('image/')) {
