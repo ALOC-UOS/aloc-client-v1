@@ -27,8 +27,16 @@ import { Message } from '../Message';
 
 const TopBarItems = [
   {
-    name: '문제 목록',
-    route: '/problem',
+    name: '알록이란?',
+    route: '/about',
+  },
+  {
+    name: '프로젝트',
+    route: '/project',
+  },
+  {
+    name: '스터디',
+    route: '/study',
   },
   {
     name: '구성원',

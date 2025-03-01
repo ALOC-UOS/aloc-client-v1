@@ -237,7 +237,7 @@ const Member = () => {
                 </S.ProfileLink>
               </S.ProfileBackgroundImage>
               <S.MemberWrapper>
-                <S.ProfileRankWrap href={`https://solved.ac/${member.baekjoonId}`} target="_blank">
+                {/* <S.ProfileRankWrap href={`https://solved.ac/${member.baekjoonId}`} target="_blank">
                   <S.ProfileRank
                     src={
                       parseInt(member.rank / 10) === 1
@@ -262,16 +262,16 @@ const Member = () => {
                               : Number5
                     }
                   />
-                </S.ProfileRankWrap>
+                </S.ProfileRankWrap> */}
                 <S.MemberName>{member.username}</S.MemberName>
                 <S.MemberUserInfoWrapper>
                   <S.MemberUserInfoText>{member.studentId}학번</S.MemberUserInfoText>
                   {/* <MemberUserInfoBar />
                   <MemberUserInfoText>{member.joinedAt}</MemberUserInfoText> */}
                 </S.MemberUserInfoWrapper>
-                <S.MemberBar />
-                <S.MemberInfoWrapper>
-                  <S.MemberInfoRow>
+                {/* <S.MemberBar />
+                <S.MemberInfoWrapper> 
+                  /* <S.MemberInfoRow>
                     <S.MemberInfoItem>해결한 문제 수</S.MemberInfoItem>
                     <S.MemberInfoItem
                       blue={true}
@@ -289,7 +289,7 @@ const Member = () => {
                       {member.unsolvedCount}개
                     </S.MemberInfoItem>
                   </S.MemberInfoRow>
-                </S.MemberInfoWrapper>
+                </S.MemberInfoWrapper> */}
               </S.MemberWrapper>
             </S.ProfileWrapper>
           ))

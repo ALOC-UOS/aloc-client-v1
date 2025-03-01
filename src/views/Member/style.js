@@ -226,10 +226,20 @@ const ProfileNumber = styled.img`
   opacity: 0.8;
 `;
 
+// const MemberWrapper = styled.div`
+//   position: relative;
+//   background-color: var(--color-white);
+//   padding: 12px 12px 24px 12px;
+// `;
+
 const MemberWrapper = styled.div`
   position: relative;
   background-color: var(--color-white);
-  padding: 12px 12px 24px 12px;
+  padding: 12px 12px 12px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  // 추가: 내부 요소들을 중앙 정렬
+  justify-content: center;
 `;
 
 const MemberName = styled.div`

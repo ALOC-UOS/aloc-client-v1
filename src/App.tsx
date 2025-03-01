@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@/views/Main';
 import Problem from '@/views/Problem';
 import Member from '@/views/Member';
+import About from '@/views/about';
+import Project from '@/views/Project';
+import Study from '@/views/StudyTemp';
 import Shop from '@/views/Shop';
 import Login from '@/views/Login';
 import Admin from '@/views/Admin';
@@ -116,6 +119,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
           <Route path="/problem" element={<Problem />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="/study" element={<Study />} />
           <Route path="/member" element={<Member />} />
           <Route path="/shop" element={<Shop />} />
           <Route path='/admin' element={<Admin />} />
