@@ -26,10 +26,10 @@ import { serverAPI } from '../../api/axios';
 import { Message } from '../Message';
 
 const TopBarItems = [
-  {
-    name: '알록이란?',
-    route: '/about',
-  },
+  // {
+  //   name: '알록이란?',
+  //   route: '/about',
+  // },
   {
     name: '프로젝트',
     route: '/project',
@@ -42,10 +42,10 @@ const TopBarItems = [
     name: '구성원',
     route: '/member',
   },
-  {
-    name: '상점',
-    route: '/shop',
-  },
+  // {
+  //   name: '상점',
+  //   route: '/shop',
+  // },
 ];
 
 const TopBar = () => {

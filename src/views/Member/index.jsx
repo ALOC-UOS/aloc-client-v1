@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import S from './style';
 import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
@@ -73,7 +73,7 @@ const Member = () => {
   const [obtainCoin, setObtainCoin] = useState(0);
   const [coinTriggerAnimation, setCoinTriggerAnimation] = useState(false);
   const { getMembers, isLoading, members } = useMember();
-
+  
   function openProblemListModal(type, githubId) {
     const url = `${import.meta.env.VITE_API_BASE_URL}/user/${githubId}/${type === 'solved' ? 'solved' : 'unsolved'}-problems?routine=DAILY&season=3`;
     setModalTitle(type === 'solved' ? '해결한 문제 목록' : '해결하지 못한 문제 목록');
@@ -199,10 +199,10 @@ const Member = () => {
         ) : (
           members.map((member, index) => (
             <S.ProfileWrapper delay={index * 0.15}>
-              <S.MemberUserInfoCoin>
+              {/* <S.MemberUserInfoCoin>
                 <img src={CoinIcon} alt="coin" />
                 {member.coin}
-              </S.MemberUserInfoCoin>
+              </S.MemberUserInfoCoin> */}
               <S.ProfileBackgroundImage
                 solved={member.todaySolved}
                 category={member.colorCategory}
@@ -295,12 +295,12 @@ const Member = () => {
           ))
         )}
       </S.ContentContainer>
-      {isLoggedIn && (
+      {/* {isLoggedIn && (
         <S.ProblemSolvedButton onClick={() => checkTodaySolvedProblem()}>
           문제 풀었어요!
         </S.ProblemSolvedButton>
       )}
-      {showConfetti && <Confetti />}
+      {showConfetti && <Confetti />} */}
     </S.MemberContainer>
   );
 };
