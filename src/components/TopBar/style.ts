@@ -48,7 +48,7 @@ const TopBarItem = styled.div<{ selected: boolean }>`
   align-items: center;
   font-size: 16px;
   font-weight: 500;
-  color: var(--color-sub-text);
+  color: black;
   cursor: pointer;
   user-select: none;
   &:hover {
