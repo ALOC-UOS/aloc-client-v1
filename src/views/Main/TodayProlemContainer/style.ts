@@ -12,30 +12,7 @@ const MoveUp = keyframes`
   }
 `;
 
-const AppearOpacity = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
-const Container = styled.div<{ backgroundColor: string }>`
-  animation: ${AppearOpacity} 1s ease-in-out;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100dvh;
-  overflow: hidden;
-  background-image: linear-gradient(105deg, ${(props) => props.backgroundColor}, #000000);
-  perspective: 1000px;
-`;
-
-const ContentWrapper = styled.div`
+const ProblemContainer = styled.div`
   animation: ${MoveUp} 1s ease-in-out;
   z-index: 1;
   position: relative;
@@ -44,7 +21,7 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 0 32px 0;
+  padding: 24px 24px 32px 24px;
   background-color: var(--color-white-10);
   gap: 80px;
   border-radius: 24px;
@@ -142,8 +119,7 @@ const BottomText = styled.p`
 `;
 
 export default {
-  Container,
-  ContentWrapper,
+  ProblemContainer,
   Callout,
   Title,
   Description,

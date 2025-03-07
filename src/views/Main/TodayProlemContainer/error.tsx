@@ -29,7 +29,7 @@ const ProblemContentError = ({ error }: ProblemContentErrorProps) => {
       >
         <source src={PurpleCharacterVideo} type="video/mp4" />
       </video>
-      <S.ContentWrapper color={'var(--color-black)'}>
+      <S.ProblemContainer color={'var(--color-black)'}>
         <VStack alignItems="center" gap={80}>
           <VStack alignItems="center" gap={8}>
             <S.Callout color={'var(--color-white-50)'}>오늘의 에러</S.Callout>
@@ -41,7 +41,7 @@ const ProblemContentError = ({ error }: ProblemContentErrorProps) => {
           </VStack>
         </VStack>
         <S.BottomText> 관리자에게 문의해주세요 😭 </S.BottomText>
-      </S.ContentWrapper>
+      </S.ProblemContainer>
     </>
   );
 };

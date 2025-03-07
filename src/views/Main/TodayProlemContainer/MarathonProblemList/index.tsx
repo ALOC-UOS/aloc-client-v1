@@ -4,12 +4,12 @@ import { serverAPI } from '@/api/axios';
 import { tierStyleConfig } from '@/styles/tier.config';
 import LockIcon from '@/assets/icons/lock.svg';
 import S from './style';
-import { Problem, SolvedProblem } from '@/types/problem.types';
+import { Problem } from '@/types/problem.types';
 import { HStack } from '@/components/Stack';
 
 const DAYS_OF_WEEK = 7;
 const MarathonProblemList = () => {
-  const [problemData, setProblemData] = useState<SolvedProblem[]>([]);
+  const [problemData, setProblemData] = useState<Problem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +42,7 @@ const MarathonProblemList = () => {
       });
   };
 
-  const ProblemItem = ({ problem }: { problem: SolvedProblem | null }) => {
+  const ProblemItem = ({ problem }: { problem: Problem | null }) => {
     if (!problem) {
       return (
         <S.ProblemItem isSolved={false} backgroundColor="transparent">

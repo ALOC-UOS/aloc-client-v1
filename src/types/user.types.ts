@@ -1,5 +1,3 @@
-import { Course } from './algorithm.types';
-
 export interface ProfileBackground {
   category: 'common' | 'rare' | 'special';
   colorName: string;
@@ -21,7 +19,6 @@ export interface UserInfo {
   background: ProfileBackground;
   baekjoonId: string;
   githubId: string;
-  algorithmCourse: Course;
   createdAt: string;
   studentId: string;
   todaySolved: boolean;

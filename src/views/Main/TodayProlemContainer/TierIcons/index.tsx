@@ -77,7 +77,7 @@ const TierIcons = ({ tier }: TierIconsProps) => {
     <>
       <div
         style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 'calc(50% - 240px)',
           left: 'calc(50% - 420px)',
           transform: 'skew(10deg, 10deg) scale(0.5)',
@@ -95,7 +95,7 @@ const TierIcons = ({ tier }: TierIconsProps) => {
       </div>
       <div
         style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 'calc(50% + 70px)',
           left: 'calc(50% + 190px)',
           transform: 'skew(-20deg, 10deg) scale(0.5)',

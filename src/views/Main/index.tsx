@@ -1,12 +1,12 @@
 import TopBar from '@/components/TopBar';
 import { VStack } from '@/components/Stack';
-import ProblemContent from './ProblemContent';
+import CourseContainer from './CourseContainer';
 
 const Main = () => {
   return (
-    <VStack style={{ backgroundColor: 'var(--color-black)' }}>
+    <VStack style={{ minHeight: '100dvh', backgroundColor: 'var(--color-black)' }}>
       <TopBar />
-      <ProblemContent />
+      <CourseContainer />
     </VStack>
   );
 };
