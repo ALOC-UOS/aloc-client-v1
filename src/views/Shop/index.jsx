@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import TopBar from '../../components/TopBar';
 import CoinIcon from '../../assets/icons/coin.svg';
 import DefaultProfile from '../../assets/images/default-profile.svg';
 import ChangeColor from '../../assets/items/change-color.svg';

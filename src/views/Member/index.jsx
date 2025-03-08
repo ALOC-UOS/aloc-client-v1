@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 import S from './style';
-import TopBar from '../../components/TopBar';
 import ListModal from '../../components/ListModal';
 import { BlackOverlay } from '../../components/BlackOverlay';
 import DecorationItemComponent from '../../components/Decorations/Item';
@@ -151,7 +150,6 @@ const Member = () => {
 
   return (
     <S.MemberContainer>
-      <TopBar />
       {loadingMessage.render({
         icon: LoadingFillBlueIcon,
         isLoadingSolvedProblem: true,
