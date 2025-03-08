@@ -9,6 +9,7 @@ import { serverAPI, setupInterceptors } from '@/api/axios';
 import useLoginState from '@/hooks/useLoginState';
 import useUserState from '@/hooks/useUserState';
 import GlobalStyles from '@/styles/global';
+import TopBar from '@/components/service/TopBar';
 
 function App() {
   const { initLoginStatus } = useLoginState();
@@ -34,6 +35,7 @@ function App() {
     <>
       <GlobalStyles />
       <BrowserRouter>
+        <TopBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />

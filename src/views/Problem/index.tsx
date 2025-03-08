@@ -1,5 +1,4 @@
 import S from './Problem.styles';
-import TopBar from '../../components/TopBar';
 import { AlgorithmListComponent as AlgorithmList } from './AlgorithmList';
 import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
@@ -20,7 +19,6 @@ const Problem = () => {
   });
   return (
     <S.ProblemContainer>
-      <TopBar />
       <VStack gap={16} style={{ height: '80vh', minWidth: '262px' }}>
         {seasonDropdown.render()}
         <S.Wrapping style={{ flexDirection: 'row', gap: '24px', flexShrink: 0 }}>
