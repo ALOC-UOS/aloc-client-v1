@@ -26,7 +26,7 @@ import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
 import Confetti from '../../components/common/Confetti';
 import useMember from '../../hooks/useMember';
-import UserProfileImage from '@/components/UserProfileImage';
+import UserProfileImage from '@/components/service/UserProfileImage';
 
 const MessageText = ({ solvedStatus, rank }) => {
   switch (solvedStatus) {
