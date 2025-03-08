@@ -5,7 +5,7 @@ import { tierStyleConfig } from '@/styles/tier.config';
 import LockIcon from '@/assets/icons/lock.svg';
 import S from './style';
 import { Problem } from '@/types/problem.types';
-import { HStack } from '@/components/Stack';
+import { HStack } from '@/components/common/Stack';
 
 const DAYS_OF_WEEK = 7;
 const MarathonProblemList = () => {

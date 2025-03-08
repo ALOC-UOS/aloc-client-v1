@@ -1,9 +1,6 @@
-import axios from 'axios';
 import { useState } from 'react';
 import S from './style';
-import ListModal from '../../components/ListModal';
-import { BlackOverlay } from '../../components/BlackOverlay';
-import DecorationItemComponent from '../../components/Decorations/Item';
+import DecorationItemComponent from '../../components/service/Decorations/Item';
 import TierBronzeEmblem from '../../assets/icons/tier/bronze.emblem.png';
 import TierSilverEmblem from '../../assets/icons/tier/silver.emblem.png';
 import TierGoldEmblem from '../../assets/icons/tier/gold.emblem.png';
@@ -14,183 +11,18 @@ import Number3 from '../../assets/icons/roman-number/3.svg';
 import Number4 from '../../assets/icons/roman-number/4.svg';
 import Number5 from '../../assets/icons/roman-number/5.svg';
 import CoinIcon from '../../assets/icons/coin.svg';
-import LoadingWhiteIcon from '../../assets/icons/loading.white.svg';
 import LoadingBlueIcon from '../../assets/icons/loading.blue.svg';
-import CheckIcon from '../../assets/icons/check.white.svg';
 import DefaultProfile from '../../assets/images/default-profile.svg';
-import { serverAPI } from '../../api/axios';
-import useLoginState from '../../hooks/useLoginState';
-import LoadingFillBlueIcon from '../../assets/icons/loading.fill.blue.svg';
-import { HStack } from '../../components/Stack';
-import { Message } from '../../components/Message';
-import CoinMessage from '../../components/Message/CoinMessage';
-import Confetti from '../../components/Confetti';
+import Confetti from '../../components/common/Confetti';
 import useMember from '../../hooks/useMember';
-import UserProfileImage from '@/components/UserProfileImage';
-
-const MessageText = ({ solvedStatus, rank }) => {
-  switch (solvedStatus) {
-    case 'ALREADY_SOLVED':
-      return (
-        <HStack gap={4}>
-          <span>✅</span>
-          <span>이미 문제를 풀었어요!</span>
-        </HStack>
-      );
-    case 'SOLVED':
-      return (
-        <HStack>
-          <span style={{ color: 'var(--color-blue)' }}>{rank}등</span>으로 문제를 풀었어요!
-        </HStack>
-      );
-    default:
-      return (
-        <HStack gap={4}>
-          <span>🤔</span>
-          <div>아직 문제를 풀지 않았어요!</div>
-        </HStack>
-      );
-  }
-};
+import UserProfileImage from '@/components/service/UserProfileImage';
 
 const Member = () => {
-  const [isLoadingSolvedProblem, setIsLoadingSolvedProblem] = useState(false);
-  const [isShowLoading, setIsShowLoading] = useState(false);
-  const [SelectedGithubId, setSelectedGithubId] = useState('');
-  const [SelectedType, setSelectedType] = useState('');
-  const [ProblemListData, setProblemListData] = useState([]);
-  const [isOpenedModal, setIsOpenedModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
-  const { isLoggedIn } = useLoginState();
   const [showConfetti, setShowConfetti] = useState(false);
-  const loadingMessage = Message();
-  const rankMessage = Message();
-  const coinMessage = Message();
-  const [solvedStatus, setSolvedStatus] = useState('');
-  const [rank, setRank] = useState(0);
-  const [userCoin, setUserCoin] = useState(0);
-  const [obtainCoin, setObtainCoin] = useState(0);
-  const [coinTriggerAnimation, setCoinTriggerAnimation] = useState(false);
   const { getMembers, isLoading, members } = useMember();
-
-  function openProblemListModal(type, githubId) {
-    const url = `${import.meta.env.VITE_API_BASE_URL}/user/${githubId}/${type === 'solved' ? 'solved' : 'unsolved'}-problems?routine=DAILY&season=3`;
-    setModalTitle(type === 'solved' ? '해결한 문제 목록' : '해결하지 못한 문제 목록');
-
-    axios
-      .get(url)
-      .then((response) => {
-        setProblemListData(response.data.result);
-        setIsOpenedModal(true);
-        setSelectedGithubId(githubId);
-        setSelectedType(type);
-      })
-      .catch((error) => {
-        console.error(error, 'API 요청 중 오류 발생:');
-      });
-  }
-
-  function closeModal() {
-    setIsOpenedModal(false);
-    setSelectedGithubId('');
-    setSelectedType('');
-  }
-
-  function checkSolvedProblem() {
-    setIsLoadingSolvedProblem(true);
-    setIsShowLoading(true);
-    serverAPI
-      .post('/problems/solved')
-      .then((response) => {
-        getMembers();
-        openProblemListModal(SelectedType, SelectedGithubId);
-        setTimeout(() => {
-          setIsShowLoading(false);
-        }, 500);
-        setTimeout(() => {
-          setIsLoadingSolvedProblem(false);
-        }, 1500);
-      })
-      .catch((error) => {
-        console.error(error, 'API 요청 중 오류 발생:');
-      });
-  }
-
-  const checkTodaySolvedProblem = () => {
-    loadingMessage.show();
-    serverAPI
-      .post('/today-problem/solved', {}, { timeout: 300000 })
-      .then((res) => {
-        setSolvedStatus(res.data.result.solvedStatus);
-        if (res.data.result.solvedStatus === 'SOLVED') {
-          setRank(res.data.result.place);
-          setUserCoin(res.data.result.userCoin);
-          setObtainCoin(res.data.result.obtainCoin);
-          getMembers();
-          setShowConfetti(true);
-          setTimeout(() => setShowConfetti(false), 2000);
-        }
-        loadingMessage.hide();
-        rankMessage.toast();
-        if (res.data.result.solvedStatus === 'SOLVED') {
-          setTimeout(() => {
-            setCoinTriggerAnimation(true);
-            coinMessage.show();
-          }, 2000);
-          setTimeout(() => {
-            setCoinTriggerAnimation(false);
-            coinMessage.hide();
-          }, 6000);
-        }
-      })
-      .catch((error) => {
-        console.error(error, 'API 요청 중 오류 발생:');
-      });
-  };
 
   return (
     <S.MemberContainer>
-      {loadingMessage.render({
-        icon: LoadingFillBlueIcon,
-        isLoadingSolvedProblem: true,
-        children: (
-          <S.MessageComponentText>
-            <span style={{ color: 'var(--color-blue)' }}>풀이 여부</span>를 확인하고 있어요
-          </S.MessageComponentText>
-        ),
-      })}
-      {rankMessage.render({
-        children: (
-          <S.MessageComponentText>
-            <MessageText solvedStatus={solvedStatus} rank={rank} />
-          </S.MessageComponentText>
-        ),
-      })}
-      {coinMessage.render({
-        icon: CoinIcon,
-        isCoin: true,
-        children: (
-          <S.MessageComponentText>
-            <CoinMessage
-              userCoin={userCoin}
-              obtainCoin={obtainCoin}
-              triggerAnimation={coinTriggerAnimation}
-            />
-          </S.MessageComponentText>
-        ),
-      })}
-      <S.IconWrapper active={isLoadingSolvedProblem}>
-        <S.Icon active={isShowLoading} src={LoadingWhiteIcon} />
-        <S.Icon active={!isShowLoading && isLoadingSolvedProblem} src={CheckIcon} check={true} />
-      </S.IconWrapper>
-      <ListModal
-        isOpen={isOpenedModal}
-        modalTitle={modalTitle}
-        problemListData={ProblemListData}
-        closeModal={closeModal}
-        checkSolvedProblem={checkSolvedProblem}
-      />
-      <BlackOverlay isOpen={isOpenedModal} />
       <S.ContentContainer>
         {isLoading ? (
           <S.BlueLoadingIcon src={LoadingBlueIcon} />
@@ -271,21 +103,11 @@ const Member = () => {
                 <S.MemberInfoWrapper>
                   <S.MemberInfoRow>
                     <S.MemberInfoItem>해결한 문제 수</S.MemberInfoItem>
-                    <S.MemberInfoItem
-                      blue={true}
-                      onClick={() => openProblemListModal('solved', member.githubId)}
-                    >
-                      {member.solvedCount}개
-                    </S.MemberInfoItem>
+                    <S.MemberInfoItem blue={true}>{member.solvedCount}개</S.MemberInfoItem>
                   </S.MemberInfoRow>
                   <S.MemberInfoRow>
                     <S.MemberInfoItem>해결하지 못한 문제 수</S.MemberInfoItem>
-                    <S.MemberInfoItem
-                      blue={true}
-                      onClick={() => openProblemListModal('unsolved', member.githubId)}
-                    >
-                      {member.unsolvedCount}개
-                    </S.MemberInfoItem>
+                    <S.MemberInfoItem blue={true}>{member.unsolvedCount}개</S.MemberInfoItem>
                   </S.MemberInfoRow>
                 </S.MemberInfoWrapper>
               </S.MemberWrapper>
@@ -293,11 +115,6 @@ const Member = () => {
           ))
         )}
       </S.ContentContainer>
-      {isLoggedIn && (
-        <S.ProblemSolvedButton onClick={() => checkTodaySolvedProblem()}>
-          문제 풀었어요!
-        </S.ProblemSolvedButton>
-      )}
       {showConfetti && <Confetti />}
     </S.MemberContainer>
   );

@@ -2,8 +2,8 @@ import S from './style';
 import { useEffect, useState } from 'react';
 import useSolvedUser from '@/hooks/useSolvedUser';
 import { formatSolveTime } from '@/utils/index';
-import UserProfileImage from '@/components/UserProfileImage';
-import { HStack } from '@/components/Stack';
+import UserProfileImage from '@/components/service/UserProfileImage';
+import { HStack } from '@/components/common/Stack';
 
 const ONE_SECOND = 1000;
 

@@ -1,4 +1,4 @@
-import S from './style';
+import S from './UserProfileImage.style';
 import { UserInfo } from '@/types/user.types';
 import DefaultProfile from '@/assets/images/default-profile.svg';
 

@@ -1,7 +1,7 @@
 import ProblemContentError from '../TodayProlemContainer/error';
 import TierIcons from '../TodayProlemContainer/TierIcons';
 import MarathonProblemList from '../TodayProlemContainer/MarathonProblemList';
-import { VStack } from '@/components/Stack';
+import { VStack } from '@/components/common/Stack';
 import SilderContainer from './SilderContainer';
 import useUserCourse from './SilderContainer/useUserCourse';
 import Background from './Background';
