@@ -24,7 +24,7 @@ import LoadingFillBlueIcon from '../../assets/icons/loading.fill.blue.svg';
 import { HStack } from '../../components/common/Stack';
 import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
-import Confetti from '../../components/Confetti';
+import Confetti from '../../components/common/Confetti';
 import useMember from '../../hooks/useMember';
 import UserProfileImage from '@/components/UserProfileImage';
 
