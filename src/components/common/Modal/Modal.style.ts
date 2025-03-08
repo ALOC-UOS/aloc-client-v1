@@ -18,7 +18,7 @@ const ModalContainer = styled(motion.div)`
   position: relative;
   transition: none;
   background-color: var(--color-white);
-  padding: 24px 12px 16px 12px;
+  padding: 24px 16px 16px 16px;
   border-radius: 16px;
   min-width: 360px;
   max-width: 90%;

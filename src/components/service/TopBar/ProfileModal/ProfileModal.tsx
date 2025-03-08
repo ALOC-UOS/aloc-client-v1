@@ -26,12 +26,12 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <VStack alignItems={'center'} gap={24}>
+      <VStack alignItems="center" gap={24}>
         <VStack gap={4}>
           <Modal.Title>프로필 정보를 입력해주세요</Modal.Title>
           <Modal.Subtitle>알록 서비스를 이용하기 위해 필요해요</Modal.Subtitle>
         </VStack>
-        <VStack alignItems={'center'} gap={8}>
+        <VStack alignItems="center" gap={8}>
           <UserProfileImage user={null} width={'160px'} height={'160px'} />
           <p
             style={{
