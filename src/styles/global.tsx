@@ -19,20 +19,21 @@ const GlobalStyles = () => (
         user-select: none;
         -webkit-user-drag: none;
         -webkit-touch-callout: none;
-      }
 
-      body {
-        transition: none;
-        background-color: #e5e6ec;
         font-family:
           'Noto Sans KR',
           -apple-system,
           sans-serif,
           BlinkMacSystemFont,
           'Segoe UI',
-          'Roboto';
+          'Roboto' !important;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        transition: none;
+        background-color: #e5e6ec;
       }
 
       img {
@@ -102,15 +103,7 @@ const GlobalStyles = () => (
 
       button {
         cursor: pointer;
-        font-family:
-          'Noto Sans KR',
-          -apple-system,
-          sans-serif,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          'Roboto';
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+
         &:hover {
           filter: brightness(0.9);
           transform: scale(1.05);

@@ -12,10 +12,12 @@ import IconButton from './IconButton';
 import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
 import GoogleLoginModal from './GoogleLoginModal';
+import ProfileModal from './ProfileModal';
 
 const TopBar = () => {
   const [isScroll, setIsScroll] = useState(false);
-  const { isOpen, show, hide } = useModal();
+  const { isOpen: isLoginModalOpen, show: showLoginModal, hide: hideLoginModal } = useModal();
+  const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -24,6 +26,9 @@ const TopBar = () => {
 
   const handleGoogleLogin = () => {
     console.log('Google 로그인 시도');
+    // 로그인 성공 후 모달 닫기
+    hideLoginModal();
+    showProfileModal();
   };
 
   useEffect(() => {
@@ -48,12 +53,17 @@ const TopBar = () => {
         <HStack gap={16}>
           <IconButton icon={CoursesBlueIcon} activeIcon={CoursesWhiteIcon} route="/courses" />
           <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
-          <S.LoginButton onClick={show}>로그인</S.LoginButton>
+          <S.LoginButton onClick={showLoginModal}>로그인</S.LoginButton>
           <ProfileButton />
         </HStack>
       </S.TopBarContainer>
 
-      <GoogleLoginModal isOpen={isOpen} onClose={hide} onGoogleLogin={handleGoogleLogin} />
+      <GoogleLoginModal
+        isOpen={isLoginModalOpen}
+        onClose={hideLoginModal}
+        onGoogleLogin={handleGoogleLogin}
+      />
+      <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />
     </>
   );
 };
