@@ -10,10 +10,21 @@ import UsersWhiteIcon from '@/assets/icons/users.white.svg';
 import UsersBlueIcon from '@/assets/icons/users.blue.svg';
 import IconButton from './IconButton';
 import ProfileButton from './ProfileButton';
+import useModal from '@/hooks/useModal';
+import GoogleLoginModal from './GoogleLoginModal';
 
 const TopBar = () => {
   const [isScroll, setIsScroll] = useState(false);
+  const { isOpen, show, hide } = useModal();
   const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+  const handleGoogleLogin = () => {
+    console.log('Google 로그인 시도');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,29 +38,23 @@ const TopBar = () => {
     };
   }, []);
 
-  const handleLogoClick = () => {
-    navigate('/');
-  };
-
   return (
-    <S.TopBarContainer
-      isScroll={isScroll}
-      style={{
-        zIndex: 100,
-        padding: '16px 40px',
-      }}
-    >
-      <HStack gap={8} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-        <img src={LogoWhite} width={40} height={40} />
-        <img src={AlocText} width={74} height={41} />
-      </HStack>
-      <HStack gap={16}>
-        <IconButton icon={CoursesBlueIcon} activeIcon={CoursesWhiteIcon} route="/courses" />
-        <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
-        <S.LoginButton>로그인</S.LoginButton>
-        <ProfileButton />
-      </HStack>
-    </S.TopBarContainer>
+    <>
+      <S.TopBarContainer isScroll={isScroll}>
+        <HStack gap={8} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+          <img src={LogoWhite} width={40} height={40} />
+          <img src={AlocText} width={74} height={41} />
+        </HStack>
+        <HStack gap={16}>
+          <IconButton icon={CoursesBlueIcon} activeIcon={CoursesWhiteIcon} route="/courses" />
+          <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
+          <S.LoginButton onClick={show}>로그인</S.LoginButton>
+          <ProfileButton />
+        </HStack>
+      </S.TopBarContainer>
+
+      <GoogleLoginModal isOpen={isOpen} onClose={hide} onGoogleLogin={handleGoogleLogin} />
+    </>
   );
 };
 
