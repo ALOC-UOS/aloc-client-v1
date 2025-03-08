@@ -1,5 +1,5 @@
 import S from './style';
-import { VStack } from '@/components/Stack';
+import { VStack } from '@/components/common/Stack';
 import PurpleCharacterVideo1 from '@/assets/videos/purple.character.1.mp4';
 import PurpleCharacterVideo2 from '@/assets/videos/purple.character.2.mp4';
 

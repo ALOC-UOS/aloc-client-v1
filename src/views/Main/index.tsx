@@ -1,4 +1,4 @@
-import { VStack } from '@/components/Stack';
+import { VStack } from '@/components/common/Stack';
 import CourseContainer from './CourseContainer';
 
 const Main = () => {

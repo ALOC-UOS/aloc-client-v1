@@ -1,7 +1,7 @@
 import { Problem } from '@/types/problem.types';
 import S from './style';
 import SolvedUserInfo from './SolvedUserInfo';
-import { VStack } from '@/components/Stack';
+import { VStack } from '@/components/common/Stack';
 
 interface TodayProlemContainerProps {
   courseName: string;

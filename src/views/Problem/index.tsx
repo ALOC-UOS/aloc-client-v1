@@ -2,7 +2,7 @@ import S from './Problem.styles';
 import { AlgorithmListComponent as AlgorithmList } from './AlgorithmList';
 import { ProblemListComponent as ProblemList } from './ProblemList';
 import { SolvedUserListComponent as SolvedUserList } from './SolvedUserList';
-import { VStack } from '../../components/Stack';
+import { VStack } from '../../components/common/Stack';
 import { useAlgorithm } from '../../hooks/useAlgorithm';
 import useDropdown from '../../hooks/useDropdown';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import S from './ProfileButton.style';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HStack } from '@/components/Stack';
+import { HStack } from '@/components/common/Stack';
 import UserProfileImage from '@/components/UserProfileImage';
 import Label from '@/components/common/Label';
 

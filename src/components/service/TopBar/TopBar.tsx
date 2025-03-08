@@ -1,5 +1,5 @@
 import S from './TopBar.style';
-import { HStack } from '@/components/Stack';
+import { HStack } from '@/components/common/Stack';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoWhite from '@/assets/images/logo.season2.white.svg';

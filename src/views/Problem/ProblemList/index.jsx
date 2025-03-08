@@ -1,5 +1,5 @@
 import S from './ProblemList.styles';
-import { HStack, VStack } from '../../../components/Stack';
+import { HStack, VStack } from '../../../components/common/Stack';
 import { useAlgorithm } from '@/hooks/useAlgorithm';
 import MemberIcon from '../../../assets/icons/member.svg';
 import ActiveMemberIcon from '../../../assets/icons/active-member.svg';

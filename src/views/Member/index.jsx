@@ -21,7 +21,7 @@ import DefaultProfile from '../../assets/images/default-profile.svg';
 import { serverAPI } from '../../api/axios';
 import useLoginState from '../../hooks/useLoginState';
 import LoadingFillBlueIcon from '../../assets/icons/loading.fill.blue.svg';
-import { HStack } from '../../components/Stack';
+import { HStack } from '../../components/common/Stack';
 import { Message } from '../../components/Message';
 import CoinMessage from '../../components/Message/CoinMessage';
 import Confetti from '../../components/Confetti';
