@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 
-const TierCircle = styled.div`
+const TierCircle = styled.div<{ width: number; height: number }>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 36px;
-  height: 36px;
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
   border-radius: 50%;
   background-image: linear-gradient(to bottom, #686b72, #35373c);
   padding-top: 2px;

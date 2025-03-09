@@ -21,6 +21,7 @@ export interface CourseInfo extends Course {
     lastSolvedAt: string;
   };
   isSolved: boolean;
+  duration?: number;
 }
 
 export interface UserCourse extends Course {

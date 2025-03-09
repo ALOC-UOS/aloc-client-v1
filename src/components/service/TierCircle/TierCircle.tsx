@@ -8,14 +8,15 @@ import Number4 from '@/assets/icons/roman-number/4.svg';
 import Number5 from '@/assets/icons/roman-number/5.svg';
 import { tierStyleConfig } from '@/styles/tier.config';
 
-interface TierCircleProps {
+type TierCircleSize = 'small' | 'medium' | 'large';
+
+interface TierCircleProps extends React.HTMLAttributes<HTMLDivElement> {
   tier: Tier;
   number: number;
-  width?: string;
-  height?: string;
+  size?: TierCircleSize;
 }
 
-const TierCircle = ({ tier, number }: TierCircleProps) => {
+const TierCircle = ({ tier, number, size = 'medium', ...props }: TierCircleProps) => {
   const renderNumber = () => {
     if (number === 1) return Number1;
     if (number === 2) return Number2;
@@ -23,15 +24,41 @@ const TierCircle = ({ tier, number }: TierCircleProps) => {
     if (number === 4) return Number4;
     return Number5;
   };
+
+  const sizeConfig = {
+    small: {
+      circleSize: 24,
+      tierSize: 16,
+      numberSize: 12,
+    },
+    medium: {
+      circleSize: 36,
+      tierSize: 24,
+      numberSize: 16,
+    },
+    large: {
+      circleSize: 48,
+      tierSize: 32,
+      numberSize: 20,
+    },
+  };
+
+  const { circleSize, tierSize, numberSize } = sizeConfig[size];
+
   return (
-    <S.TierCircle>
-      <img src={tierStyleConfig[tier].icon.small} alt={tier} />
+    <S.TierCircle width={circleSize} height={circleSize} {...props}>
+      <img src={tierStyleConfig[tier].icon.small} alt={tier} width={tierSize} height={tierSize} />
       <img
         src={renderNumber()}
         alt={tier}
-        width={16}
-        height={16}
-        style={{ position: 'absolute', left: '50%', bottom: '0px', transform: 'translateX(-50%)' }}
+        width={numberSize}
+        height={numberSize}
+        style={{
+          position: 'absolute',
+          left: '50%',
+          bottom: '0px',
+          transform: 'translateX(-50%)',
+        }}
       />
     </S.TierCircle>
   );

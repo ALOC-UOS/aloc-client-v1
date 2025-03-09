@@ -4,17 +4,16 @@ import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import S from './CourseSelectModal.style';
 import TierCircle from '@/components/service/TierCircle';
+import { CourseInfo } from '@/types/course.types';
+import { getTier, getTierNumber } from '@/utils/Tier';
 
 interface CourseSelectModalProps {
   isOpen: boolean;
+  course: CourseInfo;
   onClose: () => void;
 }
 
-const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, onClose }) => {
-  const PROBLEM_COUNT = 100;
-
-  if (!isOpen) return null;
-
+const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, course, onClose }) => {
   const handleClose = () => {
     onClose();
   };
@@ -30,20 +29,36 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, onClose }
           <p style={{ color: 'var(--color-sub-text)', fontSize: '16px', fontWeight: '500' }}>
             선택한 코스
           </p>
-          <S.CourseName>작심삼일</S.CourseName>
+          <S.CourseName>{course.name}</S.CourseName>
         </VStack>
         <S.CourseInfoContainer>
+          {course.type === 'deadline' && course.duration && (
+            <S.CourseInfoItem>
+              <S.CourseInfoName>마감일</S.CourseInfoName>
+              <p
+                style={{ color: 'var(--color-content-text)', fontSize: '28px', fontWeight: 'bold' }}
+              >
+                {course.duration}일
+              </p>
+            </S.CourseInfoItem>
+          )}
           <S.CourseInfoItem>
             <S.CourseInfoName>총 문제 수</S.CourseInfoName>
             <p style={{ color: 'var(--color-content-text)', fontSize: '28px', fontWeight: 'bold' }}>
-              {PROBLEM_COUNT}개
+              {course.totalProblemCount}개
             </p>
           </S.CourseInfoItem>
           <S.CourseInfoItem>
             <S.CourseInfoName>난이도</S.CourseInfoName>
             <HStack gap={4}>
-              <TierCircle tier="bronze" number={1} />
-              <TierCircle tier="silver" number={3} />
+              <TierCircle
+                tier={getTier(course.difficulty.start)}
+                number={getTierNumber(course.difficulty.start)}
+              />
+              <TierCircle
+                tier={getTier(course.difficulty.end)}
+                number={getTierNumber(course.difficulty.end)}
+              />
             </HStack>
           </S.CourseInfoItem>
         </S.CourseInfoContainer>

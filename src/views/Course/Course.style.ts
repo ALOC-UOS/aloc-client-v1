@@ -10,7 +10,7 @@ const ContentContainer = styled.div`
   background-color: var(--color-foreground);
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 `;
 
 export default { ContentContainer };

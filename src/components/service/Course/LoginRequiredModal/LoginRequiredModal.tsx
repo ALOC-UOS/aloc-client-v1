@@ -9,8 +9,6 @@ interface LoginRequiredModalProps {
 }
 
 const LoginRequiredModal: React.FC<LoginRequiredModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
   const onGoogleLogin = () => {
     // 구글 로그인 로직 추가
   };
