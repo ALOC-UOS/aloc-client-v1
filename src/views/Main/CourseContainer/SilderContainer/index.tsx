@@ -1,13 +1,15 @@
 import S from './style';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import useUserCourse from './useUserCourse';
 import { moveToProblemSite } from '@/utils/index';
 import TodayProlemContainer from '../../TodayProlemContainer';
+import { useLocation } from 'react-router-dom';
 
 const SilderContainer = () => {
   const { courseIndex, setCourseIndex, todayProblem, courseList } = useUserCourse();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(0);
   const sliderItemRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   const handleCourseClick = (index: number) => {
     if (courseIndex !== index) {
@@ -38,13 +40,18 @@ const SilderContainer = () => {
     return 0;
   };
 
+  useLayoutEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, [location.pathname]);
+
   useEffect(() => {
-    const handleResize = () => {
+    const updateWindowWidth = () => {
       setWindowWidth(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    updateWindowWidth();
+    window.addEventListener('resize', updateWindowWidth);
+    return () => window.removeEventListener('resize', updateWindowWidth);
   }, []);
 
   return (
