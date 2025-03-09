@@ -11,7 +11,7 @@ interface CourseSelectModalProps {
 }
 
 const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, onClose }) => {
-  const COIN_COUNT = 240;
+  const PROBLEM_COUNT = 100;
 
   if (!isOpen) return null;
 
@@ -19,9 +19,8 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, onClose }
     onClose();
   };
 
-  const handleBuy = () => {
+  const handleStart = () => {
     onClose();
-    // 구매 로직 추가
   };
 
   return (
@@ -37,7 +36,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, onClose }
           <S.CourseInfoItem>
             <S.CourseInfoName>총 문제 수</S.CourseInfoName>
             <p style={{ color: 'var(--color-content-text)', fontSize: '28px', fontWeight: 'bold' }}>
-              100개
+              {PROBLEM_COUNT}개
             </p>
           </S.CourseInfoItem>
           <S.CourseInfoItem>
@@ -52,7 +51,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, onClose }
           <Button variant="secondary" onClick={handleClose} fullWidth>
             닫기
           </Button>
-          <Button variant="primary" onClick={handleBuy} fullWidth>
+          <Button variant="primary" onClick={handleStart} fullWidth>
             시작하기
           </Button>
         </HStack>
