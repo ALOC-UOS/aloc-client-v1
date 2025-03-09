@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@/views/Main';
-import Member from '@/views/Member';
 import Shop from '@/views/Shop';
 import UserPage from '@/views/User';
 import { serverAPI, setupInterceptors } from '@/api/axios';
@@ -38,7 +37,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/users" element={<UserPage />} />
-          <Route path="/member" element={<Member />} />
           <Route path="/shop" element={<Shop />} />
         </Routes>
       </BrowserRouter>
