@@ -19,20 +19,21 @@ const GlobalStyles = () => (
         user-select: none;
         -webkit-user-drag: none;
         -webkit-touch-callout: none;
-      }
 
-      body {
-        transition: none;
-        background-color: #e5e6ec;
         font-family:
           'Noto Sans KR',
           -apple-system,
           sans-serif,
           BlinkMacSystemFont,
           'Segoe UI',
-          'Roboto';
+          'Roboto' !important;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        transition: none;
+        background-color: #e5e6ec;
       }
 
       img {
@@ -52,9 +53,11 @@ const GlobalStyles = () => (
         --color-dark-blue: #454d5f;
         --color-dark-blue-25: #454d5f40;
         --color-white: #ffffff;
+        --color-white-50: #ffffff80;
         --color-white-25: #ffffff40;
         --color-white-10: #ffffff1a;
         --color-black: #000000;
+        --color-black-50: #00000080;
         --color-black-25: #00000040;
         --color-black-10: #0000001a;
 
@@ -101,15 +104,7 @@ const GlobalStyles = () => (
 
       button {
         cursor: pointer;
-        font-family:
-          'Noto Sans KR',
-          -apple-system,
-          sans-serif,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          'Roboto';
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+
         &:hover {
           filter: brightness(0.9);
           transform: scale(1.05);
