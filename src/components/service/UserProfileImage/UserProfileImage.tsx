@@ -7,9 +7,16 @@ interface UserProfileImageProps {
   width?: string;
   height?: string;
   backgroundColor?: string;
+  disabled?: boolean;
 }
 
-const UserProfileImage = ({ user, width, height, backgroundColor }: UserProfileImageProps) => {
+const UserProfileImage = ({
+  user,
+  width,
+  height,
+  backgroundColor,
+  disabled = false,
+}: UserProfileImageProps) => {
   if (!user || !user.profileImageFileName) {
     return (
       <S.ProfileImage
@@ -17,6 +24,7 @@ const UserProfileImage = ({ user, width, height, backgroundColor }: UserProfileI
         width={width}
         height={height}
         backgroundColor={backgroundColor}
+        disabled={disabled}
       />
     );
   }
@@ -32,6 +40,7 @@ const UserProfileImage = ({ user, width, height, backgroundColor }: UserProfileI
       height={height}
       backgroundColor={backgroundColor}
       onClick={() => moveToGithubSite(user.githubId)}
+      disabled={disabled}
     />
   );
 };

@@ -21,7 +21,7 @@ const ProfileButton = () => {
         <UserProfileImage user={null} width="28px" height="28px" />
         <S.UserNickname isMainPage={isMainPage}>유저 닉네임</S.UserNickname>
       </HStack>
-      <Label />
+      <Label text="0일 째" />
     </S.ButtonContainer>
   );
 };
