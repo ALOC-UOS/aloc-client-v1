@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoWhite from '@/assets/images/logo.season2.white.svg';
 import AlocText from '@/assets/images/aloc-text.svg';
-import CoursesWhiteIcon from '@/assets/icons/courses.white.svg';
-import CoursesBlueIcon from '@/assets/icons/courses.blue.svg';
+import CourseWhiteIcon from '@/assets/icons/course.white.svg';
+import CourseBlueIcon from '@/assets/icons/course.blue.svg';
 import UsersWhiteIcon from '@/assets/icons/users.white.svg';
 import UsersBlueIcon from '@/assets/icons/users.blue.svg';
 import IconButton from './IconButton';
@@ -51,7 +51,7 @@ const TopBar = () => {
           <img src={AlocText} width={74} height={41} />
         </HStack>
         <HStack gap={16}>
-          <IconButton icon={CoursesBlueIcon} activeIcon={CoursesWhiteIcon} route="/courses" />
+          <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />
           <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
           <S.LoginButton onClick={showLoginModal}>로그인</S.LoginButton>
           <ProfileButton />
