@@ -28,7 +28,7 @@ const TopSection = styled.div<{ isSolved: boolean }>`
   align-items: center;
   justify-content: center;
   min-width: 240px;
-  padding: 12px;
+  padding: 16px;
   background-color: ${(props) =>
     props.isSolved ? 'var(--color-blue)' : 'var(--color-background)'};
 `;
@@ -91,6 +91,33 @@ const SolvedAnimation = styled.div<{ isSolved: boolean; delay: number }>`
     `}
 `;
 
+const CoinWrapper = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: var(--color-yellow);
+  font-size: 12px;
+  font-weight: 500;
+  gap: 4px;
+  opacity: 0.2;
+  user-select: none;
+
+  padding: 4px 8px;
+  background-color: var(--color-black-25);
+  border-radius: 24px;
+  &:hover {
+    opacity: 1;
+    & > img {
+      transform: rotateY(180deg);
+    }
+  }
+`;
+
 export default {
   UserProfileCardContainer,
   TopSection,
@@ -98,4 +125,5 @@ export default {
   Nickname,
   AchievementItem,
   SolvedAnimation,
+  CoinWrapper,
 };

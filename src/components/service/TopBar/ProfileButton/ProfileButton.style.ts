@@ -8,7 +8,7 @@ const ButtonContainer = styled.button<{ isMainPage: boolean }>`
 
   border: 1px solid var(--color-black-10);
   border-radius: 8px;
-  padding: 4px 8px 4px 4px;
+  padding: 4px;
   background-color: ${({ isMainPage }) =>
     isMainPage ? 'var(--color-white-10)' : 'var(--color-white)'};
 `;

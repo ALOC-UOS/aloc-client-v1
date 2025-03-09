@@ -4,6 +4,7 @@ import S from './UserProfileCard.style';
 import TierCircle from '@/components/service/TierCircle';
 import Label from '@/components/common/Label';
 import Line from '@/components/common/Line';
+import CoinIcon from '@/assets/icons/coin.svg';
 
 const UserProfileCard = () => {
   const isSolved = Math.random() < 0.5;
@@ -11,6 +12,10 @@ const UserProfileCard = () => {
   return (
     <S.UserProfileCardContainer>
       <S.TopSection isSolved={isSolved}>
+        <S.CoinWrapper>
+          <img src={CoinIcon} alt="coin" width={16} height={16} />
+          240
+        </S.CoinWrapper>
         <S.SolvedAnimation isSolved={isSolved} delay={0} />
         <UserProfileImage user={null} width="120px" height="120px" disabled={true} />
       </S.TopSection>

@@ -26,15 +26,15 @@ const LabelContainer = styled.div<{ isActive: boolean }>`
 
 const Circle = styled.div<{ isActive: boolean }>`
   animation: ${({ isActive }) => (isActive ? blink : 'none')} 1.5s infinite;
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background-color: ${({ isActive }) => (isActive ? 'var(--color-blue)' : 'var(--color-sub-text)')};
 `;
 
 const LabelText = styled.p<{ isActive: boolean }>`
   color: ${({ isActive }) => (isActive ? 'var(--color-blue)' : 'var(--color-sub-text)')};
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
 `;
 
