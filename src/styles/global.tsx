@@ -41,6 +41,10 @@ const GlobalStyles = () => (
         height: auto;
       }
 
+      hr {
+        border-style: none;
+      }
+
       :root {
         /* Default Colors */
         --color-blue: #408cff;

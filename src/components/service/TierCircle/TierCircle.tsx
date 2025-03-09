@@ -11,6 +11,8 @@ import { tierStyleConfig } from '@/styles/tier.config';
 interface TierCircleProps {
   tier: Tier;
   number: number;
+  width?: string;
+  height?: string;
 }
 
 const TierCircle = ({ tier, number }: TierCircleProps) => {

@@ -13,14 +13,14 @@ const TopBarContainer = styled.div<{ isScroll: boolean }>`
   justify-content: space-between;
 
   padding: 16px 24px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
 
   ${(props) =>
     props.isScroll &&
     css`
       background-color: var(--color-foreground-10);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
     `}
   @media (max-width: 480px) {
     top: 0;
