@@ -9,11 +9,15 @@ import { getTier, getTierNumber } from '@/utils/Tier';
 
 interface CourseSelectModalProps {
   isOpen: boolean;
-  course: CourseInfo;
+  course: CourseInfo | null;
   onClose: () => void;
 }
 
 const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, course, onClose }) => {
+  if (!course) {
+    return null;
+  }
+
   const handleClose = () => {
     onClose();
   };
