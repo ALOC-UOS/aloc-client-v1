@@ -1,6 +1,7 @@
 import { tierStyleConfig } from '@/styles/tier.config';
 import { UserCourse } from '@/types/course.types';
 import { Problem, TodayProblem } from '@/types/problem.types';
+import { dummyUserList } from './User';
 
 const dummyProblemList: Problem[] = [
   {
@@ -65,8 +66,8 @@ const dummyTodayProblemList: TodayProblem[] = [
       icon: tierStyleConfig['bronze'].icon,
     },
     isSolved: false,
-    userList: [],
-    solvedCount: 0,
+    userList: [...dummyUserList.slice(0, 2)],
+    solvedCount: 2,
     lastSolvedAt: '',
   },
   {
@@ -81,7 +82,7 @@ const dummyTodayProblemList: TodayProblem[] = [
     },
     isSolved: false,
     userList: [],
-    solvedCount: 2,
+    solvedCount: 0,
     lastSolvedAt: '2025-03-05 12:00:00',
   },
   {
@@ -95,8 +96,8 @@ const dummyTodayProblemList: TodayProblem[] = [
       icon: tierStyleConfig['gold'].icon,
     },
     isSolved: false,
-    userList: [],
-    solvedCount: 14,
+    userList: [...dummyUserList.slice(0, 3)],
+    solvedCount: 3,
     lastSolvedAt: '2025-03-06 12:00:00',
   },
   {
@@ -111,7 +112,7 @@ const dummyTodayProblemList: TodayProblem[] = [
     },
     isSolved: false,
     userList: [],
-    solvedCount: 112,
+    solvedCount: 0,
     lastSolvedAt: '2025-03-06 14:30:00',
   },
 ];
