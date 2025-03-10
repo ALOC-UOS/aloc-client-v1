@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@/views/Main';
 import Shop from '@/views/Shop';
 import UserPage from '@/views/User';
+import CoursePage from '@/views/Course';
 import { serverAPI, setupInterceptors } from '@/api/axios';
 import useLoginState from '@/hooks/useLoginState';
 import useUserState from '@/hooks/useUserState';
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/users" element={<UserPage />} />
+          <Route path="/course" element={<CoursePage />} />
           <Route path="/shop" element={<Shop />} />
         </Routes>
       </BrowserRouter>
