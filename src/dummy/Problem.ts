@@ -65,7 +65,7 @@ const dummyTodayProblemList: TodayProblem[] = [
       icon: tierStyleConfig['bronze'].icon,
     },
     isSolved: false,
-    profileImageList: [],
+    userList: [],
     solvedCount: 0,
     lastSolvedAt: '',
   },
@@ -80,7 +80,7 @@ const dummyTodayProblemList: TodayProblem[] = [
       icon: tierStyleConfig['silver'].icon,
     },
     isSolved: false,
-    profileImageList: [],
+    userList: [],
     solvedCount: 2,
     lastSolvedAt: '2025-03-05 12:00:00',
   },
@@ -95,7 +95,7 @@ const dummyTodayProblemList: TodayProblem[] = [
       icon: tierStyleConfig['gold'].icon,
     },
     isSolved: false,
-    profileImageList: [],
+    userList: [],
     solvedCount: 14,
     lastSolvedAt: '2025-03-06 12:00:00',
   },
@@ -110,13 +110,13 @@ const dummyTodayProblemList: TodayProblem[] = [
       icon: tierStyleConfig['platinum'].icon,
     },
     isSolved: false,
-    profileImageList: [],
+    userList: [],
     solvedCount: 112,
     lastSolvedAt: '2025-03-06 14:30:00',
   },
 ];
 
-export const dummyCourseList: UserCourse[] = [
+export const dummyUserInProgressCourseList: UserCourse[] = [
   {
     id: '1',
     type: 'oneday',

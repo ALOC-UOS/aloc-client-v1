@@ -11,10 +11,10 @@ const dummyCourseList: CourseInfo[] = [
       start: 1,
       end: 10,
     },
-    solvedInfo: {
-      userProfileImageList: [],
+    success: {
+      userList: [],
       count: 0,
-      lastSolvedAt: '',
+      lastSuccessAt: '',
     },
     isSolved: false,
   },
@@ -28,10 +28,10 @@ const dummyCourseList: CourseInfo[] = [
       start: 6,
       end: 10,
     },
-    solvedInfo: {
-      userProfileImageList: [],
+    success: {
+      userList: [],
       count: 0,
-      lastSolvedAt: '',
+      lastSuccessAt: '',
     },
     isSolved: false,
     duration: 7,
@@ -46,10 +46,10 @@ const dummyCourseList: CourseInfo[] = [
       start: 11,
       end: 20,
     },
-    solvedInfo: {
-      userProfileImageList: [],
+    success: {
+      userList: [],
       count: 0,
-      lastSolvedAt: '',
+      lastSuccessAt: '',
     },
     isSolved: false,
     duration: 7,

@@ -36,7 +36,7 @@ const DefaultUserWrapper = styled.div`
   gap: 4px;
 `;
 
-const UserWrapper = styled.div<{ isShow: boolean }>`
+const UserWrapper = styled.div`
   animation: ${MoveUp} 1s ease-in-out;
   display: flex;
   flex-direction: row;
@@ -45,11 +45,6 @@ const UserWrapper = styled.div<{ isShow: boolean }>`
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   padding: 8px 12px 8px 8px;
-  ${(props) =>
-    props.isShow &&
-    css`
-      animation: ${DisappearUp} 1s ease-in-out forwards;
-    `}
 `;
 
 const Description = styled.span`

@@ -7,7 +7,7 @@ import CourseSelectModal from '@/components/service/Course/CourseSelectModal';
 import LoginRequiredModal from '@/components/service/Course/LoginRequiredModal';
 import useModal from '@/hooks/useModal';
 import { CourseInfo } from '@/types/course.types';
-import dummyCourseList from './dummyData';
+import dummyCourseList from '../../dummy/Course';
 import ExceededModal from '@/components/service/Course/ExceededModal';
 
 type ModalType = 'login' | 'exceeded' | 'course';

@@ -1,15 +1,15 @@
 import { atom, useAtom } from 'jotai';
-import { dummyCourseList } from '../dummyData';
+import { dummyUserInProgressCourseList } from '../../../../dummy/Problem';
 import { TodayProblem } from '@/types/problem.types';
 import { UserCourse } from '@/types/course.types';
 
-const courseListAtom = atom<UserCourse[]>(dummyCourseList);
+const courseListAtom = atom<UserCourse[]>(dummyUserInProgressCourseList);
 
 const courseIndexAtom = atom<number>(0);
 
 const todayProblemAtom = atom<TodayProblem | null>((get) => {
   const courseIndex = get(courseIndexAtom);
-  const course = dummyCourseList[courseIndex];
+  const course = dummyUserInProgressCourseList[courseIndex];
   if (!course) return null;
   const lastIndex = course.problems.length - 1;
   return course.problems[lastIndex] as TodayProblem;
