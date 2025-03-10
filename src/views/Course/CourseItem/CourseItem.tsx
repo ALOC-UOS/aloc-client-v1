@@ -2,7 +2,7 @@ import { HStack, VStack } from '@/components/common/Stack';
 import S from './CourseItem.style';
 import TierCircle from '@/components/service/TierCircle';
 import { CourseInfo } from '@/types/course.types';
-import { getTier, getTierNumber } from '@/utils/Tier';
+import { getTierByDifficulty, getTierNumberByDifficulty } from '@/utils/Tier';
 
 interface CourseItemProps {
   course: CourseInfo;
@@ -23,14 +23,14 @@ const CourseItem = ({ course, onClick }: CourseItemProps) => {
       </VStack>
       <HStack>
         <TierCircle
-          tier={getTier(course.difficulty.start)}
-          number={getTierNumber(course.difficulty.start)}
+          tier={getTierByDifficulty(course.difficulty.start)}
+          number={getTierNumberByDifficulty(course.difficulty.start)}
           size="large"
           style={{ marginRight: -8 }}
         />
         <TierCircle
-          tier={getTier(course.difficulty.end)}
-          number={getTierNumber(course.difficulty.end)}
+          tier={getTierByDifficulty(course.difficulty.end)}
+          number={getTierNumberByDifficulty(course.difficulty.end)}
           size="large"
           style={{ boxShadow: '-4px 0px 4px rgba(0, 0, 0, 0.25)' }}
         />

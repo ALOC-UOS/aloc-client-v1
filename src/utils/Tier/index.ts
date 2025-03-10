@@ -1,6 +1,6 @@
 import { Tier } from '@/types/tier.types';
 
-export const getTier = (difficulty: number): Tier => {
+export const getTierByDifficulty = (difficulty: number): Tier => {
   if (1 <= difficulty && difficulty <= 5) return 'bronze';
   if (6 <= difficulty && difficulty <= 10) return 'silver';
   if (11 <= difficulty && difficulty <= 15) return 'gold';
@@ -9,7 +9,7 @@ export const getTier = (difficulty: number): Tier => {
   return 'bronze'; // Todo: 추후에 bronze말고 unknown이든 추가해야함.
 };
 
-export const getTierNumber = (difficulty: number): number => {
+export const getTierNumberByDifficulty = (difficulty: number): number => {
   /*
     1, 6, 11, 16은 5
     2, 7, 12, 17은 4
@@ -28,4 +28,19 @@ export const getTierNumber = (difficulty: number): number => {
 
   // 유효하지 않은 난이도인 경우 기본값 반환
   return 1;
+};
+
+export const getTierByUserRank = (rank: number): Tier => {
+  const tensDigit = Math.floor((rank % 100) / 10);
+
+  if (tensDigit === 1) return 'bronze';
+  if (tensDigit === 2) return 'silver';
+  if (tensDigit === 3) return 'gold';
+  if (tensDigit === 4) return 'platinum';
+
+  return 'bronze';
+};
+
+export const getTierNumberByUserRank = (rank: number): number => {
+  return rank % 10;
 };

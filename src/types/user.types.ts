@@ -11,4 +11,5 @@ export interface UserInfo {
   createdAt: string;
   todaySolved: boolean;
   solvedCount: number;
+  consecutiveSolvedDays: number;
 }

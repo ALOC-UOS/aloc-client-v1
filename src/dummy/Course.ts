@@ -1,6 +1,6 @@
 import { CourseInfo } from '@/types/course.types';
 
-const dummyCourseList: CourseInfo[] = [
+export const dummyCourseList: CourseInfo[] = [
   {
     id: '1',
     type: 'oneday',
@@ -55,5 +55,3 @@ const dummyCourseList: CourseInfo[] = [
     duration: 7,
   },
 ];
-
-export default dummyCourseList;

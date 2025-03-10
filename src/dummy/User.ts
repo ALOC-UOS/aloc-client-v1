@@ -1,7 +1,7 @@
 import { UserInfo } from '@/types/user.types';
 import { profileBackgroundList } from './ProfileBackgroundColor';
 
-export const userList: UserInfo[] = [
+export const dummyUserList: UserInfo[] = [
   {
     id: '494a22bb-e9d6-4949-998a-376b5aa4bd2b',
     nickname: '김준호',
@@ -13,6 +13,7 @@ export const userList: UserInfo[] = [
     createdAt: '2025-03-09 12:00:00',
     todaySolved: true,
     solvedCount: 10,
+    consecutiveSolvedDays: 0,
   },
   {
     id: '494a22bb-e9d6-4949-998a-376b5aa4bd2c',
@@ -25,6 +26,7 @@ export const userList: UserInfo[] = [
     createdAt: '2025-03-09 12:00:00',
     todaySolved: false,
     solvedCount: 10,
+    consecutiveSolvedDays: 4,
   },
   {
     id: '494a22bb-e9d6-4949-998a-376b5aa4bd2d',
@@ -37,5 +39,19 @@ export const userList: UserInfo[] = [
     createdAt: '2025-03-09 12:00:00',
     todaySolved: true,
     solvedCount: 20,
+    consecutiveSolvedDays: 11,
+  },
+  {
+    id: '494a22bb-e9d6-4949-998a-376b5aa4bd2e',
+    nickname: '정준호',
+    coin: 100,
+    rank: 23,
+    baekjoonId: 'dodolist',
+    profileImageFileName: '74a85359-a483-40e0-93eb-06e91e06cf68_펭귄 (1).gif',
+    profileBackgroundColor: profileBackgroundList[1],
+    createdAt: '2025-03-09 12:00:00',
+    todaySolved: false,
+    solvedCount: 10,
+    consecutiveSolvedDays: 7,
   },
 ];
