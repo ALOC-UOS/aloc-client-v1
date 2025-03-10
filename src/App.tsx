@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@/views/Main';
-import Problem from '@/views/Problem';
-import Member from '@/views/Member';
 import Shop from '@/views/Shop';
-import Login from '@/views/Login';
+import UserPage from '@/views/User';
+import CoursePage from '@/views/Course';
 import { serverAPI, setupInterceptors } from '@/api/axios';
 import useLoginState from '@/hooks/useLoginState';
 import useUserState from '@/hooks/useUserState';
 import GlobalStyles from '@/styles/global';
+import TopBar from '@/components/service/TopBar';
 
 function App() {
   const { initLoginStatus } = useLoginState();
@@ -34,11 +34,11 @@ function App() {
     <>
       <GlobalStyles />
       <BrowserRouter>
+        <TopBar />
         <Routes>
-          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
-          <Route path="/problem" element={<Problem />} />
-          <Route path="/member" element={<Member />} />
+          <Route path="/users" element={<UserPage />} />
+          <Route path="/course" element={<CoursePage />} />
           <Route path="/shop" element={<Shop />} />
         </Routes>
       </BrowserRouter>
