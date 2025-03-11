@@ -8,36 +8,39 @@ on:
 jobs:
   push-to-other-repo:
     runs-on: ubuntu-latest
+    container: pandoc/latex
     steps:
-      - name: Checkout source repo
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v2
 
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
 
-      - name: Push to target repo
+      - name: creates output
+        run: sh ./build.sh
+
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
         env:
-          TARGET_REPO: git@github.com:Dodolist/open-aloc-client.git
-          GH_USERNAME: 'Dodolist'
-          GH_EMAIL: 'dodolist3@gmail.com'
-        run: |
-          git config --global user.name "$GH_USERNAME"
-          git config --global user.email "$GH_EMAIL"
-          git commit --amend --author="$GH_USERNAME <$GH_EMAIL>" --no-edit
-          git remote add target_repo $TARGET_REPO
-          GIT_COMMITTER_NAME="$GH_USERNAME" GIT_COMMITTER_EMAIL="$GH_EMAIL" git push target_repo deploy:main --force
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          source-directory: 'output'
+          destination-github-username: ${{ secrets.DESTINATION_GITHUB_USERNAME }}
+          destination-repository-name: ${{ secrets.DESTINATION_REPOSITORY_NAME }}
+          user-email: ${{ secrets.ACCOUNT_EMAIL }}
+          commit-message: ${{ github.event.commits[0].message }}
+          target-branch: main
+          force-push: true
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
       - name: Send deployment status to Discord
         if: success()
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           content: |
-            [aloc-client]
-            배포가 성공적으로 완료되었어요 🚀
+            [open-aloc-client]
+            배포가 성공적으로 완료되었어요! 🚀
             커밋한 사람 🙋🏻${{ github.actor }}
             ${{ github.event.head_commit.message }}
       - name: Send deployment failure to Discord
@@ -46,7 +49,7 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           content: |
-            [aloc-client] 
-            배포 중 문제가 발생했어요 ❌
+            [open-aloc-client] 
+            배포 중 문제가 발생했어요! ❌
             잘못한 사람 🙋🏻${{ github.actor }}
             ${{ github.event.head_commit.message }}
