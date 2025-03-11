@@ -11,6 +11,8 @@ interface LoginRequiredModalProps {
 const LoginRequiredModal: React.FC<LoginRequiredModalProps> = ({ isOpen, onClose }) => {
   const onGoogleLogin = () => {
     // 구글 로그인 로직 추가
+    const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GOOGLE_AUTH_REDIRECT_URI}&response_type=code&scope=email profile`;
+    window.location.href = googleLoginUrl;
   };
 
   const handleClose = () => {
