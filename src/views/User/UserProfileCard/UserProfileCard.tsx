@@ -5,31 +5,38 @@ import TierCircle from '@/components/service/TierCircle';
 import Label from '@/components/common/Label';
 import Line from '@/components/common/Line';
 import CoinIcon from '@/assets/icons/coin.svg';
+import { UserInfo } from '@/types/user.types';
+import { getTierByUserRank, getTierNumberByUserRank } from '@/utils/Tier';
 
-const UserProfileCard = () => {
-  const isSolved = Math.random() < 0.5;
+interface UserProfileCardProps {
+  user: UserInfo;
+}
 
+const UserProfileCard = ({ user }: UserProfileCardProps) => {
   return (
     <S.UserProfileCardContainer>
-      <S.TopSection isSolved={isSolved}>
+      <S.TopSection isSolved={user.todaySolved}>
         <S.CoinWrapper>
           <img src={CoinIcon} alt="coin" width={16} height={16} />
-          240
+          {user.coin}
         </S.CoinWrapper>
-        <S.SolvedAnimation isSolved={isSolved} delay={0} />
-        <UserProfileImage user={null} width="120px" height="120px" disabled={true} />
+        <S.SolvedAnimation isSolved={user.todaySolved} delay={0} />
+        <UserProfileImage user={user} width="120px" height="120px" disabled={true} />
       </S.TopSection>
       <S.BottomSection>
         <HStack alignItems="center" justifyContent="space-between">
           <HStack alignItems="center" gap={4}>
-            <TierCircle tier="gold" number={1} />
-            <S.Nickname>이종우</S.Nickname>
+            <TierCircle
+              tier={getTierByUserRank(user.rank)}
+              number={getTierNumberByUserRank(user.rank)}
+            />
+            <S.Nickname>{user.nickname}</S.Nickname>
           </HStack>
-          <Label text="0일 째" isActive={isSolved} />
+          <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />
         </HStack>
         <Line />
         <VStack gap={4} alignItems="flex-start">
-          <S.AchievementItem>57문제 해결</S.AchievementItem>
+          <S.AchievementItem>{user.solvedCount}문제 해결</S.AchievementItem>
           <S.AchievementItem>코스 10개 완주</S.AchievementItem>
         </VStack>
       </S.BottomSection>

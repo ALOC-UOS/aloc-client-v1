@@ -4,6 +4,7 @@ import Main from '@/views/Main';
 import Shop from '@/views/Shop';
 import UserPage from '@/views/User';
 import CoursePage from '@/views/Course';
+import GoogleAuthCallback from '@/views/GoogleAuthCallback';
 import { serverAPI, setupInterceptors } from '@/api/axios';
 import useLoginState from '@/hooks/useLoginState';
 import useUserState from '@/hooks/useUserState';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/users" element={<UserPage />} />
           <Route path="/course" element={<CoursePage />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/finish-google-sso" element={<GoogleAuthCallback />} />
         </Routes>
       </BrowserRouter>
     </>

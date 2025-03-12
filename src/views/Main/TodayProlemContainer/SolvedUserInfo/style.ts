@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 
 const MoveUp = keyframes`
   0% {
@@ -12,44 +12,27 @@ const MoveUp = keyframes`
   }
 `;
 
-const DisappearUp = keyframes`
-  from {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-16px);
-    opacity: 0;
-  }
-`;
-
-const DefaultUserWrapper = styled.div`
+const UserWrapper = styled.div`
   animation: ${MoveUp} 1s 0.7s ease-in-out forwards;
   display: flex;
   flex-direction: row;
   align-items: center;
   border-radius: 32px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--color-white-10);
   backdrop-filter: blur(16px);
   padding: 8px 12px 8px 8px;
   opacity: 0;
   gap: 4px;
 `;
 
-const UserWrapper = styled.div<{ isShow: boolean }>`
-  animation: ${MoveUp} 1s ease-in-out;
+const UserProfileImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 32px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  padding: 8px 12px 8px 8px;
-  ${(props) =>
-    props.isShow &&
-    css`
-      animation: ${DisappearUp} 1s ease-in-out forwards;
-    `}
+
+  & > img:not(:first-child) {
+    margin-left: -16px;
+  }
 `;
 
 const Description = styled.span`
@@ -60,7 +43,7 @@ const Description = styled.span`
   user-select: none;
 `;
 
-const SolveTime = styled.span`
+const LastSolvedAt = styled.span`
   color: var(--color-white-50);
   font-size: 12px;
   font-weight: 500;
@@ -68,8 +51,8 @@ const SolveTime = styled.span`
 `;
 
 export default {
-  DefaultUserWrapper,
   UserWrapper,
+  UserProfileImageWrapper,
   Description,
-  SolveTime,
+  LastSolvedAt,
 };

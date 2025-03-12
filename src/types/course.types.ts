@@ -1,4 +1,5 @@
 import { Problem, TodayProblem } from './problem.types';
+import { UserInfo } from './user.types';
 
 export type CourseType = 'oneday' | 'deadline';
 
@@ -15,10 +16,10 @@ export interface CourseInfo extends Course {
     start: number;
     end: number;
   };
-  solvedInfo: {
-    userProfileImageList: string[];
+  success: {
+    userList: UserInfo[];
     count: number;
-    lastSolvedAt: string;
+    lastSuccessAt: string;
   };
   isSolved: boolean;
   duration?: number;

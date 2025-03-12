@@ -1,11 +1,11 @@
-import { Problem } from '@/types/problem.types';
+import { TodayProblem } from '@/types/problem.types';
 import S from './style';
 import SolvedUserInfo from './SolvedUserInfo';
 import { VStack } from '@/components/common/Stack';
 
 interface TodayProlemContainerProps {
   courseName: string;
-  problem: Problem;
+  problem: TodayProblem;
   onClick: () => void;
 }
 
@@ -18,7 +18,11 @@ const TodayProlemContainer = ({ courseName, problem, onClick }: TodayProlemConta
           {problem.problemId}. {problem.name}
         </S.Title>
       </VStack>
-      <SolvedUserInfo />
+      <SolvedUserInfo
+        userList={problem.userList}
+        solvedCount={problem.solvedCount}
+        lastSolvedAt={problem.lastSolvedAt}
+      />
       <S.BottomText> 오늘도 파이팅 😁 </S.BottomText>
     </S.ProblemContainer>
   );

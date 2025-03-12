@@ -4,6 +4,7 @@ import useUserCourse from './useUserCourse';
 import { moveToProblemSite } from '@/utils/index';
 import TodayProlemContainer from '../../TodayProlemContainer';
 import { useLocation } from 'react-router-dom';
+import { TodayProblem } from '@/types/problem.types';
 
 const SilderContainer = () => {
   const { courseIndex, setCourseIndex, todayProblem, courseList } = useUserCourse();
@@ -71,7 +72,7 @@ const SilderContainer = () => {
           >
             <TodayProlemContainer
               courseName={course.name}
-              problem={course.problems[course.problems.length - 1]}
+              problem={course.problems[course.problems.length - 1] as TodayProblem}
               onClick={() => handleCourseClick(index)}
             />
           </S.SliderItem>
