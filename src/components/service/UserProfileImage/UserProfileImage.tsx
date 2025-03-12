@@ -29,8 +29,16 @@ const UserProfileImage = ({
     );
   }
 
-  const moveToGithubSite = (githubId: string) => {
-    window.open(`https://www.github.com/${githubId}`);
+  const moveToBaekjoonSite = (baekjoonId: string) => {
+    window.open(`https://www.acmicpc.net/user/${baekjoonId}`);
+  };
+
+  const handleClick = () => {
+    if (disabled) {
+      return;
+    }
+
+    moveToBaekjoonSite(user.baekjoonId);
   };
 
   return (
@@ -39,7 +47,7 @@ const UserProfileImage = ({
       width={width}
       height={height}
       backgroundColor={backgroundColor}
-      onClick={() => moveToGithubSite(user.githubId)}
+      onClick={handleClick}
       disabled={disabled}
     />
   );

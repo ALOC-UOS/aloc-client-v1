@@ -5,7 +5,7 @@ import Modal from '@/components/common/Modal';
 import S from './CourseSelectModal.style';
 import TierCircle from '@/components/service/TierCircle';
 import { CourseInfo } from '@/types/course.types';
-import { getTier, getTierNumber } from '@/utils/Tier';
+import { getTierByDifficulty, getTierNumberByDifficulty } from '@/utils/Tier';
 
 interface CourseSelectModalProps {
   isOpen: boolean;
@@ -56,12 +56,12 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, course, o
             <S.CourseInfoName>난이도</S.CourseInfoName>
             <HStack gap={4}>
               <TierCircle
-                tier={getTier(course.difficulty.start)}
-                number={getTierNumber(course.difficulty.start)}
+                tier={getTierByDifficulty(course.difficulty.start)}
+                number={getTierNumberByDifficulty(course.difficulty.start)}
               />
               <TierCircle
-                tier={getTier(course.difficulty.end)}
-                number={getTierNumber(course.difficulty.end)}
+                tier={getTierByDifficulty(course.difficulty.end)}
+                number={getTierNumberByDifficulty(course.difficulty.end)}
               />
             </HStack>
           </S.CourseInfoItem>

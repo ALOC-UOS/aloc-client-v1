@@ -1,54 +1,39 @@
 import S from './style';
-import { useEffect, useState } from 'react';
-import useSolvedUser from '@/hooks/useSolvedUser';
 import { formatSolveTime } from '@/utils/index';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import { HStack } from '@/components/common/Stack';
+import { UserInfo } from '@/types/user.types';
 
-const ONE_SECOND = 1000;
+interface SolvedUserInfoProps {
+  userList: UserInfo[];
+  solvedCount: number;
+  lastSolvedAt: string;
+}
 
-const SolvedUserInfo = () => {
-  const { solvedUserList, isEmpty } = useSolvedUser();
-  const [listIndex, setListIndex] = useState(0);
-  const [isShowUser, setIsShowUser] = useState(false);
-
-  useEffect(() => {
-    if (!solvedUserList) {
-      return;
-    }
-
-    const showUserInterval = 5 * ONE_SECOND;
-    const hideUserDelay = 4 * ONE_SECOND;
-
-    const timer = setInterval(() => {
-      setListIndex((prevIndex) => (prevIndex + 1) % solvedUserList.length);
-      setIsShowUser(false);
-      setTimeout(() => setIsShowUser(true), hideUserDelay);
-    }, showUserInterval);
-
-    return () => clearInterval(timer);
-  }, [solvedUserList]);
-
-  if (isEmpty) {
+const SolvedUserInfo = ({ userList, solvedCount, lastSolvedAt }: SolvedUserInfoProps) => {
+  if (solvedCount === 0) {
     return (
-      <S.DefaultUserWrapper>
+      <S.UserWrapper>
         <UserProfileImage user={null} />
-        <S.Description>아무도 문제를 풀지 않았어요.</S.Description>
-        <S.SolveTime>-</S.SolveTime>
-      </S.DefaultUserWrapper>
+        <S.Description>아무도 문제를 풀지 않았어요</S.Description>
+      </S.UserWrapper>
     );
   }
 
   return (
-    <S.UserWrapper isShow={isShowUser}>
-      <UserProfileImage user={solvedUserList[listIndex]} />
+    <S.UserWrapper>
+      <S.UserProfileImageWrapper>
+        {userList.map((user) => (
+          <UserProfileImage key={user.id} user={user} />
+        ))}
+      </S.UserProfileImageWrapper>
       <HStack alignItems="center">
         <S.Description>
-          <span style={{ color: 'var(--color-blue)' }}>{solvedUserList[listIndex].username}</span>
-          님이 문제를 풀었어요.
+          <span style={{ color: 'var(--color-blue)' }}>{solvedCount}</span>
+          명이 이 문제를 풀었어요.
         </S.Description>
       </HStack>
-      <S.SolveTime>{formatSolveTime(solvedUserList[listIndex].solvedAt)}</S.SolveTime>
+      <S.LastSolvedAt>{formatSolveTime(lastSolvedAt)}</S.LastSolvedAt>
     </S.UserWrapper>
   );
 };

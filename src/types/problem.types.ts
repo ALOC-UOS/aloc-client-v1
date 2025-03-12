@@ -1,4 +1,5 @@
 import { TierStyleConfig } from './tier.types';
+import { UserInfo } from './user.types';
 
 export type Problem = {
   id: number;
@@ -10,7 +11,7 @@ export type Problem = {
 };
 
 export interface TodayProblem extends Problem {
-  profileImageList: string[];
+  userList: UserInfo[];
   solvedCount: number;
   lastSolvedAt: string;
 }

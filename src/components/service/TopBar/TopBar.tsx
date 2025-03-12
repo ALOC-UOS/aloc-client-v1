@@ -24,13 +24,6 @@ const TopBar = () => {
     navigate('/');
   };
 
-  const handleGoogleLogin = () => {
-    console.log('Google 로그인 시도');
-    // 로그인 성공 후 모달 닫기
-    hideLoginModal();
-    showProfileModal();
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScroll(window.scrollY > 0);
@@ -58,11 +51,7 @@ const TopBar = () => {
         </HStack>
       </S.TopBarContainer>
 
-      <GoogleLoginModal
-        isOpen={isLoginModalOpen}
-        onClose={hideLoginModal}
-        onGoogleLogin={handleGoogleLogin}
-      />
+      <GoogleLoginModal isOpen={isLoginModalOpen} onClose={hideLoginModal} />
       <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />
     </>
   );
