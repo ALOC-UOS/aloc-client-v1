@@ -24,12 +24,6 @@ const TopBar = () => {
     navigate('/');
   };
 
-  const handleGoogleLogin = () => {
-    console.log('Google 로그인 시도');
-    const googleLoginUrl = 'https://api.openaloc.store/oauth2/authorization/google';
-    window.location.href = googleLoginUrl;
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScroll(window.scrollY > 0);
@@ -41,40 +35,6 @@ const TopBar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    const handleMessage = async (event: { origin: string; data: { type: string; code: any } }) => {
-      const redirectOrigin = new URL(import.meta.env.VITE_GOOGLE_AUTH_REDIRECT_URI).origin;
-      if (event.origin !== redirectOrigin) return;
-
-      if (event.data.type === 'google-login' && event.data.code) {
-        console.log('구글 로그인 코드:', event.data.code);
-        try {
-          const response = await fetch('https://api.openaloc.store/login/oauth2/code/google', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ code: event.data.code }),
-            credentials: 'include',
-          });
-
-          if (!response.ok) throw new Error('로그인 처리 중 오류가 발생했습니다');
-
-          const userData = await response.json();
-
-          console.log('로그인 성공:', userData);
-          hideLoginModal();
-          showProfileModal();
-        } catch (error) {
-          console.error('로그인 처리 중 오류:', error);
-        }
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [hideLoginModal, showProfileModal]);
 
   return (
     <>
@@ -91,11 +51,7 @@ const TopBar = () => {
         </HStack>
       </S.TopBarContainer>
 
-      <GoogleLoginModal
-        isOpen={isLoginModalOpen}
-        onClose={hideLoginModal}
-        onGoogleLogin={handleGoogleLogin}
-      />
+      <GoogleLoginModal isOpen={isLoginModalOpen} onClose={hideLoginModal} />
       <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />
     </>
   );
