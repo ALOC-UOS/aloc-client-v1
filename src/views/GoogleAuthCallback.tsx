@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { serverAPI } from '@/api/axios';
+import axios from 'axios';
 
 const GoogleAuthCallback = () => {
   useEffect(() => {
     const handleAuth = async () => {
       try {
         // 액세스 토큰 요청
-        const response = await serverAPI.post('/auth/refresh');
-
+        const response = await axios.post(`${process.env.VITE_API_BASE_URL}/auth/refresh`);
         if (response.data && response.data.accessToken) {
           // accessToken을 localStorage에 저장
           try {
