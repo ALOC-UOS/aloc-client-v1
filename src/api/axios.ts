@@ -2,7 +2,6 @@ import axios from 'axios';
 
 // API 기본 설정
 const serverAPI = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
