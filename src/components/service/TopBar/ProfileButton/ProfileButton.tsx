@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import S from './ProfileButton.style';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HStack } from '@/components/common/Stack';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import Label from '@/components/common/Label';
+import useUser from '@/hooks/useUser';
 
 const ProfileButton = () => {
-  const [isSignIn, setIsSignIn] = useState(false);
+  const { user } = useUser();
   const location = useLocation();
   const navigate = useNavigate();
   const isMainPage = location.pathname === '/';
@@ -15,13 +15,17 @@ const ProfileButton = () => {
     navigate('/profile/me');
   };
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <S.ButtonContainer onClick={handleClick} isMainPage={isMainPage}>
       <HStack alignItems="center" gap={8}>
         <UserProfileImage user={null} width="28px" height="28px" />
-        <S.UserNickname isMainPage={isMainPage}>유저 닉네임</S.UserNickname>
+        <S.UserNickname isMainPage={isMainPage}>{user.nickname}</S.UserNickname>
       </HStack>
-      <Label text="0일 째" />
+      <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />
     </S.ButtonContainer>
   );
 };

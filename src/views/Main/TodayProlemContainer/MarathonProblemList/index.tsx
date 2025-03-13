@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getProblemTier, moveToProblemSite } from '@/utils/index';
-import { serverAPI } from '@/api/axios';
+// import { serverAPI } from '@/api/axios';
 import { tierStyleConfig } from '@/styles/tier.config';
 import LockIcon from '@/assets/icons/lock.svg';
 import S from './style';
 import { Problem } from '@/types/problem.types';
 import { HStack } from '@/components/common/Stack';
+import axios from 'axios';
 
 const DAYS_OF_WEEK = 7;
 const MarathonProblemList = () => {
@@ -31,7 +32,7 @@ const MarathonProblemList = () => {
   }, []);
 
   const getProblemData = async () => {
-    return await serverAPI
+    return await axios
       .get('/daily-problems')
       .then((response) => {
         return response.data.result;

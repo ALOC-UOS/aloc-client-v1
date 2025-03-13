@@ -1,35 +1,20 @@
-// import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@/views/Main';
 import Shop from '@/views/Shop';
 import UserPage from '@/views/User';
 import CoursePage from '@/views/Course';
 import GoogleAuthCallback from '@/views/GoogleAuthCallback';
-// import { serverAPI, setupInterceptors } from '@/api/axios';
-// import useLoginState from '@/hooks/useLoginState';
-// import useUserState from '@/hooks/useUserState';
 import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
+import useUser from '@/hooks/useUser';
+import { useEffect } from 'react';
 
 function App() {
-  // const { initLoginStatus } = useLoginState();
-  // const { setUserInfo, deleteUserInfo } = useUserState();
+  const { checkLoginStatus } = useUser();
 
-  // useEffect(() => {
-  //   setupInterceptors(initLoginStatus);
-  //   serverAPI
-  //     .get('/user')
-  //     .then((response) => {
-  //       const userInfo = response.data.result;
-  //       localStorage.setItem('isLoggedIn', 'true');
-  //       setUserInfo(userInfo);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       initLoginStatus();
-  //       deleteUserInfo();
-  //     });
-  // }, []);
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
 
   return (
     <>

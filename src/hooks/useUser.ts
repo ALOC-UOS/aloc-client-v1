@@ -1,123 +1,82 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { UserInfo } from '@/types/user.types';
+import { serverAPI } from '@/api/axios';
+import { atom, useAtom } from 'jotai';
+
+export const userAtom = atom<UserInfo | null>(null);
 
 const useUser = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [users, setUsers] = useState<UserInfo[]>([]);
-  const [currentUser, setCurrentUser] = useState<UserInfo | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useAtom(userAtom);
 
-  const loadUsers = () => {
-    setIsLoading(true);
-    axios
-      .get('/users')
-      .then((response) => {
-        setUsers(response.data.result);
-      })
-      .catch((error) => {
-        console.error(error, 'API 요청 중 오류 발생:');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  const loadCurrentUser = () => {
-    setIsLoading(true);
-    axios
-      .get('/users/me')
-      .then((response) => {
-        setCurrentUser(response.data.result);
-        setIsLoggedIn(true);
-      })
-      .catch((error) => {
-        console.error(error, '사용자 정보 불러오기 실패:');
-        setIsLoggedIn(false);
-        setCurrentUser(null);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  // 구글 로그인 처리
-  const googleLogin = async (token: string) => {
+  // 토큰 확인 및 사용자 정보 로드
+  const loadUser = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post('/auth/google', { token });
-      setCurrentUser(response.data.result);
-      setIsLoggedIn(true);
-      return { success: true, needsAdditionalInfo: !response.data.result.baekjoonId };
-    } catch (error) {
-      console.error(error, '구글 로그인 실패:');
-      return { success: false, error };
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // 추가 정보 업데이트 (가입 시 또는 프로필 수정 시)
-  const updateUserInfo = async (userData: UserInfo) => {
-    setIsLoading(true);
-    try {
-      const response = await axios.patch('/users/me', userData);
-      setCurrentUser(response.data.result);
-      return { success: true };
-    } catch (error) {
-      console.error(error, '사용자 정보 업데이트 실패:');
-      return { success: false, error };
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // 프로필 이미지 업데이트
-  const updateProfileImage = async (imageFile: File) => {
-    setIsLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append('profileImage', imageFile);
-
-      const response = await axios.patch('/users/me/profile-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      const response = await serverAPI.get('/user');
+      const userInfo = response.data.result;
+      setUser({
+        id: userInfo.id,
+        nickname: userInfo.username,
+        coin: userInfo.coin,
+        rank: userInfo.rank,
+        baekjoonId: userInfo.baekjoonId,
+        profileImageFileName: userInfo.profileImageFileName,
+        profileBackgroundColor: {
+          name: userInfo.profileColor,
+          type: userInfo.type,
+          color1: userInfo.color1,
+          color2: userInfo.color2,
+          color3: userInfo.color3,
+          color4: userInfo.color4,
+          color5: userInfo.color5,
+          degree: userInfo.degree,
         },
+        createdAt: userInfo.createdAt,
+        todaySolved: userInfo.todaySolved,
+        solvedCount: userInfo.solvedCount,
+        consecutiveSolvedDays: userInfo.consecutiveSolvedDays,
       });
-
-      setCurrentUser(response.data.result);
-      return { success: true };
     } catch (error) {
-      console.error(error, '프로필 이미지 업데이트 실패:');
-      return { success: false, error };
+      console.error('사용자 정보 불러오기 실패:', error);
+      setUser(null);
+      throw error;
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const checkLoginStatus = async () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      setUser(null);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      await loadUser();
+    } catch (error) {
+      console.error('토큰으로 사용자 정보 조회 실패:', error);
+      // 토큰이 유효하지 않은 경우 로그아웃 처리
+      logout();
     }
   };
 
   // 로그아웃
   const logout = () => {
-    setCurrentUser(null);
-    setIsLoggedIn(false);
-    // 필요한 경우 서버에 로그아웃 요청 추가
+    localStorage.removeItem('accessToken');
+    serverAPI.post('/auth/logout');
+    setUser(null);
   };
-
-  useEffect(() => {
-    // 페이지 로드 시 현재 사용자 정보 확인
-    loadCurrentUser();
-  }, []);
 
   return {
     isLoading,
-    users,
-    loadUsers,
-    currentUser,
-    isLoggedIn,
-    googleLogin,
-    updateUserInfo,
-    updateProfileImage,
-    loadCurrentUser,
+    user,
+    isLoggedIn: user !== null,
+    loadUser,
     logout,
+    checkLoginStatus,
   };
 };
 
