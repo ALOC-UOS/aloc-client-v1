@@ -12,13 +12,12 @@ interface GoogleLoginModalProps {
 
 const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
   const handleGoogleLogin = () => {
-    console.log('Google 로그인 시도');
     const googleLoginUrl = `${import.meta.env.VITE_API_BASE_URL}/oauth2/authorization/google`;
     window.open(googleLoginUrl, '_blank', 'width=500,height=600');
   };
 
   useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
+    const handleGoogleLoginSuccess = async (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return;
 
       if (event.data.type === 'google-login-success') {
@@ -31,8 +30,8 @@ const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
       }
     };
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    window.addEventListener('message', handleGoogleLoginSuccess);
+    return () => window.removeEventListener('message', handleGoogleLoginSuccess);
   }, [onClose]);
 
   return (

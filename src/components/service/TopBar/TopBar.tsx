@@ -13,9 +13,11 @@ import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
 import GoogleLoginModal from './GoogleLoginModal';
 import ProfileModal from './ProfileModal';
+import useUser from '@/hooks/useUser';
 
 const TopBar = () => {
   const [isScroll, setIsScroll] = useState(false);
+  const { isLoggedIn } = useUser();
   const { isOpen: isLoginModalOpen, show: showLoginModal, hide: hideLoginModal } = useModal();
   const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
   const navigate = useNavigate();
@@ -46,8 +48,11 @@ const TopBar = () => {
         <HStack gap={16}>
           <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />
           <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
-          <S.LoginButton onClick={showLoginModal}>로그인</S.LoginButton>
-          <ProfileButton />
+          {isLoggedIn ? (
+            <ProfileButton />
+          ) : (
+            <S.LoginButton onClick={showLoginModal}>로그인</S.LoginButton>
+          )}
         </HStack>
       </S.TopBarContainer>
 
