@@ -4,12 +4,17 @@ import S from './Modal.style';
 
 interface ModalProps {
   isOpen: boolean;
+  isBackdropClickable?: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+const Modal = ({ isOpen, isBackdropClickable, onClose, children }: ModalProps) => {
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isBackdropClickable) {
+      return;
+    }
+
     if (e.target === e.currentTarget) {
       onClose();
     }
