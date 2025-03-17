@@ -32,7 +32,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
           <S.CourseName>{course.name}</S.CourseName>
         </VStack>
         <S.CourseInfoContainer>
-          {course.type === 'deadline' && course.duration && (
+          {course.type === 'DEADLINE' && course.duration && (
             <S.CourseInfoItem>
               <S.CourseInfoName>마감일</S.CourseInfoName>
               <p

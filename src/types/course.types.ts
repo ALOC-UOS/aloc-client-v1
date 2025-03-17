@@ -1,7 +1,9 @@
 import { Problem, TodayProblem } from './problem.types';
 import { UserInfo } from './user.types';
 
-export type CourseType = 'oneday' | 'deadline';
+export type CourseType = 'DAILY' | 'DEADLINE';
+
+export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
 
 export type Course = {
   id: string;
@@ -21,7 +23,7 @@ export interface CourseInfo extends Course {
     count: number;
     lastSuccessAt: string;
   };
-  isSolved: boolean;
+  status: CourseStatus;
   duration?: number;
 }
 

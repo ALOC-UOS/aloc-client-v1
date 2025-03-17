@@ -23,15 +23,15 @@ const useCourses = () => {
       // response의 배열을 CourseInfo[] 타입으로 변환
       const courses = response.data.result.content.map((course: any) => ({
         ...course,
-        id: course.courseId,
-        type: course.courseType,
+        id: course.id,
+        type: course.type,
         name: course.title,
         totalProblemCount: course.problemCnt,
         difficulty: {
-          start: course.minRank,
-          end: course.maxRank,
+          start: course.rank.min,
+          end: course.rank.max,
         },
-        isSolved: course.success,
+        status: course.state,
         duration: course.duration,
       }));
       setCourses(courses);
