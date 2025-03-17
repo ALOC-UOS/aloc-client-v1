@@ -20,8 +20,9 @@ const useCourses = () => {
           size: SIZE,
         },
       });
+
       // response의 배열을 CourseInfo[] 타입으로 변환
-      const courses = response.data.result.content.map((course: any) => ({
+      const courses: CourseInfo[] = response.data.result.content.map((course: any) => ({
         ...course,
         id: course.id,
         type: course.type,

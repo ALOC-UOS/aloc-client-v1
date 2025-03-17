@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
+import { ProfileBackgroundColor } from '@/types/profileBackgroundColor.types';
 
 const MoveBackground = keyframes`
   0% {
@@ -22,15 +23,49 @@ const UserProfileCardContainer = styled.div`
   height: min-content;
 `;
 
-const TopSection = styled.div<{ isSolved: boolean }>`
+const TopSection = styled.div<{
+  isSolved: boolean;
+  backgroundColor: ProfileBackgroundColor;
+}>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 240px;
   padding: 16px;
-  background-color: ${(props) =>
-    props.isSolved ? 'var(--color-blue)' : 'var(--color-background)'};
+  background-color: var(--color-background);
+  ${(props) => {
+    if (!props.isSolved) {
+      return;
+    }
+
+    if (props.backgroundColor.type === 'common') {
+      return css`
+        background-color: ${props.backgroundColor.color1};
+      `;
+    }
+
+    if (props.backgroundColor.type === 'rare') {
+      return css`
+        background-image: linear-gradient(
+          ${props.backgroundColor.degree}deg,
+          ${props.backgroundColor.color1} 0%,
+          ${props.backgroundColor.color2} 100%
+        );
+      `;
+    }
+
+    if (props.backgroundColor.type === 'special') {
+      return css`
+        background-image: linear-gradient(
+          ${props.backgroundColor.degree}deg,
+          ${props.backgroundColor.color1} 0%,
+          ${props.backgroundColor.color2} 50%,
+          ${props.backgroundColor.color3} 100%
+        );
+      `;
+    }
+  }}
 `;
 
 const BottomSection = styled.div`

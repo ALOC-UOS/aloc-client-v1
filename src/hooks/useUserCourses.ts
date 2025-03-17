@@ -8,7 +8,6 @@ const useUserCourses = () => {
   const getUserCourses = async () => {
     const response = await serverAPI.get('/user/courses');
     setUserCourses(response.data.result);
-    console.log(response.data.result);
   };
 
   return { userCourses, getUserCourses };

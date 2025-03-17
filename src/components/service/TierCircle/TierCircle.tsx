@@ -1,6 +1,7 @@
 import { Tier } from '@/types/tier.types';
 import S from './TierCircle.style';
 
+import Number0 from '@/assets/icons/roman-number/0.svg';
 import Number1 from '@/assets/icons/roman-number/1.svg';
 import Number2 from '@/assets/icons/roman-number/2.svg';
 import Number3 from '@/assets/icons/roman-number/3.svg';
@@ -22,7 +23,8 @@ const TierCircle = ({ tier, number, size = 'medium', ...props }: TierCircleProps
     if (number === 2) return Number2;
     if (number === 3) return Number3;
     if (number === 4) return Number4;
-    return Number5;
+    if (number === 5) return Number5;
+    return Number0;
   };
 
   const sizeConfig = {
