@@ -17,7 +17,6 @@ const useUser = () => {
       const response = await serverAPI.get('/user');
       const userInfo = response.data.result;
       setUser({
-        id: userInfo.id,
         nickname: userInfo.username,
         coin: userInfo.coin,
         rank: userInfo.rank,

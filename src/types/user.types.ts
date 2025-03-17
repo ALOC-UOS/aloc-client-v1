@@ -1,7 +1,7 @@
 import { ProfileBackgroundColor } from './profileBackgroundColor.types';
 
 export interface UserInfo {
-  name: string | null;
+  nickname: string | null;
   coin: number | null;
   rank: number | null;
   baekjoonId: string | null;
