@@ -3,7 +3,7 @@ import { VStack } from '@/components/common/Stack';
 import Header from '@/components/common/Header';
 import CourseItemList from './CourseItemList';
 import CourseSelectModal from '@/components/service/Course/CourseSelectModal';
-import LoginRequiredModal from '@/components/service/Course/LoginRequiredModal';
+import GoogleLoginModal from '@/components/service/GoogleLoginModal';
 import useModal from '@/hooks/useModal';
 import { CourseInfo } from '@/types/course.types';
 import ExceededModal from '@/components/service/Course/ExceededModal';
@@ -57,7 +57,7 @@ const CoursePage = () => {
         <Header title="코스 목록" />
         <CourseItemList onCourseClick={handleCourseClick} />
       </VStack>
-      {modalType === 'login' && <LoginRequiredModal isOpen={isOpen} onClose={hide} />}
+      {modalType === 'login' && <GoogleLoginModal isOpen={isOpen} onClose={hide} />}
       {modalType === 'exceeded' && <ExceededModal isOpen={isOpen} onClose={hide} />}
       {modalType === 'course' && selectedCourse && (
         <CourseSelectModal
