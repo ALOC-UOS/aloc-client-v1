@@ -21,7 +21,7 @@ const UserProfileCard = ({ user }: UserProfileCardProps) => {
           {user.coin}
         </S.CoinWrapper>
         <S.SolvedAnimation isSolved={user.todaySolved} delay={0} />
-        <UserProfileImage user={user} width="120px" height="120px" disabled={true} />
+        <UserProfileImage user={user} width="120px" height="120px" />
       </S.TopSection>
       <S.BottomSection>
         <HStack alignItems="center" justifyContent="space-between">
