@@ -11,6 +11,7 @@ const ProfileImage = styled.img<{
   position: absolute;
   width: ${(props) => props.width || '32px'};
   height: ${(props) => props.height || '32px'};
+  object-fit: cover;
   background-color: ${(props) => props.backgroundColor || 'var(--color-background)'};
   border-radius: 50%;
   will-change: transform;
