@@ -8,19 +8,29 @@ import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
 import useUser from '@/hooks/useUser';
 import { useEffect } from 'react';
+import ProfileModal from './components/service/TopBar/ProfileModal';
+import useModal from './hooks/useModal';
 
 function App() {
-  const { checkLoginStatus } = useUser();
+  const { checkLoginStatus, user } = useUser();
+  const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
 
   useEffect(() => {
     checkLoginStatus();
   }, []);
+
+  useEffect(() => {
+    if (user && !user.baekjoonId) {
+      showProfileModal();
+    }
+  }, [user]);
 
   return (
     <>
       <GlobalStyles />
       <BrowserRouter>
         <TopBar />
+        <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/users" element={<UserPage />} />

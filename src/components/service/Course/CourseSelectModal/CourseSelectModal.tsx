@@ -9,25 +9,21 @@ import { getTierByDifficulty, getTierNumberByDifficulty } from '@/utils/Tier';
 
 interface CourseSelectModalProps {
   isOpen: boolean;
-  course: CourseInfo | null;
+  course: CourseInfo;
+  onStart: () => void;
   onClose: () => void;
+  isLoading: boolean;
 }
 
-const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, course, onClose }) => {
-  if (!course) {
-    return null;
-  }
-
-  const handleClose = () => {
-    onClose();
-  };
-
-  const handleStart = () => {
-    onClose();
-  };
-
+const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
+  isOpen,
+  course,
+  onStart,
+  onClose,
+  isLoading,
+}) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isBackdropClickable={!isLoading}>
       <VStack alignItems="center" gap={24}>
         <VStack alignItems="center" gap={4}>
           <p style={{ color: 'var(--color-sub-text)', fontSize: '16px', fontWeight: '500' }}>
@@ -36,7 +32,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, course, o
           <S.CourseName>{course.name}</S.CourseName>
         </VStack>
         <S.CourseInfoContainer>
-          {course.type === 'deadline' && course.duration && (
+          {course.type === 'DEADLINE' && course.duration && (
             <S.CourseInfoItem>
               <S.CourseInfoName>마감일</S.CourseInfoName>
               <p
@@ -67,10 +63,10 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({ isOpen, course, o
           </S.CourseInfoItem>
         </S.CourseInfoContainer>
         <HStack gap={8} style={{ width: '100%' }}>
-          <Button variant="secondary" onClick={handleClose} fullWidth>
+          <Button variant="secondary" onClick={onClose} fullWidth disabled={isLoading}>
             닫기
           </Button>
-          <Button variant="primary" onClick={handleStart} fullWidth>
+          <Button variant="primary" onClick={onStart} fullWidth isLoading={isLoading}>
             시작하기
           </Button>
         </HStack>

@@ -1,24 +1,42 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { UserInfo } from '@/types/user.types';
+import { serverAPI } from '@/api/axios';
 
 const useUsers = () => {
   const [users, setUsers] = useState<UserInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const loadUsers = () => {
+  const loadUsers = async () => {
     setIsLoading(true);
-    axios
-      .get('/users')
-      .then((response) => {
-        setUsers(response.data.result);
-      })
-      .catch((error) => {
-        console.error(error, 'API 요청 중 오류 발생:');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      const response = await serverAPI.get('/users');
+      const users: UserInfo[] = response.data.result.map((user: any) => ({
+        name: user.username,
+        coin: user.coin,
+        rank: user.rank,
+        baekjoonId: user.baekjoonId,
+        profileImageFileName: user.profileImageFileName,
+        profileBackgroundColor: {
+          name: user.profileColor,
+          type: user.type,
+          color1: user.color1,
+          color2: user.color2,
+          color3: user.color3,
+          color4: user.color4,
+          color5: user.color5,
+          degree: user.degree,
+        },
+        createdAt: user.createdAt,
+        todaySolved: user.todaySolved,
+        solvedCount: user.solvedCount,
+        consecutiveSolvedDays: user.consecutiveSolvedDays,
+      }));
+      setUsers(users);
+    } catch (error) {
+      console.error(error, 'API 요청 중 오류 발생:');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {

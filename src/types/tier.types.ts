@@ -1,4 +1,4 @@
-export type Tier = 'bronze' | 'silver' | 'gold' | 'platinum';
+export type Tier = 'unranked' | 'bronze' | 'silver' | 'gold' | 'platinum' | 'diamond';
 
 export interface TierStyleConfig {
   backgroundColor: string;

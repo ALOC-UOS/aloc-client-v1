@@ -6,7 +6,8 @@ import { atom, useAtom } from 'jotai';
 export const userAtom = atom<UserInfo | null>(null);
 
 const useUser = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
 
   // 토큰 확인 및 사용자 정보 로드
@@ -70,6 +71,41 @@ const useUser = () => {
     setUser(null);
   };
 
+  const updateUser = async ({ baekjoonId, nickname }: { baekjoonId: string; nickname: string }) => {
+    setIsLoading(true);
+    try {
+      await serverAPI.patch('/user', { baekjoonId, nickname });
+      await loadUser();
+    } catch (error) {
+      console.error('사용자 정보 업데이트 실패:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateProfileImage = async (imageFile: File) => {
+    setIsUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append('profileImageFile', imageFile);
+
+      const response = await serverAPI.patch('/user/profile-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const newUserInfo = response.data.result;
+      setUser({ ...user, profileImageFileName: newUserInfo.profileImageFileName } as UserInfo);
+    } catch (error) {
+      console.error('사용자 정보 업데이트 실패:', error);
+      throw error;
+    } finally {
+      setIsUploadingImage(false);
+    }
+  };
+
   return {
     isLoading,
     user,
@@ -77,6 +113,9 @@ const useUser = () => {
     loadUser,
     logout,
     checkLoginStatus,
+    updateUser,
+    updateProfileImage,
+    isUploadingImage,
   };
 };
 

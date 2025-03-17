@@ -42,7 +42,7 @@ const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
       <VStack gap={24}>
         <VStack gap={4}>
           <Modal.Title>로그인</Modal.Title>
-          <Modal.Subtitle>로그인 후에 코스를 선택하세요</Modal.Subtitle>
+          <Modal.Subtitle>로그인 후에 기능을 이용할 수 있어요</Modal.Subtitle>
         </VStack>
         <S.GoogleLoginButton onClick={handleGoogleLogin}>
           <img src={GoogleLogoIcon} alt="Google" width={24} height={24} />

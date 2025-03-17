@@ -15,7 +15,7 @@ interface UserProfileCardProps {
 const UserProfileCard = ({ user }: UserProfileCardProps) => {
   return (
     <S.UserProfileCardContainer>
-      <S.TopSection isSolved={user.todaySolved}>
+      <S.TopSection isSolved={user.todaySolved} backgroundColor={user.profileBackgroundColor}>
         <S.CoinWrapper>
           <img src={CoinIcon} alt="coin" width={16} height={16} />
           {user.coin}
@@ -27,17 +27,16 @@ const UserProfileCard = ({ user }: UserProfileCardProps) => {
         <HStack alignItems="center" justifyContent="space-between">
           <HStack alignItems="center" gap={4}>
             <TierCircle
-              tier={getTierByUserRank(user.rank)}
-              number={getTierNumberByUserRank(user.rank)}
+              tier={user.rank ? getTierByUserRank(user.rank) : 'unranked'}
+              number={user.rank ? getTierNumberByUserRank(user.rank) : 0}
             />
-            <S.Nickname>{user.nickname}</S.Nickname>
+            <S.Nickname>{user.name}</S.Nickname>
           </HStack>
           <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />
         </HStack>
         <Line />
         <VStack gap={4} alignItems="flex-start">
           <S.AchievementItem>{user.solvedCount}문제 해결</S.AchievementItem>
-          <S.AchievementItem>코스 10개 완주</S.AchievementItem>
         </VStack>
       </S.BottomSection>
     </S.UserProfileCardContainer>

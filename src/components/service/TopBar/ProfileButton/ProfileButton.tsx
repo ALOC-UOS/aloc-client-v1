@@ -22,7 +22,7 @@ const ProfileButton = () => {
   return (
     <S.ButtonContainer onClick={handleClick} isMainPage={isMainPage}>
       <HStack alignItems="center" gap={8}>
-        <UserProfileImage user={null} width="28px" height="28px" />
+        <UserProfileImage user={user} width="28px" height="28px" />
         <S.UserNickname isMainPage={isMainPage}>{user.nickname}</S.UserNickname>
       </HStack>
       <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />

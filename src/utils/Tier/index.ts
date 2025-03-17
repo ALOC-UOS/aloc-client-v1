@@ -5,8 +5,9 @@ export const getTierByDifficulty = (difficulty: number): Tier => {
   if (6 <= difficulty && difficulty <= 10) return 'silver';
   if (11 <= difficulty && difficulty <= 15) return 'gold';
   if (16 <= difficulty && difficulty <= 20) return 'platinum';
+  if (21 <= difficulty && difficulty <= 25) return 'diamond';
 
-  return 'bronze'; // Todo: 추후에 bronze말고 unknown이든 추가해야함.
+  return 'unranked';
 };
 
 export const getTierNumberByDifficulty = (difficulty: number): number => {
@@ -37,8 +38,8 @@ export const getTierByUserRank = (rank: number): Tier => {
   if (tensDigit === 2) return 'silver';
   if (tensDigit === 3) return 'gold';
   if (tensDigit === 4) return 'platinum';
-
-  return 'bronze';
+  if (tensDigit === 5) return 'diamond';
+  return 'unranked';
 };
 
 export const getTierNumberByUserRank = (rank: number): number => {
