@@ -30,7 +30,7 @@ const UserProfileCard = ({ user }: UserProfileCardProps) => {
               tier={user.rank ? getTierByUserRank(user.rank) : 'unranked'}
               number={user.rank ? getTierNumberByUserRank(user.rank) : 0}
             />
-            <S.Nickname>{user.name}</S.Nickname>
+            <S.Nickname>{user.nickname}</S.Nickname>
           </HStack>
           <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />
         </HStack>

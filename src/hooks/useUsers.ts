@@ -11,7 +11,7 @@ const useUsers = () => {
     try {
       const response = await serverAPI.get('/users');
       const users: UserInfo[] = response.data.result.map((user: any) => ({
-        name: user.username,
+        nickname: user.username,
         coin: user.coin,
         rank: user.rank,
         baekjoonId: user.baekjoonId,
