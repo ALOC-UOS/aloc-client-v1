@@ -12,14 +12,12 @@ import IconButton from './IconButton';
 import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
 import GoogleLoginModal from './GoogleLoginModal';
-import ProfileModal from './ProfileModal';
 import useUser from '@/hooks/useUser';
 
 const TopBar = () => {
   const [isScroll, setIsScroll] = useState(false);
   const { isLoggedIn } = useUser();
   const { isOpen: isLoginModalOpen, show: showLoginModal, hide: hideLoginModal } = useModal();
-  const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -57,7 +55,6 @@ const TopBar = () => {
       </S.TopBarContainer>
 
       <GoogleLoginModal isOpen={isLoginModalOpen} onClose={hideLoginModal} />
-      <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />
     </>
   );
 };

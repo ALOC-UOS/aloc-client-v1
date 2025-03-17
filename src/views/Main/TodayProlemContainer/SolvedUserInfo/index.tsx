@@ -14,7 +14,7 @@ const SolvedUserInfo = ({ userList, solvedCount, lastSolvedAt }: SolvedUserInfoP
   if (solvedCount === 0) {
     return (
       <S.UserWrapper>
-        <UserProfileImage user={null} />
+        <UserProfileImage user={null} width="32px" height="32px" />
         <S.Description>아무도 문제를 풀지 않았어요</S.Description>
       </S.UserWrapper>
     );
@@ -24,7 +24,7 @@ const SolvedUserInfo = ({ userList, solvedCount, lastSolvedAt }: SolvedUserInfoP
     <S.UserWrapper>
       <S.UserProfileImageWrapper>
         {userList.map((user) => (
-          <UserProfileImage key={user.id} user={user} />
+          <UserProfileImage key={user.id} user={user} width="32px" height="32px" />
         ))}
       </S.UserProfileImageWrapper>
       <HStack alignItems="center">

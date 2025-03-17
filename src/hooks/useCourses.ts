@@ -20,7 +20,21 @@ const useCourses = () => {
           size: SIZE,
         },
       });
-      setCourses(response.data.result.content || []);
+      // response의 배열을 CourseInfo[] 타입으로 변환
+      const courses = response.data.result.content.map((course: any) => ({
+        ...course,
+        id: course.courseId,
+        type: course.courseType,
+        name: course.title,
+        totalProblemCount: course.problemCnt,
+        difficulty: {
+          start: course.minRank,
+          end: course.maxRank,
+        },
+        isSolved: course.success,
+        duration: course.duration,
+      }));
+      setCourses(courses);
       setPage(page + 1);
     } catch (error) {
       console.error(error);
