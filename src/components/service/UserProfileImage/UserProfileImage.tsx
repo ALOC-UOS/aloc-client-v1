@@ -3,7 +3,7 @@ import { UserInfo } from '@/types/user.types';
 import DefaultProfile from '@/assets/images/default-profile.svg';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { HStack } from '@/components/common/Stack';
-import { linkNames } from '@/constants/linkNames';
+import { moveToBaekjoonProfileSite } from '@/utils/index';
 
 interface UserProfileImageProps {
   user: UserInfo | null;
@@ -42,16 +42,12 @@ const UserProfileImage = ({
     );
   }
 
-  const moveToBaekjoonSite = (baekjoonId: string) => {
-    window.open(`${linkNames.baekjoon.profile}${baekjoonId}`);
-  };
-
   const handleClick = () => {
     if (disabled || !user.baekjoonId) {
       return;
     }
 
-    moveToBaekjoonSite(user.baekjoonId);
+    moveToBaekjoonProfileSite(user.baekjoonId);
   };
 
   return (

@@ -34,6 +34,10 @@ export const formatSolveTime = (solvedAt: string) => {
   }
 };
 
-export const moveToProblemSite = (problemId: number) => {
+export const moveToProblemProblemSite = (problemId: number) => {
   window.open(`${linkNames.baekjoon.problem}${problemId}`, '_blank');
+};
+
+export const moveToBaekjoonProfileSite = (baekjoonId: string) => {
+  window.open(`${linkNames.baekjoon.profile}${baekjoonId}`);
 };
