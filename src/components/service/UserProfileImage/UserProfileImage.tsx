@@ -3,6 +3,7 @@ import { UserInfo } from '@/types/user.types';
 import DefaultProfile from '@/assets/images/default-profile.svg';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { HStack } from '@/components/common/Stack';
+import { linkNames } from '@/constants/linkNames';
 
 interface UserProfileImageProps {
   user: UserInfo | null;
@@ -42,7 +43,7 @@ const UserProfileImage = ({
   }
 
   const moveToBaekjoonSite = (baekjoonId: string) => {
-    window.open(`https://www.acmicpc.net/user/${baekjoonId}`);
+    window.open(`${linkNames.baekjoon.profile}${baekjoonId}`);
   };
 
   const handleClick = () => {
