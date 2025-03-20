@@ -24,7 +24,7 @@ const SolvedUserInfo = ({ userList, solvedCount, lastSolvedAt }: SolvedUserInfoP
     <S.UserWrapper>
       <S.UserProfileImageWrapper>
         {userList.map((user) => (
-          <UserProfileImage key={user.id} user={user} width="32px" height="32px" />
+          <UserProfileImage key={user.baekjoonId} user={user} width="32px" height="32px" />
         ))}
       </S.UserProfileImageWrapper>
       <HStack alignItems="center">

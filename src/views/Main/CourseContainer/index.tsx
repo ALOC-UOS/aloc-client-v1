@@ -3,13 +3,28 @@ import TierIcons from '../TodayProlemContainer/TierIcons';
 import MarathonProblemList from '../TodayProlemContainer/MarathonProblemList';
 import { VStack } from '@/components/common/Stack';
 import SilderContainer from './SilderContainer';
-import useUserCourse from './SilderContainer/useUserCourse';
+import useUserCourses from '@/hooks/useUserCourses';
 import Background from './Background';
 
 const CourseContainer = () => {
-  const { todayProblem, courseList } = useUserCourse();
+  const { isLoading, todayProblem, userCourses } = useUserCourses();
 
-  if (!courseList || !todayProblem) {
+  if (isLoading) {
+    return (
+      <VStack
+        alignItems="center"
+        justifyContent="center"
+        style={{
+          position: 'fixed',
+          width: '100%',
+          height: '100dvh',
+          backgroundColor: 'var(--color-black)',
+        }}
+      />
+    );
+  }
+
+  if (!userCourses || !todayProblem) {
     return (
       <VStack
         alignItems="center"

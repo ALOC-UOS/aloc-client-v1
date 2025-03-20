@@ -1,4 +1,4 @@
-import { Problem, TodayProblem } from './problem.types';
+import { Problem } from './problem.types';
 import { UserInfo } from './user.types';
 
 export type CourseType = 'DAILY' | 'DEADLINE';
@@ -28,5 +28,6 @@ export interface CourseInfo extends Course {
 }
 
 export interface UserCourse extends Course {
-  problems: (Problem | TodayProblem)[];
+  todayProblemId: number;
+  problems: Problem[];
 }

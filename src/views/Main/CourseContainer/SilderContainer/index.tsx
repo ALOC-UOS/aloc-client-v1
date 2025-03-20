@@ -1,13 +1,13 @@
 import S from './style';
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import useUserCourse from './useUserCourse';
+import useUserCourses from '@/hooks/useUserCourses';
 import { moveToProblemProblemSite } from '@/utils/index';
 import TodayProlemContainer from '../../TodayProlemContainer';
 import { useLocation } from 'react-router-dom';
-import { TodayProblem } from '@/types/problem.types';
+import { Problem } from '@/types/problem.types';
 
 const SilderContainer = () => {
-  const { courseIndex, setCourseIndex, todayProblem, courseList } = useUserCourse();
+  const { courseIndex, setCourseIndex, todayProblem, userCourses } = useUserCourses();
   const [windowWidth, setWindowWidth] = useState(0);
   const sliderItemRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -55,9 +55,13 @@ const SilderContainer = () => {
     return () => window.removeEventListener('resize', updateWindowWidth);
   }, []);
 
+  if (!userCourses || !todayProblem) {
+    return null;
+  }
+
   return (
     <S.SliderContainer>
-      {courseList.map((course, index) => {
+      {userCourses.map((course, index) => {
         return (
           <S.SliderItem
             key={course.id}
@@ -72,7 +76,7 @@ const SilderContainer = () => {
           >
             <TodayProlemContainer
               courseName={course.name}
-              problem={course.problems[course.problems.length - 1] as TodayProblem}
+              problem={course.problems[course.problems.length - 1] as Problem}
               onClick={() => handleCourseClick(index)}
             />
           </S.SliderItem>

@@ -2,10 +2,12 @@ import { useMemo, useState } from 'react';
 import { UserInfo } from '@/types/user.types';
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
+import useUserCourses from './useUserCourses';
 
 export const userAtom = atom<UserInfo | null>(null);
 
 const useUser = () => {
+  const { getUserCourses } = useUserCourses();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
@@ -48,6 +50,7 @@ const useUser = () => {
 
     try {
       await loadUser();
+      await getUserCourses();
     } catch (error) {
       console.error('토큰으로 사용자 정보 조회 실패:', error);
       // 토큰이 유효하지 않은 경우 로그아웃 처리
