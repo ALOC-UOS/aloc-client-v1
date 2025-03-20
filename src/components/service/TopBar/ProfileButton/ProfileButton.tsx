@@ -4,6 +4,7 @@ import { HStack } from '@/components/common/Stack';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import Label from '@/components/common/Label';
 import useUser from '@/hooks/useUser';
+import { pathname } from '@/constants/pathnames';
 
 const ProfileButton = () => {
   const { user } = useUser();
@@ -12,7 +13,7 @@ const ProfileButton = () => {
   const isMainPage = location.pathname === '/';
 
   const handleClick = () => {
-    navigate('/profile/me');
+    navigate(pathname.PROFILE_PAGE);
   };
 
   if (!user) {
