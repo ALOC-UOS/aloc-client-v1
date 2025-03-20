@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { UserInfo } from '@/types/user.types';
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
@@ -9,6 +9,7 @@ const useUser = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
+  const isLoggedIn = useMemo(() => user !== null, [user]);
 
   // 토큰 확인 및 사용자 정보 로드
   const loadUser = async () => {
@@ -101,7 +102,7 @@ const useUser = () => {
   return {
     isLoading,
     user,
-    isLoggedIn: user !== null,
+    isLoggedIn,
     loadUser,
     logout,
     checkLoginStatus,
