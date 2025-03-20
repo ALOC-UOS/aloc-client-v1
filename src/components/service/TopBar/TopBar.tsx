@@ -13,6 +13,7 @@ import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
 import GoogleLoginModal from '../GoogleLoginModal';
 import useUser from '@/hooks/useUser';
+import { pathname } from '@/constants/pathnames';
 
 const TopBar = () => {
   const [isScroll, setIsScroll] = useState(false);
@@ -21,7 +22,7 @@ const TopBar = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    navigate('/');
+    navigate(pathname.MAIN_PAGE);
   };
 
   useEffect(() => {
