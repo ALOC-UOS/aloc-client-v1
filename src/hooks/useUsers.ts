@@ -16,7 +16,7 @@ const useUsers = () => {
         rank: user.rank,
         baekjoonId: user.baekjoonId,
         profileImageFileName: user.profileImageFileName,
-        profileBackgroundColor: user.profileColor,
+        profileBackgroundColor: user.color,
         createdAt: user.createdAt,
         todaySolved: user.todaySolved,
         solvedCount: user.solvedCount,
