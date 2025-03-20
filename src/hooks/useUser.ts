@@ -17,21 +17,12 @@ const useUser = () => {
       const response = await serverAPI.get('/user');
       const userInfo = response.data.result;
       setUser({
-        nickname: userInfo.username,
+        nickname: userInfo.name,
         coin: userInfo.coin,
         rank: userInfo.rank,
         baekjoonId: userInfo.baekjoonId,
         profileImageFileName: userInfo.profileImageFileName,
-        profileBackgroundColor: {
-          name: userInfo.profileColor,
-          type: userInfo.type,
-          color1: userInfo.color1,
-          color2: userInfo.color2,
-          color3: userInfo.color3,
-          color4: userInfo.color4,
-          color5: userInfo.color5,
-          degree: userInfo.degree,
-        },
+        profileBackgroundColor: userInfo.profileColor,
         createdAt: userInfo.createdAt,
         todaySolved: userInfo.todaySolved,
         solvedCount: userInfo.solvedCount,
@@ -73,7 +64,7 @@ const useUser = () => {
   const updateUser = async ({ baekjoonId, nickname }: { baekjoonId: string; nickname: string }) => {
     setIsLoading(true);
     try {
-      await serverAPI.patch('/user', { baekjoonId, nickname });
+      await serverAPI.patch('/user', { baekjoonId, name: nickname });
       await loadUser();
     } catch (error) {
       console.error('사용자 정보 업데이트 실패:', error);
@@ -83,11 +74,13 @@ const useUser = () => {
     }
   };
 
-  const updateProfileImage = async (imageFile: File) => {
+  const updateProfileImage = async (imageFile: File | null) => {
     setIsUploadingImage(true);
     try {
       const formData = new FormData();
-      formData.append('profileImageFile', imageFile);
+      if (imageFile) {
+        formData.append('profileImageFile', imageFile);
+      }
 
       const response = await serverAPI.patch('/user/profile-image', formData, {
         headers: {
