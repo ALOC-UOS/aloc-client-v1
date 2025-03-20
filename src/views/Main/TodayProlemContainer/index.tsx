@@ -1,11 +1,11 @@
-import { TodayProblem } from '@/types/problem.types';
+import { Problem } from '@/types/problem.types';
 import S from './style';
 import SolvedUserInfo from './SolvedUserInfo';
 import { VStack } from '@/components/common/Stack';
 
 interface TodayProlemContainerProps {
   courseName: string;
-  problem: TodayProblem;
+  problem: Problem;
   onClick: () => void;
 }
 

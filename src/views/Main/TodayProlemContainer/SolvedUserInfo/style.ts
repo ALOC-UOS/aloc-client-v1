@@ -30,7 +30,7 @@ const UserProfileImageWrapper = styled.div`
   flex-direction: row;
   align-items: center;
 
-  & > *:not(:first-child) {
+  & > *:not(:first-of-type) {
     margin-left: -16px;
   }
 `;
