@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { VStack } from '@/components/common/Stack';
+import { HStack, VStack } from '@/components/common/Stack';
 import Modal from '@/components/common/Modal';
 import Input from '@/components/common/Input/Input';
 import Button from '@/components/common/Button';
@@ -42,6 +42,15 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
 
   const handleImageClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleImageDelete = async () => {
+    try {
+      await updateProfileImage(null);
+    } catch (error) {
+      console.error('프로필 이미지 삭제 실패:', error);
+      alert('이미지 삭제에 실패했습니다. 다시 시도해주세요.');
+    }
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,18 +99,34 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
             accept="image/*"
             onChange={handleImageChange}
           />
-          <p
-            style={{
-              color: 'var(--color-blue)',
-              fontSize: '12px',
-              fontWeight: '500',
-              cursor: 'pointer',
-              textDecoration: 'underline',
-            }}
-            onClick={handleImageClick}
-          >
-            {isUploadingImage ? '업로드 중...' : '사진 변경하기(선택)'}
-          </p>
+          <HStack gap={12}>
+            <p
+              style={{
+                color: 'var(--color-blue)',
+                fontSize: '12px',
+                fontWeight: '500',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+              }}
+              onClick={handleImageClick}
+            >
+              {isUploadingImage ? '업로드 중...' : '사진 변경하기(선택)'}
+            </p>
+            {user?.profileImageFileName && (
+              <p
+                style={{
+                  color: 'var(--color-red)',
+                  fontSize: '12px',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                }}
+                onClick={handleImageDelete}
+              >
+                삭제하기
+              </p>
+            )}
+          </HStack>
         </VStack>
         <VStack gap={16} style={{ width: '100%' }}>
           <Input

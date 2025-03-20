@@ -11,21 +11,12 @@ const useUsers = () => {
     try {
       const response = await serverAPI.get('/users');
       const users: UserInfo[] = response.data.result.map((user: any) => ({
-        nickname: user.username,
+        nickname: user.name,
         coin: user.coin,
         rank: user.rank,
         baekjoonId: user.baekjoonId,
         profileImageFileName: user.profileImageFileName,
-        profileBackgroundColor: {
-          name: user.profileColor,
-          type: user.type,
-          color1: user.color1,
-          color2: user.color2,
-          color3: user.color3,
-          color4: user.color4,
-          color5: user.color5,
-          degree: user.degree,
-        },
+        profileBackgroundColor: user.profileColor,
         createdAt: user.createdAt,
         todaySolved: user.todaySolved,
         solvedCount: user.solvedCount,

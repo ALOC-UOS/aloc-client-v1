@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
+import { linkNames } from '@/constants/linkNames';
 
 dayjs.extend(relativeTime);
 dayjs.locale('ko');
@@ -33,6 +34,10 @@ export const formatSolveTime = (solvedAt: string) => {
   }
 };
 
-export const moveToProblemSite = (problemId: number) => {
-  window.open(`https://www.acmicpc.net/problem/${problemId}`, '_blank');
+export const moveToProblemProblemSite = (problemId: number) => {
+  window.open(`${linkNames.baekjoon.problem}${problemId}`, '_blank');
+};
+
+export const moveToBaekjoonProfileSite = (baekjoonId: string) => {
+  window.open(`${linkNames.baekjoon.profile}${baekjoonId}`);
 };

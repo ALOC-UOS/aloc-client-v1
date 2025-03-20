@@ -32,7 +32,7 @@ const useCourses = () => {
           start: course.rank.min,
           end: course.rank.max,
         },
-        status: course.state,
+        status: course.status,
         duration: course.duration,
       }));
       setCourses(courses);

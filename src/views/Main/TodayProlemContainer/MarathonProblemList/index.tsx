@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getProblemTier, moveToProblemSite } from '@/utils/index';
+import { getProblemTier, moveToProblemProblemSite } from '@/utils/index';
 // import { serverAPI } from '@/api/axios';
 import { tierStyleConfig } from '@/styles/tier.config';
 import LockIcon from '@/assets/icons/lock.svg';
@@ -56,7 +56,7 @@ const MarathonProblemList = () => {
       <S.ProblemItem
         isSolved={problem.isSolved}
         backgroundColor={problem.tier.backgroundColor}
-        onClick={() => moveToProblemSite(problem.problemId)}
+        onClick={() => moveToProblemProblemSite(problem.problemId)}
       >
         <img
           src={problem.tier.icon.small}
