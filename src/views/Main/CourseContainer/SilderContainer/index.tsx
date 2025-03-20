@@ -1,7 +1,7 @@
 import S from './style';
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import useUserCourse from './useUserCourse';
-import { moveToProblemSite } from '@/utils/index';
+import { moveToProblemProblemSite } from '@/utils/index';
 import TodayProlemContainer from '../../TodayProlemContainer';
 import { useLocation } from 'react-router-dom';
 import { TodayProblem } from '@/types/problem.types';
@@ -19,7 +19,7 @@ const SilderContainer = () => {
     }
 
     if (todayProblem) {
-      moveToProblemSite(todayProblem.problemId);
+      moveToProblemProblemSite(todayProblem.problemId);
     }
   };
 
