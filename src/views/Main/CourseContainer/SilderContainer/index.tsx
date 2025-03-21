@@ -1,5 +1,5 @@
 import S from './style';
-import { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import useUserCourses from '@/hooks/useUserCourses';
 import { moveToProblemProblemSite } from '@/utils/index';
 import TodayProlemContainer from '../../TodayProlemContainer';
@@ -41,7 +41,7 @@ const SilderContainer = () => {
     return 0;
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, [location.pathname]);
 

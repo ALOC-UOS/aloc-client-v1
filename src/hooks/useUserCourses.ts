@@ -1,6 +1,6 @@
 import { atom, useAtom } from 'jotai';
 import { Problem } from '@/types/problem.types';
-import { UserCourse } from '@/types/course.types';
+import { CourseInfo, UserCourse } from '@/types/course.types';
 import { useEffect, useState } from 'react';
 import { serverAPI } from '@/api/axios';
 import { getTierByDifficulty } from '@/utils/Tier';
@@ -15,6 +15,7 @@ const todayProblemAtom = atom<Problem | null>(null);
 const useUserCourses = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userCourses, setUserCourses] = useAtom(userCourseListAtom);
+  const [selectedCourse, setSelectedCourse] = useState<CourseInfo | null>(null);
   const [courseIndex, setCourseIndex] = useAtom(courseIndexAtom);
   const [todayProblem, setTodayProblem] = useAtom(todayProblemAtom);
 
@@ -73,6 +74,23 @@ const useUserCourses = () => {
     }
   };
 
+  const addCourse = async (course: CourseInfo) => {
+    setIsLoading(true);
+    try {
+      await serverAPI.post(`/user/course/${course.id}`);
+      await getUserCourses();
+      return true;
+    } catch (error) {
+      console.error('코스 추가 중 오류 발생:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => {
+        setSelectedCourse(null);
+      }, 300);
+    }
+  };
+
   return {
     isLoading,
     courseIndex,
@@ -80,6 +98,9 @@ const useUserCourses = () => {
     todayProblem,
     userCourses,
     getUserCourses,
+    addCourse,
+    selectedCourse,
+    setSelectedCourse,
   };
 };
 
