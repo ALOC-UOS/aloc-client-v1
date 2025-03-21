@@ -8,7 +8,6 @@ import useModal from '@/hooks/useModal';
 import { CourseInfo } from '@/types/course.types';
 import ExceededModal from '@/components/service/Course/ExceededModal';
 import useUser from '@/hooks/useUser';
-import useCourse from '@/hooks/useCourse';
 import useUserCourses from '@/hooks/useUserCourses';
 
 type ModalType = 'login' | 'exceeded' | 'course';
@@ -22,8 +21,7 @@ const getModalType = (isLoggedIn: boolean, coursesCount: number): ModalType => {
 const CoursePage = () => {
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const { isOpen, show, hide } = useModal();
-  const { userCourses } = useUserCourses();
-  const { isLoading, selectedCourse, setSelectedCourse, addCourse } = useCourse();
+  const { isLoading, selectedCourse, setSelectedCourse, addCourse, userCourses } = useUserCourses();
   const { isLoggedIn } = useUser();
 
   const determineModalType = (): ModalType => {
