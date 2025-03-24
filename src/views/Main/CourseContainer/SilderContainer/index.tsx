@@ -2,8 +2,8 @@ import S from './style';
 import { useEffect, useState, useRef } from 'react';
 import useUserCourses from '@/hooks/useUserCourses';
 import { moveToProblemProblemSite } from '@/utils/index';
-import TodayProlemContainer from '../../TodayProlemContainer';
-import ProblemList from '../../ProblemList';
+import TodayProlemContainer from './TodayProlemContainer';
+import ProblemList from './ProblemList';
 import { useLocation } from 'react-router-dom';
 import { Problem } from '@/types/problem.types';
 
