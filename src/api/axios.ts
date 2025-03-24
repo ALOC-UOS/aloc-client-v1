@@ -31,7 +31,6 @@ serverAPI.interceptors.response.use(
       try {
         // 리프레시 토큰으로 새 액세스 토큰 요청
         // 쿠키에 저장된 리프레시 토큰은 자동으로 요청에 포함됨
-        console.log('토큰 만료로 리프레시 토큰으로 재시도합니다.');
         const response = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/auth/refresh`,
           {},
