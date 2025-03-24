@@ -149,63 +149,75 @@ const ProfilePage = () => {
             >
               진행중인 코스
             </p>
-            <VStack gap={8}>
-              {userCourses.map((course) => (
-                <VStack
-                  key={course.id}
-                  alignItems="flex-start"
-                  gap={4}
-                  style={{
-                    backgroundColor: 'var(--color-white)',
-                    padding: '12px',
-                    borderRadius: '16px',
-                    minWidth: '280px',
-                  }}
-                  onClick={() => {
-                    setSelectedCourseId(course.id);
-                    handleClickButton('cancelCourse');
-                  }}
-                >
-                  <p
+            {userCourses.length === 0 ? (
+              <p
+                style={{
+                  color: 'var(--color-sub-text)',
+                  fontSize: '16px',
+                  fontWeight: '500',
+                }}
+              >
+                진행중인 코스가 여기에 표시됩니다
+              </p>
+            ) : (
+              <VStack gap={8}>
+                {userCourses.map((course) => (
+                  <VStack
+                    key={course.id}
+                    alignItems="flex-start"
+                    gap={4}
                     style={{
-                      color: 'var(--color-blue)',
-                      fontSize: '12px',
-                      fontWeight: '500',
-                      padding: '4px 8px',
-                      border: '1px solid var(--color-blue)',
-                      borderRadius: '24px',
+                      backgroundColor: 'var(--color-white)',
+                      padding: '12px',
+                      borderRadius: '16px',
+                      minWidth: '280px',
+                    }}
+                    onClick={() => {
+                      setSelectedCourseId(course.id);
+                      handleClickButton('cancelCourse');
                     }}
                   >
-                    {course.type}
-                  </p>
-                  <HStack
-                    alignItems="center"
-                    justifyContent="space-between"
-                    gap={8}
-                    style={{ width: '100%' }}
-                  >
                     <p
                       style={{
-                        color: 'var(--color-title-text)',
-                        fontSize: '16px',
+                        color: 'var(--color-blue)',
+                        fontSize: '12px',
                         fontWeight: '500',
+                        padding: '4px 8px',
+                        border: '1px solid var(--color-blue)',
+                        borderRadius: '24px',
                       }}
                     >
-                      {course.name}
+                      {course.type}
                     </p>
-                    <p
-                      style={{
-                        color: 'var(--color-sub-text)',
-                        fontSize: '14px',
-                        fontWeight: '500',
-                      }}
+                    <HStack
+                      alignItems="center"
+                      justifyContent="space-between"
+                      gap={8}
+                      style={{ width: '100%' }}
                     >
-                      {course.totalProblemCount}문제
-                    </p>
-                  </HStack>
-                </VStack>
-              ))}
-            </VStack>
+                      <p
+                        style={{
+                          color: 'var(--color-title-text)',
+                          fontSize: '16px',
+                          fontWeight: '500',
+                        }}
+                      >
+                        {course.name}
+                      </p>
+                      <p
+                        style={{
+                          color: 'var(--color-sub-text)',
+                          fontSize: '14px',
+                          fontWeight: '500',
+                        }}
+                      >
+                        {course.totalProblemCount}문제
+                      </p>
+                    </HStack>
+                  </VStack>
+                ))}
+              </VStack>
+            )}
           </S.CardContainer>
           <S.CardContainer>
             <p
