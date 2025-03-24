@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Animation from '@/styles/animation';
 
 const AnimationContainer = styled.div`
-  animation: ${Animation.FadeInUp(1, 12)} 1s 3s forwards;
+  animation: ${Animation.FadeInUp} 1s 3s forwards;
   position: fixed;
   left: 16px;
   right: 16px;
