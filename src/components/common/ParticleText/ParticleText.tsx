@@ -137,14 +137,11 @@ const ParticleText = ({ title }: ParticleTextProps) => {
 
     // 마우스 이벤트 핸들러
     const handleMouseMove = (e: MouseEvent) => {
-      const bodyStyle = window.getComputedStyle(document.body);
-      if (bodyStyle.overflow === 'hidden') {
-        return;
-      }
-
+      if (!canvasRef.current) return;
+      const rect = canvasRef.current.getBoundingClientRect();
       mouseRef.current = {
-        x: e.clientX,
-        y: e.clientY,
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
       };
     };
 
@@ -172,12 +169,7 @@ const ParticleText = ({ title }: ParticleTextProps) => {
     };
   }, []);
 
-  return (
-    <S.ParticleTextContainer>
-      <S.ParticleBackground />
-      <S.ParticleCanvas ref={canvasRef} />
-    </S.ParticleTextContainer>
-  );
+  return <S.ParticleCanvas ref={canvasRef} />;
 };
 
 export default ParticleText;

@@ -61,6 +61,7 @@ const GlobalStyles = () => (
         --color-white-25: #ffffff40;
         --color-white-10: #ffffff1a;
         --color-black: #000000;
+        --color-black-75: #000000b0;
         --color-black-50: #00000080;
         --color-black-25: #00000040;
         --color-black-10: #0000001a;

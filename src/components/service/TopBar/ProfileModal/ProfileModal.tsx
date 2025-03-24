@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { HStack, VStack } from '@/components/common/Stack';
 import Modal from '@/components/common/Modal';
-import Input from '@/components/common/Input/Input';
+import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import useUser from '@/hooks/useUser';

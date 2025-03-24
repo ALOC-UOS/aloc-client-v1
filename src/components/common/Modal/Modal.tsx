@@ -9,7 +9,7 @@ interface ModalProps {
   children: ReactNode;
 }
 
-const Modal = ({ isOpen, isBackdropClickable, onClose, children }: ModalProps) => {
+const Modal = ({ isOpen, isBackdropClickable = true, onClose, children }: ModalProps) => {
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isBackdropClickable) {
       return;

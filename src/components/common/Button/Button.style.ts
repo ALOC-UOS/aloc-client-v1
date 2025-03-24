@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'text';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'text' | 'danger';
 type ButtonSize = 'small' | 'medium' | 'large';
 
 const getButtonStyles = (variant: ButtonVariant) => {
@@ -28,6 +28,12 @@ const getButtonStyles = (variant: ButtonVariant) => {
       return css`
         background-color: transparent;
         color: var(--color-blue, #3182f6);
+        border: none;
+      `;
+    case 'danger':
+      return css`
+        background-color: var(--color-red, #ff5a5f);
+        color: var(--color-white, #ffffff);
         border: none;
       `;
     default:

@@ -92,6 +92,21 @@ const useUserCourses = () => {
     }
   };
 
+  const deleteCourse = async (courseId: string) => {
+    setIsLoading(true);
+    try {
+      await serverAPI.patch(`/user/course/${courseId}`);
+      await getUserCourses();
+    } catch (error) {
+      console.error('코스 삭제 중 오류 발생:', error);
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => {
+        setSelectedCourse(null);
+      }, 300);
+    }
+  };
+
   const checkTodayProblem = async () => {
     setIsSolvingCheckLoading(true);
     try {
@@ -111,7 +126,9 @@ const useUserCourses = () => {
     todayProblem,
     userCourses,
     getUserCourses,
+    setUserCourses,
     addCourse,
+    deleteCourse,
     selectedCourse,
     setSelectedCourse,
     isSolvingCheckLoading,

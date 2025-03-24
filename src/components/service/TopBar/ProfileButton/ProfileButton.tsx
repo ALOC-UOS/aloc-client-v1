@@ -11,6 +11,7 @@ const ProfileButton = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMainPage = location.pathname === '/';
+  const isProfilePage = location.pathname === pathname.PROFILE_PAGE;
 
   const handleClick = () => {
     navigate(pathname.PROFILE_PAGE);
@@ -21,10 +22,10 @@ const ProfileButton = () => {
   }
 
   return (
-    <S.ButtonContainer onClick={handleClick} isMainPage={isMainPage}>
+    <S.ButtonContainer onClick={handleClick} transparent={isMainPage || isProfilePage}>
       <HStack alignItems="center" gap={8}>
         <UserProfileImage user={user} width="28px" height="28px" />
-        <S.UserNickname isMainPage={isMainPage}>{user.nickname}</S.UserNickname>
+        <S.UserNickname transparent={isMainPage || isProfilePage}>{user.nickname}</S.UserNickname>
       </HStack>
       <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />
     </S.ButtonContainer>

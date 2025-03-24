@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const ButtonContainer = styled.button<{ isMainPage: boolean; isActive: boolean }>`
+const ButtonContainer = styled.button<{ transparent: boolean; isActive: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,11 +9,11 @@ const ButtonContainer = styled.button<{ isMainPage: boolean; isActive: boolean }
   border: 1px solid var(--color-black-10);
   border-radius: 8px;
   padding: 0;
-  background-color: ${({ isMainPage, isActive }) => {
+  background-color: ${({ transparent, isActive }) => {
     if (isActive) {
       return 'var(--color-blue)';
     }
-    if (isMainPage) {
+    if (transparent) {
       return 'var(--color-white-10)';
     }
     return 'var(--color-white)';

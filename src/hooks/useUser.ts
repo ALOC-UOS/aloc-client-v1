@@ -7,7 +7,7 @@ import useUserCourses from './useUserCourses';
 export const userAtom = atom<UserInfo | null>(null);
 
 const useUser = () => {
-  const { getUserCourses } = useUserCourses();
+  const { getUserCourses, setUserCourses } = useUserCourses();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
@@ -61,8 +61,9 @@ const useUser = () => {
   // 로그아웃
   const logout = () => {
     localStorage.removeItem('accessToken');
-    // serverAPI.post('/auth/logout');
+    serverAPI.post('/auth/logout');
     setUser(null);
+    setUserCourses([]);
   };
 
   const updateUser = async ({ baekjoonId, nickname }: { baekjoonId: string; nickname: string }) => {
