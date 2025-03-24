@@ -9,6 +9,7 @@ import TierSilverSmall from '../assets/icons/tier/silver.small.svg';
 import TierGoldSmall from '../assets/icons/tier/gold.small.svg';
 import TierPlatinumSmall from '../assets/icons/tier/platinum.small.svg';
 import TierDiamondSmall from '../assets/icons/tier/diamond.small.svg';
+import TierRubySmall from '../assets/icons/tier/ruby.small.svg';
 import { Tier, TierStyleConfig } from '@/types/tier.types';
 
 export const tierStyleConfig: Record<Tier, TierStyleConfig> = {
@@ -58,6 +59,14 @@ export const tierStyleConfig: Record<Tier, TierStyleConfig> = {
     icon: {
       small: TierDiamondSmall,
       circle: TierDiamondCircle,
+    },
+  },
+  ruby: {
+    backgroundColor: '#64000C',
+    color: '#FF3B73',
+    icon: {
+      small: TierRubySmall,
+      circle: '',
     },
   },
 };
