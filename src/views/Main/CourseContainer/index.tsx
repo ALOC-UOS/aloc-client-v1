@@ -1,13 +1,21 @@
 import ProblemContentError from '../TodayProlemContainer/error';
 import TierIcons from '../TodayProlemContainer/TierIcons';
-import MarathonProblemList from '../TodayProlemContainer/MarathonProblemList';
 import { VStack } from '@/components/common/Stack';
 import SilderContainer from './SilderContainer';
 import useUserCourses from '@/hooks/useUserCourses';
 import Background from './Background';
+import useUser from '@/hooks/useUser';
+import { useEffect } from 'react';
 
 const CourseContainer = () => {
-  const { isLoading, todayProblem, userCourses } = useUserCourses();
+  const { isLoading, todayProblem, userCourses, getUserCourses } = useUserCourses();
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      getUserCourses();
+    }
+  }, [user]);
 
   if (isLoading) {
     return (

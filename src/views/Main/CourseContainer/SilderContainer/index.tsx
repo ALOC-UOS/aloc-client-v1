@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import useUserCourses from '@/hooks/useUserCourses';
 import { moveToProblemProblemSite } from '@/utils/index';
 import TodayProlemContainer from '../../TodayProlemContainer';
+import ProblemList from '../../ProblemList';
 import { useLocation } from 'react-router-dom';
 import { Problem } from '@/types/problem.types';
 
@@ -72,13 +73,13 @@ const SilderContainer = () => {
               zIndex: index === courseIndex ? 10 : 5,
               opacity: index === courseIndex ? 1 : 0.5, // 멀리 있는 항목은 더 투명하게
             }}
-            onClick={() => handleCourseClick(index)}
           >
             <TodayProlemContainer
               courseName={course.name}
               problem={course.problems[course.problems.length - 1] as Problem}
               onClick={() => handleCourseClick(index)}
             />
+            <ProblemList course={course} isVisible={courseIndex === index} />
           </S.SliderItem>
         );
       })}
