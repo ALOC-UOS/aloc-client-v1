@@ -45,7 +45,7 @@ const useUser = () => {
     if (!token) {
       setUser(null);
       setIsLoading(false);
-      return;
+      // return;
     }
 
     try {
@@ -61,7 +61,7 @@ const useUser = () => {
   // 로그아웃
   const logout = () => {
     localStorage.removeItem('accessToken');
-    serverAPI.post('/auth/logout');
+    // serverAPI.post('/auth/logout');
     setUser(null);
   };
 
