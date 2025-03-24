@@ -14,6 +14,7 @@ const todayProblemAtom = atom<Problem | null>(null);
 
 const useUserCourses = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSolvingCheckLoading, setIsSolvingCheckLoading] = useState(false);
   const [userCourses, setUserCourses] = useAtom(userCourseListAtom);
   const [selectedCourse, setSelectedCourse] = useState<CourseInfo | null>(null);
   const [courseIndex, setCourseIndex] = useAtom(courseIndexAtom);
@@ -91,6 +92,18 @@ const useUserCourses = () => {
     }
   };
 
+  const checkTodayProblem = async () => {
+    setIsSolvingCheckLoading(true);
+    try {
+      const response = await serverAPI.put(`/problem/${todayProblem?.problemId}`);
+      return response.data.result.isSolved;
+    } catch (error) {
+      console.error('오늘의 문제 조회 중 오류 발생:', error);
+    } finally {
+      setIsSolvingCheckLoading(false);
+    }
+  };
+
   return {
     isLoading,
     courseIndex,
@@ -101,6 +114,8 @@ const useUserCourses = () => {
     addCourse,
     selectedCourse,
     setSelectedCourse,
+    isSolvingCheckLoading,
+    checkTodayProblem,
   };
 };
 

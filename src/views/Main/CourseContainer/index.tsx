@@ -1,14 +1,17 @@
-import ProblemContentError from '../TodayProlemContainer/error';
-import TierIcons from '../TodayProlemContainer/TierIcons';
+import ProblemContentError from './SilderContainer/TodayProlemContainer/error';
+import TierIcons from './TierIcons';
 import { VStack } from '@/components/common/Stack';
 import SilderContainer from './SilderContainer';
 import useUserCourses from '@/hooks/useUserCourses';
 import Background from './Background';
 import useUser from '@/hooks/useUser';
 import { useEffect } from 'react';
+import SolveCheckButton from './SolveCheckButton';
+import Confetti from '@/components/common/Confetti';
 
 const CourseContainer = () => {
-  const { isLoading, todayProblem, userCourses, getUserCourses } = useUserCourses();
+  const { isLoading, todayProblem, userCourses, getUserCourses, checkTodayProblem } =
+    useUserCourses();
   const { user } = useUser();
 
   useEffect(() => {
@@ -54,6 +57,8 @@ const CourseContainer = () => {
       <Background color={todayProblem.tier.backgroundColor} />
       <TierIcons tier={todayProblem.tier} key={todayProblem.problemId} />
       <SilderContainer />
+      <SolveCheckButton />
+      <Confetti />
     </>
   );
 };
