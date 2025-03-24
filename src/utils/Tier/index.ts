@@ -6,6 +6,7 @@ export const getTierByDifficulty = (difficulty: number): Tier => {
   if (11 <= difficulty && difficulty <= 15) return 'gold';
   if (16 <= difficulty && difficulty <= 20) return 'platinum';
   if (21 <= difficulty && difficulty <= 25) return 'diamond';
+  if (26 <= difficulty && difficulty <= 30) return 'ruby';
 
   return 'unranked';
 };
@@ -39,6 +40,7 @@ export const getTierByUserRank = (rank: number): Tier => {
   if (tensDigit === 3) return 'gold';
   if (tensDigit === 4) return 'platinum';
   if (tensDigit === 5) return 'diamond';
+  if (tensDigit === 6) return 'ruby';
   return 'unranked';
 };
 

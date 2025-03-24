@@ -12,6 +12,7 @@ const IconButton: React.FC<IconButtonProps> = ({ icon, activeIcon, route }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMainPage = location.pathname === '/';
+  const isProfilePage = location.pathname === '/profile/me';
 
   // 현재 경로가 버튼의 route와 일치하는지 확인
   const isCurrentRoute = location.pathname === route;
@@ -31,7 +32,11 @@ const IconButton: React.FC<IconButtonProps> = ({ icon, activeIcon, route }) => {
   };
 
   return (
-    <S.ButtonContainer onClick={handleClick} isMainPage={isMainPage} isActive={isCurrentRoute}>
+    <S.ButtonContainer
+      onClick={handleClick}
+      transparent={isMainPage || isProfilePage}
+      isActive={isCurrentRoute}
+    >
       {renderIcon()}
     </S.ButtonContainer>
   );
