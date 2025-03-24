@@ -1,6 +1,5 @@
 import ProblemContentError from '../TodayProlemContainer/error';
 import TierIcons from '../TodayProlemContainer/TierIcons';
-import MarathonProblemList from '../TodayProlemContainer/MarathonProblemList';
 import { VStack } from '@/components/common/Stack';
 import SilderContainer from './SilderContainer';
 import useUserCourses from '@/hooks/useUserCourses';

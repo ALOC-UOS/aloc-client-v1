@@ -41,7 +41,7 @@ const ProblemItemWrapper = styled.div<{ delay: number; disabled?: boolean }>`
   justify-content: center;
 
   animation: ${AppearProblemItem} 1.6s ease forwards;
-  animation-delay: ${(props) => props.delay + 2}s;
+  animation-delay: ${(props) => props.delay + 1}s;
   opacity: 0;
 
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
@@ -95,10 +95,14 @@ const ProblemItem = styled.div<{ isSolved: boolean; backgroundColor: string }>`
         linear-gradient(#fff 0 0);
     }
   }
+
+  &:active {
+    transform: scale(1.1);
+  }
 `;
 
 const HorizontalLine = styled.hr<{ delay: number }>`
-  animation: ${AppearHorizontalLine} ${(props) => props.delay + 5}s ease forwards;
+  animation: ${AppearHorizontalLine} ${(props) => props.delay + 4}s ease forwards;
   border: 0;
   width: 28px;
   height: 1px;
