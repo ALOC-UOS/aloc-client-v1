@@ -31,7 +31,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <TopBar />
-        <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />
+        {/* <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} /> */}
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/users" element={<UserPage />} />
