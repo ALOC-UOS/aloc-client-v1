@@ -78,7 +78,7 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isBackdropClickable={false}>
       <VStack alignItems="center" gap={24}>
         <VStack gap={4}>
           <Modal.Title>프로필 정보를 입력해주세요</Modal.Title>
