@@ -50,7 +50,6 @@ const useUser = () => {
 
     try {
       await loadUser();
-      await getUserCourses();
     } catch (error) {
       console.error('토큰으로 사용자 정보 조회 실패:', error);
       // 토큰이 유효하지 않은 경우 로그아웃 처리
