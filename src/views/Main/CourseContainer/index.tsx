@@ -19,7 +19,7 @@ const CourseContainer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (user && user.baekjoonId) {
       getUserCourses();
     }
   }, [user]);
