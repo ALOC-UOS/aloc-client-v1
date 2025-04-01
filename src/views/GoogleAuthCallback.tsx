@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
-import { serverAPI } from '@/api/axios';
 
 const GoogleAuthCallback = () => {
   useEffect(() => {
     const handleAuth = async () => {
       try {
-        // 액세스 토큰 요청
-        const response = await serverAPI.post('/auth/refresh');
-        if (response.data && response.data.accessToken) {
+        // URL에서 액세스 토큰 추출
+        const urlParams = new URLSearchParams(window.location.search);
+        const accessToken = urlParams.get('accessToken');
+
+        if (accessToken) {
           // accessToken을 localStorage에 저장
           try {
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('accessToken', accessToken);
             console.log('토큰이 성공적으로 저장되었습니다.');
           } catch (storageError) {
             console.error('localStorage 저장 오류:', storageError);
@@ -30,7 +31,7 @@ const GoogleAuthCallback = () => {
             console.log('window.opener가 없습니다. 메인 페이지로 리디렉션합니다.');
           }
         } else {
-          throw new Error('액세스 토큰을 받지 못했습니다.');
+          throw new Error('URL에서 액세스 토큰을 찾을 수 없습니다.');
         }
       } catch (err) {
         console.error('구글 로그인 처리 중 오류:', err);
