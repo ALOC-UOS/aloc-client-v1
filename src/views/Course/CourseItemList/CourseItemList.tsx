@@ -3,14 +3,15 @@ import { CourseInfo } from '@/types/course.types';
 import CourseItem from './CourseItem';
 import useCourses from '@/hooks/useCourses';
 import LoadingIcon from '@/components/common/Icon/Loading';
-import { VStack } from '@/components/common/Stack';
+import { HStack, VStack } from '@/components/common/Stack';
+import Button from '@/components/common/Button/Button';
 
 interface CourseItemListProps {
   onCourseClick: (course: CourseInfo) => void;
 }
 
 const CourseItemList = ({ onCourseClick }: CourseItemListProps) => {
-  const { isLoading, courses } = useCourses();
+  const { isLoading, courses, handlePageChange, totalPage, currentPage } = useCourses();
 
   if (isLoading) {
     return (
@@ -32,11 +33,30 @@ const CourseItemList = ({ onCourseClick }: CourseItemListProps) => {
   }
 
   return (
-    <S.CourseItemList>
-      {courses.map((course) => (
-        <CourseItem key={course.id} course={course} onClick={() => onCourseClick(course)} />
-      ))}
-    </S.CourseItemList>
+    <VStack>
+      <S.CourseItemList>
+        {courses.map((course) => (
+          <CourseItem key={course.id} course={course} onClick={() => onCourseClick(course)} />
+        ))}
+      </S.CourseItemList>
+      <HStack alignItems="center" justifyContent="center" gap={8} style={{ marginTop: '20px' }}>
+        {Array.from({ length: totalPage }, (_, index) => {
+          const pageNum = index + 1;
+          const isActive = pageNum === currentPage;
+
+          return (
+            <Button
+              key={pageNum}
+              onClick={() => handlePageChange(pageNum)}
+              variant={isActive ? 'primary' : 'text'}
+              size="small"
+            >
+              {pageNum}
+            </Button>
+          );
+        })}
+      </HStack>
+    </VStack>
   );
 };
 

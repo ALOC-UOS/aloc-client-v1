@@ -23,12 +23,20 @@ const getButtonStyles = (variant: ButtonVariant) => {
         background-color: transparent;
         color: var(--color-content-text, #333333);
         border: 1px solid var(--color-content-text, #333333);
+
+        &:hover {
+          background-color: var(--color-black-10, #0000001a);
+        }
       `;
     case 'text':
       return css`
         background-color: transparent;
         color: var(--color-blue, #3182f6);
         border: none;
+
+        &:hover {
+          background-color: var(--color-black-10, #0000001a);
+        }
       `;
     case 'danger':
       return css`

@@ -8,15 +8,16 @@ const coursesAtom = atom<CourseInfo[]>([]);
 const useCourses = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useAtom(coursesAtom);
-  const [page, setPage] = useState(0);
-  const SIZE = 10;
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const SIZE = 12;
 
   const getCourses = async () => {
     setIsLoading(true);
     try {
       const response = await serverAPI.get('/courses', {
         params: {
-          page: page,
+          page: currentPage - 1,
           size: SIZE,
         },
       });
@@ -36,7 +37,7 @@ const useCourses = () => {
         duration: course.duration,
       }));
       setCourses(courses);
-      setPage(page + 1);
+      setTotalPage(Math.ceil(response.data.result.totalElements / SIZE));
     } catch (error) {
       console.error(error);
       setCourses([]);
@@ -45,11 +46,15 @@ const useCourses = () => {
     }
   };
 
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   useEffect(() => {
     getCourses();
-  }, []);
+  }, [currentPage]);
 
-  return { courses, getCourses, isLoading };
+  return { courses, totalPage, currentPage, getCourses, handlePageChange, isLoading };
 };
 
 export default useCourses;
