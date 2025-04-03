@@ -15,7 +15,12 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Toaster richColors position="top-center" />
+      <Toaster
+        richColors
+        position="top-center"
+        className="my-custom-toast"
+        toastOptions={{ style: { borderRadius: '40px' } }}
+      />
       <BrowserRouter>
         <TopBar />
         <Routes>
