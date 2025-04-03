@@ -44,7 +44,7 @@ const useUserCourses = () => {
     }
   }, [courseIndex, userCourses]);
 
-  const getUserCourses = async () => {
+  const loadUserCourses = async () => {
     if (!isAuthenticated) {
       setIsLoading(false);
       return;
@@ -87,7 +87,7 @@ const useUserCourses = () => {
     setIsLoading(true);
     try {
       await serverAPI.post(`/user/course/${course.id}`);
-      await getUserCourses();
+      await loadUserCourses();
       return true;
     } catch (error) {
       console.error('코스 추가 중 오류 발생:', error);
@@ -104,7 +104,7 @@ const useUserCourses = () => {
     setIsLoading(true);
     try {
       await serverAPI.patch(`/user/course/${courseId}`);
-      await getUserCourses();
+      await loadUserCourses();
     } catch (error) {
       console.error('코스 삭제 중 오류 발생:', error);
     } finally {
@@ -133,7 +133,7 @@ const useUserCourses = () => {
     setCourseIndex,
     todayProblem,
     userCourses,
-    getUserCourses,
+    loadUserCourses,
     setUserCourses,
     addCourse,
     deleteCourse,

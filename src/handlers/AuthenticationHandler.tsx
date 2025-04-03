@@ -7,7 +7,7 @@ import useUserCourses from '@/hooks/useUserCourses';
 
 export const AuthenticationHandler = () => {
   const { user, setUser, loadUser, isLoading } = useUser();
-  const { getUserCourses } = useUserCourses();
+  const { loadUserCourses } = useUserCourses();
   const { isAuthenticated, refreshToken } = useAuth();
   const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
 
@@ -24,7 +24,7 @@ export const AuthenticationHandler = () => {
         return;
       }
       await loadUser();
-      await getUserCourses();
+      await loadUserCourses();
     };
 
     initLoginStatus();
