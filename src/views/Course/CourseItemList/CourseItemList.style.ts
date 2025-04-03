@@ -13,10 +13,10 @@ const CourseItemList = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 `;
 
-const EmptyMessage = styled.p`
+const Message = styled.p`
+  color: var(--color-sub-text);
   font-size: 24px;
   font-weight: 600;
-  color: var(--color-sub-text);
 `;
 
-export default { CourseItemList, EmptyMessage };
+export default { CourseItemList, Message };
