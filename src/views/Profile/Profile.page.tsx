@@ -71,6 +71,7 @@ const ProfilePage = () => {
             flexGrow: 1,
             backgroundColor: 'var(--color-black-75)',
             padding: '24px',
+            overflowX: 'scroll',
           }}
         >
           <S.CardContainer>
