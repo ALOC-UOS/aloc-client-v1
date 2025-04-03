@@ -10,7 +10,7 @@ const ProblemList = ({ course, isVisible }: { course: UserCourse; isVisible: boo
   return (
     <HStack
       alignItems="center"
-      justifyContent="flex-start"
+      justifyContent={course.totalProblemCount > 7 ? 'flex-start' : 'center'}
       style={{
         position: 'absolute',
         top: 'calc(100% + 48px)',
