@@ -59,6 +59,7 @@ const useAuth = () => {
   return {
     isLoading,
     isAuthenticated,
+    setIsAuthenticated,
     refreshToken,
     logout,
     getGoogleLoginUrl,

@@ -4,7 +4,6 @@ import GoogleLogoIcon from '@/assets/icons/google-logo.svg';
 import CloseIcon from '@/assets/icons/close.svg';
 import { VStack } from '@/components/common/Stack';
 import { useEffect } from 'react';
-import useUser from '@/hooks/useUser';
 import useAuth from '@/hooks/useAuth';
 
 interface GoogleLoginModalProps {
@@ -13,18 +12,19 @@ interface GoogleLoginModalProps {
 }
 
 const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
-  const { loadUser } = useUser();
-  const { getGoogleLoginUrl } = useAuth();
+  const { getGoogleLoginUrl, setIsAuthenticated } = useAuth();
   const handleGoogleLogin = () => {
     window.open(getGoogleLoginUrl(), '_blank', 'width=500,height=600');
   };
 
   useEffect(() => {
-    const handleGoogleLoginSuccess = async (event: MessageEvent) => {
+    const handleGoogleLoginSuccess = (event: MessageEvent) => {
+      console.log(event.origin);
+      console.log(window.location.origin);
       if (event.origin !== window.location.origin) return;
 
       if (event.data.type === 'google-login-success') {
-        await loadUser();
+        setIsAuthenticated(true);
         onClose();
         return;
       }
