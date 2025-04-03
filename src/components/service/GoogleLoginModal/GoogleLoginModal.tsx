@@ -5,6 +5,7 @@ import CloseIcon from '@/assets/icons/close.svg';
 import { VStack } from '@/components/common/Stack';
 import { useEffect } from 'react';
 import useUser from '@/hooks/useUser';
+import useAuth from '@/hooks/useAuth';
 
 interface GoogleLoginModalProps {
   isOpen: boolean;
@@ -13,9 +14,9 @@ interface GoogleLoginModalProps {
 
 const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
   const { loadUser } = useUser();
+  const { getGoogleLoginUrl } = useAuth();
   const handleGoogleLogin = () => {
-    const googleLoginUrl = `${import.meta.env.VITE_API_BASE_URL}/oauth2/authorization/google`;
-    window.open(googleLoginUrl, '_blank', 'width=500,height=600');
+    window.open(getGoogleLoginUrl(), '_blank', 'width=500,height=600');
   };
 
   useEffect(() => {
