@@ -1,20 +1,26 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { UserInfo } from '@/types/user.types';
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
 import useUserCourses from './useUserCourses';
+import useAuth from './useAuth';
 
 export const userAtom = atom<UserInfo | null>(null);
 
 const useUser = () => {
-  const { getUserCourses, setUserCourses } = useUserCourses();
+  const { setUserCourses } = useUserCourses();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
+  const { isAuthenticated, refreshToken, logout: authLogout } = useAuth();
   const isLoggedIn = useMemo(() => user !== null, [user]);
 
-  // 토큰 확인 및 사용자 정보 로드
+  // 사용자 정보 로드
   const loadUser = async () => {
+    if (!isAuthenticated) {
+      return false;
+    }
+
     setIsLoading(true);
     try {
       const response = await serverAPI.get('/user');
@@ -31,33 +37,34 @@ const useUser = () => {
         solvedCount: userInfo.solvedCount,
         consecutiveSolvedDays: userInfo.consecutiveSolvedDays,
       });
+      return true;
     } catch (error) {
       console.error('사용자 정보 불러오기 실패:', error);
       setUser(null);
-      throw error;
+      return false;
     } finally {
       setIsLoading(false);
     }
   };
 
+  // 로그인 상태 확인 (App.tsx에서 호출)
   const checkLoginStatus = async () => {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
+    if (!isAuthenticated) {
       setUser(null);
-      setIsLoading(false);
+      await refreshToken();
+      return;
     }
-
-    try {
-      await loadUser();
-    } catch (error) {
-      console.error('토큰으로 사용자 정보 조회 실패:', error);
-    }
+    await loadUser();
   };
 
-  // 로그아웃
+  // useAuth의 인증 상태가 변경될 때 사용자 정보 갱신
+  useEffect(() => {
+    checkLoginStatus();
+  }, [isAuthenticated]);
+
+  // 로그아웃 - useAuth의 logout을 호출하고 사용자 데이터 초기화
   const logout = async () => {
-    localStorage.removeItem('accessToken');
-    serverAPI.post('/auth/logout');
+    await authLogout();
     setUser(null);
     setUserCourses([]);
   };

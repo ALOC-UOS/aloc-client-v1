@@ -13,12 +13,8 @@ import ProfileModal from './components/service/TopBar/ProfileModal';
 import useModal from './hooks/useModal';
 
 function App() {
-  const { checkLoginStatus, user } = useUser();
+  const { user } = useUser();
   const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
-
-  useEffect(() => {
-    checkLoginStatus();
-  }, []);
 
   useEffect(() => {
     if (user && !user.baekjoonId) {

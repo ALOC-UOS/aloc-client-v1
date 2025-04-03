@@ -12,7 +12,6 @@ const GoogleAuthCallback = () => {
           // accessToken을 localStorage에 저장
           try {
             localStorage.setItem('accessToken', accessToken);
-            console.log('토큰이 성공적으로 저장되었습니다.');
           } catch (storageError) {
             console.error('localStorage 저장 오류:', storageError);
             throw new Error('토큰 저장에 실패했습니다.');
@@ -27,8 +26,6 @@ const GoogleAuthCallback = () => {
               },
               window.location.origin
             );
-          } else {
-            console.log('window.opener가 없습니다. 메인 페이지로 리디렉션합니다.');
           }
         } else {
           throw new Error('URL에서 액세스 토큰을 찾을 수 없습니다.');
