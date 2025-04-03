@@ -280,7 +280,7 @@ interface NicknameChangeModalProps {
 }
 
 const NicknameChangeModal = ({ isOpen, onClose }: NicknameChangeModalProps) => {
-  const { updateUserProfile } = useUserProfile();
+  const { isLoading, updateUserProfile } = useUserProfile();
   const [formData, setFormData] = useState({
     nickname: '',
   });
@@ -292,9 +292,15 @@ const NicknameChangeModal = ({ isOpen, onClose }: NicknameChangeModalProps) => {
     }));
   };
 
-  const handleSave = () => {
-    updateUserProfile({ baekjoonId: '', nickname: formData.nickname });
-    onClose();
+  const handleSave = async () => {
+    try {
+      await updateUserProfile({ baekjoonId: '', nickname: formData.nickname });
+      toast.success('닉네임 변경이 완료됐어요!');
+      onClose();
+    } catch (error) {
+      console.error('닉네임 변경 실패:', error);
+      toast.error('닉네임 변경에 실패했어요. 다시 시도해주세요.');
+    }
   };
 
   return (
@@ -316,7 +322,13 @@ const NicknameChangeModal = ({ isOpen, onClose }: NicknameChangeModalProps) => {
           <Button variant="secondary" fullWidth onClick={onClose}>
             닫기
           </Button>
-          <Button variant="primary" fullWidth onClick={handleSave} disabled={!formData.nickname}>
+          <Button
+            variant="primary"
+            fullWidth
+            onClick={handleSave}
+            disabled={!formData.nickname}
+            isLoading={isLoading}
+          >
             변경하기
           </Button>
         </HStack>
@@ -465,7 +477,7 @@ interface CancelCourseModalProps {
 }
 
 const CancelCourseModal = ({ isOpen, courseId, onClose }: CancelCourseModalProps) => {
-  const { deleteCourse } = useUserCourses();
+  const { deleteCourse, isLoading } = useUserCourses();
 
   const handleClickClose = async () => {
     try {
@@ -488,7 +500,7 @@ const CancelCourseModal = ({ isOpen, courseId, onClose }: CancelCourseModalProps
           <Button variant="secondary" fullWidth onClick={onClose}>
             닫기
           </Button>
-          <Button variant="danger" fullWidth onClick={handleClickClose}>
+          <Button variant="danger" fullWidth onClick={handleClickClose} isLoading={isLoading}>
             취소하기
           </Button>
         </HStack>
