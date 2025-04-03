@@ -10,24 +10,14 @@ export const AuthenticationHandler = () => {
   const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
-    if (!user?.baekjoonId) {
+    if (!isLoading && !user?.baekjoonId) {
       showProfileModal();
     }
   }, [isLoading, user?.baekjoonId]);
 
   useEffect(() => {
     const initLoginStatus = async () => {
-      if (isAuthenticated) {
-        await loadUser();
-        return;
-      }
-
-      const hasToken = await refreshToken();
-      if (!hasToken) {
+      if (!isAuthenticated && !(await refreshToken())) {
         setUser(null);
         return;
       }
