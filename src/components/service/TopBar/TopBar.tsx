@@ -41,8 +41,8 @@ const TopBar = () => {
     <>
       <S.TopBarContainer isScroll={isScroll}>
         <HStack alignItems="center" gap={8} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-          <img src={LogoWhite} alt="logo" width={40} height={40} />
-          <img src={AlocText} alt="logo-text" width={79} height={27} />
+          <img src={LogoWhite} alt="logo" width={40} height={40} key="logo" />
+          <img src={AlocText} alt="aloc-text" width={79} height={27} key="aloc-text" />
         </HStack>
         <HStack gap={16}>
           <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />
