@@ -2,8 +2,8 @@ import S from './TopBar.style';
 import { HStack } from '@/components/common/Stack';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LogoWhite from '@/assets/images/logo.season2.white.svg';
-import AlocText from '@/assets/images/aloc-text.svg';
+import LogoWhite from '@/assets/images/logo.white.png';
+import AlocText from '@/assets/images/aloc-text.png';
 import CourseWhiteIcon from '@/assets/icons/course.white.svg';
 import CourseBlueIcon from '@/assets/icons/course.blue.svg';
 import UsersWhiteIcon from '@/assets/icons/users.white.svg';
@@ -40,9 +40,9 @@ const TopBar = () => {
   return (
     <>
       <S.TopBarContainer isScroll={isScroll}>
-        <HStack gap={8} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+        <HStack alignItems="center" gap={8} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
           <img src={LogoWhite} alt="logo" width={40} height={40} />
-          <img src={AlocText} alt="logo-text" width={74} height={41} />
+          <img src={AlocText} alt="logo-text" width={79} height={27} />
         </HStack>
         <HStack gap={16}>
           <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />
