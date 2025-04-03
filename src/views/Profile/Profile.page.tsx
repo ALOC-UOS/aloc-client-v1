@@ -11,6 +11,7 @@ import Button from '@/components/common/Button';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/common/Modal';
 import Input from '@/components/common/Input';
+import useUserProfile from '@/hooks/useUserProfile';
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -277,7 +278,7 @@ interface NicknameChangeModalProps {
 }
 
 const NicknameChangeModal = ({ isOpen, onClose }: NicknameChangeModalProps) => {
-  const { updateUser } = useUser();
+  const { updateUserProfile } = useUserProfile();
   const [formData, setFormData] = useState({
     nickname: '',
   });
@@ -290,7 +291,7 @@ const NicknameChangeModal = ({ isOpen, onClose }: NicknameChangeModalProps) => {
   };
 
   const handleSave = () => {
-    updateUser({ baekjoonId: '', nickname: formData.nickname });
+    updateUserProfile({ baekjoonId: '', nickname: formData.nickname });
     onClose();
   };
 
@@ -328,7 +329,8 @@ interface ProfileImageChangeModalProps {
 }
 
 const ProfileImageChangeModal = ({ isOpen, onClose }: ProfileImageChangeModalProps) => {
-  const { user, isUploadingImage, updateProfileImage } = useUser();
+  const { user } = useUser();
+  const { isUploadingImage, updateProfileImage } = useUserProfile();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageClick = () => {

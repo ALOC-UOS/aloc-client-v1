@@ -7,7 +7,7 @@ import ProfilePage from '@/views/Profile';
 import GoogleAuthCallback from '@/views/GoogleAuthCallback';
 import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
-import ProfileModalHandler from '@/handlers/ProfileModalHandler';
+import { AuthenticationHandler } from '@/handlers/AuthenticationHandler';
 import { pathname } from '@/constants/pathnames';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <Route path={pathname.PROFILE_PAGE} element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
-      <ProfileModalHandler />
+      <AuthenticationHandler />
     </>
   );
 }

@@ -5,6 +5,7 @@ import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import useUser from '@/hooks/useUser';
+import useUserProfile from '@/hooks/useUserProfile';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -12,7 +13,8 @@ interface ProfileModalProps {
 }
 
 const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
-  const { isLoading, user, updateUser, updateProfileImage, isUploadingImage } = useUser();
+  const { user } = useUser();
+  const { isLoading, updateUserProfile, updateProfileImage, isUploadingImage } = useUserProfile();
   const [formData, setFormData] = useState({
     baekjoonId: user?.baekjoonId || '',
     nickname: user?.nickname || '',
@@ -36,7 +38,7 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
   };
 
   const handleSave = () => {
-    updateUser({ baekjoonId: formData.baekjoonId, nickname: formData.nickname });
+    updateUserProfile({ baekjoonId: formData.baekjoonId, nickname: formData.nickname });
     onClose();
   };
 
