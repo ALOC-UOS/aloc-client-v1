@@ -4,8 +4,6 @@ import { VStack } from '@/components/common/Stack';
 import SilderContainer from './SilderContainer';
 import useUserCourses from '@/hooks/useUserCourses';
 import Background from './Background';
-import useUser from '@/hooks/useUser';
-import { useEffect } from 'react';
 import SolveCheckButton from './SolveCheckButton';
 import Confetti from '@/components/common/Confetti';
 import Button from '@/components/common/Button';
@@ -13,16 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { pathname } from '@/constants/pathnames';
 
 const CourseContainer = () => {
-  const { isLoading, todayProblem, userCourses, getUserCourses, checkTodayProblem } =
-    useUserCourses();
-  const { user } = useUser();
+  const { isLoading, todayProblem, userCourses } = useUserCourses();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user && user.baekjoonId) {
-      getUserCourses();
-    }
-  }, [user]);
 
   if (isLoading) {
     return (

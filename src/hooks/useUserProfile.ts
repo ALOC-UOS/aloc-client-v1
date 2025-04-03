@@ -41,8 +41,13 @@ const useUserProfile = () => {
   }) => {
     setIsLoading(true);
     try {
-      await serverAPI.patch('/user', { baekjoonId, name: nickname });
-      setUser({ ...user, baekjoonId, nickname } as UserInfo);
+      const result = await serverAPI.patch('/user', { baekjoonId, name: nickname });
+
+      setUser({
+        ...user,
+        baekjoonId: result.data.result.baekjoonId,
+        nickname: result.data.result.name,
+      } as UserInfo);
     } catch (error) {
       console.error('사용자 정보 업데이트 실패:', error);
       throw error;

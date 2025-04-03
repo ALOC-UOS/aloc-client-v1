@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { serverAPI } from '@/api/axios';
 import { getTierByDifficulty } from '@/utils/Tier';
 import { tierStyleConfig } from '@/styles/tier.config';
+import useAuth from './useAuth';
 
 const userCourseListAtom = atom<UserCourse[]>([]);
 
@@ -12,8 +13,11 @@ const courseIndexAtom = atom<number>(0);
 
 const todayProblemAtom = atom<Problem | null>(null);
 
+const isLoadingAtom = atom<boolean>(true);
+
 const useUserCourses = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
   const [isSolvingCheckLoading, setIsSolvingCheckLoading] = useState(false);
   const [userCourses, setUserCourses] = useAtom(userCourseListAtom);
   const [selectedCourse, setSelectedCourse] = useState<CourseInfo | null>(null);
@@ -40,7 +44,12 @@ const useUserCourses = () => {
     }
   }, [courseIndex, userCourses]);
 
-  const getUserCourses = async () => {
+  const loadUserCourses = async () => {
+    if (!isAuthenticated) {
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     try {
       const response = await serverAPI.get('/user/courses');
@@ -78,7 +87,7 @@ const useUserCourses = () => {
     setIsLoading(true);
     try {
       await serverAPI.post(`/user/course/${course.id}`);
-      await getUserCourses();
+      await loadUserCourses();
       return true;
     } catch (error) {
       console.error('코스 추가 중 오류 발생:', error);
@@ -95,7 +104,7 @@ const useUserCourses = () => {
     setIsLoading(true);
     try {
       await serverAPI.patch(`/user/course/${courseId}`);
-      await getUserCourses();
+      await loadUserCourses();
     } catch (error) {
       console.error('코스 삭제 중 오류 발생:', error);
     } finally {
@@ -124,7 +133,7 @@ const useUserCourses = () => {
     setCourseIndex,
     todayProblem,
     userCourses,
-    getUserCourses,
+    loadUserCourses,
     setUserCourses,
     addCourse,
     deleteCourse,
