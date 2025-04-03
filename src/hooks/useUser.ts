@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { UserInfo } from '@/types/user.types';
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
@@ -13,7 +13,6 @@ const useUser = () => {
   const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
   const [user, setUser] = useAtom(userAtom);
   const { isAuthenticated, refreshToken, logout: authLogout } = useAuth();
-  const isLoggedIn = useMemo(() => user !== null, [user]);
 
   // 사용자 정보 로드
   const loadUser = async () => {
@@ -47,7 +46,6 @@ const useUser = () => {
     }
   };
 
-  // 로그인 상태 확인 (App.tsx에서 호출)
   const checkLoginStatus = async () => {
     if (!isAuthenticated) {
       setUser(null);
@@ -109,7 +107,6 @@ const useUser = () => {
   return {
     isLoading,
     user,
-    isLoggedIn,
     loadUser,
     logout,
     checkLoginStatus,
