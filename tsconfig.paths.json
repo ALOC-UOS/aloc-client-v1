@@ -10,7 +10,8 @@
       "@/utils/*": ["utils/*"],
       "@/api/*": ["api/*"],
       "@/styles/*": ["styles/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/handlers/*": ["handlers/*"],
     }
   }
 }
