@@ -12,6 +12,7 @@ import useModal from '@/hooks/useModal';
 import Modal from '@/components/common/Modal';
 import Input from '@/components/common/Input';
 import useUserProfile from '@/hooks/useUserProfile';
+import { toast } from 'sonner';
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -469,9 +470,11 @@ const CancelCourseModal = ({ isOpen, courseId, onClose }: CancelCourseModalProps
   const handleClickClose = async () => {
     try {
       await deleteCourse(courseId);
+      toast.success('코스가 취소됐어요. 다른 코스를 선택해보세요!');
       onClose();
     } catch (error) {
-      console.error('코스 삭제 중 오류 발생:', error);
+      console.error('코스 취소 중 오류 발생:', error);
+      toast.error('코스 취소에 실패했어요. 다시 시도해보세요.');
     }
   };
   return (
