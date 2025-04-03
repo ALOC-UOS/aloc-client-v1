@@ -6,16 +6,16 @@ import useAuth from '@/hooks/useAuth';
 import useUserCourses from '@/hooks/useUserCourses';
 
 export const AuthenticationHandler = () => {
-  const { user, setUser, loadUser, isLoading } = useUser();
+  const { user, setUser, loadUser } = useUser();
   const { loadUserCourses } = useUserCourses();
   const { isAuthenticated, refreshToken } = useAuth();
   const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
 
   useEffect(() => {
-    if (!isLoading && !user?.baekjoonId) {
+    if (user && !user.baekjoonId) {
       showProfileModal();
     }
-  }, [isLoading, user?.baekjoonId]);
+  }, [user, user?.baekjoonId]);
 
   useEffect(() => {
     const initLoginStatus = async () => {
