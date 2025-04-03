@@ -45,7 +45,6 @@ const useUser = () => {
     if (!token) {
       setUser(null);
       setIsLoading(false);
-      return;
     }
 
     try {
