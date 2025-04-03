@@ -1,7 +1,6 @@
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 const authAtom = atom<boolean>(!!localStorage.getItem('accessToken'));
 
