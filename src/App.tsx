@@ -9,11 +9,13 @@ import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
 import { AuthenticationHandler } from '@/handlers/AuthenticationHandler';
 import { pathname } from '@/constants/pathnames';
+import { Toaster } from 'sonner';
 
 function App() {
   return (
     <>
       <GlobalStyles />
+      <Toaster richColors position="top-center" />
       <BrowserRouter>
         <TopBar />
         <Routes>
