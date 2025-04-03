@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { UserInfo } from '@/types/user.types';
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
-import useUserCourses from './useUserCourses';
 import useAuth from './useAuth';
 
 export const userAtom = atom<UserInfo | null>(null);
 
 const useUser = () => {
-  const { setUserCourses } = useUserCourses();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [user, setUser] = useAtom(userAtom);
   const { isAuthenticated, logout: authLogout } = useAuth();
@@ -16,6 +14,7 @@ const useUser = () => {
   // 사용자 정보 로드
   const loadUser = async () => {
     if (!isAuthenticated) {
+      setIsLoading(false);
       return false;
     }
 
@@ -49,7 +48,6 @@ const useUser = () => {
   const logout = async () => {
     await authLogout();
     setUser(null);
-    setUserCourses([]);
   };
 
   return {

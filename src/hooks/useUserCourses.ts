@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { serverAPI } from '@/api/axios';
 import { getTierByDifficulty } from '@/utils/Tier';
 import { tierStyleConfig } from '@/styles/tier.config';
+import useAuth from './useAuth';
 
 const userCourseListAtom = atom<UserCourse[]>([]);
 
@@ -12,8 +13,11 @@ const courseIndexAtom = atom<number>(0);
 
 const todayProblemAtom = atom<Problem | null>(null);
 
+const isLoadingAtom = atom<boolean>(true);
+
 const useUserCourses = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
   const [isSolvingCheckLoading, setIsSolvingCheckLoading] = useState(false);
   const [userCourses, setUserCourses] = useAtom(userCourseListAtom);
   const [selectedCourse, setSelectedCourse] = useState<CourseInfo | null>(null);
@@ -41,6 +45,11 @@ const useUserCourses = () => {
   }, [courseIndex, userCourses]);
 
   const getUserCourses = async () => {
+    if (!isAuthenticated) {
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     try {
       const response = await serverAPI.get('/user/courses');

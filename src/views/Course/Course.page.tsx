@@ -7,7 +7,6 @@ import GoogleLoginModal from '@/components/service/GoogleLoginModal';
 import useModal from '@/hooks/useModal';
 import { CourseInfo } from '@/types/course.types';
 import ExceededModal from '@/components/service/Course/ExceededModal';
-import useUser from '@/hooks/useUser';
 import useUserCourses from '@/hooks/useUserCourses';
 import useAuth from '@/hooks/useAuth';
 
