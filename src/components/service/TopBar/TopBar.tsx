@@ -12,12 +12,12 @@ import IconButton from './IconButton';
 import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
 import GoogleLoginModal from '../GoogleLoginModal';
-import useUser from '@/hooks/useUser';
 import { pathname } from '@/constants/pathnames';
+import useAuth from '@/hooks/useAuth';
 
 const TopBar = () => {
   const [isScroll, setIsScroll] = useState(false);
-  const { isLoggedIn } = useUser();
+  const { isAuthenticated } = useAuth();
   const { isOpen: isLoginModalOpen, show: showLoginModal, hide: hideLoginModal } = useModal();
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const TopBar = () => {
         <HStack gap={16}>
           <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />
           <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <ProfileButton />
           ) : (
             <S.LoginButton onClick={showLoginModal}>로그인</S.LoginButton>

@@ -9,11 +9,12 @@ import { CourseInfo } from '@/types/course.types';
 import ExceededModal from '@/components/service/Course/ExceededModal';
 import useUser from '@/hooks/useUser';
 import useUserCourses from '@/hooks/useUserCourses';
+import useAuth from '@/hooks/useAuth';
 
 type ModalType = 'login' | 'exceeded' | 'course';
 
-const getModalType = (isLoggedIn: boolean, coursesCount: number): ModalType => {
-  if (!isLoggedIn) return 'login';
+const getModalType = (isAuthenticated: boolean, coursesCount: number): ModalType => {
+  if (!isAuthenticated) return 'login';
   if (coursesCount >= 3) return 'exceeded';
   return 'course';
 };
@@ -22,10 +23,10 @@ const CoursePage = () => {
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const { isOpen, show, hide } = useModal();
   const { isLoading, selectedCourse, setSelectedCourse, addCourse, userCourses } = useUserCourses();
-  const { isLoggedIn } = useUser();
+  const { isAuthenticated } = useAuth();
 
   const determineModalType = (): ModalType => {
-    return getModalType(isLoggedIn, userCourses.length);
+    return getModalType(isAuthenticated, userCourses.length);
   };
 
   const handleCourseClick = (course: CourseInfo) => {

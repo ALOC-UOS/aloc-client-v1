@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { serverAPI } from '@/api/axios';
+import { atom, useAtom } from 'jotai';
 import axios from 'axios';
+
+const authAtom = atom<boolean>(!!localStorage.getItem('accessToken'));
 
 const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    !!localStorage.getItem('accessToken')
-  );
+  const [isAuthenticated, setIsAuthenticated] = useAtom(authAtom);
 
   // 토큰 갱신
   const refreshToken = async (): Promise<boolean> => {

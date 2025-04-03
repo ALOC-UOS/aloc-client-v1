@@ -1,12 +1,12 @@
 import { VStack } from '@/components/common/Stack';
 import CourseContainer from './CourseContainer';
-import useUser from '@/hooks/useUser';
 import LandingPage from './LandingPage';
+import useAuth from '@/hooks/useAuth';
 
 const Main = () => {
-  const { isLoggedIn } = useUser();
+  const { isAuthenticated } = useAuth();
 
-  if (!isLoggedIn) {
+  if (!isAuthenticated) {
     return <LandingPage />;
   }
 
