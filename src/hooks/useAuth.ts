@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { serverAPI } from '@/api/axios';
 import { atom, useAtom } from 'jotai';
 import axios from 'axios';
@@ -6,7 +5,6 @@ import axios from 'axios';
 const authAtom = atom<boolean>(!!localStorage.getItem('accessToken'));
 
 const useAuth = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useAtom(authAtom);
 
   // 토큰 갱신
@@ -39,14 +37,12 @@ const useAuth = () => {
 
   // 로그아웃
   const logout = async () => {
-    setIsLoading(true);
     try {
       await serverAPI.post('/auth/logout');
     } catch (error) {
       console.error('로그아웃 요청 실패:', error);
     } finally {
       clearTokens();
-      setIsLoading(false);
       window.location.href = '/';
     }
   };
@@ -57,7 +53,6 @@ const useAuth = () => {
   };
 
   return {
-    isLoading,
     isAuthenticated,
     setIsAuthenticated,
     refreshToken,
