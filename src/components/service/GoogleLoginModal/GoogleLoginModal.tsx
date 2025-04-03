@@ -19,8 +19,6 @@ const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
 
   useEffect(() => {
     const handleGoogleLoginSuccess = (event: MessageEvent) => {
-      console.log(event.origin);
-      console.log(window.location.origin);
       if (event.origin !== window.location.origin) return;
 
       if (event.data.type === 'google-login-success') {
