@@ -6,6 +6,7 @@ import Button from '@/components/common/Button';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import useUser from '@/hooks/useUser';
 import useUserProfile from '@/hooks/useUserProfile';
+import { toast } from 'sonner';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -37,9 +38,18 @@ const ProfileModal = ({ isOpen, onClose }: ProfileModalProps) => {
     }));
   };
 
-  const handleSave = () => {
-    updateUserProfile({ baekjoonId: formData.baekjoonId, nickname: formData.nickname });
-    onClose();
+  const handleSave = async () => {
+    try {
+      await updateUserProfile({ baekjoonId: formData.baekjoonId, nickname: formData.nickname });
+      toast.success('프로필 정보가 저장됐어요! 😊');
+      setTimeout(() => {
+        toast.success('알록과 함께 오늘부터 문제를 풀어보세요! 🎉');
+      }, 2000);
+      onClose();
+    } catch (error) {
+      console.error('프로필 정보 저장 실패:', error);
+      toast.error('프로필 정보 저장에 실패했습니다. 다시 시도해주세요.');
+    }
   };
 
   const handleImageClick = () => {
