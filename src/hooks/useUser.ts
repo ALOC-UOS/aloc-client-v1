@@ -45,15 +45,12 @@ const useUser = () => {
     if (!token) {
       setUser(null);
       setIsLoading(false);
-      // return;
     }
 
     try {
       await loadUser();
     } catch (error) {
       console.error('토큰으로 사용자 정보 조회 실패:', error);
-      // 토큰이 유효하지 않은 경우 로그아웃 처리
-      await logout();
     }
   };
 
