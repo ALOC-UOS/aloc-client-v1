@@ -19,6 +19,19 @@ export const formatSolveTime = (solvedAt: string) => {
   return dayjs(solvedAt).fromNow();
 };
 
+export const formatDeadline = (deadline: string) => {
+  const now = dayjs();
+  const deadlineDate = dayjs(deadline);
+
+  const diffInDays = deadlineDate.diff(now, 'day');
+  if (diffInDays >= 1) {
+    return `${diffInDays}일 전`;
+  }
+
+  const diffInHours = deadlineDate.diff(now, 'hour');
+  return `${diffInHours}시간 전`;
+};
+
 export const moveToProblemProblemSite = (problemId: number) => {
   window.open(`${linkNames.baekjoon.problem}${problemId}`, '_blank');
 };

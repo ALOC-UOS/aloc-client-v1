@@ -13,13 +13,13 @@ import Modal from '@/components/common/Modal';
 import Input from '@/components/common/Input';
 import useUserProfile from '@/hooks/useUserProfile';
 import { toast } from 'sonner';
+import UserCourseList from './UserCourseList';
 
 const ProfilePage = () => {
   const { user } = useUser();
   const { isOpen, show, hide } = useModal();
   const { userCourses } = useUserCourses();
   const [modalType, setModalType] = useState('');
-  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
 
   const handleClickButton = (type: string) => {
     setModalType(type);
@@ -163,63 +163,7 @@ const ProfilePage = () => {
                 진행중인 코스가 여기에 표시됩니다
               </p>
             ) : (
-              <VStack gap={8}>
-                {userCourses.map((course) => (
-                  <VStack
-                    key={course.id}
-                    alignItems="flex-start"
-                    gap={4}
-                    style={{
-                      backgroundColor: 'var(--color-white)',
-                      padding: '12px',
-                      borderRadius: '16px',
-                      minWidth: '280px',
-                    }}
-                    onClick={() => {
-                      setSelectedCourseId(course.id);
-                      handleClickButton('cancelCourse');
-                    }}
-                  >
-                    <p
-                      style={{
-                        color: 'var(--color-blue)',
-                        fontSize: '12px',
-                        fontWeight: '500',
-                        padding: '4px 8px',
-                        border: '1px solid var(--color-blue)',
-                        borderRadius: '24px',
-                      }}
-                    >
-                      {course.type}
-                    </p>
-                    <HStack
-                      alignItems="center"
-                      justifyContent="space-between"
-                      gap={8}
-                      style={{ width: '100%' }}
-                    >
-                      <p
-                        style={{
-                          color: 'var(--color-title-text)',
-                          fontSize: '16px',
-                          fontWeight: '500',
-                        }}
-                      >
-                        {course.name}
-                      </p>
-                      <p
-                        style={{
-                          color: 'var(--color-sub-text)',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                        }}
-                      >
-                        {course.totalProblemCount}문제
-                      </p>
-                    </HStack>
-                  </VStack>
-                ))}
-              </VStack>
+              <UserCourseList userCourses={userCourses} />
             )}
           </S.CardContainer>
           <S.CardContainer>
@@ -251,9 +195,6 @@ const ProfilePage = () => {
       {modalType === 'nickname' && <NicknameChangeModal isOpen={isOpen} onClose={hide} />}
       {modalType === 'profileImage' && <ProfileImageChangeModal isOpen={isOpen} onClose={hide} />}
       {modalType === 'logout' && <LogoutModal isOpen={isOpen} onClose={hide} />}
-      {modalType === 'cancelCourse' && (
-        <CancelCourseModal isOpen={isOpen} courseId={selectedCourseId!} onClose={hide} />
-      )}
       <div
         style={{
           width: '100%',
@@ -463,45 +404,6 @@ const LogoutModal = ({ isOpen, onClose }: LogoutModalProps) => {
           </Button>
           <Button variant="danger" fullWidth onClick={logout}>
             로그아웃
-          </Button>
-        </HStack>
-      </VStack>
-    </Modal>
-  );
-};
-
-interface CancelCourseModalProps {
-  isOpen: boolean;
-  courseId: string;
-  onClose: () => void;
-}
-
-const CancelCourseModal = ({ isOpen, courseId, onClose }: CancelCourseModalProps) => {
-  const { deleteCourse, isLoading } = useUserCourses();
-
-  const handleClickClose = async () => {
-    try {
-      await deleteCourse(courseId);
-      toast.success('코스가 취소됐어요. 다른 코스를 선택해보세요!');
-      onClose();
-    } catch (error) {
-      console.error('코스 취소 중 오류 발생:', error);
-      toast.error('코스 취소에 실패했어요. 다시 시도해보세요.');
-    }
-  };
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <VStack gap={24}>
-        <VStack alignItems="flex-start" gap={4}>
-          <Modal.Title>코스를 취소하시겠어요?</Modal.Title>
-          <Modal.Subtitle>코스를 취소하면 처음부터 다시 시작해야 해요.</Modal.Subtitle>
-        </VStack>
-        <HStack gap={8} style={{ width: '100%' }}>
-          <Button variant="secondary" fullWidth onClick={onClose}>
-            닫기
-          </Button>
-          <Button variant="danger" fullWidth onClick={handleClickClose} isLoading={isLoading}>
-            취소하기
           </Button>
         </HStack>
       </VStack>

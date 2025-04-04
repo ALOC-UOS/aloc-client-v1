@@ -30,4 +30,5 @@ export interface CourseInfo extends Course {
 export interface UserCourse extends Course {
   todayProblemId: number;
   problems: Problem[];
+  closedAt: string;
 }

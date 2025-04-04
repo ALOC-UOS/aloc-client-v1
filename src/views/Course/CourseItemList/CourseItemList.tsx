@@ -1,6 +1,6 @@
 import S from './CourseItemList.style';
 import { CourseInfo } from '@/types/course.types';
-import CourseItem from './CourseItem';
+import CourseItem from '@/components/service/Course/CourseItem';
 import useCourses from '@/hooks/useCourses';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { HStack, VStack } from '@/components/common/Stack';

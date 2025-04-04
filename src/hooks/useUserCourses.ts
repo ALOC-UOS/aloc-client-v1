@@ -60,6 +60,7 @@ const useUserCourses = () => {
           name: course.title,
           totalProblemCount: course.problemCnt,
           todayProblemId: course.todayProblemId,
+          closedAt: course.closedAt,
           problems: course.problems.map((problem: any): Problem => {
             return {
               problemId: problem.problemId,
@@ -105,6 +106,8 @@ const useUserCourses = () => {
     try {
       await serverAPI.patch(`/user/course/${courseId}`);
       await loadUserCourses();
+      // Todo: 추후에 삭제되는 코스인 경우에만 courseIndex를 0으로 설정하도록 수정
+      setCourseIndex(0);
     } catch (error) {
       console.error('코스 삭제 중 오류 발생:', error);
     } finally {
