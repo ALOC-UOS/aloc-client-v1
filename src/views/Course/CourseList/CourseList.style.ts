@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const CourseItemList = styled.div`
+const CourseList = styled.div`
   width: 100%;
   height: 100%;
   flex: 1;
@@ -19,4 +19,4 @@ const Message = styled.p`
   font-weight: 600;
 `;
 
-export default { CourseItemList, Message };
+export default { CourseList, Message };

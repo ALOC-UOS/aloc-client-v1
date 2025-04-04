@@ -4,21 +4,19 @@ import UserProfileImage from '@/components/service/UserProfileImage';
 import useUser from '@/hooks/useUser';
 import S from './Profile.style';
 import CoinIcon from '@/assets/icons/coin.svg';
-import useUserCourses from '@/hooks/useUserCourses';
 import TierCircle from '@/components/service/TierCircle';
 import { getTierByUserRank, getTierNumberByUserRank } from '@/utils/Tier';
 import Button from '@/components/common/Button';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/common/Modal';
 import Input from '@/components/common/Input';
+import UserCourseList from '@/components/service/Course/UserCourseList';
 import useUserProfile from '@/hooks/useUserProfile';
 import { toast } from 'sonner';
-import UserCourseList from './UserCourseList';
 
 const ProfilePage = () => {
   const { user } = useUser();
   const { isOpen, show, hide } = useModal();
-  const { userCourses } = useUserCourses();
   const [modalType, setModalType] = useState('');
 
   const handleClickButton = (type: string) => {
@@ -152,19 +150,7 @@ const ProfilePage = () => {
             >
               진행중인 코스
             </p>
-            {userCourses.length === 0 ? (
-              <p
-                style={{
-                  color: 'var(--color-sub-text)',
-                  fontSize: '16px',
-                  fontWeight: '500',
-                }}
-              >
-                진행중인 코스가 여기에 표시됩니다
-              </p>
-            ) : (
-              <UserCourseList userCourses={userCourses} />
-            )}
+            <UserCourseList />
           </S.CardContainer>
           <S.CardContainer>
             <p

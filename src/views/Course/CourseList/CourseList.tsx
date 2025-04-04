@@ -1,4 +1,4 @@
-import S from './CourseItemList.style';
+import S from './CourseList.style';
 import { CourseInfo } from '@/types/course.types';
 import CourseItem from '@/components/service/Course/CourseItem';
 import useCourses from '@/hooks/useCourses';
@@ -6,39 +6,39 @@ import LoadingIcon from '@/components/common/Icon/Loading';
 import { HStack, VStack } from '@/components/common/Stack';
 import Button from '@/components/common/Button/Button';
 
-interface CourseItemListProps {
+interface CourseListProps {
   onCourseClick: (course: CourseInfo) => void;
 }
 
-const CourseItemList = ({ onCourseClick }: CourseItemListProps) => {
+const CourseList = ({ onCourseClick }: CourseListProps) => {
   const { isLoading, courses, handlePageChange, totalPage, currentPage } = useCourses();
 
   if (isLoading) {
     return (
-      <S.CourseItemList style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <S.CourseList style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <VStack gap={8}>
           <LoadingIcon />
           <S.Message>로딩중...</S.Message>
         </VStack>
-      </S.CourseItemList>
+      </S.CourseList>
     );
   }
 
   if (courses.length === 0) {
     return (
-      <S.CourseItemList style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <S.CourseList style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <S.Message>아직 생성된 코스가 없어요</S.Message>
-      </S.CourseItemList>
+      </S.CourseList>
     );
   }
 
   return (
     <VStack>
-      <S.CourseItemList>
+      <S.CourseList>
         {courses.map((course) => (
           <CourseItem key={course.id} course={course} onClick={() => onCourseClick(course)} />
         ))}
-      </S.CourseItemList>
+      </S.CourseList>
       <HStack alignItems="center" justifyContent="center" gap={8} style={{ marginTop: '20px' }}>
         {Array.from({ length: totalPage }, (_, index) => {
           const pageNum = index + 1;
@@ -60,4 +60,4 @@ const CourseItemList = ({ onCourseClick }: CourseItemListProps) => {
   );
 };
 
-export default CourseItemList;
+export default CourseList;

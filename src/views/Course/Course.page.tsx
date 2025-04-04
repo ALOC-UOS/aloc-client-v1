@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { VStack } from '@/components/common/Stack';
 import Header from '@/components/common/Header';
-import CourseItemList from './CourseItemList';
+import CourseList from './CourseList';
 import CourseSelectModal from '@/components/service/Course/CourseSelectModal';
 import GoogleLoginModal from '@/components/service/GoogleLoginModal';
 import useModal from '@/hooks/useModal';
@@ -53,7 +53,7 @@ const CoursePage = () => {
     <>
       <VStack gap={24} style={{ padding: '72px 40px', minHeight: '100dvh' }}>
         <Header title="코스 목록" />
-        <CourseItemList onCourseClick={handleCourseClick} />
+        <CourseList onCourseClick={handleCourseClick} />
       </VStack>
       {modalType === 'login' && <GoogleLoginModal isOpen={isOpen} onClose={hide} />}
       {modalType === 'exceeded' && <ExceededModal isOpen={isOpen} onClose={hide} />}
