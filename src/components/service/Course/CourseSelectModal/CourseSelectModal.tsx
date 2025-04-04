@@ -45,7 +45,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
         <S.CourseInfoContainer>
           {course.type === 'DEADLINE' && course.duration && (
             <S.CourseInfoItem>
-              <S.CourseInfoName>마감일</S.CourseInfoName>
+              <S.CourseInfoName>제한 시간</S.CourseInfoName>
               <p
                 style={{ color: 'var(--color-content-text)', fontSize: '28px', fontWeight: 'bold' }}
               >
@@ -54,7 +54,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
             </S.CourseInfoItem>
           )}
           <S.CourseInfoItem>
-            <S.CourseInfoName>총 문제 수</S.CourseInfoName>
+            <S.CourseInfoName>문제 수</S.CourseInfoName>
             <p style={{ color: 'var(--color-content-text)', fontSize: '28px', fontWeight: 'bold' }}>
               {course.totalProblemCount}개
             </p>
