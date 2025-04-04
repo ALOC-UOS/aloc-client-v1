@@ -2,14 +2,13 @@ import styled from '@emotion/styled';
 
 const CourseItemContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   background-color: var(--color-white);
   border-radius: 16px;
   overflow: hidden;
   height: min-content;
-  padding: 12px 16px;
+  padding: 16px;
+  gap: 8px;
   cursor: pointer;
 
   &:hover {
@@ -21,24 +20,43 @@ const CourseItemContainer = styled.div`
   }
 `;
 
-const CourseTypeLabel = styled.div`
+const CourseType = styled.p`
   color: var(--color-blue);
   font-size: 12px;
-  padding: 4px 6px;
-  border: 1px solid var(--color-blue);
-  border-radius: 24px;
 `;
 
 const CourseName = styled.p`
-  color: var(--color-content-text);
-  font-size: 24px;
+  color: var(--color-title-text);
+  font-size: 20px;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-foreground);
+  padding: 8px;
+  border-radius: 8px;
+  gap: 4px;
+  width: 100%;
+`;
+
+const CourseLabel = styled.p`
+  color: var(--color-sub-text);
+  font-size: 12px;
   font-weight: 500;
 `;
 
 const CourseInfo = styled.p`
-  color: var(--color-sub-text);
-  font-size: 12px;
-  font-weight: bold;
+  color: var(--color-content-text);
+  font-size: 16px;
+  font-weight: 500;
 `;
 
-export default { CourseItemContainer, CourseTypeLabel, CourseName, CourseInfo };
+export default {
+  CourseItemContainer,
+  CourseType,
+  CourseName,
+  InfoContainer,
+  CourseLabel,
+  CourseInfo,
+};
