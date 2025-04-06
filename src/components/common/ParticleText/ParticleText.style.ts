@@ -8,7 +8,7 @@ const ParticleCanvas = styled.canvas`
   right: 0;
   bottom: 0;
   overflow: hidden;
-  animation: ${Animation.FadeInUp} 2s 2s ease forwards;
+  animation: ${Animation.FadeInUp} 2s 0.5s ease forwards;
   opacity: 0;
 `;
 

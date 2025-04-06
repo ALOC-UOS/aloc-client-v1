@@ -12,7 +12,7 @@ const Section = styled.section`
 `;
 
 const Description = styled.p`
-  animation: ${Animation.FadeInUp} 2s 1s ease forwards;
+  animation: ${Animation.FadeInUp} 2s ease forwards;
   color: var(--color-white);
   font-size: 32px;
   font-weight: bold;
@@ -26,7 +26,7 @@ const GradientBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  animation: ${Animation.FadeIn} 2s 3s ease forwards;
+  animation: ${Animation.FadeIn} 2s 2s ease forwards;
   background-image: linear-gradient(to bottom, #444e79, var(--color-black));
   opacity: 0;
 `;
