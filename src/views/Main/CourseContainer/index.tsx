@@ -9,9 +9,12 @@ import Confetti from '@/components/common/Confetti';
 import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { pathname } from '@/constants/pathnames';
+import useCourses from '@/hooks/useCourses';
+import CircularCourseLayout from './CircularCourseLayout';
 
 const CourseContainer = () => {
   const { isLoading, todayProblem, userCourses } = useUserCourses();
+  const { courses } = useCourses();
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -31,29 +34,58 @@ const CourseContainer = () => {
 
   if (userCourses.length === 0) {
     return (
-      <VStack
-        alignItems="center"
-        justifyContent="center"
-        gap={32}
+      <div
         style={{
           position: 'fixed',
           width: '100%',
           height: '100dvh',
           backgroundColor: 'var(--color-black)',
+          overflow: 'hidden',
         }}
       >
-        <VStack alignItems="center" gap={8}>
-          <p style={{ color: 'var(--color-white)', fontSize: 24, fontWeight: 'bold' }}>
-            진행중인 코스가 존재하지 않아요.
-          </p>
-          <p style={{ color: 'var(--color-sub-text)', fontSize: 16, fontWeight: '500' }}>
-            코스를 추가하고 문제를 풀어보세요!
-          </p>
+        <VStack
+          alignItems="flex-start"
+          justifyContent="center"
+          gap={32}
+          style={{
+            position: 'relative',
+            height: '100%',
+            padding: '0 80px',
+          }}
+        >
+          <VStack alignItems="flex-start" gap={24}>
+            <h1
+              style={{
+                color: 'var(--color-white)',
+                fontSize: 48,
+                fontWeight: 'bold',
+                lineHeight: '1.2',
+              }}
+            >
+              진행중인
+              <br />
+              코스가 없어요.
+            </h1>
+            <p
+              style={{
+                color: 'var(--color-sub-text)',
+                fontSize: 24,
+                fontWeight: '500',
+              }}
+            >
+              코스를 추가하고 문제를 풀어보세요!
+            </p>
+          </VStack>
+          <Button
+            variant="primary"
+            onClick={() => navigate(pathname.COURSE_PAGE)}
+            style={{ padding: '12px 24px', fontSize: 16 }}
+          >
+            코스 추가하기
+          </Button>
+          <CircularCourseLayout courses={courses} />
         </VStack>
-        <Button variant="primary" onClick={() => navigate(pathname.COURSE_PAGE)}>
-          코스 추가하기
-        </Button>
-      </VStack>
+      </div>
     );
   }
 
