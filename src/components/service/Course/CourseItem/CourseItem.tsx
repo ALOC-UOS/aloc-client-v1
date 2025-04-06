@@ -13,6 +13,7 @@ import { useState } from 'react';
 import useUserCourses from '@/hooks/useUserCourses';
 import useModal from '@/hooks/useModal';
 import ReactDOM from 'react-dom';
+import { toast } from 'sonner';
 
 interface CourseItemProps {
   course: CourseInfo;
@@ -25,6 +26,7 @@ const CourseItem = ({ course }: CourseItemProps) => {
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const { isOpen, show, hide } = useModal();
   const { isLoading, selectedCourse, setSelectedCourse, addCourse, userCourses } = useUserCourses();
+  const [isAnimationComplete, setIsAnimationComplete] = useState(true);
 
   const getModalType = (isAuthenticated: boolean, coursesCount: number): ModalType => {
     if (!isAuthenticated) return 'login';
@@ -36,17 +38,34 @@ const CourseItem = ({ course }: CourseItemProps) => {
     return getModalType(isAuthenticated, userCourses.length);
   };
 
+  const handleModalClose = () => {
+    hide();
+    setIsAnimationComplete(false);
+    setTimeout(() => {
+      setModalType(null);
+      setSelectedCourse(null);
+      setIsAnimationComplete(true);
+    }, 300);
+  };
+
   const handleCourseStart = async () => {
     if (!selectedCourse) return;
 
     try {
-      const success = await addCourse(selectedCourse);
-      if (success) {
-        hide();
+      const result = await addCourse(selectedCourse);
+      if (result.success) {
+        setTimeout(() => {
+          toast.success('코스가 등록됐어요! 완주까지 응원할게요 😆');
+        }, 300);
+      } else {
+        console.error('코스 시작 실패:', result.error);
+        toast.error(result.error);
       }
     } catch (error) {
       console.error('코스 시작 중 오류 발생:', error);
-      // 여기에 사용자에게 오류 메시지를 표시하는 로직 추가 가능
+      toast.error('코스 등록에 실패했어요. 다시 시도해 주세요. 😢');
+    } finally {
+      handleModalClose();
     }
   };
 
@@ -62,15 +81,15 @@ const CourseItem = ({ course }: CourseItemProps) => {
   };
 
   const renderModal = () => {
-    if (!isOpen) return null;
+    if (!isOpen && isAnimationComplete) return null;
 
     let modalContent = null;
     switch (modalType) {
       case 'login':
-        modalContent = <GoogleLoginModal isOpen={isOpen} onClose={hide} />;
+        modalContent = <GoogleLoginModal isOpen={isOpen} onClose={handleModalClose} />;
         break;
       case 'exceeded':
-        modalContent = <ExceededModal isOpen={isOpen} onClose={hide} />;
+        modalContent = <ExceededModal isOpen={isOpen} onClose={handleModalClose} />;
         break;
       case 'course':
         if (selectedCourse) {
@@ -79,7 +98,7 @@ const CourseItem = ({ course }: CourseItemProps) => {
               isOpen={isOpen}
               course={selectedCourse}
               onStart={handleCourseStart}
-              onClose={hide}
+              onClose={handleModalClose}
               isLoading={isLoading}
             />
           );

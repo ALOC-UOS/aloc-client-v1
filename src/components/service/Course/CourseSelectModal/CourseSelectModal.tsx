@@ -6,7 +6,6 @@ import S from './CourseSelectModal.style';
 import TierCircle from '@/components/service/TierCircle';
 import { CourseInfo } from '@/types/course.types';
 import { getTierByDifficulty, getTierNumberByDifficulty } from '@/utils/Tier';
-import { toast } from 'sonner';
 
 interface CourseSelectModalProps {
   isOpen: boolean;
@@ -23,16 +22,6 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
   onClose,
   isLoading,
 }) => {
-  const handleStart = async () => {
-    try {
-      await onStart();
-      toast.success('코스가 등록됐어요! 완주까지 응원할게요 😆');
-    } catch (error) {
-      console.error('코스 시작 중 오류 발생:', error);
-      toast.error('코스 등록에 실패했어요. 다시 시도해 주세요. 😢');
-    }
-  };
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} isBackdropClickable={!isLoading}>
       <VStack alignItems="center" gap={24}>
@@ -77,7 +66,7 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
           <Button variant="secondary" onClick={onClose} fullWidth disabled={isLoading}>
             닫기
           </Button>
-          <Button variant="primary" onClick={handleStart} fullWidth isLoading={isLoading}>
+          <Button variant="primary" onClick={onStart} fullWidth isLoading={isLoading}>
             시작하기
           </Button>
         </HStack>
