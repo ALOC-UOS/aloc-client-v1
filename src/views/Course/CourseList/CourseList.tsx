@@ -1,16 +1,11 @@
 import S from './CourseList.style';
-import { CourseInfo } from '@/types/course.types';
 import CourseItem from '@/components/service/Course/CourseItem';
 import useCourses from '@/hooks/useCourses';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { HStack, VStack } from '@/components/common/Stack';
 import Button from '@/components/common/Button/Button';
 
-interface CourseListProps {
-  onCourseClick: (course: CourseInfo) => void;
-}
-
-const CourseList = ({ onCourseClick }: CourseListProps) => {
+const CourseList = () => {
   const { isLoading, courses, handlePageChange, totalPage, currentPage } = useCourses();
 
   if (isLoading) {
@@ -36,7 +31,7 @@ const CourseList = ({ onCourseClick }: CourseListProps) => {
     <VStack>
       <S.CourseList>
         {courses.map((course) => (
-          <CourseItem key={course.id} course={course} onClick={() => onCourseClick(course)} />
+          <CourseItem key={course.id} course={course} />
         ))}
       </S.CourseList>
       <HStack alignItems="center" justifyContent="center" gap={8} style={{ marginTop: '20px' }}>

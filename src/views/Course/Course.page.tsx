@@ -1,71 +1,14 @@
-import { useState } from 'react';
 import { VStack } from '@/components/common/Stack';
 import Header from '@/components/common/Header';
 import CourseList from './CourseList';
-import CourseSelectModal from '@/components/service/Course/CourseSelectModal';
-import GoogleLoginModal from '@/components/service/GoogleLoginModal';
-import useModal from '@/hooks/useModal';
-import { CourseInfo } from '@/types/course.types';
-import ExceededModal from '@/components/service/Course/ExceededModal';
-import useUserCourses from '@/hooks/useUserCourses';
-import useAuth from '@/hooks/useAuth';
-
-type ModalType = 'login' | 'exceeded' | 'course';
-
-const getModalType = (isAuthenticated: boolean, coursesCount: number): ModalType => {
-  if (!isAuthenticated) return 'login';
-  if (coursesCount >= 3) return 'exceeded';
-  return 'course';
-};
 
 const CoursePage = () => {
-  const [modalType, setModalType] = useState<ModalType | null>(null);
-  const { isOpen, show, hide } = useModal();
-  const { isLoading, selectedCourse, setSelectedCourse, addCourse, userCourses } = useUserCourses();
-  const { isAuthenticated } = useAuth();
-
-  const determineModalType = (): ModalType => {
-    return getModalType(isAuthenticated, userCourses.length);
-  };
-
-  const handleCourseClick = (course: CourseInfo) => {
-    setSelectedCourse(course);
-    const modalType = determineModalType();
-    setModalType(modalType);
-    show();
-  };
-
-  const handleCourseStart = async () => {
-    if (!selectedCourse) return;
-
-    try {
-      const success = await addCourse(selectedCourse);
-      if (success) {
-        hide();
-      }
-    } catch (error) {
-      console.error('코스 시작 중 오류 발생:', error);
-      // 여기에 사용자에게 오류 메시지를 표시하는 로직 추가 가능
-    }
-  };
-
   return (
     <>
       <VStack gap={24} style={{ padding: '72px 40px', minHeight: '100dvh' }}>
         <Header title="코스 목록" />
-        <CourseList onCourseClick={handleCourseClick} />
+        <CourseList />
       </VStack>
-      {modalType === 'login' && <GoogleLoginModal isOpen={isOpen} onClose={hide} />}
-      {modalType === 'exceeded' && <ExceededModal isOpen={isOpen} onClose={hide} />}
-      {modalType === 'course' && selectedCourse && (
-        <CourseSelectModal
-          isOpen={isOpen}
-          course={selectedCourse}
-          onStart={handleCourseStart}
-          onClose={hide}
-          isLoading={isLoading}
-        />
-      )}
     </>
   );
 };
