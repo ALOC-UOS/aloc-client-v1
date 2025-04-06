@@ -89,15 +89,13 @@ const useUserCourses = () => {
     try {
       await serverAPI.post(`/user/course/${course.id}`);
       await loadUserCourses();
-      return true;
-    } catch (error) {
-      console.error('코스 추가 중 오류 발생:', error);
-      throw error;
+      return { success: true, error: null };
+    } catch (error: any) {
+      // 서버 응답에서 에러 메시지 추출
+      const errorMessage = error.response?.data?.message || '코스 추가 중 오류가 발생했습니다.';
+      return { success: false, error: errorMessage };
     } finally {
       setIsLoading(false);
-      setTimeout(() => {
-        setSelectedCourse(null);
-      }, 300);
     }
   };
 
