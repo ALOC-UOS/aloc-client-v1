@@ -42,6 +42,10 @@ const CircularCourseLayout = ({ courses }: { courses: any[] }) => {
   const radius = screenHeight * 0.7;
   const angleStep = 360 / courses.length;
 
+  if (courses.length === 0) {
+    return null;
+  }
+
   return (
     <div style={{ position: 'fixed', top: '50%', left: '100%' }}>
       {courses.map((course, index) => {
@@ -53,8 +57,8 @@ const CircularCourseLayout = ({ courses }: { courses: any[] }) => {
         const y = radius * Math.sin(radian);
 
         const visibilityRatio = (x + radius) / (radius * 2);
-        const scale = 0.3 + visibilityRatio * 0.7;
-        const opacity = visibilityRatio;
+        const scale = visibilityRatio;
+        const opacity = Math.pow(visibilityRatio, 5);
 
         return (
           <div
@@ -69,9 +73,10 @@ const CircularCourseLayout = ({ courses }: { courses: any[] }) => {
               borderRadius: '12px',
               overflow: 'hidden',
               transition: 'all 0.1s linear',
-              scale,
-              opacity,
+              scale: scale,
+              opacity: opacity,
               zIndex: 1000 + Math.abs(x),
+              pointerEvents: visibilityRatio > 0.5 ? 'auto' : 'none',
             }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
