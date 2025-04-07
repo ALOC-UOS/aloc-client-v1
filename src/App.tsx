@@ -9,6 +9,7 @@ import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
 import { Analytics } from '@vercel/analytics/react';
 import { AuthenticationHandler } from '@/handlers/AuthenticationHandler';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { pathname } from '@/constants/pathnames';
 import { Toaster } from 'sonner';
 
@@ -35,6 +36,7 @@ function App() {
       </BrowserRouter>
       <Analytics />
       <AuthenticationHandler />
+      <SpeedInsights />
     </>
   );
 }
