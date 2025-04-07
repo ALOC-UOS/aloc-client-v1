@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import CourseItem from '@/components/service/Course/CourseItem';
+import S from './CircularCourseLayout.style';
 
 const CircularCourseLayout = ({ courses }: { courses: any[] }) => {
   // 화면 높이를 상태로 관리
@@ -47,7 +48,7 @@ const CircularCourseLayout = ({ courses }: { courses: any[] }) => {
   }
 
   return (
-    <div style={{ position: 'fixed', top: '50%', left: '100%' }}>
+    <S.CircularCourseLayout>
       {courses.map((course, index) => {
         const angle = index * angleStep;
         const itemAngle = angle + rotationAngle;
@@ -84,7 +85,7 @@ const CircularCourseLayout = ({ courses }: { courses: any[] }) => {
           </div>
         );
       })}
-    </div>
+    </S.CircularCourseLayout>
   );
 };
 

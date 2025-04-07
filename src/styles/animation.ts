@@ -20,4 +20,15 @@ const FadeInUp = keyframes`
   }
 `;
 
-export default { FadeIn, FadeInUp };
+const FadeInScale = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+export default { FadeIn, FadeInUp, FadeInScale };
