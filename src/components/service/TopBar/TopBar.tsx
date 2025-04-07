@@ -1,6 +1,5 @@
 import S from './TopBar.style';
 import { HStack } from '@/components/common/Stack';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoWhite from '@/assets/images/logo.white.png';
 import AlocText from '@/assets/images/aloc-text.png';
@@ -14,9 +13,9 @@ import useModal from '@/hooks/useModal';
 import GoogleLoginModal from '../../common/GoogleLogin/GoogleLoginModal';
 import { pathname } from '@/constants/pathnames';
 import useAuth from '@/hooks/useAuth';
+import TopBarBackground from './TopBarBackground';
 
 const TopBar = () => {
-  const [isScroll, setIsScroll] = useState(false);
   const { isAuthenticated } = useAuth();
   const { isOpen: isLoginModalOpen, show: showLoginModal, hide: hideLoginModal } = useModal();
   const navigate = useNavigate();
@@ -25,24 +24,13 @@ const TopBar = () => {
     navigate(pathname.MAIN_PAGE);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScroll(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <S.TopBarContainer isScroll={isScroll}>
+      <S.TopBarContainer>
+        <TopBarBackground />
         <HStack alignItems="center" gap={8} onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
-          <img src={LogoWhite} alt="logo" width={40} height={40} key="logo" />
-          <img src={AlocText} alt="aloc-text" width={79} height={27} key="aloc-text" />
+          <S.LogoImage src={LogoWhite} alt="logo" />
+          <S.AlocTextImage src={AlocText} alt="aloc-text" />
         </HStack>
         <HStack gap={16}>
           <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />

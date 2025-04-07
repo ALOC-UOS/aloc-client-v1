@@ -78,7 +78,6 @@ const GlobalStyles = () => (
         --color-title-text: #3c414c;
 
         --color-box-shadow: '0 4px 24px 0 #cecece';
-        --color-gradient-topbar: rgba(241, 241, 241, 0), rgb(241, 241, 241);
       }
 
       /* Dark Mode */
@@ -91,7 +90,6 @@ const GlobalStyles = () => (
         --color-title-text: #a0a4b3;
 
         --color-box-shadow: '0 4px 24px 0 #3c414c';
-        --color-gradient-topbar: rgba(29, 33, 40, 0), rgb(29, 33, 40);
       }
 
       /* Light Mode */
@@ -104,7 +102,6 @@ const GlobalStyles = () => (
         --color-title-text: #3c414c;
 
         --color-box-shadow: '0 4px 24px 0 #cecece';
-        --color-gradient-topbar: rgba(241, 241, 241, 0), rgb(241, 241, 241);
       }
 
       button {
