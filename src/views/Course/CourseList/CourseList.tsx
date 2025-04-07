@@ -28,7 +28,7 @@ const CourseList = () => {
   }
 
   return (
-    <VStack>
+    <VStack style={{ width: '100%' }}>
       <S.CourseList>
         {courses.map((course) => (
           <CourseItem key={course.id} course={course} />

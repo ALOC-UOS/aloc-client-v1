@@ -11,7 +11,7 @@ import UsersBlueIcon from '@/assets/icons/users.blue.svg';
 import IconButton from './IconButton';
 import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
-import GoogleLoginModal from '../GoogleLoginModal';
+import GoogleLoginModal from '../../common/GoogleLogin/GoogleLoginModal';
 import { pathname } from '@/constants/pathnames';
 import useAuth from '@/hooks/useAuth';
 

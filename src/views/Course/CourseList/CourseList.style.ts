@@ -10,7 +10,7 @@ const CourseList = styled.div`
   background-color: var(--color-foreground);
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 `;
 
 const Message = styled.p`

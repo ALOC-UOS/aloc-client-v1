@@ -1,10 +1,10 @@
 import Modal from '@/components/common/Modal';
 import S from './GoogleLoginModal.style';
-import GoogleLogoIcon from '@/assets/icons/google-logo.svg';
 import CloseIcon from '@/assets/icons/close.svg';
 import { VStack } from '@/components/common/Stack';
 import { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
+import GoogleLoginButton from '../GoogleLoginButton';
 
 interface GoogleLoginModalProps {
   isOpen: boolean;
@@ -12,10 +12,7 @@ interface GoogleLoginModalProps {
 }
 
 const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
-  const { getGoogleLoginUrl, setIsAuthenticated } = useAuth();
-  const handleGoogleLogin = () => {
-    window.open(getGoogleLoginUrl(), '_blank', 'width=500,height=600');
-  };
+  const { setIsAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleGoogleLoginSuccess = (event: MessageEvent) => {
@@ -46,12 +43,7 @@ const GoogleLoginModal = ({ isOpen, onClose }: GoogleLoginModalProps) => {
           <Modal.Title>로그인</Modal.Title>
           <Modal.Subtitle>로그인 후에 코스를 선택할 수 있어요</Modal.Subtitle>
         </VStack>
-        <S.GoogleLoginButton onClick={handleGoogleLogin}>
-          <img src={GoogleLogoIcon} alt="Google" width={24} height={24} />
-          <span style={{ color: 'var(--color-title-text)', fontSize: '16px', fontWeight: '500' }}>
-            Google 계정으로 계속하기
-          </span>
-        </S.GoogleLoginButton>
+        <GoogleLoginButton />
       </VStack>
     </Modal>
   );

@@ -6,7 +6,7 @@ import Number from '@/components/service/TierCircle/Number';
 import { tierStyleConfig } from '@/styles/tier.config';
 import BookIcon from '@/assets/icons/book.svg';
 import CourseSelectModal from '@/components/service/Course/CourseSelectModal';
-import GoogleLoginModal from '@/components/service/GoogleLoginModal';
+import GoogleLoginModal from '@/components/common/GoogleLogin/GoogleLoginModal';
 import ExceededModal from '@/components/service/Course/ExceededModal';
 import useAuth from '@/hooks/useAuth';
 import { useState } from 'react';

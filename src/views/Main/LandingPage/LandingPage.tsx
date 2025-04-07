@@ -1,7 +1,7 @@
 import { HStack, VStack } from '@/components/common/Stack';
 import ParticleText from '@/components/common/ParticleText';
 import S from './LandingPage.style';
-import GoogleLoginModal from '@/components/service/GoogleLoginModal';
+import GoogleLoginModal from '@/components/common/GoogleLogin/GoogleLoginModal';
 import useModal from '@/hooks/useModal';
 import Button from '@/components/common/Button';
 import { tierStyleConfig } from '@/styles/tier.config';
