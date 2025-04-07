@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 const GoogleAuthCallback = () => {
   useEffect(() => {
     const handleAuth = async () => {
-      console.log('구글 로그인 콜백 처리 시작');
       try {
         // URL에서 액세스 토큰 추출
         const urlParams = new URLSearchParams(window.location.search);
@@ -20,7 +19,6 @@ const GoogleAuthCallback = () => {
 
           // 원래 창으로 로그인 성공 메시지 전달
           if (window.opener) {
-            console.log(window.opener);
             window.opener.postMessage(
               {
                 type: 'google-login-success',
