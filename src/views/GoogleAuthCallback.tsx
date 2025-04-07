@@ -48,7 +48,7 @@ const GoogleAuthCallback = () => {
         }
       } finally {
         // 창 닫기
-        window.close();
+        // window.close();
       }
     };
 
