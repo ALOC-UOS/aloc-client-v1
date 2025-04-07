@@ -7,6 +7,7 @@ import ProfilePage from '@/views/Profile';
 import GoogleAuthCallback from '@/views/GoogleAuthCallback';
 import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
+import { Analytics } from '@vercel/analytics/react';
 import { AuthenticationHandler } from '@/handlers/AuthenticationHandler';
 import { pathname } from '@/constants/pathnames';
 import { Toaster } from 'sonner';
@@ -32,6 +33,7 @@ function App() {
           <Route path={pathname.PROFILE_PAGE} element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
+      <Analytics />
       <AuthenticationHandler />
     </>
   );
