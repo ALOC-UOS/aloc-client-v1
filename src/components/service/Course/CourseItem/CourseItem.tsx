@@ -52,7 +52,7 @@ const CourseItem = ({ course }: CourseItemProps) => {
     if (!selectedCourse) return;
 
     try {
-      const result = await addCourse(selectedCourse);
+      const result = await addCourse(selectedCourse.id);
       if (result.success) {
         setTimeout(() => {
           toast.success('코스가 등록됐어요! 완주까지 응원할게요 😆');

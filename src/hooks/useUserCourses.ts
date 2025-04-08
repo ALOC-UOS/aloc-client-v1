@@ -84,10 +84,10 @@ const useUserCourses = () => {
     }
   };
 
-  const addCourse = async (course: CourseInfo) => {
+  const addCourse = async (courseId: string) => {
     setIsLoading(true);
     try {
-      await serverAPI.post(`/user/course/${course.id}`);
+      await serverAPI.post(`/user/courses/${courseId}`);
       await loadUserCourses();
       return { success: true, error: null };
     } catch (error: any) {
@@ -102,7 +102,7 @@ const useUserCourses = () => {
   const deleteCourse = async (courseId: string) => {
     setIsLoading(true);
     try {
-      await serverAPI.patch(`/user/course/${courseId}`);
+      await serverAPI.patch(`/user/courses/${courseId}`);
       await loadUserCourses();
       // Todo: 추후에 삭제되는 코스인 경우에만 courseIndex를 0으로 설정하도록 수정
       setCourseIndex(0);
@@ -117,9 +117,14 @@ const useUserCourses = () => {
   };
 
   const checkTodayProblem = async () => {
+    if (!todayProblem) {
+      return false;
+    }
+
     setIsSolvingCheckLoading(true);
+
     try {
-      const response = await serverAPI.put(`/problem/${todayProblem?.problemId}`);
+      const response = await serverAPI.patch(`/problems/${todayProblem.problemId}`);
       return response.data.result.isSolved;
     } catch (error) {
       console.error('오늘의 문제 조회 중 오류 발생:', error);
