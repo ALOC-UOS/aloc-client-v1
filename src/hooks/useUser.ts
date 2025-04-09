@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { UserInfo } from '@/types/user.types';
-import { serverAPI } from '@/api/axios';
+import { serverAPI } from '@/lib/api/axios';
 import { atom, useAtom } from 'jotai';
 import useAuth from './useAuth';
 

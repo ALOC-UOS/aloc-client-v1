@@ -1,4 +1,4 @@
-import { serverAPI } from '@/api/axios';
+import { serverAPI } from '@/lib/api/axios';
 import { UserInfo } from '@/types/user.types';
 import { useState } from 'react';
 import useUser from './useUser';

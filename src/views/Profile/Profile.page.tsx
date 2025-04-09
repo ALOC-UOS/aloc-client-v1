@@ -5,7 +5,7 @@ import useUser from '@/hooks/useUser';
 import S from './Profile.style';
 import CoinIcon from '@/assets/icons/coin.svg';
 import TierCircle from '@/components/service/TierCircle';
-import { getTierByUserRank, getTierNumberByUserRank } from '@/utils/Tier';
+import { getTierByUserRank, getTierNumberByUserRank } from '@/lib/utils/Tier';
 import Button from '@/components/common/Button';
 import useModal from '@/hooks/useModal';
 import Modal from '@/components/common/Modal';

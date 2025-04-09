@@ -1,4 +1,4 @@
-import { serverAPI } from '@/api/axios';
+import { serverAPI } from '@/lib/api/axios';
 import { atom, useAtom } from 'jotai';
 import axios from 'axios';
 

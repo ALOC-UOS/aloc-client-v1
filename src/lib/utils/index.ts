@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
-import { linkNames } from '@/constants/linkNames';
+import { linkNames } from '@/lib/constants/linkNames';
 
 dayjs.extend(relativeTime);
 dayjs.locale('ko');

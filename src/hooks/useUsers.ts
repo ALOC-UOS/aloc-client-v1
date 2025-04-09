@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { UserInfo } from '@/types/user.types';
-import { serverAPI } from '@/api/axios';
+import { serverAPI } from '@/lib/api/axios';
 
 const useUsers = () => {
   const [users, setUsers] = useState<UserInfo[]>([]);

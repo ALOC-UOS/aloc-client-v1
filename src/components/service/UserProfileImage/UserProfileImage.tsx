@@ -3,7 +3,7 @@ import { UserInfo } from '@/types/user.types';
 import DefaultProfile from '@/assets/images/default-profile.svg';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { HStack } from '@/components/common/Stack';
-import { moveToBaekjoonProfileSite } from '@/utils/index';
+import { moveToBaekjoonProfileSite } from '@/lib/utils/index';
 
 interface UserProfileImageProps {
   user: UserInfo | null;

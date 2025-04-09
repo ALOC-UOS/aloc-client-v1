@@ -1,7 +1,7 @@
 import { HStack, VStack } from '@/components/common/Stack';
 import S from './CourseItem.style';
 import { CourseInfo } from '@/types/course.types';
-import { getTierByDifficulty, getTierNumberByDifficulty } from '@/utils/Tier';
+import { getTierByDifficulty, getTierNumberByDifficulty } from '@/lib/utils/Tier';
 import Number from '@/components/service/TierCircle/Number';
 import { tierStyleConfig } from '@/styles/tier.config';
 import BookIcon from '@/assets/icons/book.svg';

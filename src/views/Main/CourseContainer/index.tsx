@@ -8,7 +8,7 @@ import SolveCheckButton from './SolveCheckButton';
 import Confetti from '@/components/common/Confetti';
 import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
-import { pathname } from '@/constants/pathnames';
+import { pathname } from '@/lib/constants/pathnames';
 import useCourses from '@/hooks/useCourses';
 import CircularCourseLayout from './CircularCourseLayout';
 

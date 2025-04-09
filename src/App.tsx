@@ -10,7 +10,7 @@ import TopBar from '@/components/service/TopBar';
 import { Analytics } from '@vercel/analytics/react';
 import { AuthenticationHandler } from '@/handlers/AuthenticationHandler';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import { pathname } from '@/constants/pathnames';
+import { pathname } from '@/lib/constants/pathnames';
 import { Toaster } from 'sonner';
 
 function App() {

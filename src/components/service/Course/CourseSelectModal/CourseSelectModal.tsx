@@ -5,7 +5,7 @@ import Modal from '@/components/common/Modal';
 import S from './CourseSelectModal.style';
 import TierCircle from '@/components/service/TierCircle';
 import { CourseInfo } from '@/types/course.types';
-import { getTierByDifficulty, getTierNumberByDifficulty } from '@/utils/Tier';
+import { getTierByDifficulty, getTierNumberByDifficulty } from '@/lib/utils/Tier';
 
 interface CourseSelectModalProps {
   isOpen: boolean;

@@ -6,7 +6,7 @@ import useUserCourses from '@/hooks/useUserCourses';
 import { UserCourse } from '@/types/course.types';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { formatDeadline } from '@/utils/index';
+import { formatDeadline } from '@/lib/utils/index';
 import S from './UserCourseItem.style';
 
 interface UserCourseItemProps {

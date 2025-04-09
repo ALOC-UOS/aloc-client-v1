@@ -1,5 +1,5 @@
 import S from './style';
-import { formatSolveTime } from '@/utils/index';
+import { formatSolveTime } from '@/lib/utils/index';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import { HStack } from '@/components/common/Stack';
 import { UserInfo } from '@/types/user.types';

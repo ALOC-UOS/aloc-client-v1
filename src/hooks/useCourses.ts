@@ -1,4 +1,4 @@
-import { serverAPI } from '@/api/axios';
+import { serverAPI } from '@/lib/api/axios';
 import { CourseInfo } from '@/types/course.types';
 import { atom, useAtom } from 'jotai';
 import { useEffect, useState } from 'react';

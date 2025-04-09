@@ -4,7 +4,7 @@ import { HStack } from '@/components/common/Stack';
 import UserProfileImage from '@/components/service/UserProfileImage';
 import Label from '@/components/common/Label';
 import useUser from '@/hooks/useUser';
-import { pathname } from '@/constants/pathnames';
+import { pathname } from '@/lib/constants/pathnames';
 
 const ProfileButton = () => {
   const { user } = useUser();

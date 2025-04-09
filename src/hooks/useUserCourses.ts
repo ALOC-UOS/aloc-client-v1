@@ -2,8 +2,8 @@ import { atom, useAtom } from 'jotai';
 import { Problem } from '@/types/problem.types';
 import { CourseInfo, UserCourse } from '@/types/course.types';
 import { useEffect, useState } from 'react';
-import { serverAPI } from '@/api/axios';
-import { getTierByDifficulty } from '@/utils/Tier';
+import { serverAPI } from '@/lib/api/axios';
+import { getTierByDifficulty } from '@/lib/utils/Tier';
 import { tierStyleConfig } from '@/styles/tier.config';
 import useAuth from './useAuth';
 

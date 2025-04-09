@@ -6,7 +6,7 @@ import Label from '@/components/common/Label';
 import Line from '@/components/common/Line';
 import CoinIcon from '@/assets/icons/coin.svg';
 import { UserInfo } from '@/types/user.types';
-import { getTierByUserRank, getTierNumberByUserRank } from '@/utils/Tier';
+import { getTierByUserRank, getTierNumberByUserRank } from '@/lib/utils/Tier';
 
 interface UserProfileCardProps {
   user: UserInfo;

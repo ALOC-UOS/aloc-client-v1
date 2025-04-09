@@ -1,4 +1,4 @@
-import { moveToProblemProblemSite } from '@/utils/index';
+import { moveToProblemProblemSite } from '@/lib/utils/index';
 import LockIcon from '@/assets/icons/lock.svg';
 import CloseIcon from '@/assets/icons/close.svg';
 import S from './ProblemList.style';

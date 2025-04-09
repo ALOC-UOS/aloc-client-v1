@@ -2,7 +2,7 @@ import CoinIcon from '../../assets/icons/coin.svg';
 import DefaultProfile from '../../assets/images/default-profile.svg';
 import ChangeColor from '../../assets/items/change-color.svg';
 import DecorationItemComponent from '../../components/service/Decorations/Item';
-import { DECORATION_ITEMS, NORMAL_ITEMS } from '../../constants/Shop';
+import { DECORATION_ITEMS, NORMAL_ITEMS } from '../../lib/constants/Shop';
 import {
   ShopContainer,
   ContentContainer,
