@@ -8,13 +8,19 @@ const SolveCheckButton = () => {
   const { todayProblem, checkTodayProblem, isSolvingCheckLoading } = useUserCourses();
 
   const handleCheckTodayProblem = async () => {
-    const isSolved = await checkTodayProblem();
+    const response = await checkTodayProblem();
 
-    if (isSolved) {
+    if (response.isSolved) {
       show();
-      toast.success('오늘의 문제를 풀어버렸어요! 🎉', {
-        description: `코인: ${isSolved?.coinResponseDtos?.addedCoin || 0}개`,
-      });
+      const coinArray = response.coinResponseDtos;
+
+      if (coinArray.length > 0) {
+        coinArray.forEach((coin: any) => {
+          toast.success('오늘의 문제를 풀어버렸어요! 🎉', {
+            description: `코인: ${coin.addedCoin || 0}개`,
+          });
+        });
+      }
       return;
     }
 

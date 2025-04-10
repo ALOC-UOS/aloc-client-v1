@@ -125,7 +125,7 @@ const useUserCourses = () => {
 
     try {
       const response = await serverAPI.patch(`/problems/${todayProblem.problemId}`);
-      return response.data.result.isSolved;
+      return response.data.result;
     } catch (error) {
       console.error('오늘의 문제 조회 중 오류 발생:', error);
     } finally {
