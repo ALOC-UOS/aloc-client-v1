@@ -3,8 +3,7 @@ import { Global, css } from '@emotion/react';
 const GlobalStyles = () => (
   <Global
     styles={css`
-      *,
-      body {
+      * {
         transition: all 0.3s;
         margin: 0;
         box-sizing: border-box;
@@ -13,31 +12,37 @@ const GlobalStyles = () => (
         /* Scrollbar Style */
         scrollbar-width: thin;
         scrollbar-color: rgba(0, 29, 58, 0.18) transparent;
-      }
 
-      body {
-        background-color: #e5e6ec;
-        margin: 0;
-        font-family:
-          'Noto Sans KR',
-          -apple-system,
-          sans-serif,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          'Roboto';
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      img {
-        max-width: 100%;
-        height: auto;
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
         user-select: none;
         -webkit-user-drag: none;
         -webkit-touch-callout: none;
+
+        font-family:
+          'Noto Sans KR',
+          -apple-system,
+          sans-serif,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          'Roboto' !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        transition: none;
+        background-color: #e5e6ec;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      hr {
+        border-style: none;
       }
 
       :root {
@@ -56,6 +61,7 @@ const GlobalStyles = () => (
         --color-white-25: #ffffff40;
         --color-white-10: #ffffff1a;
         --color-black: #000000;
+        --color-black-75: #000000b0;
         --color-black-50: #00000080;
         --color-black-25: #00000040;
         --color-black-10: #0000001a;
@@ -72,7 +78,6 @@ const GlobalStyles = () => (
         --color-title-text: #3c414c;
 
         --color-box-shadow: '0 4px 24px 0 #cecece';
-        --color-gradient-topbar: rgba(241, 241, 241, 0), rgb(241, 241, 241);
       }
 
       /* Dark Mode */
@@ -85,7 +90,6 @@ const GlobalStyles = () => (
         --color-title-text: #a0a4b3;
 
         --color-box-shadow: '0 4px 24px 0 #3c414c';
-        --color-gradient-topbar: rgba(29, 33, 40, 0), rgb(29, 33, 40);
       }
 
       /* Light Mode */
@@ -98,7 +102,19 @@ const GlobalStyles = () => (
         --color-title-text: #3c414c;
 
         --color-box-shadow: '0 4px 24px 0 #cecece';
-        --color-gradient-topbar: rgba(241, 241, 241, 0), rgb(241, 241, 241);
+      }
+
+      button {
+        cursor: pointer;
+
+        &:hover {
+          filter: brightness(0.9);
+          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
       }
     `}
   />

@@ -1,13 +1,15 @@
 import { TierStyleConfig } from './tier.types';
+import { UserInfo } from './user.types';
+
+type ProblemStatus = 'UNSOLVED' | 'SOLVED' | 'CLOSED' | 'HIDDEN';
 
 export type Problem = {
-  id: number;
   problemId: number;
-  title: string;
+  name: string;
   difficulty: number;
   tier: TierStyleConfig;
+  status: ProblemStatus;
+  userList: UserInfo[];
+  solvedCount: number;
+  lastSolvedAt: string;
 };
-
-export interface SolvedProblem extends Problem {
-  isSolved: boolean;
-}
