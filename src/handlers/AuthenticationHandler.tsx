@@ -15,6 +15,8 @@ export const AuthenticationHandler = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isProtectedRoute = PROTECTED_ROUTES.includes(location.pathname);
+
   // 인증 상태 체크 및 유저 정보 로드
   useEffect(() => {
     const initUserStatus = async () => {
@@ -22,7 +24,7 @@ export const AuthenticationHandler = () => {
       if (!isAuthenticated && !(await refreshToken())) {
         setUser(null);
         // 인증이 필요한 라우트에서 유저가 없는 경우 메인으로 리다이렉션
-        if (PROTECTED_ROUTES.includes(location.pathname)) {
+        if (isProtectedRoute) {
           navigate(pathname.MAIN_PAGE, { replace: true });
         }
         return;
@@ -35,7 +37,7 @@ export const AuthenticationHandler = () => {
     initUserStatus();
     // 컴포넌트 마운트 시와 인증 상태가 변경될 때만 실행
     // 보호된 라우트로 이동할 때만 체크 추가
-  }, [isAuthenticated, PROTECTED_ROUTES.includes(location.pathname) ? location.pathname : null]);
+  }, [isAuthenticated, isProtectedRoute]);
 
   // 유저 상태 감지하여 백준 ID 확인 및 유저 코스 로드
   useEffect(() => {
