@@ -22,33 +22,14 @@ const UserProfileImage = ({
   disabled = false,
   isLoading = false,
 }: UserProfileImageProps) => {
-  if (!user || !user.profileImageFileName) {
-    return (
-      <HStack
-        alignItems="center"
-        justifyContent="center"
-        style={{ position: 'relative', width: `${width}`, height: `${height}` }}
-      >
-        <S.ProfileImage
-          src={DefaultProfile}
-          width={width}
-          height={height}
-          backgroundColor={backgroundColor}
-          disabled={disabled}
-          isLoading={isLoading}
-        />
-        {isLoading && <LoadingIcon />}
-      </HStack>
-    );
-  }
-
   const handleClick = () => {
-    if (disabled || !user.baekjoonId) {
-      return;
-    }
-
+    if (disabled || !user?.baekjoonId) return;
     moveToBaekjoonProfileSite(user.baekjoonId);
   };
+
+  const profileImageUrl = user?.profileImageFileName
+    ? `${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${user.profileImageFileName}`
+    : DefaultProfile;
 
   return (
     <HStack
@@ -57,7 +38,7 @@ const UserProfileImage = ({
       style={{ position: 'relative', width: `${width}`, height: `${height}` }}
     >
       <S.ProfileImage
-        src={`${import.meta.env.VITE_USER_PROFILE_IMAGE_URL}/${user.profileImageFileName}`}
+        src={profileImageUrl}
         width={width}
         height={height}
         backgroundColor={backgroundColor}
