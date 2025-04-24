@@ -14,3 +14,5 @@ export const pathname: Record<Pathname, string> = {
   SHOP_PAGE: '/shop',
   GOOGLE_AUTH_CALLBACK: '/finish-google-sso',
 };
+
+export const PROTECTED_ROUTES = [pathname.PROFILE_PAGE];

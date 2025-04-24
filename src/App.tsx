@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from '@/views/Main';
-import Shop from '@/views/Shop';
 import UserPage from '@/views/User';
 import CoursePage from '@/views/Course';
 import ProfilePage from '@/views/Profile';
@@ -25,17 +24,16 @@ function App() {
       />
       <BrowserRouter>
         <TopBar />
+        <AuthenticationHandler />
         <Routes>
           <Route path={pathname.MAIN_PAGE} element={<Main />} />
+          <Route path={pathname.GOOGLE_AUTH_CALLBACK} element={<GoogleAuthCallback />} />
           <Route path={pathname.USERS_PAGE} element={<UserPage />} />
           <Route path={pathname.COURSE_PAGE} element={<CoursePage />} />
-          <Route path={pathname.SHOP_PAGE} element={<Shop />} />
-          <Route path={pathname.GOOGLE_AUTH_CALLBACK} element={<GoogleAuthCallback />} />
           <Route path={pathname.PROFILE_PAGE} element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
       <Analytics />
-      <AuthenticationHandler />
       <SpeedInsights />
     </>
   );
