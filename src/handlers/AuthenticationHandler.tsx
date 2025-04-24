@@ -12,22 +12,29 @@ export const AuthenticationHandler = () => {
   const { isOpen: isProfileModalOpen, show: showProfileModal, hide: hideProfileModal } = useModal();
 
   useEffect(() => {
-    if (user && !user.baekjoonId) {
-      showProfileModal();
-    }
-  }, [user, user?.baekjoonId]);
-
-  useEffect(() => {
-    const initLoginStatus = async () => {
+    const initUserStatus = async () => {
+      // 인증 상태 확인
       if (!isAuthenticated && !(await refreshToken())) {
         setUser(null);
         return;
       }
+
+      // 유저 정보 로드
       await loadUser();
-      await loadUserCourses();
+
+      // 유저가 있고 백준 ID가 없는 경우 프로필 모달 표시
+      if (user && !user.baekjoonId) {
+        showProfileModal();
+        return;
+      }
+
+      // 유저 정보가 있는 경우 유저 코스 로드
+      if (user) {
+        await loadUserCourses();
+      }
     };
 
-    initLoginStatus();
+    initUserStatus();
   }, [isAuthenticated]);
 
   return <ProfileModal isOpen={isProfileModalOpen} onClose={hideProfileModal} />;
