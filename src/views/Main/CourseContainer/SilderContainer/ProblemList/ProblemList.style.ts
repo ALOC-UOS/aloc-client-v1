@@ -61,6 +61,7 @@ const ProblemItem = styled.div<{ isSolved: boolean; backgroundColor: string }>`
   align-items: center;
 
   opacity: ${(props) => (props.isSolved ? 1 : 0.5)};
+  background-color: ${(props) => (props.isSolved ? props.backgroundColor : 'transparent')};
   border-radius: 50%;
 
   &:before {
@@ -85,15 +86,6 @@ const ProblemItem = styled.div<{ isSolved: boolean; backgroundColor: string }>`
     opacity: 1;
     background-color: ${(props) => props.backgroundColor};
     transform: scale(1.2);
-
-    &:before {
-      mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    }
   }
 
   &:active {
