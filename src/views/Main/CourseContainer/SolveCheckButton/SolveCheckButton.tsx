@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 const SolveCheckButton = () => {
   const { show } = useConfetti();
-  const { todayProblem, checkTodayProblem, isSolvingCheckLoading } = useUserCourses();
+  const { todayProblem, checkTodayProblem, isSolvingCheckLoading, loadUserCourses} = useUserCourses();
 
   const handleCheckTodayProblem = async () => {
     const response = await checkTodayProblem();
@@ -21,6 +21,9 @@ const SolveCheckButton = () => {
           });
         });
       }
+
+      await loadUserCourses();
+
       return;
     }
 
