@@ -24,7 +24,7 @@ const useUsers = () => {
       }));
       setUsers(users);
     } catch (error) {
-      console.error(error, 'API 요청 중 오류 발생:');
+      console.error('API 요청 중 오류 발생:', error);
     } finally {
       setIsLoading(false);
     }

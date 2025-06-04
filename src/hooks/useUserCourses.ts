@@ -118,7 +118,7 @@ const useUserCourses = () => {
 
   const checkTodayProblem = async () => {
     if (!todayProblem) {
-      return false;
+      return { isSolved: false, coinResponseDtos: [] };
     }
 
     setIsSolvingCheckLoading(true);
@@ -128,6 +128,7 @@ const useUserCourses = () => {
       return response.data.result;
     } catch (error) {
       console.error('오늘의 문제 조회 중 오류 발생:', error);
+      return { isSolved: false, coinResponseDtos: [] };
     } finally {
       setIsSolvingCheckLoading(false);
     }

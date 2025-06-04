@@ -32,7 +32,7 @@ export const formatDeadline = (deadline: string) => {
   return `${diffInHours}시간 전`;
 };
 
-export const moveToProblemProblemSite = (problemId: number) => {
+export const moveToProblemSite = (problemId: number) => {
   window.open(`${linkNames.baekjoon.problem}${problemId}`, '_blank');
 };
 

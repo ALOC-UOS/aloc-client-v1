@@ -1,4 +1,4 @@
-import { moveToProblemProblemSite } from '@/lib/utils/index';
+import { moveToProblemSite } from '@/lib/utils/index';
 import LockIcon from '@/assets/icons/lock.svg';
 import CloseIcon from '@/assets/icons/close.svg';
 import S from './ProblemList.style';
@@ -57,7 +57,7 @@ const ProblemItem = ({ problem }: { problem: Problem | null }) => {
     <S.ProblemItem
       isSolved={problem.status === 'SOLVED'}
       backgroundColor={problem.tier.backgroundColor}
-      onClick={() => moveToProblemProblemSite(problem.problemId)}
+      onClick={() => moveToProblemSite(problem.problemId)}
     >
       <img
         src={problem.tier.icon.small}
