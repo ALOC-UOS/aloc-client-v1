@@ -1,7 +1,7 @@
-import ProblemContentError from './SilderContainer/TodayProlemContainer/error';
+import ProblemContentError from './SliderContainer/TodayProblemContainer/error';
 import TierIcons from './TierIcons';
 import { VStack } from '@/components/common/Stack';
-import SilderContainer from './SilderContainer';
+import SliderContainer from './SliderContainer';
 import useUserCourses from '@/hooks/useUserCourses';
 import Background from './Background';
 import SolveCheckButton from './SolveCheckButton';
@@ -105,7 +105,7 @@ const CourseContainer = () => {
     <>
       <Background color={todayProblem.tier.backgroundColor} />
       <TierIcons tier={todayProblem.tier} key={todayProblem.problemId} />
-      <SilderContainer />
+      <SliderContainer />
       <SolveCheckButton />
       <Confetti />
     </>

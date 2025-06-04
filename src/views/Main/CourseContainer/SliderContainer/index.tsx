@@ -1,13 +1,13 @@
 import S from './style';
 import { useEffect, useState, useRef } from 'react';
 import useUserCourses from '@/hooks/useUserCourses';
-import { moveToProblemProblemSite } from '@/lib/utils/index';
-import TodayProlemContainer from './TodayProlemContainer';
+import { moveToProblemSite } from '@/lib/utils/index';
+import TodayProblemContainer from './TodayProblemContainer';
 import ProblemList from './ProblemList';
 import { useLocation } from 'react-router-dom';
 import { Problem } from '@/types/problem.types';
 
-const SilderContainer = () => {
+const SliderContainer = () => {
   const { courseIndex, setCourseIndex, todayProblem, userCourses } = useUserCourses();
   const [windowWidth, setWindowWidth] = useState(0);
   const sliderItemRef = useRef<HTMLDivElement>(null);
@@ -20,7 +20,7 @@ const SilderContainer = () => {
     }
 
     if (todayProblem) {
-      moveToProblemProblemSite(todayProblem.problemId);
+      moveToProblemSite(todayProblem.problemId);
     }
   };
 
@@ -74,7 +74,7 @@ const SilderContainer = () => {
               opacity: index === courseIndex ? 1 : 0.5, // 멀리 있는 항목은 더 투명하게
             }}
           >
-            <TodayProlemContainer
+            <TodayProblemContainer
               courseName={course.name}
               problem={course.problems[course.problems.length - 1] as Problem}
               onClick={() => handleCourseClick(index)}
@@ -87,4 +87,4 @@ const SilderContainer = () => {
   );
 };
 
-export default SilderContainer;
+export default SliderContainer;

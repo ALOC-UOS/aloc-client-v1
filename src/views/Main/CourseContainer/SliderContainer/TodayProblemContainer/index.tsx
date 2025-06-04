@@ -3,13 +3,13 @@ import S from './style';
 import SolvedUserInfo from './SolvedUserInfo';
 import { VStack } from '@/components/common/Stack';
 
-interface TodayProlemContainerProps {
+interface TodayProblemContainerProps {
   courseName: string;
   problem: Problem;
   onClick: () => void;
 }
 
-const TodayProlemContainer = ({ courseName, problem, onClick }: TodayProlemContainerProps) => {
+const TodayProblemContainer = ({ courseName, problem, onClick }: TodayProblemContainerProps) => {
   return (
     <S.ProblemContainer color={problem.tier.color} onClick={onClick}>
       <VStack alignItems="center" gap={8}>
@@ -28,4 +28,4 @@ const TodayProlemContainer = ({ courseName, problem, onClick }: TodayProlemConta
   );
 };
 
-export default TodayProlemContainer;
+export default TodayProblemContainer;
