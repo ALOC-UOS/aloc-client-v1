@@ -12,33 +12,6 @@ const AppearCard = keyframes`
   }
 `;
 
-const ShopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-background);
-  min-height: 100vh;
-  padding-bottom: 48px;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  padding: 24px 0 24px 40px;
-  margin-top: 120px;
-  flex-wrap: wrap;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -143,8 +116,6 @@ const Button = styled.div`
 `;
 
 export {
-  ShopContainer,
-  ContentContainer,
   ItemContainer,
   ItemCard,
   ItemImgWrapper,

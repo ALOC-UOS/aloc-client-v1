@@ -1,3 +1,5 @@
+import { DecorationItemName } from '@/types/decorationItem.types';
+
 export const PRICE = {
   GREEN_TURTLE: 1000,
   PINK_TURTLE: 1000,
@@ -6,7 +8,12 @@ export const PRICE = {
   BUBBLE: 2000,
 };
 
-export const DECORATION_ITEMS = [
+export const DECORATION_ITEMS: {
+  name: string;
+  description: string;
+  price: number;
+  type: DecorationItemName;
+}[] = [
   {
     name: '초록 거북이',
     description: '귀여운 거북이가 엉금엉금 기어오릅니다.',
