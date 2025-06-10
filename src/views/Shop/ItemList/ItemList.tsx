@@ -1,7 +1,8 @@
+import useProfileBackgroundColor from '@/hooks/useProfileBackgroundColor';
 import CoinIcon from '../../../assets/icons/coin.svg';
 import ChangeColor from '../../../assets/items/change-color.svg';
 import { DECORATION_ITEMS, NORMAL_ITEMS } from '../../../lib/constants/Shop';
-import { DecorationShopItem, NormalShopItem } from '../../../types/decorationItem.types';
+import { NormalShopItem } from '../../../types/decorationItem.types';
 import {
   ItemContainer,
   ItemCard,
@@ -14,47 +15,24 @@ import {
   ItemPrice,
   Button,
 } from './ItemList.style';
-import axios from 'axios';
-import { useState, useCallback } from 'react';
+import { toast } from 'sonner';
 
 const ItemList = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { isLoading, updateProfileBackgroundColor } = useProfileBackgroundColor();
 
-  const handlePurchase = useCallback(
-    async (item: DecorationShopItem | NormalShopItem, index: number, isDecoration: boolean) => {
-      try {
-        setIsLoading(true);
-        setSelectedIndex(index);
-        const token = localStorage.getItem('token');
-        if (!token) {
-          alert('로그인이 필요합니다.');
-          return;
-        }
-        const response = await axios.post(
-          '/user/profile-background-color',
-          {
-            itemId: isDecoration ? (item as DecorationShopItem).type : item.name,
-            price: item.price,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (response.status === 200) {
-          alert('구매가 완료되었습니다.');
-        }
-      } catch (e) {
-        alert('구매 중 오류가 발생했습니다.');
-      } finally {
-        setIsLoading(false);
-        setSelectedIndex(null);
-      }
-    },
-    []
-  );
+  const handlePurchase = async () => {
+    const response = await updateProfileBackgroundColor();
+    if (response?.error) {
+      toast.error(response.error);
+      return;
+    }
+    
+    if (response?.color) {
+      toast.success('배경색이 변경되었습니다! 🎨', {
+        description: `색상: ${response.color.name} / 희귀도: ${response.color.type}`,
+      });
+    }
+  };
 
   return (
     <ItemContainer>
@@ -100,14 +78,13 @@ const ItemList = () => {
             <InfoDescription>{item.description}</InfoDescription>
           </ItemInfo>
           <Button
-            onClick={() => handlePurchase(item, index + DECORATION_ITEMS.length, false)}
+            onClick={handlePurchase}
             style={{
-              opacity: isLoading && selectedIndex === index + DECORATION_ITEMS.length ? 0.5 : 1,
-              pointerEvents:
-                isLoading && selectedIndex === index + DECORATION_ITEMS.length ? 'none' : 'auto',
+              opacity: isLoading ? 0.5 : 1,
+              pointerEvents: isLoading ? 'none' : 'auto',
             }}
           >
-            {isLoading && selectedIndex === index + DECORATION_ITEMS.length ? '구매 중...' : '구매'}
+            {isLoading ? '구매 중...' : '구매'}
           </Button>
         </ItemCard>
       ))}
