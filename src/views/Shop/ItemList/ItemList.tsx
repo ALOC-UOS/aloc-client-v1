@@ -16,11 +16,21 @@ import {
   Button,
 } from './ItemList.style';
 import { toast } from 'sonner';
+import GoogleLoginModal from '@/components/common/GoogleLogin/GoogleLoginModal';
+import useModal from '@/hooks/useModal';
+import useAuth from '@/hooks/useAuth';
 
 const ItemList = () => {
   const { isLoading, updateProfileBackgroundColor } = useProfileBackgroundColor();
+  const { isOpen, show, hide } = useModal();
+  const { isAuthenticated } = useAuth();
 
   const handlePurchase = async () => {
+    if (!isAuthenticated) {
+      show();
+      return;
+    }
+
     const response = await updateProfileBackgroundColor();
     if (response?.error) {
       toast.error(response.error);
@@ -88,6 +98,7 @@ const ItemList = () => {
           </Button>
         </ItemCard>
       ))}
+      <GoogleLoginModal isOpen={isOpen} onClose={hide} />
     </ItemContainer>
   );
 };
