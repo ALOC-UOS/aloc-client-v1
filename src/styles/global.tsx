@@ -65,6 +65,7 @@ const GlobalStyles = () => (
         --color-black-50: #00000080;
         --color-black-25: #00000040;
         --color-black-10: #0000001a;
+        --color-disabled: #d3d3d3;
 
         --color-gradient-blue: #04a3fb, #2f5dff;
         --color-gradient-yellow: #ffb800, #ff7a00;
@@ -107,6 +108,18 @@ const GlobalStyles = () => (
       button {
         cursor: pointer;
 
+        &:focus {
+          outline: none;
+          border: none;
+          box-shadow: none;
+        }
+
+        &:focus-visible {
+          outline: none;
+          border: none;
+          box-shadow: none;
+        }
+
         &:hover {
           filter: brightness(0.9);
           transform: scale(1.05);
@@ -114,6 +127,20 @@ const GlobalStyles = () => (
 
         &:active {
           transform: scale(0.95);
+          border: none;
+          outline: none;
+        }
+
+        &:disabled {
+          background-color: var(--color-disabled);
+          color: var(--color-white);
+          cursor: default;
+          filter: none;
+          transform: none;
+          opacity: 0.6;
+          pointer-events: none;
+          border: none;
+          outline: none;
         }
       }
     `}

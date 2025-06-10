@@ -13,24 +13,73 @@ import {
   ItemName,
   InfoDescription,
   ItemPrice,
-  Button,
+  PurchaseButton,
 } from './ItemList.style';
 import { toast } from 'sonner';
 import GoogleLoginModal from '@/components/common/GoogleLogin/GoogleLoginModal';
 import useModal from '@/hooks/useModal';
 import useAuth from '@/hooks/useAuth';
+import Modal from '@/components/common/Modal';
+import { HStack, VStack } from '@/components/common/Stack';
+import Button from '@/components/common/Button';
+import useUser from '@/hooks/useUser';
+
+interface PurchaseModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onPurchase: () => Promise<void>;
+  isLoading: boolean;
+}
+
+const PurchaseModal = ({ isOpen, onClose, onPurchase, isLoading }: PurchaseModalProps) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <VStack gap={24}>
+        <VStack alignItems="flex-start" gap={4}>
+          <Modal.Title>배경색을 구매하시겠어요?</Modal.Title>
+          <Modal.Subtitle>구매한 배경색은 프로필에서 사용할 수 있어요.</Modal.Subtitle>
+        </VStack>
+        <HStack gap={8} style={{ width: '100%' }}>
+          <Button variant="secondary" fullWidth onClick={onClose}>
+            닫기
+          </Button>
+          <Button variant="primary" fullWidth onClick={onPurchase} isLoading={isLoading}>
+            구매하기
+          </Button>
+        </HStack>
+      </VStack>
+    </Modal>
+  );
+};
 
 const ItemList = () => {
   const { isLoading, updateProfileBackgroundColor } = useProfileBackgroundColor();
-  const { isOpen, show, hide } = useModal();
+  const { isOpen: isLoginModalOpen, show: showLoginModal, hide: hideLoginModal } = useModal();
+  const {
+    isOpen: isPurchaseModalOpen,
+    show: showPurchaseModal,
+    hide: hidePurchaseModal,
+  } = useModal();
   const { isAuthenticated } = useAuth();
+  const { user } = useUser();
 
-  const handlePurchase = async () => {
+  const handlePurchaseClick = () => {
     if (!isAuthenticated) {
-      show();
+      showLoginModal();
       return;
     }
 
+    const itemPrice = NORMAL_ITEMS[0].price;
+    const userCoin = user?.coin ?? 0;
+    if (userCoin < itemPrice) {
+      toast.error('코인이 부족합니다 🪙');
+      return;
+    }
+
+    showPurchaseModal();
+  };
+
+  const handlePurchase = async () => {
     const response = await updateProfileBackgroundColor();
     if (response?.error) {
       toast.error(response.error);
@@ -41,6 +90,7 @@ const ItemList = () => {
       toast.success('배경색이 변경되었습니다! 🎨', {
         description: `색상: ${response.color.name} / 희귀도: ${response.color.type}`,
       });
+      hidePurchaseModal();
     }
   };
 
@@ -87,18 +137,25 @@ const ItemList = () => {
             </InfoWrapper>
             <InfoDescription>{item.description}</InfoDescription>
           </ItemInfo>
-          <Button
-            onClick={handlePurchase}
+          <PurchaseButton
+            onClick={handlePurchaseClick}
             style={{
               opacity: isLoading ? 0.5 : 1,
               pointerEvents: isLoading ? 'none' : 'auto',
             }}
+            disabled={isLoading || (user?.coin ?? 0) < item.price}
           >
             {isLoading ? '구매 중...' : '구매'}
-          </Button>
+          </PurchaseButton>
         </ItemCard>
       ))}
-      <GoogleLoginModal isOpen={isOpen} onClose={hide} />
+      <GoogleLoginModal isOpen={isLoginModalOpen} onClose={hideLoginModal} />
+      <PurchaseModal
+        isOpen={isPurchaseModalOpen}
+        onClose={hidePurchaseModal}
+        onPurchase={handlePurchase}
+        isLoading={isLoading}
+      />
     </ItemContainer>
   );
 };
