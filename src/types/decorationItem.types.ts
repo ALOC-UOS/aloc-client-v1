@@ -8,3 +8,18 @@ export interface DecorationStyleConfig {
   style: { width: number; height: number };
   src: string;
 }
+
+export interface DecorationShopItem {
+  type: DecorationItemName;
+  name: string;
+  price: number;
+  description: string;
+}
+
+export interface NormalShopItem {
+  name: string;
+  price: number;
+  description: string;
+}
+
+export type ShopItem = DecorationShopItem | NormalShopItem;

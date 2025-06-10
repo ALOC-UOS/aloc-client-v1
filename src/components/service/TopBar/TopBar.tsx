@@ -7,6 +7,8 @@ import CourseWhiteIcon from '@/assets/icons/course.white.svg';
 import CourseBlueIcon from '@/assets/icons/course.blue.svg';
 import UsersWhiteIcon from '@/assets/icons/users.white.svg';
 import UsersBlueIcon from '@/assets/icons/users.blue.svg';
+import ShopWhiteIcon from '@/assets/icons/shop.white.svg';
+import ShopBlueIcon from '@/assets/icons/shop.blue.svg';
 import IconButton from './IconButton';
 import ProfileButton from './ProfileButton';
 import useModal from '@/hooks/useModal';
@@ -35,6 +37,7 @@ const TopBar = () => {
         <HStack gap={16}>
           <IconButton icon={CourseBlueIcon} activeIcon={CourseWhiteIcon} route="/course" />
           <IconButton icon={UsersBlueIcon} activeIcon={UsersWhiteIcon} route="/users" />
+          <IconButton icon={ShopBlueIcon} activeIcon={ShopWhiteIcon} route="/shop" />
           {isAuthenticated ? (
             <ProfileButton />
           ) : (

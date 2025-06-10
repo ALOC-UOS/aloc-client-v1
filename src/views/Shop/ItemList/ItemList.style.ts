@@ -12,33 +12,6 @@ const AppearCard = keyframes`
   }
 `;
 
-const ShopContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-background);
-  min-height: 100vh;
-  padding-bottom: 48px;
-`;
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  padding: 24px 0 24px 40px;
-  margin-top: 120px;
-  flex-wrap: wrap;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -75,7 +48,8 @@ const ItemInfo = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 8px 12px 12px;
+  padding: 4px;
+  margin: 12px;
 `;
 const InfoWrapper = styled.div`
   display: grid;
@@ -98,6 +72,7 @@ const ItemPrice = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
 
   color: var(--color-yellow);
   font-size: 14px;
@@ -118,7 +93,7 @@ const ItemPrice = styled.div`
   }
 `;
 
-const Button = styled.div`
+const PurchaseButton = styled.button`
   background-color: var(--color-blue);
   display: flex;
   align-items: center;
@@ -129,22 +104,49 @@ const Button = styled.div`
   color: var(--color-white);
   font-size: 12px;
   font-weight: 500;
+  border: none;
 
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
 
   &:hover {
     filter: brightness(0.9);
   }
+
   &:active {
     transition: all 0.05s;
     filter: brightness(0.8);
     transform: scale(0.95);
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    background-color: var(--color-dark-blue-25);
+    color: var(--color-white);
+    opacity: 0.6;
+    pointer-events: none;
+    filter: none;
+    transform: none;
+    cursor: default;
+    outline: none;
+    border: none;
   }
 `;
 
 export {
-  ShopContainer,
-  ContentContainer,
   ItemContainer,
   ItemCard,
   ItemImgWrapper,
@@ -154,5 +156,5 @@ export {
   ItemName,
   InfoDescription,
   ItemPrice,
-  Button,
+  PurchaseButton,
 };

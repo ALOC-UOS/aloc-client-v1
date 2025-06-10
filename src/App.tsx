@@ -4,6 +4,7 @@ import UserPage from '@/views/User';
 import CoursePage from '@/views/Course';
 import ProfilePage from '@/views/Profile';
 import GoogleAuthCallback from '@/views/GoogleAuthCallback';
+import ShopPage from '@/views/Shop';
 import GlobalStyles from '@/styles/global';
 import TopBar from '@/components/service/TopBar';
 import { Analytics } from '@vercel/analytics/react';
@@ -31,6 +32,7 @@ function App() {
           <Route path={pathname.USERS_PAGE} element={<UserPage />} />
           <Route path={pathname.COURSE_PAGE} element={<CoursePage />} />
           <Route path={pathname.PROFILE_PAGE} element={<ProfilePage />} />
+          <Route path={pathname.SHOP_PAGE} element={<ShopPage />} />
         </Routes>
       </BrowserRouter>
       <Analytics />
