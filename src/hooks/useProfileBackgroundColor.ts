@@ -20,18 +20,15 @@ const useProfileBackgroundColor = () => {
             }
           : prev
       );
-  
+
       return { color };
     } catch (error: any) {
-      const errorMessage =
-        error?.response?.data?.result || '프로필 배경색 변경 실패';
+      const errorMessage = error?.response?.data?.result || '프로필 배경색 변경 실패';
       return { error: errorMessage };
     } finally {
       setIsLoading(false);
     }
   };
-  
-  
 
   return {
     isLoading,

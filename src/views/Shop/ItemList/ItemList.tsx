@@ -26,7 +26,7 @@ const ItemList = () => {
       toast.error(response.error);
       return;
     }
-    
+
     if (response?.color) {
       toast.success('배경색이 변경되었습니다! 🎨', {
         description: `색상: ${response.color.name} / 희귀도: ${response.color.type}`,
