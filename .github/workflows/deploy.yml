@@ -2,7 +2,7 @@ name: CI/CD Frontend
 
 on:
   push:
-    branches: [ "deploy" ]
+    branches: ["deploy"]
 
 jobs:
   build:
@@ -13,6 +13,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+          echo "VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}" >> .env
+          echo "VITE_USER_PROFILE_IMAGE_URL=${{ secrets.VITE_USER_PROFILE_IMAGE_URL }}" >> .env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
