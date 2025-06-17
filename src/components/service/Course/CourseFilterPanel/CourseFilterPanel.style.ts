@@ -24,7 +24,7 @@ const TypeFilterButton = styled.div`
   }
 `;
 
-const SortButton = styled.div`
+const SortButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,12 +33,12 @@ const SortButton = styled.div`
   padding: 8px 16px;
   border-radius: 32px;
   width: 100px;
-  font-size: 16x;
+  font-size: 16px;
   color: var(--color-sub-text);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-
+  border: none;
   &:hover {
     filter: brightness(0.9);
   }

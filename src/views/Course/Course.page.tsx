@@ -6,14 +6,23 @@ import CourseFilterPanel from '@/components/service/Course/CourseFilterPanel';
 import Pagination from '@/components/common/Pagination';
 import { useState } from 'react';
 import useCourses from '@/hooks/useCourses';
-
-type CourseType = 'DEADLINE' | 'DAILY' | null;
+import { CourseType } from '@/types/course.types';
 
 const CoursePage = () => {
   const [courseType, setCourseType] = useState<CourseType>(null);
   const [sortType, setSortType] = useState<'popular' | 'difficulty'>('popular');
   const [currentPage, setCurrentPage] = useState(1);
   const { totalPage } = useCourses({ courseType, sortType, currentPage });
+
+  const handleCourseTypeChange = (type: CourseType) => {
+    setCourseType(type);
+    setCurrentPage(1);
+  };
+
+  const handleSortTypeChange = (type: 'popular' | 'difficulty') => {
+    setSortType(type);
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -31,9 +40,9 @@ const CoursePage = () => {
               >
                 <CourseFilterPanel
                   courseType={courseType}
-                  setCourseType={setCourseType}
+                  setCourseType={handleCourseTypeChange}
                   sortType={sortType}
-                  setSortType={setSortType}
+                  setSortType={handleSortTypeChange}
                 />
               </div>
               <Pagination

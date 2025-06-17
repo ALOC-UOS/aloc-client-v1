@@ -4,7 +4,7 @@ interface PageButtonProps {
   isSelected?: boolean;
 }
 
-const PageButton = styled.div<PageButtonProps>`
+const PageButton = styled.button<PageButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,7 @@ const PageButton = styled.div<PageButtonProps>`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   flex-shrink: 0;
+  border: none;
 
   &:hover {
     filter: brightness(0.9);
@@ -33,12 +34,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: 8px;
+  padding: 16px;
   height: 200px;
   overflow-y: auto;
   background-color: var(--color-foreground);
   border-radius: 16px;
-  padding: 16px;
 
   &::-webkit-scrollbar {
     width: 4px;

@@ -1,11 +1,9 @@
 import { serverAPI } from '@/lib/api/axios';
-import { CourseInfo } from '@/types/course.types';
+import { CourseInfo, CourseType } from '@/types/course.types';
 import { atom, useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 const coursesAtom = atom<CourseInfo[]>([]);
-
-type CourseType = 'DEADLINE' | 'DAILY' | null;
 
 interface UseCoursesProps {
   courseType: CourseType;
@@ -26,7 +24,7 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
         params: {
           page: currentPage - 1,
           size: SIZE,
-          courseType: courseType,
+          courseType: courseType === null ? null : courseType,
           sort:
             sortType === 'popular'
               ? 'generateCnt,desc'

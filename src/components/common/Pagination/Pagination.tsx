@@ -13,6 +13,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
         <S.PageButton
           key={page}
           isSelected={page === currentPage}
+          aria-current={page === currentPage ? 'page' : undefined}
           onClick={() => onPageChange(page)}
         >
           {page}

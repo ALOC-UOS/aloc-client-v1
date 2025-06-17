@@ -1,8 +1,7 @@
 import { HStack, VStack } from '@/components/common/Stack';
 import Line from '@/components/common/Line';
 import S from './CourseFilterPanel.style';
-
-type CourseType = 'DEADLINE' | 'DAILY' | null;
+import { CourseType } from '@/types/course.types';
 
 interface CourseFilterPanelProps {
   courseType: CourseType;

@@ -3,8 +3,7 @@ import CourseItem from '@/components/service/Course/CourseItem';
 import useCourses from '@/hooks/useCourses';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { VStack } from '@/components/common/Stack';
-
-type CourseType = 'DEADLINE' | 'DAILY' | null;
+import { CourseType } from '@/types/course.types';
 
 interface CourseListProps {
   courseType: CourseType;
