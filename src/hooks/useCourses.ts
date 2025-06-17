@@ -5,12 +5,19 @@ import { useEffect, useState } from 'react';
 
 const coursesAtom = atom<CourseInfo[]>([]);
 
-const useCourses = () => {
+type CourseType = 'DEADLINE' | 'DAILY' | null;
+
+interface UseCoursesProps {
+  courseType: CourseType;
+  sortType: 'popular' | 'difficulty';
+  currentPage: number;
+}
+
+const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useAtom(coursesAtom);
   const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const SIZE = 12;
+  const SIZE = 6;
 
   const getCourses = async () => {
     setIsLoading(true);
@@ -19,6 +26,8 @@ const useCourses = () => {
         params: {
           page: currentPage - 1,
           size: SIZE,
+          courseType: courseType,
+          sort: sortType === 'popular' ? 'generateCnt,desc' : 'averageRank,desc',
         },
       });
 
@@ -46,15 +55,11 @@ const useCourses = () => {
     }
   };
 
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
-
   useEffect(() => {
     getCourses();
-  }, [currentPage]);
+  }, [currentPage, courseType, sortType]);
 
-  return { courses, totalPage, currentPage, getCourses, handlePageChange, isLoading };
+  return { courses, totalPage, isLoading };
 };
 
 export default useCourses;
