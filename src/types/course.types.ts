@@ -3,7 +3,7 @@ import { UserInfo } from './user.types';
 
 export type CourseType = 'DAILY' | 'DEADLINE';
 
-export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
+export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'SUCCESS' | 'FAILED';
 
 export type Course = {
   id: string;

@@ -9,7 +9,7 @@ type CourseType = 'DEADLINE' | 'DAILY' | null;
 
 interface UseCoursesProps {
   courseType: CourseType;
-  sortType: 'popular' | 'difficulty';
+  sortType: 'popular' | 'difficulty' | 'createdAt';
   currentPage: number;
 }
 
@@ -27,7 +27,12 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
           page: currentPage - 1,
           size: SIZE,
           courseType: courseType,
-          sort: sortType === 'popular' ? 'generateCnt,desc' : 'averageRank,desc',
+          sort:
+            sortType === 'popular'
+              ? 'generateCnt,desc'
+              : sortType === 'difficulty'
+                ? 'averageRank,desc'
+                : 'createdAt,desc',
         },
       });
 

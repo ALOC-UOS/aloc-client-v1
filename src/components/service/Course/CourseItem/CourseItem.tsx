@@ -14,6 +14,9 @@ import useUserCourses from '@/hooks/useUserCourses';
 import useModal from '@/hooks/useModal';
 import ReactDOM from 'react-dom';
 import { toast } from 'sonner';
+import SuccessLabel from '@/assets/label/successLabel.svg';
+import FailedLabel from '@/assets/label/failedLabel.svg';
+import InProgressLabel from '@/assets/label/inProgressLabel.svg';
 
 interface CourseItemProps {
   course: CourseInfo;
@@ -108,9 +111,25 @@ const CourseItem = ({ course }: CourseItemProps) => {
 
     return modalContent ? ReactDOM.createPortal(modalContent, document.body) : null;
   };
+
+  const renderStateLabel = () => {
+    if (!isAuthenticated || !course.status || course.status === 'NOT_STARTED') return null;
+    if (course.status === 'SUCCESS') {
+      return <S.StateLabel src={SuccessLabel} alt="완주 성공" />;
+    }
+    if (course.status === 'FAILED') {
+      return <S.StateLabel src={FailedLabel} alt="완주 실패" />;
+    }
+    if (course.status === 'IN_PROGRESS') {
+      return <S.StateLabel src={InProgressLabel} alt="완주 진행중" />;
+    }
+    return null;
+  };
+
   return (
     <>
       <S.CourseItemContainer onClick={onClick}>
+        {renderStateLabel()}
         <VStack alignItems="flex-start" gap={4}>
           <S.CourseType>{course.type}</S.CourseType>
           <S.CourseName>{course.name}</S.CourseName>

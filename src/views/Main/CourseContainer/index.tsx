@@ -14,7 +14,11 @@ import CircularCourseLayout from './CircularCourseLayout';
 
 const CourseContainer = () => {
   const { isLoading, todayProblem, userCourses } = useUserCourses();
-  const { courses } = useCourses();
+  const { courses } = useCourses({
+    courseType: null,
+    sortType: 'createdAt',
+    currentPage: 1,
+  });
   const navigate = useNavigate();
 
   if (isLoading) {

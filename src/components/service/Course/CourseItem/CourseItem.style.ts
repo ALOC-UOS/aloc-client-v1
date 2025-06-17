@@ -10,6 +10,7 @@ const CourseItemContainer = styled.div`
   padding: 16px;
   gap: 8px;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     filter: brightness(0.9);
@@ -52,6 +53,12 @@ const CourseInfo = styled.p`
   font-weight: 500;
 `;
 
+const StateLabel = styled.img`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+`;
+
 export default {
   CourseItemContainer,
   CourseType,
@@ -59,4 +66,5 @@ export default {
   InfoContainer,
   CourseLabel,
   CourseInfo,
+  StateLabel,
 };
