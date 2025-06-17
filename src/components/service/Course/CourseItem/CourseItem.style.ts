@@ -19,6 +19,12 @@ const CourseItemContainer = styled.div`
   &:active {
     filter: brightness(0.8);
   }
+
+  .state-label {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
 `;
 
 const CourseType = styled.p`
@@ -53,12 +59,6 @@ const CourseInfo = styled.p`
   font-weight: 500;
 `;
 
-const StateLabel = styled.img`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-`;
-
 export default {
   CourseItemContainer,
   CourseType,
@@ -66,5 +66,4 @@ export default {
   InfoContainer,
   CourseLabel,
   CourseInfo,
-  StateLabel,
 };

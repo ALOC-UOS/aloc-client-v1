@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 
+export type LabelVariant = 'success' | 'failed' | 'active' | 'inactive' | 'loading';
+
+interface LabelContainerProps {
+  variant: LabelVariant;
+}
+
 const blink = keyframes`
   0% {
     opacity: 0;
@@ -13,29 +19,76 @@ const blink = keyframes`
   }
 `;
 
-const LabelContainer = styled.div<{ isActive: boolean }>`
-  display: flex;
+const getVariantStyles = (variant: LabelVariant) => {
+  switch (variant) {
+    case 'success':
+      return {
+        background: 'var(--color-green-10)',
+        color: 'var(--color-green)',
+      };
+    case 'failed':
+      return {
+        background: 'var(--color-red-10)',
+        color: 'var(--color-red)',
+      };
+    case 'loading':
+      return {
+        background: 'var(--color-blue-10)',
+        color: 'var(--color-blue)',
+      };
+    case 'active':
+      return {
+        background: 'var(--color--blue-25)',
+        color: 'var(--color-blue)',
+      };
+    case 'inactive':
+      return {
+        background: 'var(--color-background)',
+        color: 'var(--color-sub-text)',
+      };
+    default:
+      return {
+        background: 'var(--color-background)',
+        color: 'var(--color-sub-text)',
+      };
+  }
+};
+
+const Container = styled.div<LabelContainerProps>`
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 4px;
   padding: 4px 8px;
   border-radius: 16px;
-  background-color: ${({ isActive }) =>
-    isActive ? 'var(--color-blue-25)' : 'var(--color-background)'};
+  font-size: 12px;
+  font-weight: 500;
+  background-color: ${({ variant }) => getVariantStyles(variant).background};
+  color: ${({ variant }) => getVariantStyles(variant).color};
 `;
 
-const Circle = styled.div<{ isActive: boolean }>`
-  animation: ${({ isActive }) => (isActive ? blink : 'none')} 1.5s infinite;
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const Circle = styled.div<{ variant: LabelVariant }>`
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: ${({ isActive }) => (isActive ? 'var(--color-blue)' : 'var(--color-sub-text)')};
+  background-color: ${({ variant }) => getVariantStyles(variant).color};
+  animation: ${({ variant }) => (variant === 'active' ? blink : 'none')} 1.5s infinite;
 `;
 
-const LabelText = styled.p<{ isActive: boolean }>`
-  color: ${({ isActive }) => (isActive ? 'var(--color-blue)' : 'var(--color-sub-text)')};
-  font-size: 12px;
-  font-weight: 500;
-`;
-
-export default { LabelContainer, Circle, LabelText };
+export default {
+  Container,
+  IconWrapper,
+  Circle,
+};

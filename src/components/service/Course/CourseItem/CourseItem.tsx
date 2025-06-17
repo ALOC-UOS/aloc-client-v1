@@ -14,15 +14,23 @@ import useUserCourses from '@/hooks/useUserCourses';
 import useModal from '@/hooks/useModal';
 import ReactDOM from 'react-dom';
 import { toast } from 'sonner';
-import SuccessLabel from '@/assets/label/successLabel.svg';
-import FailedLabel from '@/assets/label/failedLabel.svg';
-import InProgressLabel from '@/assets/label/inProgressLabel.svg';
+import Label from '@/components/common/Label';
+import CheckIcon from '@/assets/icons/check.green.svg';
+import CloseIcon from '@/assets/icons/cancle.red.svg';
+import LoadingIcon from '@/assets/icons/loading.blue.svg';
 
 interface CourseItemProps {
   course: CourseInfo;
 }
 
 type ModalType = 'login' | 'exceeded' | 'course';
+
+interface StateConfig {
+  variant: 'success' | 'failed' | 'loading';
+  text: string;
+  icon?: string;
+  showCircle?: boolean;
+}
 
 const CourseItem = ({ course }: CourseItemProps) => {
   const { isAuthenticated } = useAuth();
@@ -114,16 +122,38 @@ const CourseItem = ({ course }: CourseItemProps) => {
 
   const renderStateLabel = () => {
     if (!isAuthenticated || !course.status || course.status === 'NOT_STARTED') return null;
-    if (course.status === 'SUCCESS') {
-      return <S.StateLabel src={SuccessLabel} alt="완주 성공" />;
-    }
-    if (course.status === 'FAILED') {
-      return <S.StateLabel src={FailedLabel} alt="완주 실패" />;
-    }
-    if (course.status === 'IN_PROGRESS') {
-      return <S.StateLabel src={InProgressLabel} alt="완주 진행중" />;
-    }
-    return null;
+
+    const stateConfig: Record<string, StateConfig> = {
+      SUCCESS: {
+        variant: 'success',
+        text: '완주 성공',
+        icon: CheckIcon,
+      },
+      FAILED: {
+        variant: 'failed',
+        text: '실패',
+        icon: CloseIcon,
+      },
+      IN_PROGRESS: {
+        variant: 'loading',
+        text: '진행중',
+        icon: LoadingIcon,
+      },
+    };
+
+    const config = stateConfig[course.status];
+    if (!config) return null;
+
+    return (
+      <Label
+        variant={config.variant}
+        icon={config.icon}
+        showCircle={config.showCircle}
+        className="state-label"
+      >
+        {config.text}
+      </Label>
+    );
   };
 
   return (
