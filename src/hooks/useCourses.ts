@@ -15,7 +15,7 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useAtom(coursesAtom);
   const [totalPage, setTotalPage] = useState(0);
-  const SIZE = 6;
+  const SIZE = 9;
 
   const getSortParam = (sortType: SortType) => {
     switch (sortType) {
