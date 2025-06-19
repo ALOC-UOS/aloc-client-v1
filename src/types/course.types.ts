@@ -1,7 +1,15 @@
 import { Problem } from './problem.types';
 import { UserInfo } from './user.types';
 
-export type CourseType = 'DAILY' | 'DEADLINE' | null;
+export enum CourseType {
+  DEADLINE = 'DEADLINE',
+  DAILY = 'DAILY',
+}
+
+export enum SortType {
+  POPULAR = 'popular',
+  DIFFICULTY = 'difficulty',
+}
 
 export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'SUCCESS' | 'FAILED';
 

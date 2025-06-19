@@ -3,11 +3,11 @@ import CourseItem from '@/components/service/Course/CourseItem';
 import useCourses from '@/hooks/useCourses';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { VStack } from '@/components/common/Stack';
-import { CourseType } from '@/types/course.types';
+import { CourseType, SortType } from '@/types/course.types';
 
 interface CourseListProps {
-  courseType: CourseType;
-  sortType: 'popular' | 'difficulty';
+  courseType: CourseType | null;
+  sortType: SortType;
   currentPage: number;
 }
 

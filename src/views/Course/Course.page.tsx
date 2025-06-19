@@ -6,20 +6,20 @@ import CourseFilterPanel from '@/components/service/Course/CourseFilterPanel';
 import Pagination from '@/components/common/Pagination';
 import { useState } from 'react';
 import useCourses from '@/hooks/useCourses';
-import { CourseType } from '@/types/course.types';
+import { CourseType, SortType } from '@/types/course.types';
 
 const CoursePage = () => {
-  const [courseType, setCourseType] = useState<CourseType>(null);
-  const [sortType, setSortType] = useState<'popular' | 'difficulty'>('popular');
+  const [courseType, setCourseType] = useState<CourseType | null>(null);
+  const [sortType, setSortType] = useState<SortType>(SortType.POPULAR);
   const [currentPage, setCurrentPage] = useState(1);
   const { totalPage } = useCourses({ courseType, sortType, currentPage });
 
-  const handleCourseTypeChange = (type: CourseType) => {
+  const handleCourseTypeChange = (type: CourseType | null) => {
     setCourseType(type);
     setCurrentPage(1);
   };
 
-  const handleSortTypeChange = (type: 'popular' | 'difficulty') => {
+  const handleSortTypeChange = (type: SortType) => {
     setSortType(type);
     setCurrentPage(1);
   };

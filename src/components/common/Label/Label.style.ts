@@ -38,7 +38,7 @@ const getVariantStyles = (variant: LabelVariant) => {
       };
     case 'active':
       return {
-        background: 'var(--color--blue-25)',
+        background: 'var(--color-blue-25)',
         color: 'var(--color-blue)',
       };
     case 'inactive':

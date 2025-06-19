@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom';
 import { toast } from 'sonner';
 import Label from '@/components/common/Label';
 import CheckIcon from '@/assets/icons/check.green.svg';
-import CloseIcon from '@/assets/icons/cancle.red.svg';
+import CancelIcon from '@/assets/icons/cancel.red.svg';
 import LoadingIcon from '@/assets/icons/loading.blue.svg';
 
 interface CourseItemProps {
@@ -28,8 +28,8 @@ type ModalType = 'login' | 'exceeded' | 'course';
 interface StateConfig {
   variant: 'success' | 'failed' | 'loading';
   text: string;
+  type: 'icon' | 'circle';
   icon?: string;
-  showCircle?: boolean;
 }
 
 const CourseItem = ({ course }: CourseItemProps) => {
@@ -127,16 +127,19 @@ const CourseItem = ({ course }: CourseItemProps) => {
       SUCCESS: {
         variant: 'success',
         text: '완주 성공',
+        type: 'icon',
         icon: CheckIcon,
       },
       FAILED: {
         variant: 'failed',
         text: '실패',
-        icon: CloseIcon,
+        type: 'icon',
+        icon: CancelIcon,
       },
       IN_PROGRESS: {
         variant: 'loading',
         text: '진행중',
+        type: 'icon',
         icon: LoadingIcon,
       },
     };
@@ -144,16 +147,16 @@ const CourseItem = ({ course }: CourseItemProps) => {
     const config = stateConfig[course.status];
     if (!config) return null;
 
-    return (
-      <Label
-        variant={config.variant}
-        icon={config.icon}
-        showCircle={config.showCircle}
-        className="state-label"
-      >
-        {config.text}
-      </Label>
-    );
+    const labelProps = {
+      variant: config.variant,
+      className: 'state-label',
+      children: config.text,
+      ...(config.type === 'icon'
+        ? { type: 'icon' as const, icon: config.icon! }
+        : { type: 'circle' as const }),
+    };
+
+    return <Label {...labelProps} />;
   };
 
   return (

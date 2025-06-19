@@ -29,7 +29,7 @@ const ProfileButton = () => {
       </HStack>
       <Label
         variant={user.todaySolved ? 'active' : 'inactive'}
-        showCircle={true}
+        type="circle"
       >{`${user.consecutiveSolvedDays}일 째`}</Label>
     </S.ButtonContainer>
   );

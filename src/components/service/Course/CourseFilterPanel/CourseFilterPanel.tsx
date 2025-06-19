@@ -1,13 +1,13 @@
 import { HStack, VStack } from '@/components/common/Stack';
 import Line from '@/components/common/Line';
 import S from './CourseFilterPanel.style';
-import { CourseType } from '@/types/course.types';
+import { CourseType, SortType } from '@/types/course.types';
 
 interface CourseFilterPanelProps {
-  courseType: CourseType;
-  setCourseType: (type: CourseType) => void;
-  sortType: 'popular' | 'difficulty';
-  setSortType: (type: 'popular' | 'difficulty') => void;
+  courseType: CourseType | null;
+  setCourseType: (type: CourseType | null) => void;
+  sortType: SortType;
+  setSortType: (type: SortType) => void;
 }
 
 const CourseFilterPanel = ({
@@ -16,7 +16,7 @@ const CourseFilterPanel = ({
   sortType,
   setSortType,
 }: CourseFilterPanelProps) => {
-  const toggleCourseType = (type: Exclude<CourseType, null>) => {
+  const toggleCourseType = (type: CourseType) => {
     if (courseType === type) {
       // 현재 선택된 타입을 다시 클릭하면 선택 해제
       setCourseType(null);
@@ -30,20 +30,14 @@ const CourseFilterPanel = ({
     <VStack gap={16}>
       <VStack gap={16}>
         <S.TypeFilterButton
-          onClick={() => toggleCourseType('DEADLINE')}
-          style={{
-            backgroundColor: courseType === 'DEADLINE' ? 'var(--color-blue)' : 'var(--color-white)',
-            color: courseType === 'DEADLINE' ? 'var(--color-white)' : 'var(--color-sub-text)',
-          }}
+          isSelected={courseType === CourseType.DEADLINE}
+          onClick={() => toggleCourseType(CourseType.DEADLINE)}
         >
           Deadline
         </S.TypeFilterButton>
         <S.TypeFilterButton
-          onClick={() => toggleCourseType('DAILY')}
-          style={{
-            backgroundColor: courseType === 'DAILY' ? 'var(--color-blue)' : 'var(--color-white)',
-            color: courseType === 'DAILY' ? 'var(--color-white)' : 'var(--color-sub-text)',
-          }}
+          isSelected={courseType === CourseType.DAILY}
+          onClick={() => toggleCourseType(CourseType.DAILY)}
         >
           Daily
         </S.TypeFilterButton>
@@ -53,20 +47,14 @@ const CourseFilterPanel = ({
 
       <HStack gap={8} style={{ padding: 2 }}>
         <S.SortButton
-          onClick={() => setSortType('popular')}
-          style={{
-            backgroundColor: sortType === 'popular' ? 'var(--color-blue)' : 'var(--color-white)',
-            color: sortType === 'popular' ? 'var(--color-white)' : 'var(--color-sub-text)',
-          }}
+          isSelected={sortType === SortType.POPULAR}
+          onClick={() => setSortType(SortType.POPULAR)}
         >
           인기순
         </S.SortButton>
         <S.SortButton
-          onClick={() => setSortType('difficulty')}
-          style={{
-            backgroundColor: sortType === 'difficulty' ? 'var(--color-blue)' : 'var(--color-white)',
-            color: sortType === 'difficulty' ? 'var(--color-white)' : 'var(--color-sub-text)',
-          }}
+          isSelected={sortType === SortType.DIFFICULTY}
+          onClick={() => setSortType(SortType.DIFFICULTY)}
         >
           난이도순
         </S.SortButton>
