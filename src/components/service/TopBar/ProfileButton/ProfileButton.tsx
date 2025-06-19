@@ -27,7 +27,10 @@ const ProfileButton = () => {
         <UserProfileImage user={user} width="28px" height="28px" />
         <S.UserNickname transparent={isMainPage || isProfilePage}>{user.nickname}</S.UserNickname>
       </HStack>
-      <Label text={`${user.consecutiveSolvedDays}일 째`} isActive={user.todaySolved} />
+      <Label
+        variant={user.todaySolved ? 'active' : 'inactive'}
+        type="circle"
+      >{`${user.consecutiveSolvedDays}일 째`}</Label>
     </S.ButtonContainer>
   );
 };

@@ -48,9 +48,11 @@ const GlobalStyles = () => (
       :root {
         /* Default Colors */
         --color-blue: #408cff;
+        --color-blue-10: #408cff1a;
         --color-blue-25: #408cff40;
         --color-secondary-blue: #98bffa;
         --color-red: #ff5a5a;
+        --color-red-10: #ff5a5a1a;
         --color-red-25: #ff5a5a40;
         --color-yellow: #ffb800;
         --color-yellow-25: #ffb80040;
@@ -66,6 +68,8 @@ const GlobalStyles = () => (
         --color-black-25: #00000040;
         --color-black-10: #0000001a;
         --color-disabled: #d3d3d3;
+        --color-green: #15cc3e;
+        --color-green-10: #15cc3e1a;
 
         --color-gradient-blue: #04a3fb, #2f5dff;
         --color-gradient-yellow: #ffb800, #ff7a00;

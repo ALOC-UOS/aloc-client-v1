@@ -1,16 +1,34 @@
 import { serverAPI } from '@/lib/api/axios';
-import { CourseInfo } from '@/types/course.types';
+import { CourseInfo, CourseType, SortType } from '@/types/course.types';
 import { atom, useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 const coursesAtom = atom<CourseInfo[]>([]);
 
-const useCourses = () => {
+interface UseCoursesProps {
+  courseType: CourseType | null;
+  sortType: SortType;
+  currentPage: number;
+}
+
+const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useAtom(coursesAtom);
   const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const SIZE = 12;
+  const SIZE = 9;
+
+  const getSortParam = (sortType: SortType) => {
+    switch (sortType) {
+      case SortType.POPULAR:
+        return 'generateCnt,desc';
+      case SortType.EASY:
+        return 'averageRank,asc';
+      case SortType.HARD:
+        return 'averageRank,desc';
+      default:
+        return 'createdAt,desc';
+    }
+  };
 
   const getCourses = async () => {
     setIsLoading(true);
@@ -19,6 +37,8 @@ const useCourses = () => {
         params: {
           page: currentPage - 1,
           size: SIZE,
+          courseType: courseType === null ? null : courseType,
+          sort: getSortParam(sortType),
         },
       });
 
@@ -29,9 +49,11 @@ const useCourses = () => {
         type: course.type,
         name: course.title,
         totalProblemCount: course.problemCnt,
+        description: course.description,
         difficulty: {
           start: course.rank.min,
           end: course.rank.max,
+          avg: course.rank.avg,
         },
         status: course.status,
         duration: course.duration,
@@ -46,15 +68,11 @@ const useCourses = () => {
     }
   };
 
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
-
   useEffect(() => {
     getCourses();
-  }, [currentPage]);
+  }, [currentPage, courseType, sortType]);
 
-  return { courses, totalPage, currentPage, getCourses, handlePageChange, isLoading };
+  return { courses, totalPage, isLoading };
 };
 
 export default useCourses;
