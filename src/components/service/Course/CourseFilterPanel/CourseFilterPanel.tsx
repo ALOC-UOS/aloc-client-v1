@@ -70,7 +70,7 @@ const CourseFilterPanel = ({
             isSelected={sortType === SortType.HARD}
             onClick={() => setSortType(SortType.HARD)}
           >
-            어려움순
+            어려운순
           </S.SortButton>
         </HStack>
       </VStack>
