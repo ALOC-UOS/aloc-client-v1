@@ -35,7 +35,7 @@ const Container = styled.div`
   align-items: center;
   gap: 16px;
   padding: 16px;
-  height: 255px;
+  height: 245px;
   overflow-y: auto;
   background-color: var(--color-foreground);
   border-radius: 16px;

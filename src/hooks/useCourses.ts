@@ -25,7 +25,6 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
         return 'averageRank,asc';
       case SortType.HARD:
         return 'averageRank,desc';
-      case SortType.NEWEST:
       default:
         return 'createdAt,desc';
     }

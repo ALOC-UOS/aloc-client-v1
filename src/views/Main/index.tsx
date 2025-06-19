@@ -8,18 +8,19 @@ import useAuth from '@/hooks/useAuth';
 
 const Main = () => {
   const { isAuthenticated } = useAuth();
-  if (!isAuthenticated) {
-    return <LandingPage />;
-  }
   const [courseType, setCourseType] = useState<CourseType | null>(null);
   const [sortType, setSortType] = useState<SortType>(SortType.NEWEST);
   const [currentPage, setCurrentPage] = useState(1);
-  
-  const { courses, totalPage, isLoading } = useCourses({
+
+  const { courses, isLoading } = useCourses({
     courseType,
     sortType,
     currentPage,
   });
+
+  if (!isAuthenticated) {
+    return <LandingPage />;
+  }
 
   return (
     <VStack style={{ minHeight: '100dvh', backgroundColor: 'var(--color-black)' }}>
