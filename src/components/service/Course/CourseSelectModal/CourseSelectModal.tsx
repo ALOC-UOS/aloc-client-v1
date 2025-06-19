@@ -30,6 +30,9 @@ const CourseSelectModal: React.FC<CourseSelectModalProps> = ({
             선택한 코스
           </p>
           <S.CourseName>{course.name}</S.CourseName>
+          <p style={{ color: 'var(--color-sub-text)', fontSize: '14px', fontWeight: '500' }}>
+            {course.description}
+          </p>
         </VStack>
         <S.CourseInfoContainer>
           {course.type === 'DEADLINE' && course.duration && (

@@ -49,9 +49,11 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
         type: course.type,
         name: course.title,
         totalProblemCount: course.problemCnt,
+        description: course.description,
         difficulty: {
           start: course.rank.min,
           end: course.rank.max,
+          avg: course.rank.avg,
         },
         status: course.status,
         duration: course.duration,

@@ -20,6 +20,7 @@ export type Course = {
   type: CourseType;
   name: string;
   totalProblemCount: number;
+  description: string;
 };
 
 export interface CourseInfo extends Course {
@@ -27,6 +28,7 @@ export interface CourseInfo extends Course {
   difficulty: {
     start: number;
     end: number;
+    avg: number;
   };
   success: {
     userList: UserInfo[];

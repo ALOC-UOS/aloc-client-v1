@@ -176,7 +176,7 @@ const CourseItem = ({ course }: CourseItemProps) => {
             </HStack>
           </S.InfoContainer>
           <S.InfoContainer>
-            <S.CourseLabel>난이도</S.CourseLabel>
+            <S.CourseLabel>평균 난이도</S.CourseLabel>
             <HStack alignItems="center" gap={4}>
               <VStack
                 alignItems="center"
@@ -185,30 +185,12 @@ const CourseItem = ({ course }: CourseItemProps) => {
                   width: 24,
                   height: 24,
                   backgroundColor:
-                    tierStyleConfig[getTierByDifficulty(course.difficulty.start)].color,
+                    tierStyleConfig[getTierByDifficulty(course.difficulty.avg)].color,
                   borderRadius: '50%',
                 }}
               >
                 <Number
-                  number={getTierNumberByDifficulty(course.difficulty.start)}
-                  width={20}
-                  height={20}
-                />
-              </VStack>
-              <hr style={{ width: 4, height: 2, backgroundColor: 'var(--color-sub-text)' }} />
-              <VStack
-                alignItems="center"
-                justifyContent="center"
-                style={{
-                  width: 24,
-                  height: 24,
-                  backgroundColor:
-                    tierStyleConfig[getTierByDifficulty(course.difficulty.end)].color,
-                  borderRadius: '50%',
-                }}
-              >
-                <Number
-                  number={getTierNumberByDifficulty(course.difficulty.end)}
+                  number={getTierNumberByDifficulty(course.difficulty.avg)}
                   width={20}
                   height={20}
                 />
