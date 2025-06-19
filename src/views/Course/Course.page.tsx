@@ -10,9 +10,9 @@ import { CourseType, SortType } from '@/types/course.types';
 
 const CoursePage = () => {
   const [courseType, setCourseType] = useState<CourseType | null>(null);
-  const [sortType, setSortType] = useState<SortType>(SortType.POPULAR);
+  const [sortType, setSortType] = useState<SortType>(SortType.NEWEST);
   const [currentPage, setCurrentPage] = useState(1);
-  const { totalPage } = useCourses({ courseType, sortType, currentPage });
+  const { courses, totalPage, isLoading } = useCourses({ courseType, sortType, currentPage });
 
   const handleCourseTypeChange = (type: CourseType | null) => {
     setCourseType(type);
@@ -69,7 +69,13 @@ const CoursePage = () => {
           </VStack>
 
           <HStack gap={32} style={{ flex: 1 }}>
-            <CourseList courseType={courseType} sortType={sortType} currentPage={currentPage} />
+            <CourseList
+              courses={courses}
+              isLoading={isLoading}
+              courseType={courseType}
+              sortType={sortType}
+              currentPage={currentPage}
+            />
           </HStack>
         </HStack>
       </VStack>

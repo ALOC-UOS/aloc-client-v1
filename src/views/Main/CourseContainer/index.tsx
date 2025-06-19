@@ -9,16 +9,32 @@ import Confetti from '@/components/common/Confetti';
 import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { pathname } from '@/lib/constants/pathnames';
-import useCourses from '@/hooks/useCourses';
+import { CourseInfo, CourseType, SortType } from '@/types/course.types';
 import CircularCourseLayout from './CircularCourseLayout';
+import { Dispatch, SetStateAction } from 'react';
 
-const CourseContainer = () => {
-  const { isLoading, todayProblem, userCourses } = useUserCourses();
-  const { courses } = useCourses({
-    courseType: null,
-    sortType: 'createdAt',
-    currentPage: 1,
-  });
+interface CourseContainerProps {
+  courses: CourseInfo[];
+  isLoading: boolean;
+  courseType: CourseType | null;
+  sortType: SortType;
+  currentPage: number;
+  setCourseType: Dispatch<SetStateAction<CourseType | null>>;
+  setSortType: Dispatch<SetStateAction<SortType>>;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+}
+
+const CourseContainer = ({
+  courses,
+  isLoading,
+  courseType,
+  sortType,
+  currentPage,
+  setCourseType,
+  setSortType,
+  setCurrentPage,
+}: CourseContainerProps) => {
+  const { todayProblem, userCourses } = useUserCourses();
   const navigate = useNavigate();
 
   if (isLoading) {

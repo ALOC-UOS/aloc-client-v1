@@ -17,6 +17,20 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
   const [totalPage, setTotalPage] = useState(0);
   const SIZE = 6;
 
+  const getSortParam = (sortType: SortType) => {
+    switch (sortType) {
+      case SortType.POPULAR:
+        return 'generateCnt,desc';
+      case SortType.EASY:
+        return 'averageRank,asc';
+      case SortType.HARD:
+        return 'averageRank,desc';
+      case SortType.NEWEST:
+      default:
+        return 'createdAt,desc';
+    }
+  };
+
   const getCourses = async () => {
     setIsLoading(true);
     try {
@@ -25,12 +39,7 @@ const useCourses = ({ courseType, sortType, currentPage }: UseCoursesProps) => {
           page: currentPage - 1,
           size: SIZE,
           courseType: courseType === null ? null : courseType,
-          sort:
-            sortType === SortType.POPULAR
-              ? 'generateCnt,desc'
-              : sortType === SortType.DIFFICULTY
-                ? 'averageRank,desc'
-                : 'createdAt,desc',
+          sort: getSortParam(sortType),
         },
       });
 

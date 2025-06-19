@@ -1,19 +1,18 @@
 import S from './CourseList.style';
 import CourseItem from '@/components/service/Course/CourseItem';
-import useCourses from '@/hooks/useCourses';
 import LoadingIcon from '@/components/common/Icon/Loading';
 import { VStack } from '@/components/common/Stack';
-import { CourseType, SortType } from '@/types/course.types';
+import { CourseInfo, CourseType, SortType } from '@/types/course.types';
 
 interface CourseListProps {
+  courses: CourseInfo[];
+  isLoading: boolean;
   courseType: CourseType | null;
   sortType: SortType;
   currentPage: number;
 }
 
-const CourseList = ({ courseType, sortType, currentPage }: CourseListProps) => {
-  const { isLoading, courses } = useCourses({ courseType, sortType, currentPage });
-
+const CourseList = ({ courses, isLoading }: CourseListProps) => {
   if (isLoading) {
     return (
       <S.CourseList style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -45,18 +45,32 @@ const CourseFilterPanel = ({
 
       <Line width="100%" color="var(--color-black-10)" />
 
-      <HStack gap={8} style={{ padding: 2 }}>
+      <HStack gap={8}>
+        <S.SortButton
+          isSelected={sortType === SortType.NEWEST}
+          onClick={() => setSortType(SortType.NEWEST)}
+        >
+          최신순
+        </S.SortButton>
         <S.SortButton
           isSelected={sortType === SortType.POPULAR}
           onClick={() => setSortType(SortType.POPULAR)}
         >
           인기순
         </S.SortButton>
+      </HStack>
+      <HStack gap={8}>
         <S.SortButton
-          isSelected={sortType === SortType.DIFFICULTY}
-          onClick={() => setSortType(SortType.DIFFICULTY)}
+          isSelected={sortType === SortType.EASY}
+          onClick={() => setSortType(SortType.EASY)}
         >
-          난이도순
+          쉬운순
+        </S.SortButton>
+        <S.SortButton
+          isSelected={sortType === SortType.HARD}
+          onClick={() => setSortType(SortType.HARD)}
+        >
+          어려움순
         </S.SortButton>
       </HStack>
     </VStack>

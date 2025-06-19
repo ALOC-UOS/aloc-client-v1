@@ -7,8 +7,10 @@ export enum CourseType {
 }
 
 export enum SortType {
+  NEWEST = 'newest',
   POPULAR = 'popular',
-  DIFFICULTY = 'difficulty',
+  EASY = 'easy',
+  HARD = 'hard',
 }
 
 export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'SUCCESS' | 'FAILED';
