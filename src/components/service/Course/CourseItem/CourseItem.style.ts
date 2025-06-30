@@ -10,6 +10,7 @@ const CourseItemContainer = styled.div`
   padding: 16px;
   gap: 8px;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     filter: brightness(0.9);
@@ -17,6 +18,12 @@ const CourseItemContainer = styled.div`
 
   &:active {
     filter: brightness(0.8);
+  }
+
+  .state-label {
+    position: absolute;
+    top: 16px;
+    right: 16px;
   }
 `;
 

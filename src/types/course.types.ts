@@ -1,15 +1,26 @@
 import { Problem } from './problem.types';
 import { UserInfo } from './user.types';
 
-export type CourseType = 'DAILY' | 'DEADLINE';
+export enum CourseType {
+  DEADLINE = 'DEADLINE',
+  DAILY = 'DAILY',
+}
 
-export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED';
+export enum SortType {
+  NEWEST = 'newest',
+  POPULAR = 'popular',
+  EASY = 'easy',
+  HARD = 'hard',
+}
+
+export type CourseStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'SUCCESS' | 'FAILED';
 
 export type Course = {
   id: string;
   type: CourseType;
   name: string;
   totalProblemCount: number;
+  description: string;
 };
 
 export interface CourseInfo extends Course {
@@ -17,6 +28,7 @@ export interface CourseInfo extends Course {
   difficulty: {
     start: number;
     end: number;
+    avg: number;
   };
   success: {
     userList: UserInfo[];

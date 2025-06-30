@@ -1,16 +1,37 @@
+import { ReactNode } from 'react';
 import S from './Label.style';
+import { LabelVariant } from './Label.style';
 
-interface LabelProps {
-  text: string;
-  isActive?: boolean;
+interface BaseLabelProps {
+  variant: LabelVariant;
+  children: ReactNode;
+  className?: string;
 }
 
-const Label = ({ text, isActive = false }: LabelProps) => {
+interface IconLabelProps extends BaseLabelProps {
+  type: 'icon';
+  icon: string;
+}
+
+interface CircleLabelProps extends BaseLabelProps {
+  type: 'circle';
+}
+
+type LabelProps = IconLabelProps | CircleLabelProps;
+
+const Label = (props: LabelProps) => {
+  const { variant, children, className } = props;
+
   return (
-    <S.LabelContainer isActive={isActive}>
-      <S.Circle isActive={isActive} />
-      <S.LabelText isActive={isActive}>{text}</S.LabelText>
-    </S.LabelContainer>
+    <S.Container variant={variant} className={className}>
+      {props.type === 'circle' && <S.Circle variant={variant} />}
+      {props.type === 'icon' && (
+        <S.IconWrapper>
+          <img src={props.icon} alt="" aria-hidden={true} />
+        </S.IconWrapper>
+      )}
+      {children}
+    </S.Container>
   );
 };
 
