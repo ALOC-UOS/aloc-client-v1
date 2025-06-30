@@ -49,7 +49,7 @@ const useAuth = () => {
 
   // 소셜 로그인 URL 생성
   const getGoogleLoginUrl = () => {
-    return `${import.meta.env.VITE_API_BASE_URL}/oauth2/authorization/google`;
+    return import.meta.env.VITE_GOOGLE_LOGIN_URL;
   };
 
   return {

@@ -6,11 +6,11 @@
 
 ## 📚 주요 기능
 
-### ✏️ _"Daily Course"_ 
+### ✏️ _"Daily Course"_
 
 매일 하나씩 공개되는 문제를 꾸준히 풀어야 완주할 수 있는 데일리 코스입니다.
 
-### 🃏 _"Deadline Course"_ 
+### 🃏 _"Deadline Course"_
 
 정해진 기간 안에 모든 문제를 자율적으로 해결해야 완주할 수 있는 마감형 코스입니다.
 
@@ -27,6 +27,7 @@
 ## 🛠️ 기술 스택
 
 ### 프론트엔드
+
 - **핵심 기술**: TypeScript, React 19
 - **상태 관리**: Jotai
 - **스타일링**: Emotion
@@ -37,10 +38,12 @@
 - **빌드 도구**: Vite
 
 ### 인프라
+
 - **배포**: Vercel
 - **CI/CD**: GitHub Actions
 
 ### 개발 도구
+
 - **코드 품질**: ESLint, Prettier
 - **버전 관리**: Git, GitHub
 - **디자인**: Figma
@@ -66,11 +69,13 @@ yarn dev
 ```
 
 ### 환경 변수 설정
+
 프로젝트 루트에 `.env` 파일을 생성하고 다음 변수를 설정하세요:
 
 ```
-VITE_API_BASE_URL=https://api.openaloc.store
+VITE_API_BASE_URL=https://api.openaloc.store/api
 VITE_USER_PROFILE_IMAGE_URL=https://api.openaloc.store/upload/user
+VITE_GOOGLE_LOGIN_URL=https://api.openaloc.store/oauth2/authorization/google
 ```
 
 <br/>
@@ -130,4 +135,3 @@ aloc-client/
 ---
 
 © 2024 ALOC Team. All Rights Reserved.
-
